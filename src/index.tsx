@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import AppRouter from './router';
+import './style/base.css';
+
+import AppRouter from './views/router';
 
 ReactDOM.render(
     <AppRouter />,

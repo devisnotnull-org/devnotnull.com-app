@@ -1,6 +1,13 @@
-.HeaderClass {
-    padding: '10px';
-    font-size: '1.3em';
-    background: '#ffffff';
-    display: 'inline-block';
+@import '../../style/common.css';
+
+:root {
+    --header-background-colour: #ffffff;
+}
+
+.Header {
+    composes: Container--Standard from '../../style/common.css';
+    padding: var(--base-pad);
+    background: var(--header-background-colour);
+    display: flex;
+    justify-content: space-evenly;
 }

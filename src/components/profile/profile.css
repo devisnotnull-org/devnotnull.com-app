@@ -1,0 +1,7 @@
+@import '../../style/common.css';
+
+.HeaderClass {
+    padding: var(--base-pad);
+    background: var(--base-colour);
+    display: block;
+}

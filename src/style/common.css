@@ -1,0 +1,33 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
+
+:root {
+    --base-font-famiy: 'Open Sans', Arial, Tahoma;
+    --base-font-weight: 400;
+    --base-background-colour: #ededed;
+    --base-font-size: 10px;
+    
+    --base-pad: 1rem;
+
+    --header-1: 2rem;
+    --header-2: 1.7rem;
+    --header-3: 1.5rem;
+    --header-4: 1.3rem;
+
+    font-weight: var(--base-font-weight);
+    font-size: var(--base-font-size);
+    font-family: var(--base-font-famiy);
+
+    background-color: var(--base-background-colour);
+}
+
+.Container--Large {
+    max-width: 110rem;
+}
+
+.Container--Standard {
+    max-width: 100rem;
+}
+
+.Container--Small {
+    max-width: 50rem;
+}
