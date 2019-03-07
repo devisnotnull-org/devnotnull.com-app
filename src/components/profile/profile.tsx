@@ -9,12 +9,9 @@ interface SelectorProps {}
 type Props = StateProps | ActionProps | SelectorProps
 
 export const Profile: React.SFC<Props> = () => (
-
     <div
         className={styles.HeaderClass}>
-  
     </div>    
-
 );
 
 export default Profile;
