@@ -1,5 +1,18 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
 
+@charset "utf-8";
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+body{
+    margin: 0 auto;
+    padding: 0;
+    font-size: var(--base-font-size);
+}
+
 :root {
     --base-font-famiy: 'Open Sans', Arial, Tahoma;
     --base-font-weight: 400;
@@ -13,15 +26,42 @@
     --header-3: 1.5rem;
     --header-4: 1.3rem;
 
+    --font-colour: #363636;
+    --base-colour: #ec7263;
+
+    color: var(--font-colour);
     font-weight: var(--base-font-weight);
     font-size: var(--base-font-size);
     font-family: var(--base-font-famiy);
 
     background-color: var(--base-background-colour);
+
+    --tablet-breakpoint: 1024px;
+    --mobile-breakpoint: 800px;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    font-size: 1.3rem;
+}
+
+h2 {
+    color: #EC7263;
+    font-size: 1.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+h2:before{
+    content: '//';
+    margin-right: 5px;
 }
 
 .Container--Large {
-    max-width: 110rem;
+    max-width: 115rem;
 }
 
 .Container--Standard {
@@ -29,5 +69,35 @@
 }
 
 .Container--Small {
-    max-width: 50rem;
+    max-width: 90rem;
+}
+
+.Align--Center {
+    margin: 0 auto;
+}
+
+.Container {
+    composes: Container--Large;
+    background: #ffffff;
+    margin: 0 auto;
+}
+
+/** **/
+
+.Block {
+
+}
+
+.Block:after {
+    width: 100%;
+    height: 0.3rem;
+    background: #ddd;
+    opacity: 0.5;
+    margin-top: 1.5rem;
+    content: '';
+    display: block;
+}
+
+.Clearfix {
+    clear: both;
 }

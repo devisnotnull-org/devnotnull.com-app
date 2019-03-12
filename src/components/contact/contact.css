@@ -1,0 +1,41 @@
+
+.ContactItem {
+    width: 100%;
+    display: flex;
+    border: 1px solid #e6e6e6;
+    border-bottom: none
+}
+
+.ContactItem:last-child {
+    border: 1px solid #e6e6e6;
+}
+
+.ContactItem--Icon {
+    padding: 1rem;
+    border-right: 1px solid #aaa;
+    opacity: 0.3;
+    flex: 1;
+}
+
+.ContactItem .fa {
+    font-size: 2em;
+}
+
+.ContactItem--Title{
+    flex: 8;
+    padding: 1rem;
+    font-size: 1.5em;
+    font-weight: 700;
+    opacity: 0.9;
+}
+
+.ContactItem--Title--Only{
+    margin-top: 10px;
+}
+
+.ContactItem--Description{
+    width: 80%;
+    width: calc(100% - 55px);
+    font-size: 1.2em;
+    opacity: 0.7;
+}

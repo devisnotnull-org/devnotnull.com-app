@@ -1,0 +1,5 @@
+export const aboutPayload: string[] = [
+    'From an early age I was interested in programming and with age this interest has only increased, building software that solves a genuine problem and has a purpose is the main criteria for any job or project I undertake',
+    'I would describe myself as young, keen and hungry for knowledge; When I’m not at work trying to build/fix an application you will probably find me scouring blogs or stack overflow for new technologies and methods of coding. I have been lucky with all of my positions to date in the fact that I have been exposed to every level of application delivery,this has given me what I would consider to be an advantage over most other candidates for the pure fact that I realised early on in my carer that programming is only one small segment in the lifetime delivery of any project',
+    'I am also a very keen advocate of the micro service pattern and technologies alongside Docker'
+]

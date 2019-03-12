@@ -14,7 +14,7 @@
 }
 
 .Header {
-    composes: Container--Standard from '../../style/common.css';
+    composes: Container--Large from '../../style/common.css';
     padding: var(--base-pad);
     background: var(--header-background-colour);
     display: flex;
