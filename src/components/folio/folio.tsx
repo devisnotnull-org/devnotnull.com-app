@@ -15,13 +15,11 @@ export const Folio: React.SFC<Props> = () => (
         <h2>Folio</h2>
         <div className={classnames(styles['Folio'])}>
             <section className={classnames(styles['Folio--Image'])}>
-                <div>Kingfisher diy.com</div>
                 <img src="http://media.fandanzle.co.uk/diy.png" />
             </section>
         </div>
         <div className={classnames(styles['Folio'])}>
             <section className={classnames(styles['Folio--Image'])}>
-                <div>Securedata diy.com</div>
                 <img src="http://media.fandanzle.co.uk/secdata.png" />
             </section>
         </div>

@@ -21,9 +21,8 @@ const educationPayload: EducationPayload[] = [
     {
         'year': '2007 - 1010',
         'institute': 'Brighton University',
-        'subject': 'FDSC Degree in Networking/Software Enginnering',
+        'subject': 'FDSC Software engineering & networked system’s',
         'description': [
-            'I obtained a foundation Degree in Networking/Software enginneering from Brighton university'
         ]
     },
     {

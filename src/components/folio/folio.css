@@ -5,9 +5,7 @@
 }
 
 .Folio--Image {
-    width: 50%;
-    height: 50%;
-    margin: 0 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .Folio--Image img {

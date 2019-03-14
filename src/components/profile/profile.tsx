@@ -17,7 +17,7 @@ export const Profile: React.SFC<Props> = () => (
                 <img src="//media.fandanzle.co.uk/avatar.png" alt="avatar"/>
             </div>
             <div className={classnames(styles['Text--Header'])}>
-                <h1>Hello, My name is Alex and im a software developer</h1>
+                <h1>My name is Alex and im a developer</h1>
                 <div>With a passion for web development, security, networking and microservices.</div>
             </div>
         </div>
