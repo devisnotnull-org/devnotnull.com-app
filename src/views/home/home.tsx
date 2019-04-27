@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import classnames from "classnames";
-
 import * as styles from "../../style/common.css";
 import * as homeStyles from "./home.css"
 import About from '../../components/about/about';
@@ -24,7 +22,7 @@ export class HomeView extends React.Component<Props> {
     render() {
         return(
             <div className={styles['Container']}>
-
+            
                 <Profile />
                 
                 <div className={homeStyles['Content']}>
