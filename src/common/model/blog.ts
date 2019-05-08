@@ -1,4 +1,4 @@
 export interface IBlogPost {
-    title: string;
-    summary: string;
+  title: string;
+  summary: string;
 }

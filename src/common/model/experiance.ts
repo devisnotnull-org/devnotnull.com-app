@@ -1,6 +1,6 @@
 export interface IExperiancePayload {
-    year: string
-    company: string
-    title: string
-    description: string[]
+  year: string;
+  company: string;
+  title: string;
+  description: string[];
 }

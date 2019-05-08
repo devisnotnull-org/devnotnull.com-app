@@ -9,7 +9,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import reducer from './common/reducer'
 
-import AppRouter from './views/routes';
+import AppRouter from './containers/routes';
 
 import './style/base.css';
 

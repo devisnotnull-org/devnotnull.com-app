@@ -18,13 +18,13 @@
 }
 
 .ContactItem .fa {
-    font-size: 2em;
+    font-size: 2rem;
 }
 
 .ContactItem--Title{
     flex: 8;
     padding: 1rem;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-weight: 700;
     opacity: 0.9;
 }
@@ -36,6 +36,6 @@
 .ContactItem--Description{
     width: 80%;
     width: calc(100% - 55px);
-    font-size: 1.2em;
+    font-size: 1.2rem;
     opacity: 0.7;
 }
