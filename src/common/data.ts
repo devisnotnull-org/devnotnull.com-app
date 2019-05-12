@@ -44,15 +44,15 @@ export const experiancePayload: IExperiancePayload[] = [
     year: '2019 - Present',
     company: 'Photobox',
     title: 'Engineering Manager',
-    description: []
+    description: ['Engineering Manager for the shopping experience team']
   },
   {
     year: '2017 - 2019',
     company: 'Kingfisher Digital',
     title: 'Lead developer / Full Stack Developer',
     description: [
-      'Over the previous two years I have been 1 of 5 lead developer’s within Kingfisher Digital’s new digital Hub, managing up to 50 developer’s across a shared hierarchy.',
-      'The projects have been varied; my primary focus has been towards the expanding React/Typescript & Express/Typescript oriented stack’s we have deployed across our various front and backend estates. The most interesting project was when my team was tasked with implementing Augmented reality using ARKIT within the core B&Q IOS app.',
+      'Over my two year tenure I was 1 of 5 lead developer’s within Kingfisher Digital’s  digital Hub, managing up to 50 developer’s across a shared hierarchy.',
+      'The projects were varied; my primary focus was expanding the React/Typescript & Express/Typescript oriented stack’s we had deployed across our various front and backend estates. The most interesting project was when my team was tasked with implementing Augmented reality using ARKIT within the core B&Q IOS app.',
       'I have also been involved in all levels of conversation across the digital platform; Solution design, Systems architecture, Staffing, Tooling, Vendor sign offs & System operation’s.'
     ]
   },

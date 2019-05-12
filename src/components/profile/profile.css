@@ -10,6 +10,7 @@
     text-align: center;
     margin-right: 1.5rem;
     margin-left: 1.5rem;
+    padding-bottom: 2rem;
 }
 
 .Header--Photo {
@@ -61,4 +62,8 @@
     margin-top: 1.5rem;
     content: '';
     display: block;
+}
+
+.Description {
+  font-size: 1.6rem;
 }

@@ -18,7 +18,7 @@
     --default-line-heigh: 2rem;
     
     --base-pad: 1rem;
-
+ 
     --header-1: 2rem;
     --header-2: 1.7rem;
     --header-3: 1.5rem;
@@ -30,13 +30,15 @@
     --tablet-breakpoint: 1024px;
     --mobile-breakpoint: 800px;
 
-    --max-size: 120rem;
+    --max-size: 110rem;
 }
 
 body {
     margin: 0 auto;
     padding: 0;
     max-width: var(--max-size);
+
+    font-weight: 100;
 }
 
 html {
@@ -45,8 +47,9 @@ html {
     font-weight: var(--base-font-weight);
     font-size: var(--base-font-size);
     font-family: var(--base-font-famiy);
-    
     background-color: var(--base-background-colour);
+
+    font-weight: 100;
 }
 
 .Container--Large {
@@ -72,6 +75,8 @@ html {
 }
 
 .Block {
+    border-bottom: 2px solid var(--base-background-colour);
+    margin-bottom: 2rem;
 }
 
 .Block:after {
