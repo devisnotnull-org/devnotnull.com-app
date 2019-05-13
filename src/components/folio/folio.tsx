@@ -13,12 +13,11 @@ type Props = StateProps & ActionProps & SelectorProps
 
 export const Folio: React.SFC<Props> = () => (
     <div className={classnames(commonStyles['Block'])}>
-        <div>Portfolio</div>
+        <h2>Portfolio</h2>
         {folioPayload.map((item) => (
             <div className={classnames(styles['Folio'])}>
                 <section className={classnames(styles['Folio--Image'])}>
-                    <img src={item.image} />
-                    <h3>{item.title}</h3>
+                  <img src={item.image} />
                 </section>
             </div>
         ))}

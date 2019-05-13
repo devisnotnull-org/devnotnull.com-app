@@ -6,18 +6,18 @@ import { IProfile } from './model/profile';
 
 export const contactDetails: IContactDetails[] = [
   {
-    icon: 'ICON',
+    icon: 'http://oflisback.github.io/react-favicon/public/img/github.ico',
     isLink: false,
     text: 'hi@fandanzle.co.uk'
   },
   {
-    icon: 'ICON',
+    icon: 'http://oflisback.github.io/react-favicon/public/img/github.ico',
     link: 'https://github.com/stump201',
     isLink: true,
     text: 'Github'
   },
   {
-    icon: 'ICON',
+    icon: 'http://oflisback.github.io/react-favicon/public/img/github.ico',
     isLink: true,
     link: 'https://github.com/stump201',
     text: 'Docker Hub'

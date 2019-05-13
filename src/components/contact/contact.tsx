@@ -1,5 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
+import Favicon from 'react-favicon';
 
 import * as commonStyles from '../../style/common.css'
 import * as styles from './contact.css'
@@ -18,9 +19,13 @@ export const Contact: React.SFC<Props> = () => (
         <h2>Contact</h2>
         {contactDetails.map(item => (
             <div className={classnames(styles['ContactItem'])}>
-                <div className={classnames(styles['ContactItem--Icon'])}>{item.icon}</div>
+                <div className={classnames(styles['ContactItem--Icon'])}>
+                  <Favicon url={item.icon} />
+                </div>
                 <div className={classnames(styles['ContactItem--Title'])}>
-                    {item.isLink && <a href={item.link}>{item.text}</a>}
+                    {item.isLink && 
+                    <a href={item.link}>{item.text}</a>
+                    }
                     {!item.isLink && <span>{item.text}</span> }
                 </div>
             </div>
