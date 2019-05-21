@@ -1,7 +1,7 @@
 import * as React from "react";
 import classnames from "classnames";
 
-import { aboutPayload } from "../../data";
+import { aboutPayload } from "../../common/data";
 
 import * as commonStyles from "../../style/common.css";
 
