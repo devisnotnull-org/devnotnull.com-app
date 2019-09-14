@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __importStar(require("react"));
 const classnames_1 = __importDefault(require("classnames"));
-const data_1 = require("../../data");
+const data_1 = require("../../common/data");
 const commonStyles = __importStar(require("../../style/common.css"));
-exports.About = () => (React.createElement("div", { className: classnames_1.default(commonStyles['Block']) },
+exports.About = () => (React.createElement("div", { className: classnames_1.default(commonStyles["Block"]) },
     React.createElement("h2", null, "About me"),
-    React.createElement("div", null, data_1.aboutPayload.map(item => React.createElement("p", null, item)))));
+    React.createElement("div", null, data_1.aboutPayload.map(item => (React.createElement("p", null, item))))));
 exports.default = exports.About;
 //# sourceMappingURL=about.js.map

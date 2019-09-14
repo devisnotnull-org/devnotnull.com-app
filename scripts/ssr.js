@@ -14,13 +14,12 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../config/env');
 
-
 const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
 const bfj = require('bfj');
-const configFactory = require('../config/webpack.config');
+const configFactory = require('../config/webpack.ssr.config');
 const paths = require('../config/paths');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
@@ -49,7 +48,7 @@ const argv = process.argv.slice(2);
 const writeStatsJson = argv.indexOf('--stats') !== -1;
 
 // Generate configuration
-const config = configFactory('production');
+const config = configFactory('development');
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
@@ -89,6 +88,10 @@ checkBrowsers(paths.appPath, isInteractive)
       }
 
       console.log('File sizes after gzip:\n');
+      console.log('stats', stats)
+      //console.log('previousFileSizes', previousFileSizes)
+      console.log('paths.appBuild', paths.appBuild)
+      
       printFileSizesAfterBuild(
         stats,
         previousFileSizes,
@@ -97,12 +100,11 @@ checkBrowsers(paths.appPath, isInteractive)
         WARN_AFTER_CHUNK_GZIP_SIZE
       );
 
-      console.log();
-
       const appPackage = require(paths.appPackageJson);
       const publicUrl = paths.publicUrl;
       const publicPath = config.output.publicPath;
       const buildFolder = path.relative(process.cwd(), paths.appBuild);
+      
       printHostingInstructions(
         appPackage,
         publicUrl,
@@ -110,6 +112,7 @@ checkBrowsers(paths.appPath, isInteractive)
         buildFolder,
         useYarn
       );
+
     },
     err => {
       console.log(chalk.red('Failed to compile.\n'));

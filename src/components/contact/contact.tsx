@@ -19,9 +19,6 @@ export const Contact: React.SFC<Props> = () => (
         <h2>Contact</h2>
         {contactDetails.map(item => (
             <div className={classnames(styles['ContactItem'])}>
-                <div className={classnames(styles['ContactItem--Icon'])}>
-                  <Favicon url={item.icon} />
-                </div>
                 <div className={classnames(styles['ContactItem--Title'])}>
                     {item.isLink && 
                     <a href={item.link}>{item.text}</a>

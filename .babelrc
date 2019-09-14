@@ -1,0 +1,9 @@
+{
+    "plugins": [
+      ["dynamic-import-node", { "noInterop": true }],
+      ["remove-webpack"]
+    ],
+    "presets": [
+        "react-app"
+    ]
+}

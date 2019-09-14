@@ -14,12 +14,11 @@ const React = __importStar(require("react"));
 const classnames_1 = __importDefault(require("classnames"));
 const styles = __importStar(require("./profile.css"));
 const commonStyles = __importStar(require("../../style/common.css"));
-exports.Profile = () => (React.createElement("div", { className: classnames_1.default(styles['Header']) },
-    React.createElement("div", { className: classnames_1.default(commonStyles['Block']) },
-        React.createElement("div", { className: classnames_1.default(styles['Header--Photo']) },
-            React.createElement("img", { src: "//media.fandanzle.co.uk/avatar.png", alt: "avatar" })),
-        React.createElement("div", { className: classnames_1.default(styles['Text--Header']) },
-            React.createElement("h1", null, "My name is Alex and im a developer"),
-            React.createElement("div", null, "With a passion for web development, security, networking and microservices.")))));
+exports.Profile = () => (React.createElement("div", { className: classnames_1.default(styles["Header"], commonStyles["Block"]) },
+    React.createElement("div", { className: classnames_1.default(styles["Header--Photo"]) },
+        React.createElement("img", { src: "//media.fandanzle.co.uk/avatar.png", alt: "avatar" })),
+    React.createElement("div", { className: classnames_1.default(styles["Text--Header"]) },
+        React.createElement("h1", null, "Alex brown Portfolio"),
+        React.createElement("div", { className: classnames_1.default(styles["Description"]) }, "A Developer with a passion for web development, security, networking and microservices."))));
 exports.default = exports.Profile;
 //# sourceMappingURL=profile.js.map

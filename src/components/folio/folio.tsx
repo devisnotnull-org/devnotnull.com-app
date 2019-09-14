@@ -17,7 +17,10 @@ export const Folio: React.SFC<Props> = () => (
         {folioPayload.map((item) => (
             <div className={classnames(styles['Folio'])}>
                 <section className={classnames(styles['Folio--Image'])}>
-                  <img src={item.image} />
+                    <div className={classnames(styles['Folio--Overlay'])}>
+                        <div className={classnames(styles['Folio--Overlay--Header'])}>// {item.title}</div>
+                    </div>
+                    <img src={item.image} />
                 </section>
             </div>
         ))}

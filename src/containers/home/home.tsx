@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as styles from "../../style/common.css";
-import * as homeStyles from "./home.css"
 import About from '../../components/about/about';
 import Contact from '../../components/contact/contact';
 import Skillz from '../../components/skillz/skillz';
@@ -10,6 +8,9 @@ import Experiance from '../../components/experiance/experiance';
 import Education from '../../components/education/education';
 import Profile from '../../components/profile/profile';
 import Folio from '../../components/folio/folio';
+
+import * as styles from "../../style/common.css";
+import * as homeStyles from "./home.css"
 
 interface StateProps {}
 interface ActionProps {}

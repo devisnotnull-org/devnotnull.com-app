@@ -14,13 +14,15 @@ const React = __importStar(require("react"));
 const classnames_1 = __importDefault(require("classnames"));
 const styles = __importStar(require("./folio.css"));
 const commonStyles = __importStar(require("../../style/common.css"));
+const data_1 = require("../../common/data");
 exports.Folio = () => (React.createElement("div", { className: classnames_1.default(commonStyles['Block']) },
-    React.createElement("h2", null, "Folio"),
-    React.createElement("div", { className: classnames_1.default(styles['Folio']) },
+    React.createElement("h2", null, "Portfolio"),
+    data_1.folioPayload.map((item) => (React.createElement("div", { className: classnames_1.default(styles['Folio']) },
         React.createElement("section", { className: classnames_1.default(styles['Folio--Image']) },
-            React.createElement("img", { src: "http://media.fandanzle.co.uk/diy.png" }))),
-    React.createElement("div", { className: classnames_1.default(styles['Folio']) },
-        React.createElement("section", { className: classnames_1.default(styles['Folio--Image']) },
-            React.createElement("img", { src: "http://media.fandanzle.co.uk/secdata.png" })))));
+            React.createElement("div", { className: classnames_1.default(styles['Folio--Overlay']) },
+                React.createElement("div", { className: classnames_1.default(styles['Folio--Overlay--Header']) },
+                    "// ",
+                    item.title)),
+            React.createElement("img", { src: item.image })))))));
 exports.default = exports.Folio;
 //# sourceMappingURL=folio.js.map
