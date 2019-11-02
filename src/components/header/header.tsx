@@ -1,14 +1,24 @@
-import React from 'react';
+import * as React from 'react';
+import classnames from 'classnames';
 
-interface StateProps {}
+import * as styles from './header.css'
+
+interface StateProps {
+    classes: string
+}
 interface ActionProps {}
 interface SelectorProps {}
 
-type Props = StateProps | ActionProps | SelectorProps
+type Props = StateProps & ActionProps & SelectorProps
 
-export const Header: React.SFC<Props> = () => (
+export const Header: React.SFC<Props> = ({ classes }) => (
 
-    <div>
+    <div
+        className={
+            classnames([
+                styles.Header,
+                classes
+            ])}>
         <div>
             <b>
                 <a href="/">About Me</a>
