@@ -1,7 +1,9 @@
 {
-  "main.js": "/ssr/js/server.js",
-  "main.js.map": "/ssr/js/server.js.map",
-  "vendor.js": "/ssr/js/vendor.server.js",
-  "vendor.js.map": "/ssr/js/vendor.server.js.map",
+  "main.js": "/static/js/main.chunk.js",
+  "main.js.map": "/static/js/main.chunk.js.map",
+  "runtime~main.js": "/static/js/bundle.js",
+  "runtime~main.js.map": "/static/js/bundle.js.map",
+  "vendor.js": "/static/js/vendor.chunk.js",
+  "vendor.js.map": "/static/js/vendor.chunk.js.map",
   "index.html": "/index.html"
 }

@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import * as commonStyles from '../../style/common.css'
 import * as styles from './experiance.css'
 import { experiancePayload } from '../../common/data';
+import { IExperiancePayload } from '../../models/experiance';
 
 //
 
@@ -16,13 +17,13 @@ type Props = StateProps & ActionProps & SelectorProps
 export const Experiance: React.SFC<Props> = () => (
     <div className={classnames(commonStyles['Block'])}>
         <h2>EXPERIENCE</h2>
-        {experiancePayload.map((item) => (
-            <section className={styles['Experiance']}>
+        {experiancePayload.map((item: IExperiancePayload, index: number) => (
+            <section key={index} className={styles['Experiance']}>
                 <aside className={styles['Experiance--Year']}>{item.year}</aside>
                 <div className={styles['Experiance--Description']}>
                     <h3>{item.company}</h3>
                     <h4>{item.title}</h4>
-                    {item.description.map((descriptiveItem) => <p>{descriptiveItem}</p>)}
+                    {item.description.map((descriptiveItem: string, descriptiveIndex: number) => <p key={descriptiveIndex}>{descriptiveItem}</p>)}
                 </div>
             </section>
         ))}

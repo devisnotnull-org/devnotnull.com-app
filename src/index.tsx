@@ -1,20 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
 import { BrowserRouter } from "react-router-dom";
 import ReactGA from 'react-ga';
-import createSagaMiddleware from 'redux-saga'
 
-import reducer from './common/reducer'
+import { store } from './common/store'
 import AppRouter from './containers/routes';
 
-const sagaMiddleware = createSagaMiddleware()
+import {} from './common/store';
 
-const store = createStore(
-  reducer,
-  applyMiddleware(sagaMiddleware)
-)
+declare global {
+  interface Window { MyNamespace: any; }
+}
+
+window.MyNamespace = window.MyNamespace || {};
 
 ReactGA.initialize('UA-136352816-1');
 

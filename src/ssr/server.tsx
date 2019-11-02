@@ -11,7 +11,6 @@ import AppRouter from '../containers/routes';
 import { createStore, applyMiddleware } from 'redux';
 import { renderToString } from 'react-dom/server'
 
-
 import { StaticRouter } from 'react-router-dom';
 
 import reducer from '../common/reducer'

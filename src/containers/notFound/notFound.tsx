@@ -5,11 +5,13 @@ import classnames from "classnames";
 
 import * as styles from "../../style/common.css";
 
-interface StateProps {}
-interface ActionProps {}
-interface SelectorProps {}
+type StateProps = {}
+type ActionProps = {}
+type SelectorProps = {}
 
-type Props = StateProps & ActionProps & SelectorProps
+type DefaultProps = {}
+
+type Props = StateProps & ActionProps & SelectorProps & DefaultProps
 
 export class NotFoundView extends React.Component<Props> {
 

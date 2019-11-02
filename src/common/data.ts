@@ -1,8 +1,36 @@
-import { IContactDetails } from './model/contact';
-import { IEducationPayload } from './model/education';
-import { IExperiancePayload } from './model/experiance';
-import { IFolio } from './model/folio';
-import { IProfile } from './model/profile';
+import { IContactDetails } from '../models/contact';
+import { IEducationPayload } from '../models/education';
+import { IExperiancePayload } from '../models/experiance';
+import { IFolio } from '../models/folio';
+import { IProfile } from '../models/profile';
+import { IAbillityPayload} from '../models/abillity';
+
+export const skillzPayload: IAbillityPayload[] = [
+  {
+      "key": "Javascript",
+      "values": ['ES6', 'Node.js','Typescript', 'React', 'Angular', 'Microservices', 'Webpack', 'ExtJs', 'JQuery']
+  },
+  {
+      "key": "Java",
+      "values": ['Spring', 'Vert.X', "Microservices", "Custom Frameworks"]
+  },
+  {
+      "key": "Misc",
+      "values": ['Security', 'OAuth 1/2', "SAML", "Docker", "General design Principles"]
+  },
+  {
+      "key": "Python",
+      "values": ['Flask', 'TurboGears', 'System Intergration', 'Python 2 & 3']
+  },
+  {
+      "key": "Devops/System",
+      "values": ['Unix', 'Bash', 'AWS', 'GCloud', 'Azure', 'Kubernetes']
+  },
+  {
+      "key": "PHP",
+      "values": ['Custom Frameworks', 'Zend', 'Laravel']
+  }
+];
 
 export const contactDetails: IContactDetails[] = [
   {

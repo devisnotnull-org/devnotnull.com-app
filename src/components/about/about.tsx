@@ -15,8 +15,8 @@ export const About: React.SFC<Props> = () => (
   <div className={classnames(commonStyles["Block"])}>
     <h2>About me</h2>
     <div>
-      {aboutPayload.map(item => (
-        <p>{item}</p>
+      {aboutPayload.map((item: string, index: number) => (
+        <p key={index}>{item}</p>
       ))}
     </div>
   </div>
