@@ -1,0 +1,96 @@
+@import "../../style/common.css";
+
+:root{
+    --section-top-margin: 2rem;
+}
+
+.Education {
+    margin-top: var(--section-top-margin);
+    position: relative;
+    padding: 1em 0;
+    display: flex;
+}
+
+.Education:before {
+    width: 0.5rem;
+    height: 100%;
+    position: absolute;
+    left: 2.45rem;
+    top: 0;
+    content: ' ';
+    display: block;
+    background: var(--base-colour);
+    background: linear-gradient(to bottom, #ffffff 60px, var(--base-colour) 50%, var(--base-colour) 89%, #ffffff 100%);
+}
+
+.Education--Year {
+    background: #fff;
+    padding: 1rem;
+    font-size: 1.5em;
+    font-weight: 700;
+    flex: 1;
+}
+
+.Education--Description {
+    width: 80%;
+    display: inline-block;
+    background: #eee;
+    margin-bottom: 1rem;
+    position: relative;
+    padding: 1rem 1rem 0 1rem;
+    border-bottom: 1px solid #ddd;
+    flex: 9;
+}
+
+.Education--Description:after {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    right: 0;
+    left: -1.5rem;
+    height: 0;
+    width: 0;
+    border: solid transparent;
+    border-right-color: #eee;
+    border-width: 1rem;
+    pointer-events: none;
+}
+
+.Education--Description h3 {
+    font-size: 1.6em;
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+}
+
+.Education--Description p {
+    font-size: 1.3em;
+    margin-top: 0.5rem;
+    padding: 0;
+}
+
+.Education:before {
+    width: 0.5rem;
+    height: 100%;
+    position: absolute;
+    left: 2.45rem;
+    top: 0;
+    content: ' ';
+    display: block;
+    background: #ec7263;
+    background: linear-gradient(to bottom, #ffffff 0%, var(--base-colour) 7%, var(--base-colour)#ec7263 89%, #ffffff 100%);
+}
+
+.Education--Description:after {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    right: 0;
+    left: -1.5rem;
+    height: 0;
+    width: 0;
+    border: solid transparent;
+    border-right-color: #eee;
+    border-width: 1rem;
+    pointer-events: none;
+}

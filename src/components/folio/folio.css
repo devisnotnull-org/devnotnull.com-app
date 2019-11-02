@@ -1,0 +1,48 @@
+.Folio {
+    display: flex;  
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.Folio--Image img {
+    width: 100%;
+    height: 100%;
+}
+
+.Folio--Overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Folio--Overlay:hover {
+    opacity: 0.7;
+    background-color: #000000;
+    transition: background-color 200ms linear;
+}
+
+.Folio--Overlay--Header {
+   text-align: center;
+   padding: 1rem;
+   background: #000000;
+   color: #ffffff;
+   font-size: 1.5rem;
+   font-weight: bold;
+}
+
+@media (max-width: 850px) {
+
+    .Folio {
+        flex-direction: column;
+    }
+
+    .Folio--Image {
+        width: 100%;
+    }
+
+}
