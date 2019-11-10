@@ -5,6 +5,8 @@ import { blogSaga } from './blog/sagas';
 import { folioSaga } from './folio/sagas';
 import { educationSaga } from './education/sagas';
 import { experianceSaga } from './experiance/sagas';
+import { metadataSagas } from './metadata/sagas';
+import { assetSaga } from './assets/sagas';
 import testSagas from './test/sagas';
 
 import { 
@@ -13,6 +15,7 @@ import {
   EducationActionTypes,
   ExperianceActionTypes,
   FolioActionTypes,
+  AssetActionTypes,
   GlobalActionTypes
 } from './actions'
 
@@ -22,7 +25,8 @@ export function* fetchAllSaga() {
     blogSaga(),
     educationSaga(),
     experianceSaga(),
-    folioSaga()
+    folioSaga(),
+    metadataSagas()
   ])
 }
 
@@ -36,5 +40,6 @@ export default function* rootSaga() {
     takeEvery(EducationActionTypes.FETCH_START, educationSaga),
     takeEvery(ExperianceActionTypes.FETCH_START, experianceSaga),
     takeEvery(FolioActionTypes.FETCH_START, folioSaga),
+    takeEvery(AssetActionTypes.FETCH_START, assetSaga),
   ])
 }

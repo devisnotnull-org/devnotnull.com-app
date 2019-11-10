@@ -5,6 +5,8 @@ import ability, { IAbilityState } from './ability/reducer'
 import education, { IEducationState } from './education/reducer'
 import experiance, { IExperianceState } from './experiance/reducer'
 import folio, { IFolioState } from './folio/reducer'
+import metadata, { IMetadataState } from './metadata/reducer'
+import assets, { IAssetState } from './assets/reducer'
 
 export interface IState {
     blog: IBlogState
@@ -12,6 +14,8 @@ export interface IState {
     education: IEducationState
     experiance: IExperianceState
     folio: IFolioState
+    metadata: IMetadataState
+    assets: IAssetState
 }
 
 export default combineReducers<IState>({
@@ -19,5 +23,7 @@ export default combineReducers<IState>({
     ability,
     education,
     experiance,
-    folio
+    folio,
+    metadata,
+    assets
 })

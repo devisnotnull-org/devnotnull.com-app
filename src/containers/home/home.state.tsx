@@ -12,6 +12,8 @@ import { getExperianceItems } from '../../common/experiance/selectors';
 import { getEducationItems } from '../../common/education/selectors';
 import { getBlogItems } from '../../common/blog/selectors';
 import { getFolioItems } from '../../common/folio/selectors';
+import { getMetadataItem } from '../../common/metadata/selectors';
+import { IMetadataPayload } from '../../models/metadata';
 
 import { IStateProps } from './home.state'
 
@@ -22,6 +24,7 @@ export type IStateProps = {
     experianceItems: ICommonFields<IExperiancePayload>[];
     educationItems: ICommonFields<IEducationPayload>[];
     folioList: ICommonFields<IFolioPayload>[];
+    metadata: ICommonFields<IMetadataPayload>[];
 }
 
 export type IActionProps = {
@@ -37,6 +40,7 @@ export const mapStateToProps = (state: any): IStateProps => ({
     experianceItems:  getExperianceItems(state),
     educationItems: getEducationItems(state),
     folioList: getFolioItems(state),
+    metadata: getMetadataItem(state)
 });
 
 export const mapDispatchToProps = (dispatch: any): IActionProps => ({
