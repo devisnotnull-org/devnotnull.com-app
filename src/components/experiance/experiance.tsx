@@ -3,27 +3,27 @@ import classnames from 'classnames';
 
 import * as commonStyles from '../../style/common.css'
 import * as styles from './experiance.css'
-import { experiancePayload } from '../../common/data';
 import { IExperiancePayload } from '../../models/experiance';
+import { ICommonFields } from '../../models/common';
 
-//
+interface IStateProps {
+    experianceList: ICommonFields<IExperiancePayload>[]
+}
 
-interface StateProps {}
-interface ActionProps {}
-interface SelectorProps {}
+type Props = IStateProps
 
-type Props = StateProps & ActionProps & SelectorProps
-
-export const Experiance: React.SFC<Props> = () => (
+export const Experiance: React.SFC<Props> = ({ experianceList }) => (
     <div className={classnames(commonStyles['Block'])}>
         <h2>EXPERIENCE</h2>
-        {experiancePayload.map((item: IExperiancePayload, index: number) => (
+        {experianceList.map((item:  ICommonFields<IExperiancePayload>, index: number) => (
             <section key={index} className={styles['Experiance']}>
-                <aside className={styles['Experiance--Year']}>{item.year}</aside>
+                <aside className={styles['Experiance--Year']}>
+                    <div>{item.fields.startDate}</div>
+                    <div>{item.fields.endDate}</div>
+                </aside>
                 <div className={styles['Experiance--Description']}>
-                    <h3>{item.company}</h3>
-                    <h4>{item.title}</h4>
-                    {item.description.map((descriptiveItem: string, descriptiveIndex: number) => <p key={descriptiveIndex}>{descriptiveItem}</p>)}
+                    <h3>{item.fields.company}</h3>
+                    <div>{item.fields.description}</div>
                 </div>
             </section>
         ))}

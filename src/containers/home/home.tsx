@@ -19,8 +19,7 @@ import * as homeStyles from "./home.css"
 export class HomeView extends Component<IHomeComponentProps, {}> {
 
     render() {
-        console.log(JSON.stringify(this.props, undefined, 2));
-        const { blogItems, abilityItems, educationItems, experianceItems } = this.props
+        const { blogItems, abilityItems, educationItems, experianceItems, metadata } = this.props
         return(
             <div className={styles['Container']}>
             
@@ -30,12 +29,13 @@ export class HomeView extends Component<IHomeComponentProps, {}> {
                 <div> abilityItems:  {JSON.stringify(abilityItems, undefined, 2)} </div>
                 <div> educationItems:  {JSON.stringify(educationItems, undefined, 2)} </div>
                 <div> experianceItems:  {JSON.stringify(experianceItems, undefined, 2)} </div>
+                <div> metadataItem:  {JSON.stringify(metadata, undefined, 2)} </div>
                 
                 <div className={homeStyles['Content']}>
                 
                     <aside className={homeStyles['Description']}>
                         <About/>
-                        <Experiance />
+                        <Experiance experianceList={experianceItems} />
                         <Education />
                         <Folio />
                     </aside>

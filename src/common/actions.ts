@@ -5,13 +5,15 @@ import { BlogActionTypes } from './blog/actions'
 import { EducationActionTypes } from './education/actions'
 import { ExperianceActionTypes } from './experiance/actions'
 import { FolioActionTypes } from './folio/actions'
+import { AssetActionTypes } from './assets/actions'
 
 export {
   AbilitiesActionTypes,
   BlogActionTypes,
   EducationActionTypes,
   ExperianceActionTypes,
-  FolioActionTypes
+  FolioActionTypes,
+  AssetActionTypes
 }
 
 export enum GlobalActionTypes {
