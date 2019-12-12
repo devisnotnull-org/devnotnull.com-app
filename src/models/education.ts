@@ -1,6 +1,7 @@
 export interface IEducationPayload {
-  year: string;
   institute: string;
   subject: string;
-  description: string[];
+  startDate: string;
+  endDate: string;
+  qualifications: string[];
 }

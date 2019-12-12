@@ -1,0 +1,39 @@
+import * as React from "react";
+import classnames from "classnames";
+import moment from 'moment'
+
+import { IEducationPayload } from "../../../models/education";
+import { ICommonFields } from "../../../models/common";
+
+import * as commonStyles from "../../../style/common.css";
+import * as styles from "./education.css";
+
+interface IStateProps {
+  educationList: ICommonFields<IEducationPayload>[]
+}
+
+type Props = IStateProps
+
+export const Education: React.SFC<Props> = ({ educationList }) => (
+  <div className={classnames(commonStyles['Block'])}>
+      <h2>EXPERIENCE</h2>
+      {educationList.map((item:  ICommonFields<IEducationPayload>, index: number) => (
+          <section key={index} className={styles['Education']}>
+              <aside className={styles['Education--Year']}>
+                  <div>{moment(item.fields.startDate).format('YYYY')} - {moment(item.fields.endDate).format('YYYY')}</div>
+              </aside>
+              <div className={styles['Education--Description']}>
+                  <h3>{item.fields.institute}</h3>
+                  <div>{item.fields.subject}</div>
+              </div>
+              <div>
+                    {item.fields.qualifications.map((qualification) => {
+                        <div>{qualification}</div>
+                    })}
+              </div>
+          </section>
+      ))}
+  </div>
+);
+
+export default Education;
