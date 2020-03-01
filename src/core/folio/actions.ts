@@ -1,6 +1,6 @@
 import { action } from 'typesafe-actions';
 
-import { IFolio } from '../../models/folio';
+import { IFolioPayload } from '../../models/folio';
 
 export enum FolioActionTypes {
   FETCH_START = '@folio/FETCH_START',
@@ -10,7 +10,7 @@ export enum FolioActionTypes {
 
 export const fetchRequest = () => action(FolioActionTypes.FETCH_START);
 
-export const fetchSuccess = (data: IFolio[]) =>
+export const fetchSuccess = (data: IFolioPayload[]) =>
   action(FolioActionTypes.FETCH_SUCCESS, data);
 
 export const fetchError = (message: string) =>

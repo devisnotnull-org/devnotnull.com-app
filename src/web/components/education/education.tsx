@@ -24,11 +24,11 @@ export const Education: React.SFC<Props> = ({ educationList }) => (
               </aside>
               <div className={styles['Education--Description']}>
                   <h3>{item.fields.institute}</h3>
-                  <div>{item.fields.subject}</div>
+                  <p>{item.fields.subject}</p>
               </div>
               <div>
                     {item.fields.qualifications.map((qualification) => {
-                        <div>{qualification}</div>
+                        <p>{qualification}</p>
                     })}
               </div>
           </section>

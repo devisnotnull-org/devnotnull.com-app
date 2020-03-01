@@ -15,9 +15,9 @@ type Props = StateProps & ActionProps & SelectorProps;
 export const About: React.SFC<Props> = ({ metadata }) => (
   <div className={classnames(commonStyles["Block"])}>
     <h2>About me</h2>
-    <div>
+    <p>
       {metadata.summary}
-    </div>
+    </p>
   </div>
 );
 

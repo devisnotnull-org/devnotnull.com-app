@@ -6,6 +6,7 @@ declare const styles: {
   readonly "Container": string;
   readonly "Block": string;
   readonly "Clearfix": string;
+  readonly "Navigation": string;
 };
 export = styles;
 

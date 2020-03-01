@@ -1,6 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import Favicon from 'react-favicon';
+import { Favicon } from '../../common/favicon/favicon';
+import { Link } from '../../common/link/link'
 
 import * as commonStyles from '../../../style/common.css'
 import * as styles from './contact.css'
@@ -20,7 +21,8 @@ export const Contact: React.SFC<Props> = ({ contactList }) => (
         {contactList && contactList.map((item: ICommonFields<IContactPayload>, index: number)  => (
             <div key={index} className={classnames(styles['ContactItem'])}>
                 <div className={classnames(styles['ContactItem--Title'])}>
-                    <a href={item.fields.link}>{item.fields.text}</a>
+                    <Favicon name={item.fields.icon} />
+                    <Link to={item.fields.link || ''}>{item.fields.text}</Link>
                 </div>
             </div>
         ))}

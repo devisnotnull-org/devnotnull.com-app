@@ -23,7 +23,7 @@ export const Experiance: React.SFC<Props> = ({ experianceList }) => (
                 </aside>
                 <div className={styles['Experiance--Description']}>
                     <h3>{item.fields.company}</h3>
-                    <div>{item.fields.description}</div>
+                    <p>{item.fields.description}</p>
                 </div>
             </section>
         ))}

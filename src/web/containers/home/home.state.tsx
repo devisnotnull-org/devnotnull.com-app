@@ -15,7 +15,6 @@ import { getFolioItems } from '../../../core/folio/selectors';
 import { getMetadata } from '../../../core/metadata/selectors';
 import { IMetadataPayload } from '../../../models/metadata';
 
-import { IStateProps } from './home.state'
 import { IContactPayload } from '../../../models/contact';
 import { getContactItems } from '../../../core/contact/selectors';
 
