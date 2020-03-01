@@ -3,13 +3,13 @@ import { fetchRequest } from '../../../core/actions'
 import { ICommonFields } from '../../../models/common'
 import { IBlogPostPayload } from '../../../models/blog'
 import { getBlogItems } from '../../../core/blog/selectors';
-
-
-import { IStateProps } from './blog.state'
+import { IMetadataPayload } from '../../../models/metadata';
+import { getMetadata } from '../../../core/metadata/selectors';
 
 export type IStateProps = {
     title?: string,
     blogItems: ICommonFields<IBlogPostPayload>[];
+    metadata: IMetadataPayload;
 }
 
 export type IActionProps = {
@@ -19,8 +19,8 @@ export type IActionProps = {
 export type IBlogComponentProps = IStateProps & IActionProps;
 
 export const mapStateToProps = (state: any): IStateProps => ({
-    title: "This is a title",
     blogItems: getBlogItems(state),
+    metadata: getMetadata(state)
 });
 
 export const mapDispatchToProps = (dispatch: any): IActionProps => ({

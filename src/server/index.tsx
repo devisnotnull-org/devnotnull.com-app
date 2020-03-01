@@ -1,19 +1,14 @@
 import express from 'express';
 import * as React from 'react';
 import path from 'path';
-import fs from 'fs';
-import { load } from 'cheerio';
 import { renderToString } from 'react-dom/server'
 import createSagaMiddleware from 'redux-saga';
 import { StaticRouter } from 'react-router-dom';
-import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 
 import AppRouter from '../web/containers/routes';
 import reducer from '../core/reducers'
-import { HomeView } from '../web/containers/home/home';
 
 const port = 3000;
 
@@ -30,10 +25,6 @@ function handleRender(req: any, res: any) {
     applyMiddleware(sagaMiddleware)
   )
 
-  const finalPath = path.join(__dirname, '../../public/index.html');
-  const openHtml = fs.readFileSync(finalPath);
-  const loadItem = load(openHtml.toString());
-
   // Render the component to a string
   const html = renderToString(
     <Provider store={store}>
@@ -45,10 +36,8 @@ function handleRender(req: any, res: any) {
 
   // Grab the initial state from our Redux store
   const preloadedState = store.getState()
-
   // Send the rendered page back to the client
-  res.send(preloadedState)
-
+  res.send(html)
 }
 
 app.use(express.static(path.join(__dirname, '../build/static')));
@@ -56,7 +45,6 @@ app.use(express.static(path.join(__dirname, '../build/static')));
 app.get('/', (req: express.Request, res: express.Response) => {
     
   handleRender(req, res)
-
 });
 
 app.listen(port, () => console.log('Example app listening on port 3000!'));

@@ -8,3 +8,11 @@ export interface ICommonContentListPayload<T> {
   limit: number;
   items: Array<ICommonFields<T>>
 }
+
+export interface ICommonDataNode {
+  nodeType: string;
+  data: any;
+  content?: [ICommonDataNode];
+  value?: string;
+  marks?: [];
+}

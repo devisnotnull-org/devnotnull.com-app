@@ -1,0 +1,9 @@
+{
+  "main.css": "/static/css/main.73e69a18.css",
+  "main.js": "/server.js",
+  "favicon.ico": "/favicon.ico",
+  "index.html": "/index.html",
+  "manifest.json": "/manifest.json",
+  "precache-manifest.7f81e262339442019ed9329d0406339e.js": "/precache-manifest.7f81e262339442019ed9329d0406339e.js",
+  "service-worker.js": "/service-worker.js"
+}

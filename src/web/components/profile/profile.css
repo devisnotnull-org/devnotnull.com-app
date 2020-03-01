@@ -1,32 +1,42 @@
 @import '../../../style/common.css';
 
 :root {
-    --header-top: 8rem;
     --header-inverse-top: -7.5rem;
 }
 
 .Header {
-    margin-top: 90px;
-    text-align: center;
+    text-align: left;
     margin-right: 1.5rem;
     margin-left: 1.5rem;
     padding-bottom: 2rem;
 }
 
 .Header--Photo {
-    width: 150px;
-    height: 150px;
+    width: 10rem;
+    height: 10rem;
     border-radius: 50%;
     overflow: hidden;
     padding: 5px;
     background: #ededed;
     display: inline-block;
-    margin-top: -80px;
+
+    -webkit-transition:  -webkit-transform .2s ease-out;
+    -moz-transition: -moz-transform .2s ease-out;
+    -o-transition: -o-transform .2s ease-out;
+    -ms-transition: -ms-transform .2s ease-out; 
+    transition: transform .2s ease-out; 
+}
+
+.Header--Photo:hover {
+   -webkit-transform:scale(1.1);
+   -moz-transform:scale(1.1);
+   -o-transform:scale(1.1);
+   transform:scale(1.1);
 }
 
 .Header--Photo img {
-    width: 150px;
-    height: 150px;
+    width: 10rem;
+    height: 10rem;
     border-radius: 50%;
 }
 
@@ -59,11 +69,36 @@
     height: 0.3rem;
     background: #ddd;
     opacity: 0.5;
-    margin-top: 1.5rem;
     content: '';
     display: block;
 }
 
 .Description {
   font-size: 1.6rem;
+}
+
+.Link {
+    margin: 3rem 1rem;
+    padding: 1rem;
+    font-size: 2rem;
+    display: inline-block;
+    font-weight: 400;
+    color: black;
+}
+
+.Link--left {
+    float: left;
+}
+
+.Link--right {
+    float: right;
+}
+
+.Link--active {
+    background: orange;
+    border-radius: 1rem;
+}
+
+.Clear {
+    clear: both;
 }

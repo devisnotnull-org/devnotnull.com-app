@@ -107,7 +107,7 @@ h2 {
 }
 
 h2:before{
-    content: '//';
+    content: '';
     margin-right: 5px;
 }
 
@@ -128,4 +128,10 @@ a {
 p {
     font-size: 1.4rem;
     line-height: var(--default-line-heigh);
+}
+
+
+
+.Navigation {
+    position: ;
 }

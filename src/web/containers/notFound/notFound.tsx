@@ -1,29 +1,27 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
+import { path } from 'ramda';
 import { connect } from 'react-redux';
+import { Profile } from '../../components/profile/profile';
 
-import classnames from "classnames";
+import { INotFoundComponentProps } from './notFound.state';
+
+import { mapDispatchToProps, mapStateToProps } from './notFound.state';
 
 import * as styles from "../../../style/common.css";
 
-type StateProps = {}
-type ActionProps = {}
-type SelectorProps = {}
-
-type DefaultProps = {}
-
-type Props = StateProps & ActionProps & SelectorProps & DefaultProps
-
-export class NotFoundView extends React.Component<Props> {
+export class NotFoundView extends Component<INotFoundComponentProps, {}> {
 
     render() {
+        const { metadata } = this.props
         return(
-            <div className={classnames(styles['Align--Center'], styles['Container--Large'])}>
-                <h1>Not found view</h1>
-            </div> 
+            <div>
+                <h2>:( Page not found</h2>
+            </div>
         )
     }
 }
 
-const mapStateToProps = (state: {}) => ({});
-
-export default connect(mapStateToProps,{})(NotFoundView);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(NotFoundView);

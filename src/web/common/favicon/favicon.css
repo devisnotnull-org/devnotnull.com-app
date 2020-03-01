@@ -1,0 +1,24 @@
+.container {
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+    position: relative;
+}
+
+.container > svg  {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.deg90 {
+    transform: rotate(90deg);
+}
+
+.deg180 {
+    transform: rotate(180deg);
+}
+
+.deg270 {
+    transform: rotate(270deg);
+}

@@ -1,10 +1,9 @@
 declare const styles: {
-  readonly "Image": string;
-  readonly "Content": string;
-  readonly "Description": string;
-  readonly "Breakdown": string;
-  readonly "Header--Container": string;
-  readonly "Photo": string;
+  readonly "InnerContainer": string;
+  readonly "Entry--Container": string;
+  readonly "Entry--Header": string;
+  readonly "Entry--Body": string;
+  readonly "Block--Code": string;
 };
 export = styles;
 

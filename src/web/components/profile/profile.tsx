@@ -4,6 +4,7 @@
 import * as React from "react";
 import classnames from "classnames";
 
+import { Link } from "../../common/link/link"
 import * as styles from "./profile.css";
 import * as commonStyles from "../../../style/common.css";
 import { IMetadataPayload } from "../../../models/metadata";
@@ -17,16 +18,18 @@ interface SelectorProps {}
 type Props = StateProps & ActionProps & SelectorProps;
 
 export const Profile: React.SFC<Props> = ({ metadata }) => (
-  <div className={classnames(styles["Header"], commonStyles["Block"])}>
-      <div className={classnames(styles["Header--Photo"])}>
-        <img src="//media.fandanzle.co.uk/avatar.png" alt="avatar" />
+  <div className={classnames(styles["Header"])}>
+      <div className={classnames(styles["Header--Photo"], styles['Link--left'])}>
+        <a href="/">
+          <img src="//media.fandanzle.co.uk/avatar.png" alt="avatar" />
+        </a>
       </div>
-      <div className={classnames(styles["Text--Header"])}>
-        <h1>Alex brown Portfolio</h1>
-        <div className={classnames(styles["Description"])}>
-          A Developer with a passion for web development, security, networking and microservices.
-        </div>
-      </div>
+
+      <span className={classnames(styles['Link'], styles['Link--left'], styles['Link--active'])}><Link to={'/'}>Home</Link></span>
+      <span className={classnames(styles['Link'], styles['Link--left'])}><Link to={'/blog'}>Blog</Link></span>
+      <span className={classnames(styles['Link'], styles['Link--left'])}><Link to={'/porfolilo'}>Portfolio</Link></span>
+      <span className={classnames(styles['Link'], styles['Link--left'])}><Link to={'/projects'}>Projects</Link></span>
+      <div className={styles['Clear']} />
   </div>
 );
 
