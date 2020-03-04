@@ -20,9 +20,9 @@
     "isolatedModules": false,
     "noEmit": false,
     "jsx": "preserve",
-    "outDir": "./ssr"
+    "inlineSourceMap": true,
+    "inlineSources": true
   },
-  "outDir": "./ssr",
   "include": [
     "src"
   ]

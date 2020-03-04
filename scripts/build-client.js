@@ -69,7 +69,6 @@ checkBrowsers(paths.appPath, isInteractive)
     // Merge with the public folder
     copyPublicFolder();
     // Start the webpack build
-    console.log('Build files ')
     //
     return build(previousFileSizes);
   })

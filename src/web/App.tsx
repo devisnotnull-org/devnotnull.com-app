@@ -2,13 +2,13 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Helmet } from 'react-helmet';
 
-import HeaderViewContainer from './header/header';
-import NavigationViewContainer from './navigation/navigation';
-import HomeViewContainer from './home/home';
-import BlogViewContainer from './blog/blog';
-import NotFoundComponent from './notFound/notFound';
+import HeaderViewContainer from './containers/header/header';
+import NavigationViewContainer from './containers/navigation/navigation';
+import HomeViewContainer from './containers/home/home';
+import BlogViewContainer from './containers/blog/blog';
+import NotFoundComponent from './containers/notFound/notFound';
 
-import * as styles from "../../style/common.css";
+import * as styles from "../style/common.css";
 
 interface StateProps {}
 interface ActionProps {}

@@ -8,6 +8,7 @@ import folio, { IFolioState } from './folio/reducer'
 import metadata, { IMetadataState } from './metadata/reducer'
 import assets, { IAssetState } from './assets/reducer'
 import contact, { IContactState } from './contact/reducer'
+import { RouterState, routerReducer as router } from 'react-router-redux';
 
 export interface IState {
     blog: IBlogState
@@ -18,6 +19,7 @@ export interface IState {
     metadata: IMetadataState
     assets: IAssetState
     contact: IContactState
+    router: RouterState
 }
 
 export default combineReducers<IState>({
@@ -28,5 +30,6 @@ export default combineReducers<IState>({
     folio,
     metadata,
     assets,
-    contact
+    contact,
+    router
 })

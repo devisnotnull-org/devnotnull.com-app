@@ -14,8 +14,6 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../config/env');
 
-console.log('11111111111111111')
-
 const fs = require('fs');
 const chalk = require('chalk');
 const webpack = require('webpack');
@@ -36,15 +34,10 @@ const createDevServerConfig = require('../config/webpackDevServer.config');
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
 
-console.log('22222222222222222')
-
-
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
 }
-
-console.log('33333333333333333')
 
 // Tools like Cloud9 rely on this.
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
@@ -64,7 +57,6 @@ if (process.env.HOST) {
   console.log(
     `Learn more here: ${chalk.yellow('http://bit.ly/CRA-advanced-config')}`
   );
-  console.log();
 }
 
 // We require that you explictly set browsers and do not fall back to

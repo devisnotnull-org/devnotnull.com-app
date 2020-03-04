@@ -95,9 +95,6 @@ checkBrowsers(paths.appPath, isInteractive)
       }
 
       console.log('File sizes after gzip:\n');
-      console.log('stats', stats)
-      //console.log('previousFileSizes', previousFileSizes)
-      console.log('paths.appBuild', paths.appBuild)
       
       printFileSizesAfterBuild(
         stats,

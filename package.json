@@ -86,9 +86,15 @@
     "workbox-webpack-plugin": "^3.6.0"
   },
   "dependencies": {
+    "@types/colors": "^1.2.1",
+    "@types/react-router-redux": "^5.0.18",
+    "@types/webpack": "^4.41.7",
+    "@types/webpack-dev-middleware": "^3.7.0",
+    "@types/webpack-hot-middleware": "^2.25.0",
     "axios": "^0.19.0",
     "browser-refresh": "^1.7.3",
     "classnames": "^2.2.0",
+    "colors": "^1.4.0",
     "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^7.0.0",
     "dotenv": "8.2.0",
@@ -96,6 +102,7 @@
     "express": "^4.16.4",
     "file-loader": "2.0.0",
     "fs-extra": "7.0.0",
+    "history": "^4.10.1",
     "husky": "^4.2.0",
     "identity-obj-proxy": "3.0.0",
     "moment": "^2.24.0",
@@ -108,17 +115,21 @@
     "react-redux": "^7.2.0",
     "react-router": "^5.1.0",
     "react-router-dom": "^5.1.0",
+    "react-router-redux": "^4.0.8",
     "redux-devtools": "^3.5.0",
+    "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^1.0.0",
     "redux-saga-requests-graphql": "^0.2.0",
     "reselect": "^4.0.0",
     "resolve": "^1.15.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-hot-middleware": "^2.25.0"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "test": "node scripts/test.js",
+    "start": "node scripts/start-client.js",
+    "test": "node scripts/test-client.js",
     "build:client": "node scripts/build-client.js",
+    "build:server": "node scripts/build-server.js",
     "run-dev-ssr": "cross-env NODE_ENV=production webpack --config ./config/webpack-server.config.js --mode=development & browser-refresh dist/server.js",
     "build:server": "node scripts/build-server.js",
     "build:style-typings": "node scripts/style-typings.js"
