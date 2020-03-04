@@ -2,22 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { BrowserRouter } from "react-router-dom";
-import ReactGA from 'react-ga';
+import createHistory from 'history/createBrowserHistory';
 
-import { store } from '../core/store'
-import AppRouter from '../web/containers/routes';
+import rootSaga from '../core/sagas';
+import createStore from '../core/store'
+import AppRouter from '../web/App';
 
-declare global {
-  interface Window { MyNamespace: any; }
-}
+// Grab the state from a global variable injected into the server-generated HTML
+const preloadedState = (window as any).__INITIAL_STATE__;
 
-window.MyNamespace = window.MyNamespace || {};
+// Create client store
+const history = createHistory();
+const store = createStore(history, preloadedState);
 
-ReactGA.initialize('UA-136352816-1');
+(store as any).rootTask = (store as any).runSaga(rootSaga);
 
 ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter >
         <AppRouter />
       </BrowserRouter>
     </Provider>,

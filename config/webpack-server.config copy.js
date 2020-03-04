@@ -27,13 +27,13 @@ const paths = require('./paths');
 const getClientEnvironment = require('./env');
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
-const shouldUseSourceMap = true;
-
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
 // makes for a smoother build process.
+const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 
 // Check if TypeScript is setup
-const useTypeScript = true
+const useTypeScript = fs.existsSync(paths.appTsConfig);
 
 // style files regexes
 const cssRegex = /\.css$/;
@@ -135,7 +135,7 @@ module.exports = function() {
     target: "node",
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     bail: isEnvProduction,
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: paths.serverIndexJs,
@@ -307,9 +307,6 @@ module.exports = function() {
           ],
         },
       ],
-    },
-    optimization: {
-      minimize: false,
     },
     plugins: [
       // paths.appPublic, paths.appBuild

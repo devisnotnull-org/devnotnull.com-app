@@ -1,32 +1,43 @@
-import { SFC, Component } from 'react';
+import React, { SFC, ReactElement } from 'react';
+import { renderToString } from 'react-dom/server';
+  
+interface StatePropTypes {
+    initialState: string;
+    splitPoints: string;
+    rootComponent: ReactElement | null;
+    assets: {
+        manifest: string;
+        app: string;
+        vendor: string;
+    }
+    PROD: boolean;
+};
+  
+const Html: SFC<StatePropTypes> = ({ initialState, rootComponent, assets, PROD, splitPoints } ) => {
 
-interface StateProps {
-    cssLinks: string[];
-    js: string[];
-    state: Object;
-    title: string;
-}
+  const { manifest, app, vendor } = assets || {};
 
-type HtmlProps = StateProps
-
-export const Html: SFC<HtmlProps> = ({ title }) => (
-    <html>
+  return (
+      <>
+        <html lang="en">
         <head>
-            <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-            <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-            />
-            <meta name="theme-color" content="#000000" />
-            <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-            <title>{title}</title>
+            <meta charSet="utf-8" />
+            <title>title</title>
+            {PROD && <link rel="stylesheet" href="/static/prerender.css" type="text/css" />}
         </head>
-        <title></title>
         <body>
-            <noscript>You need to enable JavaScript to run this app.</noscript>
-            <div id="root"></div>
+            <script dangerouslySetInnerHTML={{ __html: initialState }} />
+            <script dangerouslySetInnerHTML={{ __html: splitPoints }} />
+            {PROD
+            ? <div id="root" dangerouslySetInnerHTML={{ __html: renderToString(rootComponent) }} />
+            : <div id="root" />}
+            {PROD && <script dangerouslySetInnerHTML={{ __html: manifest }} />}
+            {PROD && <script src={vendor} />}
+            <script src={PROD ? app : '/static/app.js'} />
         </body>
-    </html>
-);
+        </html>
+    </>
+  );
+};
 
 export default Html;
