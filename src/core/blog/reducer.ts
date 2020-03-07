@@ -27,8 +27,6 @@ export const blog: Reducer<IBlogState> = (
       return { ...state, loading: true, errors: undefined };
     }
     case BlogActionTypes.FETCH_SUCCESS: {
-      console.log('BlogActionTypes.FETCH_SUCCESS')
-      console.log(action.payload)
       return { ...state, loading: false, errors: undefined, ...action.payload };
     }
     case BlogActionTypes.FETCH_ERROR: {

@@ -4,7 +4,6 @@ import { AssetActionTypes } from './actions'
 import { fetchAbilities } from './fetch';
 
 export function* assetSaga() {
-  console.log("ASSSSET SAGAGASAGAGASAGAGASAGAGASAGAGA")
   try {
     const payload = yield call(fetchAbilities);
     yield put({

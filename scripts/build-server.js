@@ -1,4 +1,4 @@
-'use strict';
+
 
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = 'production';
@@ -11,21 +11,23 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
-// Ensure environment variables are read.
-require('../config/env');
-
 const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
 const bfj = require('bfj');
-const configFactory = require('../config/webpack-server.config');
-const paths = require('../config/paths');
+
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
 const printBuildError = require('react-dev-utils/printBuildError');
+
+const configFactory = require('../webpack/webpack.config');
+const paths = require('../webpack/paths');
+
+// Ensure environment variables are read.
+require('../webpack/env');
 
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
@@ -39,7 +41,8 @@ const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
 const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+if (!checkRequiredFiles([paths.serverIndexJs])) {
+  console.log("Unable to find entry point");
   process.exit(1);
 }
 
@@ -106,13 +109,13 @@ checkBrowsers(paths.appPath, isInteractive)
 
       const appPackage = require(paths.appPackageJson);
       const publicUrl = paths.publicUrl;
-      const publicPath = config.output.publicPath;
+      //const publicPath = config.output.publicPath;
       const buildFolder = path.relative(process.cwd(), paths.appBuild);
       
       printHostingInstructions(
         appPackage,
         publicUrl,
-        publicPath,
+        '',
         buildFolder,
         useYarn
       );
