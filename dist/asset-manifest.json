@@ -1,11 +1,11 @@
 {
-  "main.css": "/static/css/main.0e8496df.css",
-  "main.js": "/server.js",
-  "main.css.map": "/static/css/main.0e8496df.css.map",
-  "main.js.map": "/server.js.map",
-  "favicon.ico": "/favicon.ico",
-  "index.html": "/index.html",
-  "manifest.json": "/manifest.json",
-  "precache-manifest.fcd25ca8777bd28cda7f58d9b6b3accc.js": "/precache-manifest.fcd25ca8777bd28cda7f58d9b6b3accc.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "static/css/main.5048e9f1.css",
+  "main.js": "static/js/main-2zzlwqg0ob51wimhuz18qg.js",
+  "main.css.map": "static/css/main.5048e9f1.css.map",
+  "main.js.map": "static/js/main-2zzlwqg0ob51wimhuz18qg.js.map",
+  "vendor.js": "static/js/vendor-2zzlwqg0ob51wimhuz18qg.js",
+  "vendor.js.map": "static/js/vendor-2zzlwqg0ob51wimhuz18qg.js.map",
+  "favicon.ico": "favicon.ico",
+  "index.html": "index.html",
+  "manifest.json": "manifest.json"
 }

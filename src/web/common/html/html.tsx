@@ -6,38 +6,39 @@ interface StatePropTypes {
     splitPoints: string;
     rootComponent: ReactElement | null;
     assets: {
-        manifest: string;
-        app: string;
-        vendor: string;
+        [key: string]: string;
     }
     PROD: boolean;
 };
   
 const Html: SFC<StatePropTypes> = ({ initialState, rootComponent, assets, PROD, splitPoints } ) => {
 
-  const { manifest, app, vendor } = assets || {};
+    const keys = Object.keys(assets);
+    const js = keys.filter((a) => a.includes('.js') && !a.includes('.map') && !a.includes('.json') );
+    const css = keys.filter((a) => a.includes('.css') && !a.includes('.map') );
 
-  return (
-      <>
-        <html lang="en">
-        <head>
-            <meta charSet="utf-8" />
-            <title>title</title>
-            {PROD && <link rel="stylesheet" href="/static/prerender.css" type="text/css" />}
-        </head>
-        <body>
-            <script dangerouslySetInnerHTML={{ __html: initialState }} />
-            <script dangerouslySetInnerHTML={{ __html: splitPoints }} />
-            {PROD
-            ? <div id="root" dangerouslySetInnerHTML={{ __html: renderToString(rootComponent) }} />
-            : <div id="root" />}
-            {PROD && <script dangerouslySetInnerHTML={{ __html: manifest }} />}
-            {PROD && <script src={vendor} />}
-            <script src={PROD ? app : '/static/app.js'} />
-        </body>
-        </html>
-    </>
-  );
-};
+    const srcJsFiles = js.map(key => <script src={assets[key]} />);
+    const srcCssFiles = css.map(key => <link rel="stylesheet" href={assets[key]} type="text/css" />);
+    
+    return (
+        <>
+            <html lang="en">
+            <head>
+                <meta charSet="utf-8" />
+                <title>title</title>
+                {srcCssFiles}
+            </head>
+            <body>
+                <script dangerouslySetInnerHTML={{ __html: initialState }} />
+                <script dangerouslySetInnerHTML={{ __html: splitPoints }} />
+                {PROD
+                ? <div id="root" dangerouslySetInnerHTML={{ __html: renderToString(rootComponent) }} />
+                : <div id="root" />}
+                {srcJsFiles}
+            </body>
+            </html>
+        </>
+    );
+    };
 
 export default Html;

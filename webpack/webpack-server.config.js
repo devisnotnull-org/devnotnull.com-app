@@ -1,26 +1,19 @@
-'use strict';
 
-const fs = require('fs');
+
 const path = require('path');
 const webpack = require('webpack');
-const resolve = require('resolve');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const safePostCssParser = require('postcss-safe-parser');
+
 const ManifestPlugin = require('webpack-manifest-plugin');
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
-const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+
 const CopyPlugin = require('copy-webpack-plugin');
 
 const paths = require('./paths');
@@ -41,16 +34,15 @@ const cssModuleRegex = /\.module\.css$/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
-module.exports = function() {
-
-  process.env.BABEL_ENV = 'production';
-  process.env.NODE_ENV = 'production';
-
-  const webpackEnv = 'production'
+module.exports = function(environment, hash) {
 
   //
-  const isEnvDevelopment = webpackEnv === 'development';
-  const isEnvProduction = webpackEnv === 'production';
+  process.env.BABEL_ENV = environment;
+  process.env.NODE_ENV = environment;
+
+  //
+  const isEnvDevelopment = environment === 'development';
+  const isEnvProduction = environment === 'production';
 
   // Webpack uses `publicPath` to determine where the app is being served from.
   // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -76,13 +68,6 @@ module.exports = function() {
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
-      isEnvProduction && {
-        loader: MiniCssExtractPlugin.loader,
-        options: Object.assign(
-          {},
-          shouldUseRelativeAssetPaths ? { publicPath: '../../' } : undefined
-        ),
-      },
       {
         loader: require.resolve('css-loader'),
         options: cssOptions,
@@ -97,12 +82,11 @@ module.exports = function() {
           // https://github.com/facebook/create-react-app/issues/2677
           ident: 'postcss',
           plugins: () => [
-            require('postcss-flexbugs-fixes'),
             require('postcss-preset-env')({
-              autoprefixer: {
-                flexbox: 'no-2009',
-              },
-              stage: 3,
+              //autoprefixer: {
+              //  flexbox: 'no-2009',
+              //},
+              //stage: 3,
             }),
           ],
           sourceMap: isEnvProduction && shouldUseSourceMap,
@@ -139,6 +123,10 @@ module.exports = function() {
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: paths.serverIndexJs,
+    //
+    optimization: {
+      minimize: false,
+    },
     output: {
       // The build folder.
       path: paths.appBuild,
@@ -146,11 +134,11 @@ module.exports = function() {
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: 'server.js',
+      filename: `server.js`,
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
       publicPath: publicPath,
-      // Point sourcemap entries to original disk location (format as URL on Windows)
+      // Point sourcemap entries to original disk location (formwebpack multiplrat as URL on Windows)
       devtoolModuleFilenameTemplate: isEnvProduction
         ? info =>
             path
@@ -308,13 +296,16 @@ module.exports = function() {
         },
       ],
     },
-    optimization: {
-      minimize: false,
-    },
     plugins: [
-      // paths.appPublic, paths.appBuild
-      new CopyPlugin([
-        { from: paths.appPublic, to: paths.appBuild },
+      // Moment.js is an extremely popular library that bundles large locale files
+      // by default due to how Webpack interprets its code. This is a practical
+      // solution that requires the user to opt into importing specific locales.
+      // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
+      // You can remove this if you don't use Moment.js:
+      // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      // Generate css typings
+      new webpack.WatchIgnorePlugin([
+        /css\.d\.ts$/
       ]),
       // This gives some necessary context to module not found errors, such as
       // the requesting resource.
@@ -326,85 +317,26 @@ module.exports = function() {
       // Otherwise React will be compiled in the very slow development mode.
       new webpack.DefinePlugin(env.stringified),
       // This is necessary to emit hot updates (currently CSS only):
-      isEnvDevelopment && new webpack.HotModuleReplacementPlugin(),
+      isEnvDevelopment &&  
+        new webpack.HotModuleReplacementPlugin(),
       // Watcher doesn't work well if you mistype casing in a path so we use
       // a plugin that prints an error when you attempt to do this.
       // See https://github.com/facebook/create-react-app/issues/240
-      isEnvDevelopment && new CaseSensitivePathsPlugin(),
+      isEnvDevelopment && 
+        new CaseSensitivePathsPlugin(),
       // If you require a missing module and then `npm install` it, you still have
       // to restart the development server for Webpack to discover it. This plugin
       // makes the discovery automatic so you don't have to restart.
       // See https://github.com/facebook/create-react-app/issues/186
-      isEnvDevelopment && new WatchMissingNodeModulesPlugin(paths.appNodeModules),
+      isEnvDevelopment && 
+        new WatchMissingNodeModulesPlugin(paths.appNodeModules),
       isEnvProduction &&
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
           // both options are optional
-          filename: 'static/css/[name].[contenthash:8].css',
-          chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+          filename: `static/css/[name].${hash}.css`,
+          chunkFilename: `static/css/[name].${hash}.chunk.css`,
         }),
-      // Generate a manifest file which contains a mapping of all asset filenames
-      // to their corresponding output file so that tools can pick it up without
-      // having to parse `index.html`.
-      new ManifestPlugin({
-        fileName: 'asset-manifest.json',
-        publicPath: publicPath,
-      }),
-      // Moment.js is an extremely popular library that bundles large locale files
-      // by default due to how Webpack interprets its code. This is a practical
-      // solution that requires the user to opt into importing specific locales.
-      // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
-      // You can remove this if you don't use Moment.js:
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-      // Generate a service worker script that will precache, and keep up to date,
-      // the HTML & assets that are part of the Webpack build.
-      isEnvProduction &&
-        new WorkboxWebpackPlugin.GenerateSW({
-          clientsClaim: true,
-          exclude: [/\.map$/, /asset-manifest\.json$/],
-          importWorkboxFrom: 'cdn',
-          navigateFallback: publicUrl + '/index.html',
-          navigateFallbackBlacklist: [
-            // Exclude URLs starting with /_, as they're likely an API call
-            new RegExp('^/_'),
-            // Exclude URLs containing a dot, as they're likely a resource in
-            // public/ and not a SPA route
-            new RegExp('/[^/]+\\.[^/]+$'),
-          ],
-        }),  
-      new ForkTsCheckerWebpackPlugin({
-        typescript: resolve.sync('typescript', {
-          basedir: paths.appNodeModules,
-        }),
-        async: true,
-        checkSyntacticErrors: true,
-        tsconfig: paths.appTsConfig,
-        compilerOptions: {
-          module: 'esnext',
-          moduleResolution: 'node',
-          resolveJsonModule: true,
-          isolatedModules: true,
-          noEmit: true,
-          jsx: 'preserve',
-          "inlineSourceMap": true,
-          "inlineSources": true
-        },
-        reportFiles: [
-          '**',
-          '!**/*.json',
-          '!**/__tests__/**',
-          '!**/?(*.)(spec|test).*',
-          '!**/src/setupProxy.*',
-          '!**/src/setupTests.*',
-        ],
-        watch: paths.appSrc,
-        silent: true,
-        formatter: typescriptFormatter,
-      }),
-      // Generate css typings
-      new webpack.WatchIgnorePlugin([
-        /css\.d\.ts$/
-      ])
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.

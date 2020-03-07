@@ -1,4 +1,4 @@
-import { fetchRequest } from '../../../core/actions'
+import { fetchRequest } from '../../../core/blog/actions'
 
 import { ICommonFields } from '../../../models/common'
 import { IBlogPostPayload } from '../../../models/blog'

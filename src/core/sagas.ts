@@ -8,7 +8,6 @@ import { experianceSaga } from './experiance/sagas';
 import { metadataSagas } from './metadata/sagas';
 import { assetSaga } from './assets/sagas';
 import { contactSaga } from './contact/sagas';
-import testSagas from './test/sagas';
 
 import { 
   AbilitiesActionTypes,
@@ -33,9 +32,10 @@ export function* fetchAllSaga() {
 
 export default function* rootSaga() {
   yield all([
-    testSagas(),
-    fetchAllSaga(),
-    takeEvery(GlobalActionTypes.FETCH_START, fetchAllSaga),
+    // Fetch our global parameters
+    metadataSagas(),
+    // Bind our actions
+    takeEvery(GlobalActionTypes.FETCH_START, metadataSagas),
     takeEvery(AbilitiesActionTypes.FETCH_START, abilitiesSagas),
     takeEvery(BlogActionTypes.FETCH_START, blogSaga),
     takeEvery(EducationActionTypes.FETCH_START, educationSaga),

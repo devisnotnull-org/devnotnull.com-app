@@ -1,8 +1,5 @@
 /* eslint global-require: 0 */
 
-// Node Modules
-import fs from 'fs';
-import { basename, join } from 'path';
 import { Store } from 'redux';
 
 // Libraries
@@ -12,15 +9,30 @@ import createHistory from 'history/createMemoryHistory';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
 
-import App from '../web/App'
+import { existsSync, readFileSync } from 'fs';
+
+//
+import App from '../web/app'
 
 // Components
 import Html from '../web/common/html/html';
 
 // Redux
-// import {push} from 'react-router-redux';
 import createStore from '../core/store';
 import rootSaga from '../core/sagas';
+
+let manifest: any;
+// This is only processed when there is a page request 
+try {
+    if(existsSync(`${__dirname}/asset-manifest.json`)) {
+        const re = readFileSync(`${__dirname}/asset-manifest.json`).toString();
+        manifest = JSON.parse(re);
+    } else {
+        console.log('The file does not exist.');
+    }
+} catch (err) {
+    console.error(err);
+}
 
 /**
  * 
@@ -29,7 +41,7 @@ import rootSaga from '../core/sagas';
  * @param assets 
  * @param res 
  */
-const renderApp = (url: string, store: Store, assets: any, res?: any) => {
+const renderApp = (url: string, store: Store, res?: any) => {
 
     // 
     const PROD = process.env.NODE_ENV === 'production';
@@ -37,7 +49,7 @@ const renderApp = (url: string, store: Store, assets: any, res?: any) => {
         splitPoints: []
     };
 
-    //
+    // 
     const rootComponent = PROD
     ? (<Provider store={store}>
         <StaticRouter location={url}>
@@ -56,7 +68,7 @@ const renderApp = (url: string, store: Store, assets: any, res?: any) => {
         const html = renderToString(
             <Html
                 PROD={PROD}
-                assets={assets}
+                assets={manifest}
                 rootComponent={rootComponent}
                 initialState={initialState}
                 splitPoints={splitPoints}
@@ -81,7 +93,7 @@ export const renderPage = (req: any, res: any) => {
     const history = createHistory();
     const store = createStore(history);
     const assets = {};
-    renderApp(req.url, store, assets, res);
+    renderApp(req.url, store, res);
 };
 
 /**
