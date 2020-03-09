@@ -5,7 +5,7 @@ import moment from 'moment'
 import { IEducationPayload } from "../../../models/education";
 import { ICommonFields } from "../../../models/common";
 
-import * as commonStyles from "../../../style/common.css";
+import * as commonStyles from "../../style/common.css";
 import * as styles from "./education.css";
 
 interface IStateProps {

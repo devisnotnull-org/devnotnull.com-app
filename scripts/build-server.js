@@ -23,7 +23,7 @@ const printHostingInstructions = require('react-dev-utils/printHostingInstructio
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
 const printBuildError = require('react-dev-utils/printBuildError');
 
-const configFactory = require('../webpack/webpack.config');
+const configFactory = require('../webpack/webpack-base-docker.config');
 const paths = require('../webpack/paths');
 
 // Ensure environment variables are read.

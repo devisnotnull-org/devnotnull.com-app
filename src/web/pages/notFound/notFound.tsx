@@ -7,7 +7,7 @@ import { INotFoundComponentProps } from './notFound.state';
 
 import { mapDispatchToProps, mapStateToProps } from './notFound.state';
 
-import * as styles from "../../../style/common.css";
+import * as styles from "../../style/common.css";
 
 export class NotFoundView extends Component<INotFoundComponentProps, {}> {
 

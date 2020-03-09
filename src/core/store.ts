@@ -1,25 +1,29 @@
-import { createStore, combineReducers, applyMiddleware, Store } from 'redux';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { createStore, combineReducers, applyMiddleware, Store, Middleware } from 'redux';
 import createSaga, { END, SagaMiddleware } from 'redux-saga';
-import root from './sagas'
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { routerMiddleware } from 'connected-react-router'
 
 import rootReducers from '../core/reducers';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { isServerRender } from '../utils';
 
-export default (history: any = undefined, reduxState = undefined) => {
+export default (history: any, reduxState = undefined) => {
 
-  // Create our store
+  //
+  console.log('Is this a server side render');
+  console.log(isServerRender)
+
+  // Compose our middlewares
   const saga: SagaMiddleware = createSaga();
-  const router = routerMiddleware(history);
+  const router: Middleware = routerMiddleware(history);
 
-  // Create Saga middleware
+  // Compose with dev tools
   const enhancer = composeWithDevTools(applyMiddleware(saga, router));
 
   // Create our store
   const store: Store = createStore(
-    rootReducers,
+    rootReducers(history),
     reduxState,
-    enhancer,
+    enhancer
   );
 
   // TODO: This needs to be properly types
@@ -33,7 +37,6 @@ export default (history: any = undefined, reduxState = undefined) => {
       const nextReducers = require('../core/reducers');
       const rootReducer = combineReducers({
         ...nextReducers,
-        router: routerReducer,
       });
       store.replaceReducer(rootReducer);
     });

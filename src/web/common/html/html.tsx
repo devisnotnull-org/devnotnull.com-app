@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server';
 interface StatePropTypes {
     initialState: string;
     splitPoints: string;
-    rootComponent: ReactElement | null;
+    rootComponent: ReactElement<any> | null;
     assets: {
         [key: string]: string;
     }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import classnames from "classnames";
 
-import * as commonStyles from "../../../style/common.css";
+import * as commonStyles from "../../style/common.css";
 import { IMetadataPayload } from "../../../models/metadata";
 
 interface StateProps {

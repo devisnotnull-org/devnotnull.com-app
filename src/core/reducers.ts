@@ -8,7 +8,7 @@ import folio, { IFolioState } from './folio/reducer'
 import metadata, { IMetadataState } from './metadata/reducer'
 import assets, { IAssetState } from './assets/reducer'
 import contact, { IContactState } from './contact/reducer'
-import { RouterState, routerReducer as router } from 'react-router-redux';
+import { connectRouter } from 'connected-react-router'
 
 export interface IState {
     blog: IBlogState
@@ -19,10 +19,10 @@ export interface IState {
     metadata: IMetadataState
     assets: IAssetState
     contact: IContactState
-    router: RouterState
+    router: any
 }
 
-export default combineReducers<IState>({
+const rootReducers = (history: any) => combineReducers<IState>({
     blog,
     ability,
     education,
@@ -31,5 +31,7 @@ export default combineReducers<IState>({
     metadata,
     assets,
     contact,
-    router
-})
+    router: connectRouter(history)
+});
+
+export default rootReducers;

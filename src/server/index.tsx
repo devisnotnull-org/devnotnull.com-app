@@ -5,7 +5,7 @@ import express, { Express, Request, Response, NextFunction } from 'express';
 import { join } from 'path';
  
 // Server Side Rendering
-import { renderPage, renderDevPage } from './ssr';
+import { renderDevPageExpress, renderPageExpress } from './ssr';
 
 const PROD: boolean = process.env.NODE_ENV === 'production';
 
@@ -15,14 +15,14 @@ const app: Express = express();
 if (PROD) {
   console.log("STATIC PATH DEVVVVV")
   app.use('/static', express.static(join(__dirname, '/static')))
-  app.get('*', renderPage);
+  app.get('*', renderPageExpress);
 } else {
   // Hot Module Reloading
   console.log("STATIC PATH SERVERrr")
   // const HMR = require('./hmr').default;
   // HMR(app);
   app.use('/static', express.static(join(__dirname, '/static')))
-  app.get('*', renderDevPage);
+  app.get('*', renderDevPageExpress);
 }
 
 // catch 404 and forward to error handler

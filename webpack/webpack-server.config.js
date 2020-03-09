@@ -83,10 +83,6 @@ module.exports = function(environment, hash) {
           ident: 'postcss',
           plugins: () => [
             require('postcss-preset-env')({
-              //autoprefixer: {
-              //  flexbox: 'no-2009',
-              //},
-              //stage: 3,
             }),
           ],
           sourceMap: isEnvProduction && shouldUseSourceMap,
@@ -134,7 +130,7 @@ module.exports = function(environment, hash) {
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: `server.js`,
+      filename: '[name].js',
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
       publicPath: publicPath,

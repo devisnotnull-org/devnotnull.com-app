@@ -8,7 +8,7 @@ import HomeViewContainer from './pages/home/home';
 import BlogViewContainer from './pages/blog/blog';
 import NotFoundComponent from './pages/notFound/notFound';
 
-import * as styles from "../style/common.css";
+import * as styles from "./style/common.css";
 
 interface StateProps {}
 interface ActionProps {}

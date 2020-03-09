@@ -66,6 +66,7 @@ module.exports = {
   serverBuild: resolveApp('dist'),
   appPublic: resolveApp('public'),
   serverIndexJs: resolveModule(resolveApp, 'src/server/index'),
+  serverlessHandler: resolveModule(resolveApp, 'src/server/handler'),
   appEntryPoint: resolveModule(resolveApp, 'src/client/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
