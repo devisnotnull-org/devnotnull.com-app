@@ -8,6 +8,7 @@ import { renderToString } from 'react-dom/server';
 import createHistory from 'history/createMemoryHistory';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
+import { Request } from 'express';
 
 import { existsSync, readFileSync } from 'fs';
 
@@ -20,8 +21,11 @@ import Html from '../web/common/html/html';
 // Redux
 import createStore from '../core/store';
 import rootSaga from '../core/sagas';
+import { resolve } from 'url';
+import { reject } from 'ramda';
 
-let manifest: any;
+let manifest: any = {};
+
 // This is only processed when there is a page request 
 try {
     if(existsSync(`${__dirname}/asset-manifest.json`)) {
@@ -41,8 +45,9 @@ try {
  * @param assets 
  * @param res 
  */
-const renderApp = (url: string, store: Store, res?: any) => {
+const renderApp = (url: string, store: Store): string => {
 
+    let response: string = "";
     // 
     const PROD = process.env.NODE_ENV === 'production';
     const context = {
@@ -74,26 +79,94 @@ const renderApp = (url: string, store: Store, res?: any) => {
                 splitPoints={splitPoints}
             />
         );
-        res.send(`${html}`);
+        response = html;
     });
 
     // Do first render, trigger sagas for component to run
-    if (PROD) renderToString(rootComponent);
+    if (PROD) response = renderToString(rootComponent);
 
     // Dispatch a close event so sagas stop listening after they're resolved
     (store as any).closeSagas();
+    
+    //
+    return response;
 }
 
 /**
  * 
+ * @param url 
+ * @param store 
+ * @param assets 
+ * @param res 
+ */
+const renderServerlessApp = async (url: string, store: Store, callback)=> {
+
+    // 
+    const PROD = process.env.NODE_ENV === 'production';
+    const context = {
+        splitPoints: []
+    };
+
+    // 
+    const rootComponent = 
+        <Provider store={store}>
+            <StaticRouter location={url}>
+                <App />
+            </StaticRouter>
+        </Provider>
+    
+    console.log(rootComponent);
+
+    // Fetch all resources for root saga
+    (store as any).runSaga(rootSaga).toPromise().then(() => {
+
+        // Get state from store after sagas were run and strigify it for rendering in HTML
+        const state = store.getState();
+        const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(state)}`;
+        const splitPoints = `window.__SPLIT_POINTS__ = ${JSON.stringify(context.splitPoints)}`;
+
+        const html = renderToString(
+            <Html
+                PROD={PROD}
+                assets={manifest}
+                rootComponent={rootComponent}
+                initialState={initialState}
+                splitPoints={splitPoints}
+            />
+        );
+        
+        // console.log(html);
+
+        //
+        const response = {
+            statusCode: 200,
+            headers: {
+              'Content-Type': 'text/html',
+            },
+            body: html,
+        };
+        
+        callback(
+            null,
+            response
+        );
+
+        // Dispatch a close event so sagas stop listening after they're resolved
+    });
+
+    (store as any).closeSagas();
+}
+
+
+/**
+ * 
  * @param req 
  * @param res 
  */
-export const renderPage = (req: any, res: any) => {
+export const renderPageServerless = async (req: string, callback) => {
     const history = createHistory();
     const store = createStore(history);
-    const assets = {};
-    renderApp(req.url, store, res);
+    renderServerlessApp(req, store, callback);
 };
 
 /**
@@ -101,10 +174,19 @@ export const renderPage = (req: any, res: any) => {
  * @param req 
  * @param res 
  */
-export const renderDevPage = (req: any, res: any) => {
+export const renderPageExpress = (req: Request): string => {
     const history = createHistory();
     const store = createStore(history);
-    renderApp(req.url, store, res);
+    return renderApp(req.url, store);
 };
 
-export default renderPage;
+/**
+ * 
+ * @param req 
+ * @param res 
+ */
+export const renderDevPageExpress = (req: Request): string => {
+    const history = createHistory();
+    const store = createStore(history);
+    return renderApp(req.url, store);
+};

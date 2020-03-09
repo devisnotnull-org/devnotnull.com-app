@@ -9,8 +9,8 @@ interface IAssetEntry {
 }
 
 export interface IAssetState {
-  readonly loading: boolean;
-  readonly errors?: string;
+  readonly loading: boolean
+  readonly errors?: string
   readonly items: {[id: string]: IAssetPayload}
 }
 

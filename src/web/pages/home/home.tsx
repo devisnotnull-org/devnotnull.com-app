@@ -15,7 +15,7 @@ import { IHomeComponentProps } from './home.state';
 
 import { mapDispatchToProps, mapStateToProps } from './home.state';
 
-import * as styles from "../../../style/common.css";
+import * as styles from "../../style/common.css";
 import * as homeStyles from "./home.css"
 
 export class HomeView extends Component<IHomeComponentProps, {}> {

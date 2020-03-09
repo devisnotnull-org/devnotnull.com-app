@@ -1,0 +1,47 @@
+service:
+  name: serverless-with-typescript
+
+frameworkVersion: ">=1.26.1"
+
+package:
+  individually: true
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+  - serverless-finch
+
+custom:
+  serverless-offline:
+    port: 3000 
+  memorySizes: 
+    development: 3008 
+    staging: 3008
+  webpack:
+    webpackConfig: 'webpack/webpack-serverless.config.js'
+    packager: 'yarn'
+    includeModules: true
+
+  client:
+    bucketName: assets-devnotnull
+    distributionFolder: dist
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  timeout: 10 
+  region: ${opt:region, 'eu-west-2'}
+  memorySize: ${self:custom.memorySizes}
+  environment:
+    NODE_ENV: ${self:provider.stage}
+
+functions:
+  server:
+    handler: src/server/handler.handler
+    environment:
+      NODE_ENV: production
+    events:
+      - http:
+          method: GET
+          path: /{any+}
+
