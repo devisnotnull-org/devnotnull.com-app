@@ -309,7 +309,7 @@ module.exports = function(environment, hash) {
     plugins: [
       // paths.appPublic, paths.appBuild
       new CopyPlugin([
-        { from: paths.appPublic, to: paths.appBuild },
+        // { from: paths.appPublic, to: paths.appBuild },
       ]),
       // Generate a manifest file which contains a mapping of all asset filenames
       // to their corresponding output file so that tools can pick it up without
@@ -318,7 +318,7 @@ module.exports = function(environment, hash) {
         isInitial: true,
         writeToFileEmit: true,
         fileName: 'asset-manifest.json',
-        publicPath: publicPath,
+        //publicPath: publicPath,
       }),
       //
       new MiniCssExtractPlugin({
@@ -366,7 +366,6 @@ module.exports = function(environment, hash) {
     node: {
       __dirname: false,
       __filename: false
-
     },
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter

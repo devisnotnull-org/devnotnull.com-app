@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Link as RouterLink } from "react-router-dom";
 
 const isExternalLink = (path: string) => {
-  console.log('IS THIS A MATCH ,', path,  path.includes('http'))
   return path.includes('http')
 }
 

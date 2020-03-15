@@ -35,7 +35,7 @@ export default {
     filename: 'app.js',
     chunkFilename: '[name]_[chunkhash].js',
     path:  paths.appBuild,
-    publicPath: paths.appPublic,
+    //publicPath: paths.serverBuild,
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),

@@ -33,7 +33,7 @@ export function* fetchAllSaga() {
 export default function* rootSaga() {
   yield all([
     // Fetch our global parameters
-    metadataSagas(),
+    fetchAllSaga(),
     // Bind our actions
     takeEvery(GlobalActionTypes.FETCH_START, metadataSagas),
     takeEvery(AbilitiesActionTypes.FETCH_START, abilitiesSagas),
