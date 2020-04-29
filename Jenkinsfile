@@ -1,12 +1,12 @@
 pipeline {
   agent {
     node {
-      label 'local'
+      label 'master'
     }
 
   }
   stages {
-    stage('') {
+    stage('error') {
       steps {
         sh 'yarn build'
       }
