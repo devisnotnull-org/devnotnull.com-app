@@ -9,7 +9,6 @@
     padding: 1em 0;
     display: flex;  
     flex-direction: row;
-    min-height: 14rem;
 }
 
 .Education:before {

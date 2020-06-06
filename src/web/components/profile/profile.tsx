@@ -16,15 +16,13 @@ type Props = StateProps & ActionProps & SelectorProps;
 export const Profile: React.SFC<Props> = ({ metadata }) => (
   <div className={classnames(styles["Header"])}>
       <div className={classnames(styles["Header--Photo"], styles['Link--left'])}>
-        <a href="/">
+        <Link to={'/'}>
           <img src="//media.fandanzle.co.uk/avatar.png" alt="avatar" />
-        </a>
+        </Link>
       </div>
 
-      <span className={classnames(styles['Link'], styles['Link--left'], styles['Link--active'])}><Link to={'/'}>Home</Link></span>
+      <span className={classnames(styles['Link'], styles['Link--left'])}><Link to={'/'}>Home</Link></span>
       <span className={classnames(styles['Link'], styles['Link--left'])}><Link to={'/blog'}>Blog</Link></span>
-      <span className={classnames(styles['Link'], styles['Link--left'])}><Link to={'/porfolilo'}>Portfolio</Link></span>
-      <span className={classnames(styles['Link'], styles['Link--left'])}><Link to={'/projects'}>Projects</Link></span>
       <div className={styles['Clear']} />
   </div>
 );

@@ -9,23 +9,28 @@ package:
 plugins:
   - serverless-offline
   - serverless-webpack
-  - serverless-finch
+  - serverless-s3-deploy
 
 custom:
   serverless-offline:
     port: 3000 
+
+  siteName: devnotnull.com
+    
   memorySizes: 
     development: 3008 
     staging: 3008
+
+  s3Sync:
+    - bucketName: ${self:custom.siteName}
+      localDir: dist/static
+
   webpack:
-    webpackConfig: 'webpack/webpack-serverless.config.js'
-    packager: 'yarn'
-    includeModules: true
-
-  client:
-    bucketName: assets-devnotnull
-    distributionFolder: dist
-
+    webpackConfig: 'webpack.config.js'   # Name of webpack configuration file
+    includeModules: false   # Node modules configuration for packaging
+    packager: 'npm'   # Packager that will be used to package your external modules
+    excludeFiles: src/**/*.test.js # Provide a glob for files to ignore
+    
 provider:
   name: aws
   runtime: nodejs12.x
@@ -45,3 +50,34 @@ functions:
           method: GET
           path: /{any+}
 
+resources:
+  Resources:
+    SiteAssets:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: PublicRead
+        BucketName: ${self:custom.siteName}
+        WebsiteConfiguration:
+          IndexDocument: index.html
+    StaticSiteS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: StaticSite
+        PolicyDocument:
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Principal: "*"
+              Action:
+              - s3:GetObject
+              Resource:
+                Fn::Join: [
+                  "", [
+                    "arn:aws:s3:::",
+                    {
+                      "Ref": "SiteAssets"
+                    },
+                    "/*"
+                  ]
+                ]

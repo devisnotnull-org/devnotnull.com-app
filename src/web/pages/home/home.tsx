@@ -6,16 +6,10 @@ import Contact from '../../components/contact/contact';
 import Skillz from '../../components/skillz/skillz';
 import Experiance from '../../components/experiance/experiance';
 import Education from '../../components/education/education';
-import Profile from '../../components/profile/profile';
-import Folio from '../../components/folio/folio';
-
-import { Favicon } from '../../common/favicon/favicon'
 
 import { IHomeComponentProps } from './home.state';
-
 import { mapDispatchToProps, mapStateToProps } from './home.state';
 
-import * as styles from "../../style/common.css";
 import * as homeStyles from "./home.css"
 
 export class HomeView extends Component<IHomeComponentProps, {}> {
@@ -30,8 +24,8 @@ export class HomeView extends Component<IHomeComponentProps, {}> {
                     <Education educationList={educationItems} />
                 </aside>
                 <aside className={homeStyles['Breakdown']}>
-                    <Contact contactList={contactItems}/>
                     <Skillz abilitiesList={abilityItems} />
+                    <Contact contactList={contactItems}/>
                 </aside>
             </div>
         )

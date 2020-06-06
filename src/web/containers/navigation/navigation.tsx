@@ -20,8 +20,6 @@ export class HeaderView extends Component<IHeaderProps, {}> {
                 <div className={styles['Navigation']}>
                     <span className={classnames(styles['Link'], styles['Link--left'])}><Link to={'/'}>Home</Link></span>
                     <span className={classnames(styles['Link'], styles['Link--left'])}><Link to={'/blog'}>Blog</Link></span>
-                    <span className={classnames(styles['Link'], styles['Link--right'])}><Link to={'/porfolilo'}>Portfolio</Link></span>
-                    <span className={classnames(styles['Link'], styles['Link--right'])}><Link to={'/projects'}>Projects</Link></span>
                 </div>
             </Fragment>
         )
