@@ -3,8 +3,6 @@ import classnames from 'classnames';
 
 import * as s from "./favicon.css"
 
-
-
 const iconSelector = (name: string) => {
   switch (name) {
     case 'linked':

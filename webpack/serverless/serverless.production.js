@@ -1,12 +1,16 @@
 const TerserPlugin = require('terser-webpack-plugin');
 const merge = require('webpack-merge');
+const nodeExternals = require("webpack-node-externals");
 
-const server = require('./server.common');
+const { common } = require('./serverless.common');
 
-module.exports = merge(server, {
+module.exports = merge(common, {
   devtool: 'source-map',
+  mode: 'production',
   output: {
-    filename: '[name].js'
+    libraryTarget: 'commonjs2',
+    // path: path.join(__dirname, '.webpack'),
+
   },
   optimization: {
     minimize: false,
@@ -23,5 +27,5 @@ module.exports = merge(server, {
         }
       })
     ]
-  }
+  },
 });

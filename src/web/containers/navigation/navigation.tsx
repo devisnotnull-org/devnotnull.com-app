@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { path } from 'ramda';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
@@ -12,9 +11,7 @@ import { mapDispatchToProps, mapStateToProps } from './navigation.state';
 import * as styles from "./navigation.css"
 
 export class HeaderView extends Component<IHeaderProps, {}> {
-
     render() {
-        const { metadata } = this.props
         return(
             <Fragment>
                 <div className={styles['Navigation']}>

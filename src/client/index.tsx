@@ -35,7 +35,7 @@ renderApp();
 if ((module as any).hot) {
   //
   (module as any).hot.accept('../web/app', () => {
-    const newApp = require('../web/app').default;
+    // const newApp = require('../web/app').default;
     renderApp();
   });
   //

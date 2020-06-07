@@ -7,7 +7,7 @@ const merge = require("webpack-merge");
 
 const client = require("./client.common");
 
-const paths = require("./paths");
+const paths = require("../paths");
 
 const workerName = "service-worker";
 const workerManifestName = "precache-manifes";

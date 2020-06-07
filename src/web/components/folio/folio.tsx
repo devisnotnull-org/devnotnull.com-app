@@ -2,9 +2,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 
-import * as styles from './folio.css'
 import * as commonStyles from '../../style/common.css';
-import { IFolioPayload } from '../../../models/folio';
 
 interface StateProps {}
 interface ActionProps {}

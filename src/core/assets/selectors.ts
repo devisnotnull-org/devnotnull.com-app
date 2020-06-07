@@ -2,7 +2,6 @@ import { prop, pipe, propOr, path } from 'ramda';
 
 import { IAssetState } from './reducer';
 import { IState } from '../reducers';
-import { stat } from 'fs';
 
 export const getAsset = (state: IState): IAssetState => prop('assets', state);
 

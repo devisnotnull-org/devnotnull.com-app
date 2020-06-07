@@ -1,8 +1,5 @@
 import { fetchRequest } from '../../../core/actions'
 
-import { ICommonFields } from '../../../models/common'
-import { IBlogPostPayload } from '../../../models/blog'
-import { getBlogItems } from '../../../core/blog/selectors';
 import { IMetadataPayload } from '../../../models/metadata';
 import { getMetadata } from '../../../core/metadata/selectors';
 

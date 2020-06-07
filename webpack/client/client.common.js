@@ -1,11 +1,13 @@
 const merge = require("webpack-merge");
 
-const { common } = require('./common');
+const paths = require("../paths");
+
+const { common } = require('../common');
 
 module.exports = merge(common, {
   target: "web",
   entry: {
-    bundle: ["./client/index"]
+    bundle: ["./src/client/index"]
   },
   node: {
     fs: "empty",

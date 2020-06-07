@@ -1,14 +1,13 @@
 const merge = require("webpack-merge");
 const nodeExternals = require("webpack-node-externals");
 
-const paths = require("./paths");
-const { common } = require('./common');
-
+const paths = require("../paths");
+const { common } = require('../common');
 
 module.exports = merge(common, {
   target: 'node',
   entry: {
-    index: ['./server/index']
+    index: ['./src/server/index']
   },
   module: {
     rules: [

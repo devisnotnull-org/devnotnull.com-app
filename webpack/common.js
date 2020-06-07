@@ -11,19 +11,9 @@ const target = process.env.TARGET || "client";
 const isClient = target === "client";
 const publicPath = "/";
 
-/**
-
-  watch: true,
-  watchOptions: {
-    aggregateTimeout: 2000,
-    poll: 20000,
-    ignored: ['../dist/**', '../node_modules/**']
-  },
- * 
- */
 const common = {
   mode: NODE_ENV,
-  context: paths.src,
+  context: paths.root,
   output: {
     publicPath,
     path: paths.dist
@@ -39,7 +29,7 @@ const common = {
   module: {
     rules: [
       {
-        test: /\.m?([jt])sx?$/,
+        test: /\.(ts|js)x?$/,
         exclude: paths.nodeModules,
         loader: "babel-loader",
         options: {
@@ -48,30 +38,6 @@ const common = {
           cacheIdentifier: target,
           configFile: paths.babelConfig,
           cacheCompression: isProduction
-        }
-      },
-      {
-        test: /\.m?([jt])sx?$/,
-        loader: "babel-loader",
-        include: paths.nodeModules,
-        exclude: [/@babel(?:\/|\\{1,2})runtime/, /core-js/],
-        options: {
-          babelrc: false,
-          compact: false,
-          configFile: false,
-          sourceMaps: false,
-          cacheDirectory: true,
-          cacheCompression: isProduction,
-          presets: [
-            [
-              "@babel/preset-env",
-              {
-                modules: false,
-                useBuiltIns: false,
-                exclude: ["transform-typeof-symbol"]
-              }
-            ]
-          ]
         }
       },
       {
@@ -85,7 +51,7 @@ const common = {
     ]
   },
   plugins: [
-    // new ForkTsCheckerWebpackPlugin({ tsconfig: paths.tsConfig, eslint: true }),
+    new ForkTsCheckerWebpackPlugin({ tsconfig: paths.tsConfig, eslint: true }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new CircularDependencyPlugin({
       exclude: /node_modules/,

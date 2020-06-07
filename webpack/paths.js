@@ -1,7 +1,6 @@
 const { resolve } = require('path');
 
 const root = resolve(__dirname, '..');
-
 const src = resolve(root, 'src');
 const core = resolve(src, 'core');
 const client = resolve(src, 'client');

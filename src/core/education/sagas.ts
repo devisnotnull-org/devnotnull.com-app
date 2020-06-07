@@ -1,4 +1,4 @@
-import { call, put, all, takeEvery } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { EducationActionTypes } from './actions'
 
 import { fetchEducation } from './fetch';

@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
-import Helmet from 'react-helmet';
+import { Helmet } from "react-helmet";
 
 interface StatePropTypes {
     initialState: string;
@@ -47,5 +47,6 @@ const Html: FC<StatePropTypes> = ({ initialState, rootComponent, assets, PROD, s
         </html>
     );
 };
+
 
 export default Html;

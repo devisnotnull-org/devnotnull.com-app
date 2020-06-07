@@ -1,15 +1,13 @@
-const merge = require("webpack-merge");
+const merge = require('webpack-merge');
 const nodeExternals = require("webpack-node-externals");
+const slsw = require('serverless-webpack');
 
-const paths = require("./paths");
-const { common } = require('./common');
-
+const paths = require("../paths");
+const { common } = require('../common');
 
 module.exports = merge(common, {
   target: 'node',
-  entry: {
-    index: ['./server/index']
-  },
+  entry: slsw.lib.entries,
   module: {
     rules: [
       {

@@ -11,7 +11,6 @@ module.exports = merge(server, {
     filename: '[name].js'
   },
   plugins: [
-    new NodemonPlugin(),
     new WebpackBar({ profile: true, name: 'server' })
   ]
 });

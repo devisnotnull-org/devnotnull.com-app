@@ -3,17 +3,17 @@ service:
 
 frameworkVersion: ">=1.26.1"
 
-package:
-  individually: true
-
 plugins:
   - serverless-offline
   - serverless-webpack
   - serverless-s3-deploy
+  - serverless-offline-plus-static
 
 custom:
   serverless-offline:
     port: 3000 
+
+  localDevStaticFolder: dist
 
   siteName: devnotnull.com
     
@@ -26,10 +26,9 @@ custom:
       localDir: dist/static
 
   webpack:
-    webpackConfig: 'webpack.config.js'   # Name of webpack configuration file
-    includeModules: false   # Node modules configuration for packaging
-    packager: 'npm'   # Packager that will be used to package your external modules
-    excludeFiles: src/**/*.test.js # Provide a glob for files to ignore
+    webpackConfig: './webpack/serverless/index.js'
+    packager: 'yarn' 
+    includeModules: true
     
 provider:
   name: aws
@@ -43,8 +42,6 @@ provider:
 functions:
   server:
     handler: src/server/handler.handler
-    environment:
-      NODE_ENV: production
     events:
       - http:
           method: GET

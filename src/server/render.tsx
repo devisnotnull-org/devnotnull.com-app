@@ -7,25 +7,35 @@ import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
 import { existsSync, readFileSync } from 'fs';
 
+import { isServerRender } from '../utils';
 import Html from './html';
 import createStore from '../core/store';
 import rootSaga from '../core/sagas';
 import App from '../web/app';
 
-let manifest: any = {};
-
-try {
-    if (existsSync(`${__dirname}/asset-manifest.json`)) {
-        const re = readFileSync(`${__dirname}/asset-manifest.json`).toString();
-        console.log(re)
-        manifest = JSON.parse(re);
-    } else {
-        console.error('The file does not exist.');
+/**
+ * 
+ */
+const fetchAssets = () => {
+    let manifest: any = {};
+    try {
+        if (existsSync(`${__dirname}/asset-manifest.json`)) {
+            const re = readFileSync(`${__dirname}/asset-manifest.json`).toString();
+            console.log(re)
+            manifest = JSON.parse(re);
+        } else {
+            console.error('The file does not exist.');
+        }
+    } catch (err) {
+        console.error(err);
     }
-} catch (err) {
-    console.error(err);
+    return manifest;
 }
 
+/**
+ * 
+ * @param store 
+ */
 const renderAndWrap = (store: Store) => {
     return new Promise((res, rej) => {
         const rootSagaRun = (store as any).runSaga(rootSaga).toPromise();
@@ -42,13 +52,12 @@ const renderAndWrap = (store: Store) => {
  * @param res 
  */
 const renderApp = async (url: string, store: Store): Promise<string> => {
-    // 
+
     const PROD = process.env.NODE_ENV === 'production';
     const context = {
         splitPoints: []
     };
 
-    // 
     const rootComponent = PROD
     ? (<Provider store={store}>
         <StaticRouter location={url}>
@@ -66,16 +75,16 @@ const renderApp = async (url: string, store: Store): Promise<string> => {
     const splitPoints = `window.__SPLIT_POINTS__ = ${JSON.stringify(context.splitPoints)}`;
 
     // Do first render, trigger sagas for component to run
-    if (!PROD) return renderToString(rootComponent);
-    else return renderToString(
+    if (isServerRender) return renderToString(
         <Html
             PROD={PROD}
-            assets={manifest}
+            assets={fetchAssets()}
             rootComponent={rootComponent}
             initialState={initialState}
             splitPoints={splitPoints}
         />
     );
+    return rootComponent ? renderToString(rootComponent) : '';
 };
 
 /**

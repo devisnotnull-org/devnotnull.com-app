@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-import { ENDPOINT, TOKEN, CONTENT_TYPE } from "../constants"
-
-const select = 'fields';
-const order = '-fields.level';
+import { ENDPOINT, TOKEN } from "../constants"
 
 export const fetchAsset = (asste) => axios.get(`${ENDPOINT}environments/master/assets/${fetchAsset}`, { headers: { Authorization: TOKEN } });
 

@@ -12,7 +12,6 @@ interface StatePropTypes {
 };
   
 const Html: SFC<StatePropTypes> = ({ initialState, rootComponent, assets, PROD, splitPoints } ) => {
-
     const keys = Object.keys(assets);
     const js = keys.filter((a) => a.includes('.js') && !a.includes('.map') && !a.includes('.json') );
     const css = keys.filter((a) => a.includes('.css') && !a.includes('.map') );
@@ -32,7 +31,7 @@ const Html: SFC<StatePropTypes> = ({ initialState, rootComponent, assets, PROD, 
                 <script dangerouslySetInnerHTML={{ __html: initialState }} />
                 <script dangerouslySetInnerHTML={{ __html: splitPoints }} />
                 {PROD
-                ? <div id="root" dangerouslySetInnerHTML={{ __html: renderToString(rootComponent) }} />
+                ? <div id="root" dangerouslySetInnerHTML={{ __html: renderToString(rootComponent ?? <></>) }} />
                 : <div id="root" />}
                 {srcJsFiles}
             </body>

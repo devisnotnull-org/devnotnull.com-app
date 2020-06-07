@@ -1,4 +1,4 @@
-import { call, put, all, takeEvery } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { FolioActionTypes } from './actions'
 
 import { fetchFolio } from './fetch';

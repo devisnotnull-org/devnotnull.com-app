@@ -1,4 +1,4 @@
-import { call, put, all, takeEvery } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import { ExperianceActionTypes } from './actions'
 
 import { fetchExperiance } from './fetch';

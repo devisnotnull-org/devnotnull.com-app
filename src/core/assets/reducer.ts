@@ -1,10 +1,10 @@
-import { clone, pipe, prop } from 'ramda';
+import { clone } from 'ramda';
 import { Reducer, AnyAction } from 'redux';
 
 import { AssetActionTypes } from './actions';
 import { IAssetPayload } from '../../models/asset';
 
-interface IAssetEntry {
+export interface IAssetEntry {
   [id: string]: IAssetPayload
 }
 

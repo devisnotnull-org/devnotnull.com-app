@@ -2,7 +2,7 @@ const WebpackBar = require("webpackbar");
 const merge = require("webpack-merge");
 const webpack = require("webpack");
 
-const paths = require("./paths");
+const paths = require("../paths");
 const client = require("./client.common");
 
 module.exports = merge(client, {
