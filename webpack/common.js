@@ -59,7 +59,7 @@ const common = {
       cwd: process.cwd()
     }),
     new webpack.ProgressPlugin({
-      activeModules: false,
+      activeModules: true,
     }),
 
   ],
