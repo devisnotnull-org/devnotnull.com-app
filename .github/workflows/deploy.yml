@@ -44,4 +44,4 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: alexbrown201/fandanzle-v2
-        tags: latest, $(date +%s)
+        tags: latest
