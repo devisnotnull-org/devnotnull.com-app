@@ -46,13 +46,13 @@ jobs:
         repository: alexbrown201/fandanzle-v2
         tags: latest
 
-    - name: ls -a via ssh
-      uses: fifsky/ssh-action@master
+    - name: multiple command
+      uses: appleboy/ssh-action@master
       with:
-        command: |
+        host: ${{ secrets.HOST }}
+        username: root
+        key: ${{ secrets.PRIVATE_KEY }}
+        script: |
           docker kill fandanzle-v2
           docker pull alexbrown201/fandanzle-v2:latest
           docker run -it -p 3000:3000 --name fandanzle-v2 alexbrown201/fandanzle-v2
-        host: ${{ secrets.HOST }}
-        user: root
-        key: ${{ secrets.PRIVATE_KEY}}
