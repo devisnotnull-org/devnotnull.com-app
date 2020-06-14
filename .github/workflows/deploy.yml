@@ -50,8 +50,8 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
-        username: root
-        key: ${{ secrets.PRIVATE_KEY }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
         script: |
           docker kill fandanzle-v2
           docker pull alexbrown201/fandanzle-v2:latest
