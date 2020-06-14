@@ -1,19 +1,20 @@
+
 FROM node:12
 
-# Create app directory
-WORKDIR /usr/src/app
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
+WORKDIR /home/node/app
+
 COPY package*.json ./
 
-RUN yarn install --production=false
-# If you are building your code for production
-# RUN npm ci --only=production
+USER node
 
-# Bundle app source
-COPY . .
+RUN yarn install
+
+COPY --chown=node:node . .
+
+RUN yarn build:prod
 
 EXPOSE 8080
-CMD [ "node", "index.js" ]
+
+CMD [ "node", "dist/index.js" ]
