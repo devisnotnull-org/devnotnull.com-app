@@ -112,7 +112,7 @@
     "html-webpack-plugin": "4.0.0-alpha.2",
     "husky": "^2.2.0",
     "identity-obj-proxy": "3.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mini-css-extract-plugin": "0.4.3",
     "moment": "^2.24.0",
     "nodemon": "^1.18.10",
