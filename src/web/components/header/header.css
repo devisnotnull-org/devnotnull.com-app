@@ -1,0 +1,70 @@
+
+  
+@media (max-width: 1190px) {
+    .Header--Container {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 850px) {
+
+}
+
+.Link {
+    padding: 3rem;
+    font-size: 2rem;
+    display: inline-block;
+    font-weight: 400;
+    color: black;
+}
+
+
+@import '../../style/common.css';
+
+:root {
+    --header-inverse-top: -7.5rem;
+}
+
+.Header {
+
+}
+
+.Header--LinkIcon {
+    width: 25px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.Link {
+    margin: 2rem 2rem 2rem 0;
+    padding: 1rem;
+    font-size: 2rem;
+    display: inline-block;
+    font-weight: 400;
+    background: white;
+    color: black;
+}
+
+.Link:hover {
+    background: orange;
+    color: white;
+}
+
+.Link:hover > a {
+    color: white;
+}
+
+.Link--active {
+    background: orange;
+    color: white;
+}
+
+.Clear {
+    clear: both;
+}

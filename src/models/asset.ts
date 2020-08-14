@@ -1,4 +1,4 @@
-export interface IAssetPayload {
+export interface IAssetDataPayload {
     title: string
     file: {
         url: string
@@ -14,4 +14,12 @@ export interface IAssetPayload {
     contentType: string
 }
 
+export interface IAssetSysPayload {
+    id: string
+    type: string
+}
 
+export interface IAssetPayload {
+  sys: IAssetSysPayload,
+  fields: IAssetDataPayload
+}

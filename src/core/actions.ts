@@ -4,7 +4,7 @@ import { AbilitiesActionTypes } from './ability/actions'
 import { BlogActionTypes } from './blog/actions'
 import { EducationActionTypes } from './education/actions'
 import { ExperianceActionTypes } from './experiance/actions'
-import { FolioActionTypes } from './folio/actions'
+import { FolioActionTypes } from './portfolio/actions'
 import { ContactActionTypes } from './contact/actions'
 import { AssetActionTypes } from './assets/actions'
 

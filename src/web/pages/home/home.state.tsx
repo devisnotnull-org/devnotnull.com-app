@@ -11,7 +11,7 @@ import { getAbilityItems } from '../../../core/ability/selectors';
 import { getExperianceItems } from '../../../core/experiance/selectors';
 import { getEducationItems } from '../../../core/education/selectors';
 import { getBlogItems } from '../../../core/blog/selectors';
-import { getFolioItems } from '../../../core/folio/selectors';
+import { getFolioItems } from '../../../core/portfolio/selectors';
 import { getMetadata } from '../../../core/metadata/selectors';
 import { IMetadataPayload } from '../../../models/metadata';
 

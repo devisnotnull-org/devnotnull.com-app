@@ -1,0 +1,30 @@
+.InnerContainer {
+    padding: 0 1rem 1rem 1.5rem;
+}
+
+.Entry--Container {
+    padding-bottom: 5rem;
+    margin-bottom: 5rem;
+    border-bottom: 3px solid #ededed;
+}
+
+.Entry--Header {
+    color: #EC7263;
+    margin-bottom: 4rem;
+}
+
+.Entry--Body {
+
+}
+
+.Entry--Primary-image {
+    width: 100%;
+}
+
+.Block--Code {
+    background: #eeeeee;
+    border: #dddddd 1px solid;
+    border-radius: 5px;
+    padding: 10px;
+}
+

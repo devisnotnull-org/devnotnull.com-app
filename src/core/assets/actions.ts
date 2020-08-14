@@ -1,3 +1,4 @@
+  
 import { action } from 'typesafe-actions';
 
 import { IAssetPayload } from '../../models/asset';

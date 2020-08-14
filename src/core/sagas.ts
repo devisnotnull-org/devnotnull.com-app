@@ -2,7 +2,7 @@ import { all, takeEvery} from 'redux-saga/effects'
 
 import { abilitiesSagas } from './ability/sagas';
 import { blogSaga } from './blog/sagas';
-import { folioSaga } from './folio/sagas';
+import { folioSaga } from './portfolio/sagas';
 import { educationSaga } from './education/sagas';
 import { experianceSaga } from './experiance/sagas';
 import { metadataSagas } from './metadata/sagas';

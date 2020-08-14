@@ -7,12 +7,13 @@ const isExternalLink = (path: string) => {
 
 export type IProps = {
   to: string
+  classNames?: string 
 }
 
-export const Link: React.SFC<IProps> = ({ to, children }) => (
+export const Link: React.SFC<IProps> = ({ to, children, classNames }) => (
   isExternalLink(to) 
-    ? <a href={to}>{children}</a>
-    : <RouterLink to={to}>{children}</RouterLink>
+    ? <a href={to} className={classNames}>{children}</a>
+    : <RouterLink to={to} className={classNames}>{children}</RouterLink>
 );
 
 export default Link;

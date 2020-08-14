@@ -20,10 +20,8 @@ export const Contact: React.SFC<Props> = ({ contactList }) => (
         <h2>Contact</h2>
         {contactList && contactList.map((item: ICommonFields<IContactPayload>, index: number)  => (
             <div key={index} className={classnames(styles['ContactItem'])}>
-                <div className={classnames(styles['ContactItem--Title'])}>
-                    <Favicon name={item.fields.icon} />
-                    <Link to={item.fields.link || ''}>{item.fields.text}</Link>
-                </div>
+                <Favicon name={item.fields.icon} className={styles['ContactItem--Icon']} />
+                <Link to={item.fields.link || ''} classNames={styles['ContactItem--Title']}>{item.fields.text}</Link>
             </div>
         ))}
 

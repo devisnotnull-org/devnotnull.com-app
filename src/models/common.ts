@@ -16,3 +16,11 @@ export interface ICommonDataNode {
   value?: string;
   marks?: [];
 }
+
+export interface ILink {
+  sys: {
+    type: string
+    linkType: string
+    id: string
+  }
+}

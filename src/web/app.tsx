@@ -2,9 +2,10 @@ import React from 'react';
 import { Route, Switch } from "react-router-dom";
 import { Helmet } from 'react-helmet';
 
-import HeaderViewContainer from './containers/header/header';
+import HeaderViewContainer from './components/header/header';
 
 import HomeViewContainer from './pages/home/home';
+import FolioViewContainer from './pages/folio/folio';
 import BlogViewContainer from './pages/blog/blog';
 import NotFoundComponent from './pages/notFound/notFound';
 
@@ -34,6 +35,7 @@ class AppRouter extends React.Component<Props> {
           
           <Switch>
               <Route exact path="/" component={HomeViewContainer} />
+              <Route exact path="/portfolio" component={FolioViewContainer} />
               <Route exact path="/blog" component={BlogViewContainer} />
               <Route exact path="/blog/:id" component={BlogViewContainer} />
               <Route component={NotFoundComponent} />

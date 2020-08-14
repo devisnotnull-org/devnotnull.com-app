@@ -17,17 +17,19 @@ export class HomeView extends Component<IHomeComponentProps, {}> {
     render() {
         const { abilityItems, educationItems, experianceItems, metadata, contactItems } = this.props
         return(
-            <div className={homeStyles['Content']}>
-                <aside className={homeStyles['Description']}>
-                    <About metadata={metadata}/>
-                    <Experiance experianceList={experianceItems} />
-                    <Education educationList={educationItems} />
-                </aside>
-                <aside className={homeStyles['Breakdown']}>
-                    <Skillz abilitiesList={abilityItems} />
-                    <Contact contactList={contactItems}/>
-                </aside>
-            </div>
+            <>
+                <About metadata={metadata}/>
+                <div className={homeStyles['Content']}>
+                    <aside className={homeStyles['Description']}>
+                        <Experiance experianceList={experianceItems} />
+                        <Education educationList={educationItems} />
+                    </aside>
+                    <aside className={homeStyles['Breakdown']}>
+                        <Skillz abilitiesList={abilityItems} />
+                        <Contact contactList={contactItems}/>
+                    </aside>
+                </div>
+            </>
         )
     }
 }

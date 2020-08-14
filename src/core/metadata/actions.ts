@@ -8,6 +8,6 @@ export enum MetadataActionTypes {
   FETCH_ERROR = '@metadata/FETCH_ERROR',
 }
 
-export const fetchRequest = () => action(MetadataActionTypes.FETCH_START);
+export const fetchRequest = (id: string) => action(MetadataActionTypes.FETCH_START);
 export const fetchSuccess = (data: IMetadataPayload[]) => action(MetadataActionTypes.FETCH_SUCCESS, data);
 export const fetchError = (message: string) => action(MetadataActionTypes.FETCH_ERROR, message);
