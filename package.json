@@ -144,7 +144,7 @@
   },
   "scripts": {
     "cleanup": "rimraf dist/",
-    "test": "node scripts/test.js",
+    "test": "jest",
     "prestart": "rimraf dist",
     "prebuild": "rimraf dist",
     "start": "yarn build:style-typings && cross-env NODE_ENV=development PORT=3001 nodemon",
