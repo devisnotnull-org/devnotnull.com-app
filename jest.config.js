@@ -9,4 +9,8 @@ module.exports = {
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
     },
+    "moduleNameMapper": {
+        "\\.(css|less|scss|sass)$": "<rootDir>/jest/__mocks__/style.js",
+      },
+    "setupTestFrameworkScriptFile": "<rootDir>/jest/setup.js" 
   }

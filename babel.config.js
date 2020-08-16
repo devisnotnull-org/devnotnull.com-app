@@ -52,6 +52,8 @@ module.exports = api => {
     ["@babel/plugin-proposal-export-namespace-from"],
     ["@babel/plugin-proposal-optional-chaining"],
     ["@babel/plugin-proposal-partial-application"],
+    ["@babel/plugin-proposal-throw-expressions"],
+    ["@babel/plugin-proposal-nullish-coalescing-operator"],
     [
       "@babel/plugin-proposal-pipeline-operator",
       { proposal: "minimal" }
