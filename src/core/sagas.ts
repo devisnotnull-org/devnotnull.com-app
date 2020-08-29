@@ -1,4 +1,4 @@
-import { all, takeEvery} from 'redux-saga/effects'
+import { all, takeEvery } from 'redux-saga/effects';
 
 import { abilitiesSagas } from './ability/sagas';
 import { blogSaga } from './blog/sagas';
@@ -9,7 +9,7 @@ import { metadataSagas } from './metadata/sagas';
 import { assetSaga } from './assets/sagas';
 import { contactSaga } from './contact/sagas';
 
-import { 
+import {
   AbilitiesActionTypes,
   BlogActionTypes,
   EducationActionTypes,
@@ -17,7 +17,7 @@ import {
   FolioActionTypes,
   AssetActionTypes,
   GlobalActionTypes
-} from './actions'
+} from './actions';
 
 export function* fetchAllSaga() {
   yield all([
@@ -27,7 +27,7 @@ export function* fetchAllSaga() {
     experianceSaga(),
     folioSaga(),
     metadataSagas()
-  ])
+  ]);
 }
 
 export default function* rootSaga() {
@@ -42,6 +42,6 @@ export default function* rootSaga() {
     takeEvery(ExperianceActionTypes.FETCH_START, experianceSaga),
     takeEvery(FolioActionTypes.FETCH_START, folioSaga),
     takeEvery(AssetActionTypes.FETCH_START, assetSaga),
-    takeEvery(AssetActionTypes.FETCH_START, contactSaga),
-  ])
+    takeEvery(AssetActionTypes.FETCH_START, contactSaga)
+  ]);
 }

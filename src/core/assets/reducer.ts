@@ -5,13 +5,13 @@ import { AssetActionTypes } from './actions';
 import { IAssetPayload } from '../../models/asset';
 
 export interface IAssetEntry {
-  [id: string]: IAssetPayload
+  [id: string]: IAssetPayload;
 }
 
 export interface IAssetState {
-  readonly loading: boolean
-  readonly errors?: string
-  readonly items: {[id: string]: IAssetPayload}
+  readonly loading: boolean;
+  readonly errors?: string;
+  readonly items: { [id: string]: IAssetPayload };
 }
 
 const initialState: IAssetState = {
@@ -29,7 +29,12 @@ export const asset: Reducer<IAssetState> = (
       return { ...state, loading: true, errors: undefined };
     }
     case AssetActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, errors: undefined, items: clone(state.items) }
+      return {
+        ...state,
+        loading: false,
+        errors: undefined,
+        items: clone(state.items)
+      };
     }
     case AssetActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };

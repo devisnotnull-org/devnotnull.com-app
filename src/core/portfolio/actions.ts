@@ -5,7 +5,7 @@ import { IFolioPayload } from '../../models/folio';
 export enum FolioActionTypes {
   FETCH_START = '@folio/FETCH_START',
   FETCH_SUCCESS = '@folio/FETCH_SUCCESS',
-  FETCH_ERROR = '@folio/FETCH_ERROR',
+  FETCH_ERROR = '@folio/FETCH_ERROR'
 }
 
 export const fetchRequest = () => action(FolioActionTypes.FETCH_START);

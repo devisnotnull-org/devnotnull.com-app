@@ -4,7 +4,8 @@ import { AbilitiesActionTypes } from './actions';
 import { ICommonContentListPayload } from '../../models/common';
 import { IAbillityPayload } from '../../models/abillity';
 
-export interface IAbilityState extends ICommonContentListPayload<IAbillityPayload> {
+export interface IAbilityState
+  extends ICommonContentListPayload<IAbillityPayload> {
   readonly loading: boolean;
   readonly errors?: string;
 }

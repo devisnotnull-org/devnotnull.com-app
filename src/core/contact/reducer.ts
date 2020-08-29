@@ -4,7 +4,8 @@ import { ICommonContentListPayload } from '../../models/common';
 import { ContactActionTypes } from './actions';
 import { IContactPayload } from '../../models/contact';
 
-export interface IContactState extends ICommonContentListPayload<IContactPayload> {
+export interface IContactState
+  extends ICommonContentListPayload<IContactPayload> {
   readonly loading: boolean;
   readonly errors?: string;
 }

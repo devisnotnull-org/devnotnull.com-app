@@ -1,16 +1,21 @@
-import { createStore, combineReducers, applyMiddleware, Store, Middleware } from 'redux';
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware,
+  Store,
+  Middleware
+} from 'redux';
 import createSaga, { END, SagaMiddleware } from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { routerMiddleware } from 'connected-react-router'
+import { routerMiddleware } from 'connected-react-router';
 
 import rootReducers from '../core/reducers';
 import { isServerRender } from '../utils';
 
 export default (history: any, reduxState = undefined) => {
-
   //
   console.log('Is this a server side render');
-  console.log(isServerRender)
+  console.log(isServerRender);
 
   // Compose our middlewares
   const saga: SagaMiddleware = createSaga();
@@ -20,11 +25,7 @@ export default (history: any, reduxState = undefined) => {
   const enhancer = composeWithDevTools(applyMiddleware(saga, router));
 
   // Create our store
-  const store: Store = createStore(
-    rootReducers(history),
-    reduxState,
-    enhancer
-  );
+  const store: Store = createStore(rootReducers(history), reduxState, enhancer);
 
   // TODO: This needs to be properly types
   (store as any).runSaga = saga.run;
@@ -34,9 +35,10 @@ export default (history: any, reduxState = undefined) => {
   if ((module as any).hot) {
     // Enable Webpack hot module replacement for reducers
     (module as any).hot.accept('../core/reducers', () => {
+      // eslint-disable-next-line
       const nextReducers = require('../core/reducers');
       const rootReducer = combineReducers({
-        ...nextReducers,
+        ...nextReducers
       });
       store.replaceReducer(rootReducer);
     });

@@ -30,8 +30,14 @@ export const portfolio: Reducer<IFolioState> = (
       return { ...state, loading: true, errors: undefined };
     }
     case FolioActionTypes.FETCH_SUCCESS: {
-      console.log(JSON.stringify(action.payload))
-      return { ...state, loading: false, errors: undefined, items: action?.payload?.items ?? [], assets: action?.payload?.includes?.Asset  };
+      console.log(JSON.stringify(action.payload));
+      return {
+        ...state,
+        loading: false,
+        errors: undefined,
+        items: action?.payload?.items ?? [],
+        assets: action?.payload?.includes?.Asset
+      };
     }
     case FolioActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };

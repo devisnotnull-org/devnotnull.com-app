@@ -20,7 +20,7 @@ const initialState: MetaDataType = {
   favicon: {},
   primaryImage: {},
   secondaryImage: {}
-}
+};
 
 export const blog: Reducer<IMetadataState> = (
   state: IMetadataState = initialState,

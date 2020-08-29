@@ -4,4 +4,3 @@ export interface IBlogPostPayload {
   title: string;
   blogContent: ICommonDataNode;
 }
-

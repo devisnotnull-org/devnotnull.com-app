@@ -4,7 +4,8 @@ import { ICommonContentListPayload } from '../../models/common';
 import { BlogActionTypes } from './actions';
 import { IBlogPostPayload } from '../../models/blog';
 
-export interface IBlogState extends ICommonContentListPayload<IBlogPostPayload> {
+export interface IBlogState
+  extends ICommonContentListPayload<IBlogPostPayload> {
   readonly loading: boolean;
   readonly errors?: string;
 }

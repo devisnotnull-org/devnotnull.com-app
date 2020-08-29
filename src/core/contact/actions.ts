@@ -5,7 +5,7 @@ import { IContactPayload } from '../../models/contact';
 export enum ContactActionTypes {
   FETCH_START = '@contact/FETCH_START',
   FETCH_SUCCESS = '@contact/FETCH_SUCCESS',
-  FETCH_ERROR = '@contact/FETCH_ERROR',
+  FETCH_ERROR = '@contact/FETCH_ERROR'
 }
 
 export const fetchRequest = () => action(ContactActionTypes.FETCH_START);

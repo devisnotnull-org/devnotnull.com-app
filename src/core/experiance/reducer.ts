@@ -4,7 +4,8 @@ import { ICommonContentListPayload } from '../../models/common';
 import { ExperianceActionTypes } from './actions';
 import { IExperiancePayload } from '../../models/experiance';
 
-export interface IExperianceState extends ICommonContentListPayload<IExperiancePayload> {
+export interface IExperianceState
+  extends ICommonContentListPayload<IExperiancePayload> {
   readonly loading: boolean;
   readonly errors?: string;
 }
@@ -27,7 +28,7 @@ export const blog: Reducer<IExperianceState> = (
       return { ...state, loading: true, errors: undefined };
     }
     case ExperianceActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, errors: undefined, ...action.payload  };
+      return { ...state, loading: false, errors: undefined, ...action.payload };
     }
     case ExperianceActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };

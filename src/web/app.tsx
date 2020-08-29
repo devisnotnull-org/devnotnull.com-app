@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Switch } from "react-router-dom";
 import { Helmet } from 'react-helmet';
 
-import HeaderViewContainer from './components/header/header';
+import HeaderViewContainer from './containers/header/header';
 
-import HomeViewContainer from './pages/home/home';
-import FolioViewContainer from './pages/folio/folio';
-import BlogViewContainer from './pages/blog/blog';
-import NotFoundComponent from './pages/notFound/notFound';
+import HomeViewContainer from './containers/home/home';
+import FolioViewContainer from './containers/folio/folio';
+import BlogViewContainer from './containers/blog/blog';
+import NotFoundComponent from './containers/notFound/notFound';
 
 import * as styles from "./style/common.css";
 

@@ -1,5 +1,4 @@
 export interface INetworkResponse {
-    readonly loading: boolean;
-    readonly errors?: string;
+  readonly loading: boolean;
+  readonly errors?: string;
 }
-  

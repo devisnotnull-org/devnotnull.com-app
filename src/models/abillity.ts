@@ -1,4 +1,4 @@
 export interface IAbillityPayload {
-    subject: string
-    skills: string[]
+  subject: string;
+  skills: string[];
 }

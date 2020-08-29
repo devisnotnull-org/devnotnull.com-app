@@ -2,7 +2,7 @@ export interface IMetadataPayload {
   title: string;
   summary: string;
   blurb: string;
-  favicon: object;
-  primaryImage: object;
-  secondaryImage: object;
+  favicon: any;
+  primaryImage: any;
+  secondaryImage: any;
 }

@@ -4,7 +4,8 @@ import { ICommonContentListPayload } from '../../models/common';
 import { EducationActionTypes } from './actions';
 import { IEducationPayload } from '../../models/education';
 
-export interface IEducationState extends ICommonContentListPayload<IEducationPayload> {
+export interface IEducationState
+  extends ICommonContentListPayload<IEducationPayload> {
   readonly loading: boolean;
   readonly errors?: string;
 }
