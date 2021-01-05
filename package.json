@@ -96,7 +96,7 @@
     "@types/webpack-dev-middleware": "^3.7.0",
     "@types/webpack-hot-middleware": "^2.25.0",
     "aws-lambda": "^1.0.5",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bfj": "^7.0.2",
     "cache-loader": "^4.1.0",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
