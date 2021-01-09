@@ -1,29 +1,3 @@
-
-  
-@media (max-width: 1190px) {
-    .Header--Container {
-        margin-left: 2rem;
-        margin-right: 2rem;
-    }
-}
-
-@media (max-width: 1024px) {
-
-}
-
-@media (max-width: 850px) {
-
-}
-
-.Link {
-    padding: 3rem;
-    font-size: 2rem;
-    display: inline-block;
-    font-weight: 400;
-    color: black;
-}
-
-
 @import '../../style/common.css';
 
 :root {
@@ -31,41 +5,161 @@
 }
 
 .Header {
-  transition: opacity 1s;
-  opacity: 0.5;
+
 }
 
-.Header--LinkIcon {
-    width: 25px;
-    height: 20px;
-    display: inline-block;
-    margin-right: 5px;
+.MenuToggle {
+  display: block;
+  position: relative;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+  padding: 3rem;
+  z-index: 999;
+  cursor: pointer;
 }
 
-.Link {
-    margin: 2rem 2rem 2rem 0;
+.MenuToggle > span:first-child {
+  transform-origin: 0% 0%;
+}
+
+.MenuToggle > span:nth-last-child(2) {
+  transform-origin: 0% 100%;
+}
+
+.MenuToggle > .MenuToggle--Open ~ span {
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+.MenuToggle > .MenuToggle--Open ~ span:nth-last-child(3) {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+.MenuToggle > .MenuToggle--Open ~ span:nth-last-child(2) {
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+.MenuToggle--Open {
+  position: fixed;
+}
+
+.MenuToggle--Line {
+  display: block;
+  width: 3.3rem;
+  height: 0.4rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  background: black;
+  border-radius: 0.3rem;
+  z-index: 1;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+.Menu {
+  top: 0;
+  margin: 0;
+  padding: 8rem 0 0 0;
+  position: fixed;
+  width: 100%;
+  z-index: 998;
+  height: 100%;
+  opacity: 0;
+  background: var(--base-background-colour);
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  transition: 0.5s;
+}
+
+.Menu a {
+  padding: 1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: block;
+  font-weight: 400;
+  text-align: center;
+}
+
+.Menu svg > fill {
+  color: aquamarine;
+}
+
+.Menu a:hover {
+  background: var(--base-colour);
+  color: white;
+}
+
+.Menu a:hover {
+  background: var(--base-colour);
+  color: white;
+}
+
+.Menu--Open {
+  transform: none;
+  opacity: 1;
+}
+
+.Menu--Closed {
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  opacity: 0;
+}
+
+.Menu li {
     padding: 1rem;
     font-size: 2rem;
-    display: inline-block;
-    font-weight: 400;
-    background: white;
-    color: black;
+    margin-left: 0.6rem;
 }
 
-.Link:hover {
-    background: orange;
-    color: white;
+
+.MenuToggle {
+  display: block;
+  position: relative;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+  padding: 3rem;
+  z-index: 999;
+  cursor: pointer;
 }
 
-.Link:hover > a {
-    color: white;
+
+@media screen and (min-width: 700px) { 
+  .Menu {
+    position: fixed;
+    width: 30rem;
+    z-index: 998;
+    height: 100%;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    transition: 0.5s;
+  }
+
+  .Menu a {
+    text-align: left;
+  }
 }
 
-.Link--active {
-    background: orange;
-    color: white;
+.Left {
+  float: left;
 }
 
-.Clear {
-    clear: both;
+.Right {
+  float: right;
+}
+
+.Hide {
+  display: none;
+}
+
+.LinkIcon {
+  width: 2.5rem;
+  height: 2rem;
+  display: inline-block;
+  margin-right: 0.5rem;
 }

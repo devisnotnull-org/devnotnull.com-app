@@ -13,12 +13,12 @@
     margin-bottom: 4rem;
 }
 
-.Entry--Body {
-
-}
-
 .Entry--Primary-image {
     width: 100%;
+}
+
+.Entry--Secondary-image {
+    width: 50%;
 }
 
 .Block--Code {
@@ -28,3 +28,8 @@
     padding: 10px;
 }
 
+@media screen and (min-width: 700px) { 
+    .Entry--Primary-image {
+        width: 50%;
+    }
+}

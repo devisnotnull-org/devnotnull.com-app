@@ -1,21 +1,31 @@
+
 const WebpackBar = require('webpackbar');
 const merge = require('webpack-merge');
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 
-const NodemonPlugin = require('nodemon-webpack-plugin'); 
+const nodeExternals = require('webpack-node-externals');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
-const serverless = require('./serverless.common');
+const paths = require('../paths');
 
-module.exports = merge(serverless, {
+const server = require('./serverless.common');
+
+module.exports = merge(server, {
   devtool: false,
   mode: 'development',
+  devtool: 'source-map',
   output: {
     libraryTarget: 'commonjs2',
-    filename: '[name].js',
-    sourceMapFilename: '[file].map',
+    filename: 'serverless.js'
   },
   plugins: [
-    // new NodemonPlugin(),
-    new WebpackBar({ profile: true, name: 'serverless' })
+    new WebpackBar({ profile: true, name: 'server' }),
+    new ManifestPlugin({
+      fileName: 'asset-manifest-service.json'
+    }),
+    new DefinePlugin({
+      __ASSETS__: JSON.stringify({})
+    })
   ]
 });

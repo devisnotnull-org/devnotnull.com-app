@@ -1,31 +1,28 @@
+
 const TerserPlugin = require('terser-webpack-plugin');
 const merge = require('webpack-merge');
-const nodeExternals = require("webpack-node-externals");
+const { DefinePlugin } = require('webpack');
 
-const { common } = require('./serverless.common');
+// REQUIRE CLIENT BUILD BEFORE HAND
+const asset = require('../../dist/asset-manifest.json');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
-module.exports = merge(common, {
+const server = require('./serverless.common');
+
+module.exports = merge(server, {
   devtool: 'source-map',
   mode: 'production',
+  target: 'node',
   output: {
     libraryTarget: 'commonjs2',
-    // path: path.join(__dirname, '.webpack'),
-
+    filename: 'serverless.js'
   },
-  optimization: {
-    minimize: false,
-    minimizer: [
-      new TerserPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true,
-        terserOptions: {
-          output: {
-            comments: false,
-            ascii_only: true
-          }
-        }
-      })
-    ]
-  },
+  plugins: [
+    new DefinePlugin({
+      __ASSETS__: JSON.stringify(asset)
+    }),
+    new ManifestPlugin({
+      fileName: 'asset-manifest-server.json'
+    })
+  ]
 });

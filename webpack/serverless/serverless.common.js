@@ -1,13 +1,19 @@
 const merge = require('webpack-merge');
-const nodeExternals = require("webpack-node-externals");
-const slsw = require('serverless-webpack');
+const nodeExternals = require('webpack-node-externals');
+const WebpackBar = require('webpackbar');
+const { ProvidePlugin } = require('webpack');
 
-const paths = require("../paths");
+const paths = require('../paths');
 const { common } = require('../common');
 
 module.exports = merge(common, {
   target: 'node',
-  entry: slsw.lib.entries,
+  entry: ['whatwg-fetch', './src/server/serverless'],
+  devtool: 'source-map',
+  stats: {
+    colors: true,
+    reasons: true
+  },
   module: {
     rules: [
       {
@@ -34,9 +40,12 @@ module.exports = merge(common, {
       }
     ]
   },
-  externals: [nodeExternals()],
   node: {
     __dirname: false,
     __filename: false
-  }
+  },
+  plugins: [
+    new WebpackBar({ profile: true, name: 'serverless' }),
+    new ProvidePlugin({})
+  ]
 });

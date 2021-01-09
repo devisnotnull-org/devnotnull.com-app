@@ -14,7 +14,7 @@ export interface ICommonDataNode {
   data: any;
   content?: [ICommonDataNode];
   value?: string;
-  marks?: [];
+  marks?: { type: string }[];
 }
 
 export interface ILink {

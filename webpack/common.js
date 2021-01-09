@@ -51,7 +51,7 @@ const common = {
     ]
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin({ tsconfig: paths.tsConfig, eslint: true }),
+    //new ForkTsCheckerWebpackPlugin({ tsconfig: paths.tsConfig, eslint: true }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new CircularDependencyPlugin({
       exclude: /node_modules/,

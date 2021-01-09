@@ -1,9 +1,15 @@
 declare const styles: {
-  readonly 'Header--Container': string;
-  readonly Link: string;
-  readonly Header: string;
-  readonly 'Header--LinkIcon': string;
-  readonly 'Link--active': string;
-  readonly Clear: string;
+  readonly "Header": string;
+  readonly "MenuToggle": string;
+  readonly "MenuToggle--Open": string;
+  readonly "MenuToggle--Line": string;
+  readonly "Menu": string;
+  readonly "Menu--Open": string;
+  readonly "Menu--Closed": string;
+  readonly "Left": string;
+  readonly "Right": string;
+  readonly "Hide": string;
+  readonly "LinkIcon": string;
 };
 export = styles;
+

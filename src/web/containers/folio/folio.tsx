@@ -32,11 +32,11 @@ export class BlogView extends Component<IFolioComponentProps, {}> {
         return(
             <div className={blogStyles.InnerContainer}>
                 {folio?.map(item => {
-                    console.log('item?.fields?.primaryMediaItem?.sys?.id ,', item?.fields?.primaryMediaItem?.sys?.id)
                     return (
                         <div className={blogStyles['Entry--Container']}>
-                            <h1>{item?.fields?.title}</h1>
+                            <div>{item?.fields?.title}</div>
                             <img className={blogStyles['Entry--Primary-image']} src={findAsset(assets, item?.fields?.primaryMediaItem?.sys?.id)?.fields?.file?.url}/>
+                            {item?.fields?.secondaryMediaItems && item?.fields?.secondaryMediaItems?.map(item =>  <img className={blogStyles['Entry--Secondary-image']} src={findAsset(assets, item.sys?.id)?.fields?.file?.url}/>)}
                         </div>
                     );
                 })}

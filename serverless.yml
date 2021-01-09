@@ -1,13 +1,12 @@
-service:
-  name: serverless-with-typescript
+service: fandanzle-v2
 
-frameworkVersion: ">=1.26.1"
-
+frameworkVersion: ">=1.1.0 <2.0.0"
 plugins:
   - serverless-offline
-  - serverless-webpack
-  - serverless-s3-deploy
-  - serverless-offline-plus-static
+  - serverless-deployment-bucket
+  - serverless-prune-plugin
+  - serverless-plugin-log-subscription
+  - serverless-s3-sync
 
 custom:
   serverless-offline:
@@ -16,26 +15,35 @@ custom:
   localDevStaticFolder: dist
 
   siteName: devnotnull.com
-    
-  memorySizes: 
-    development: 3008 
-    staging: 3008
 
-  s3Sync:
-    - bucketName: ${self:custom.siteName}
-      localDir: dist/static
-
+  ## Webpack 
   webpack:
     webpackConfig: './webpack/serverless/index.js'
     packager: 'yarn' 
     includeModules: true
+
+  ## Retention
+  prune:
+    automatic: true
+    includeLayers: true
+    number: 10
+
+  ## 
+  deploymentBucket:
+    versioning: true
+    accelerate: true
+
+  ## S3 bucket for static assets
+  s3Sync:
+    - bucketName: fandanzle-assets
+      bucketPrefix: static/
+      localDir: dist/static
     
 provider:
   name: aws
   runtime: nodejs12.x
   timeout: 10 
   region: ${opt:region, 'eu-west-2'}
-  memorySize: ${self:custom.memorySizes}
   environment:
     NODE_ENV: ${self:provider.stage}
 
@@ -49,32 +57,25 @@ functions:
 
 resources:
   Resources:
-    SiteAssets:
+    AssetsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        AccessControl: PublicRead
-        BucketName: ${self:custom.siteName}
-        WebsiteConfiguration:
-          IndexDocument: index.html
-    StaticSiteS3BucketPolicy:
+        BucketName: fandanzle-assets
+    BucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
-        Bucket:
-          Ref: StaticSite
         PolicyDocument:
+          Id: MyPolicy
+          Version: "2012-10-17"
           Statement:
-            - Sid: PublicReadGetObject
+            - Sid: PublicReadForGetBucketObjects
               Effect: Allow
-              Principal: "*"
-              Action:
-              - s3:GetObject
-              Resource:
-                Fn::Join: [
-                  "", [
-                    "arn:aws:s3:::",
-                    {
-                      "Ref": "SiteAssets"
-                    },
-                    "/*"
-                  ]
-                ]
+              Principal: '*'
+              Action: 's3:GetObject'
+              Resource: !Join 
+                - ''
+                - - 'arn:aws:s3:::'
+                  - !Ref AssetsBucket
+                  - /*
+        Bucket: !Ref AssetsBucket
+    

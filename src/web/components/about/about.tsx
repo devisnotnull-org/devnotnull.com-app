@@ -18,14 +18,12 @@ type Props = StateProps & ActionProps & SelectorProps;
 export const Profile: React.SFC<Props> = ({metadata}) => (
     <>
         <div className={classnames(styles['Header'])}>
-            <div className={classnames(commonStyles['Block'])}>
-                <div className={classnames(styles['Header--Photo'])}>
-                    <img src="//media.fandanzle.co.uk/avatar.png" alt="avatar"/>
-                </div>
-                <div className={classnames(styles['Text--Header'])}>
-                    <h1>Hi <span className={styles['Header--Wave']}>👋</span>, My name is Alex and im a developer</h1>
-                    <div>With a passion for web development, security, networking and microservices.</div>
-                </div>
+            <div className={classnames(styles['Header--Photo'])}>
+                <img src="//media.fandanzle.co.uk/avatar.png" alt="avatar"/>
+            </div>
+            <div className={classnames(styles['Text--Header'])}>
+                <h1>Hi <span className={styles['Header--Wave']}>👋</span>, My name is Alex and im a developer</h1>
+                <p>With a passion for web development, security, networking and microservices.</p>
             </div>
         </div>    
         <div className={classnames(commonStyles["Block"])}>

@@ -27,3 +27,20 @@
     padding: 10px;
 }
 
+.Bold {
+    font-weight: bold;
+    padding: 0.5rem 0;
+
+}
+
+.Code {
+    background: var(--base-background-colour);
+    padding: 1rem;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:1.5rem
+}
+
+.Text {
+    padding: 0.5rem 0;
+}
