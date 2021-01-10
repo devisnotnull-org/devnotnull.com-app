@@ -8,7 +8,7 @@ const { common } = require('../common');
 
 module.exports = merge(common, {
   target: 'node',
-  entry: ['whatwg-fetch', './src/server/serverless'],
+  entry: ['whatwg-fetch', './src/server/handler'],
   devtool: 'source-map',
   stats: {
     colors: true,

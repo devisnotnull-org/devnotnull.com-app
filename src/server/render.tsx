@@ -1,99 +1,76 @@
-import { Store } from 'redux';
-
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import createHistory from 'history/createMemoryHistory';
-import { Provider } from 'react-redux';
-import { StaticRouter } from 'react-router';
-import { existsSync, readFileSync } from 'fs';
-
-import { isServerRender } from '../utils';
-import Html from './html';
-import createStore from '../core/store';
-import rootSaga from '../core/sagas';
-import App from '../web/app';
+import React from "react";
+import { renderToString } from "react-dom/server";
+import { Provider } from "react-redux";
+import { Response } from "express";
+import { StaticRouter } from "react-router";
+import { Store } from "redux";
+import rootSaga from "../core/sagas";
+import App from "@web/app";
+import Html from "./html";
 
 /**
- * 
+ *
+ * @param url
+ * @param store
+ * @param assets
+ * @param res
  */
-const fetchAssets = () => {
-    let manifest: any = {};
-    try {
-        if (existsSync(`${__dirname}/asset-manifest.json`)) {
-            const re = readFileSync(`${__dirname}/asset-manifest.json`).toString();
-            console.log(re)
-            manifest = JSON.parse(re);
-        } else {
-            console.error('The file does not exist.');
-        }
-    } catch (err) {
-        console.error(err);
-    }
-    return manifest;
-}
+export const render = (
+  url: string,
+  config: any,
+  res: Response,
+  store: Store
+  ): string => {
+  const response = "";
+  const BUILD_PROD = process.env.NODE_ENV === "production";
+  const RUNTIME_PROD = process.env.NODE_RUNTIME_ENV === "production";
 
-/**
- * 
- * @param store 
- */
-const renderAndWrap = (store: Store) => {
-    return new Promise((res, rej) => {
-        const rootSagaRun = (store as any).runSaga(rootSaga).toPromise();
-        rootSagaRun.then(() => res()).catch(() => rej());
-        (store as any).closeSagas();
-    })
-}
+  console.log('___________________________________________')
+  console.log('___________________________________________')
+  console.log('___________________________________________')
+  console.log('___________________________________________')
+  console.log('___________________________________________')
+  console.log('___________________________________________')
+  console.log('___________________________________________')
+  console.log('___________________________________________')
+  console.log('BUILD_PROD, ', BUILD_PROD)
 
-/**
- * 
- * @param url 
- * @param store 
- * @param assets 
- * @param res 
- */
-const renderApp = async (url: string, store: Store): Promise<string> => {
-
-    const PROD = process.env.NODE_ENV === 'production';
-    const context = {
-        splitPoints: []
-    };
-
-    const rootComponent = PROD
-    ? (<Provider store={store}>
-        <StaticRouter location={url}>
-            <App />
-        </StaticRouter>
-    </Provider>)
-    : null;
-
-    // Fetch all resources for root saga
-    await renderAndWrap(store)
-
-    // Get state from store after sagas were run and strigify it for rendering in HTML
-    const state = store.getState();
-    const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify(state)}`;
-    const splitPoints = `window.__SPLIT_POINTS__ = ${JSON.stringify(context.splitPoints)}`;
-
-    // Do first render, trigger sagas for component to run
-    if (isServerRender) return renderToString(
+  const context = {
+    splitPoints: [],
+  };
+  const rootComponent = BUILD_PROD ? (
+    <Provider store={store}>
+      <StaticRouter location={url}>
+        <App />
+      </StaticRouter>
+    </Provider>
+  ) : null;
+  (store as any)
+    .runSaga(rootSaga, config)
+    .toPromise()
+    .then(() => {
+      // Get state from store after sagas were run and strigify it for rendering in HTML
+      const state = store.getState();
+      const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify({
+        ...state,
+        config,
+      })}`;
+      const splitPoints = `window.__SPLIT_POINTS__ = ${JSON.stringify(
+        context.splitPoints
+      )}`;
+      const html = renderToString(
         <Html
-            PROD={PROD}
-            assets={fetchAssets()}
-            rootComponent={rootComponent}
-            initialState={initialState}
-            splitPoints={splitPoints}
+          config={config}
+          buildProd={BUILD_PROD}
+          runtimeProd={RUNTIME_PROD}
+          rootComponent={rootComponent}
+          initialState={initialState}
+          splitPoints={splitPoints}
         />
-    );
-    return rootComponent ? renderToString(rootComponent) : '';
-};
-
-/**
- * 
- * @param req 
- * @param res 
- */
-export const renderPage = async (url: string): Promise<string> => {
-    const history = createHistory();
-    const store = createStore(history);
-    return await renderApp(url, store);
+      );
+      res.send(html);
+    });
+  // Dispatch a close event so sagas stop listening after they're resolved
+  (store as any).closeSagas();
+  return response;
 };

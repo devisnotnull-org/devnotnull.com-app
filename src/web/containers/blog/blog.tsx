@@ -6,7 +6,6 @@ import { IBlogComponentProps, mapDispatchToProps, mapStateToProps } from './blog
 
 import * as blogStyles from "./blog.css"
 import { ICommonDataNode } from 'models/common';
-import styles from '@web/common/favicon/favicon.css';
 
 export type IProps = {
     to: string
@@ -21,15 +20,10 @@ const getType = (marks: { type: string }[] | undefined): string => {
 
 const renderCommonContentType = (content: ICommonDataNode[]): (JSX.Element[] | undefined)[] => { 
     return content?.map(payload => payload.content?.map((inner) => {    
-        console.log('nodeType ,', inner.nodeType)
-    if (inner.nodeType === 'list-item') { 
-        console.log('_______________________________________________')
-        console.log('_______________________________________________')
-        return <p>{JSON.stringify(inner.content)}</p>
-    }
-    if(getType(inner.marks) === 'code') return <pre className={classnames(blogStyles['Code'])}>{inner.value}</pre>   
-    if(getType(inner.marks) === 'bold') return <p><b>{inner.value}</b></p>                         
-    return <p>{inner.value}</p>   
+        if (inner.nodeType === 'list-item') return <p>{JSON.stringify(inner.content)}</p>
+        if(getType(inner.marks) === 'code') return <pre className={classnames(blogStyles['Code'])}>{inner.value}</pre>   
+        if(getType(inner.marks) === 'bold') return <p><b>{inner.value}</b></p>                         
+        return <p>{inner.value}</p>   
     }))
 }
 

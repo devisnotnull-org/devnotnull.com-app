@@ -1,19 +1,22 @@
-const merge = require("webpack-merge");
+const merge = require('webpack-merge');
+const { DefinePlugin } = require('webpack');
 
-const paths = require("../paths");
+const WebpackBar = require('webpackbar');
 
 const { common } = require('../common');
 
+const vendor = ['react', 'react-dom', 'react-router', 'react-redux', 'redux'];
+
 module.exports = merge(common, {
-  target: "web",
+  target: 'web',
   entry: {
-    bundle: ["./src/client/index"]
+    app: ['./src/client/index'],
+    vendor
   },
-  node: {
-    fs: "empty",
-    net: "empty",
-    tls: "empty",
-    dgram: "empty",
-    child_process: "empty"
-  }
+  plugins: [
+    new DefinePlugin({
+      'process.env.BROWSER': true
+    }),
+    new WebpackBar({ profile: true, name: 'client' })
+  ]
 });

@@ -14,19 +14,6 @@ type IComponentProps = {
     menuOpen: boolean;
 }
 
-var myArray = [
-    "white",
-    "grey",
-];
-  
-var randomItem = () => myArray[Math.floor(Math.random()*myArray.length)];
-
-const changeTheme = () => {
-    const themeColour = randomItem()
-    console.log('themeColour, ', themeColour)
-    if(document) document.documentElement.style.setProperty('--base-background-colour', themeColour);
-}
-
 export class HeaderView extends Component<IHeaderProps, IComponentProps> {
 
     constructor(props: IHeaderProps) {
