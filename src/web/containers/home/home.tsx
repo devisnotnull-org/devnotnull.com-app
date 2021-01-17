@@ -10,7 +10,7 @@ import Education from '../../components/education/education';
 import { IHomeComponentProps } from './home.state';
 import { mapDispatchToProps, mapStateToProps } from './home.state';
 
-import * as homeStyles from "./home.css"
+import homeStyles from "./home.css"
 
 export class HomeView extends Component<IHomeComponentProps, {}> {
 

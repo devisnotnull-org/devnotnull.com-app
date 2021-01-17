@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { IFolioComponentProps, mapDispatchToProps, mapStateToProps } from './folio.state';
 
-import * as blogStyles from "./folio.css"
+import blogStyles from "./folio.css"
 import { IAssetPayload } from 'models/asset';
 
 export type IProps = {

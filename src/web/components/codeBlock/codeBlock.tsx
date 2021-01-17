@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import * as codeBlockStyles from "./codeBlock.css"
+import codeBlockStyles from "./codeBlock.css"
 
 export type IBlockMarks = {
     type: string

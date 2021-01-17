@@ -29,6 +29,17 @@ const common = (env) => ({
   module: {
     rules: [
       {
+        test: /\.(ts|js)x?$/,
+        exclude: nodeModules,
+        loader: "babel-loader",
+        options: {
+          cacheDirectory: true,
+          compact: env === 'production',
+          configFile: babelConfig,
+          cacheCompression: env === 'production'
+        }
+      },
+      {
         loader: "file-loader",
         exclude: [/\.m?([jt])sx?$/, /\.json$/, /\.css$/],
         options: {

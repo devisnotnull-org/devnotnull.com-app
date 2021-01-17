@@ -4,7 +4,7 @@ import classnames from "classnames";
 
 import { IBlogComponentProps, mapDispatchToProps, mapStateToProps } from './blog.state';
 
-import * as blogStyles from "./blog.css"
+import blogStyles from "./blog.css"
 import { ICommonDataNode } from 'models/common';
 
 export type IProps = {
