@@ -25,4 +25,4 @@ yarn-error.log*
 .webpackCache.serverless/
 
 .serverless/
-.cache/
+.cache/.serverless/
