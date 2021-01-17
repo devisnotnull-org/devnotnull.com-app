@@ -1,9 +1,14 @@
 import * as React from 'react';
 
-import styles from './loadingSpinner.css'
+import styles from './loadingSpinner.css';
 
-export const Experiance: React.SFC = ({ }) => (
-    <div className={styles['Spinner']}><div></div><div></div><div></div><div></div></div>
+export const Experiance: React.FC = () => (
+  <div className={styles['Spinner']}>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 );
 
 export default Experiance;

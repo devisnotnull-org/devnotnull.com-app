@@ -12,7 +12,6 @@ import { routerMiddleware } from 'connected-react-router';
 import rootReducers from '../core/reducers';
 
 export default (history: any, reduxState = undefined) => {
-
   // Compose our middlewares
   const saga: SagaMiddleware = createSaga();
   const router: Middleware = routerMiddleware(history);

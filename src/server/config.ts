@@ -1,54 +1,52 @@
-import { merge } from "ramda";
+import { merge } from 'ramda';
 
 export interface AppConfig {
-    static: {
-      path: string;
-    };
+  static: {
+    path: string;
+  };
 }
 
 export type Environment =
-  | "common"
-  | "developmentLocal"
-  | "development"
-  | "stagingLocal"
-  | "staging"
-  | "productionLocal"
-  | "production";
+  | 'common'
+  | 'developmentLocal'
+  | 'development'
+  | 'stagingLocal'
+  | 'staging'
+  | 'productionLocal'
+  | 'production';
 
 type Config = {
   [key in Environment]: Partial<AppConfig>;
 };
 
-const env = process.env.NODE_RUNTIME_ENV || "development";
+const env = process.env.NODE_RUNTIME_ENV || 'development';
 const offline = process.env.IS_OFFLINE || false;
 
 const defaultConfig: Config = {
   common: {
     static: {
-      path:
-        "http://localhost:9000/",
-    },
+      path: 'http://localhost:9000/'
+    }
   },
   development: {
     static: {
-      path:
-        "https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com",
-    },
+      path: 'https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com'
+    }
   },
   developmentLocal: {},
   stagingLocal: {},
   staging: {
     static: {
-      path:
-        "https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com",
-    },
-  },  productionLocal: {},
+      path: 'https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com'
+    }
+  },
+  productionLocal: {},
   production: {
     static: {
-      path:
-        "https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com",
-    },
-  },};
+      path: 'https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com'
+    }
+  }
+};
 
 const envKey = offline ? `${env}Local` : env;
 

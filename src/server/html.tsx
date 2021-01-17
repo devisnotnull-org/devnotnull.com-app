@@ -1,6 +1,6 @@
-import React, { FC, ReactElement } from "react";
-import { renderToString } from "react-dom/server";
-import Helmet from "react-helmet";
+import React, { FC, ReactElement } from 'react';
+import { renderToString } from 'react-dom/server';
+import Helmet from 'react-helmet';
 
 /**
  *
@@ -23,7 +23,7 @@ const Html: FC<StatePropTypes> = ({
   rootComponent,
   buildProd,
   config,
-  splitPoints,
+  splitPoints
 }) => {
   // Asset var is hydrate at runtime
   // Please note is is not set when running dev
@@ -35,14 +35,14 @@ const Html: FC<StatePropTypes> = ({
 
   const keys = Object.keys(assets);
   const js = keys.filter(
-    (a) => a.includes(".js") && !a.includes(".map") && !a.includes(".json")
+    a => a.includes('.js') && !a.includes('.map') && !a.includes('.json')
   );
-  const css = keys.filter((a) => a.includes(".css") && !a.includes(".map"));
+  const css = keys.filter(a => a.includes('.css') && !a.includes('.map'));
 
-  let srcJsFiles = js.map((key) => (
+  let srcJsFiles = js.map(key => (
     <script src={`${config.static?.path}${assets[key]}`} />
   ));
-  const srcCssFiles = css.map((key) => (
+  const srcCssFiles = css.map(key => (
     <link
       rel="stylesheet"
       href={`${config.static?.path}${assets[key]}`}
@@ -53,7 +53,7 @@ const Html: FC<StatePropTypes> = ({
   // Nasty
   const devStatic = [
     <script src={`${config.static?.path}static/js/app.js`} />,
-    <script src={`${config.static?.path}static/js/vendor.js`} />,
+    <script src={`${config.static?.path}static/js/vendor.js`} />
   ];
 
   if (!buildProd) srcJsFiles = devStatic;
@@ -75,7 +75,7 @@ const Html: FC<StatePropTypes> = ({
             <div
               id="root"
               dangerouslySetInnerHTML={{
-                __html: renderToString(rootComponent),
+                __html: renderToString(rootComponent)
               }}
             />
           ) : (

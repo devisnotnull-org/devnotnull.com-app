@@ -10,31 +10,33 @@ import Education from '../../components/education/education';
 import { IHomeComponentProps } from './home.state';
 import { mapDispatchToProps, mapStateToProps } from './home.state';
 
-import homeStyles from "./home.css"
+import homeStyles from './home.css';
 
-export class HomeView extends Component<IHomeComponentProps, {}> {
-
-    render() {
-        const { abilityItems, educationItems, experianceItems, metadata, contactItems } = this.props
-        return(
-            <>
-                <About metadata={metadata}/>
-                <div className={homeStyles['Content']}>
-                    <aside className={homeStyles['Description']}>
-                        <Experiance experianceList={experianceItems} />
-                        <Education educationList={educationItems} />
-                    </aside>
-                    <aside className={homeStyles['Breakdown']}>
-                        <Skillz abilitiesList={abilityItems} />
-                        <Contact contactList={contactItems}/>
-                    </aside>
-                </div>
-            </>
-        )
-    }
+export class HomeView extends Component<IHomeComponentProps> {
+  render() {
+    const {
+      abilityItems,
+      educationItems,
+      experianceItems,
+      metadata,
+      contactItems
+    } = this.props;
+    return (
+      <>
+        <About metadata={metadata} />
+        <div className={homeStyles['Content']}>
+          <aside className={homeStyles['Description']}>
+            <Experiance experianceList={experianceItems} />
+            <Education educationList={educationItems} />
+          </aside>
+          <aside className={homeStyles['Breakdown']}>
+            <Skillz abilitiesList={abilityItems} />
+            <Contact contactList={contactItems} />
+          </aside>
+        </div>
+      </>
+    );
+  }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(HomeView);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeView);

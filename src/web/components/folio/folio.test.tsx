@@ -5,10 +5,7 @@ import Folio from './folio';
 
 describe('<Folio />', () => {
   it('render Folio Component', () => {
-    const wrapper = shallow((
-      <Folio >
-      </Folio>
-    ));
+    const wrapper = shallow(<Folio></Folio>);
     expect(wrapper).toMatchSnapshot();
   });
 });

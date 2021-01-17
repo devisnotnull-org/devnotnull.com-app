@@ -1,8 +1,8 @@
-import * as React from "react";
-import classnames from "classnames";
+import * as React from 'react';
+import classnames from 'classnames';
 
-import commonStyles from "../../style/common.css";
-import { IMetadataPayload } from "../../../models/metadata";
+import commonStyles from '../../style/common.css';
+import { IMetadataPayload } from '../../../models/metadata';
 
 interface StateProps {
   metadata: IMetadataPayload;
@@ -12,12 +12,10 @@ interface SelectorProps {}
 
 type Props = StateProps & ActionProps & SelectorProps;
 
-export const BlobBlurb: React.SFC<Props> = ({ metadata }) => (
-  <div className={classnames(commonStyles["Block"])}>
+export const BlobBlurb: React.FC<Props> = ({ metadata }) => (
+  <div className={classnames(commonStyles['Block'])}>
     <h2>Blog post</h2>
-    <p>
-      {metadata.summary}
-    </p>
+    <p>{metadata.summary}</p>
   </div>
 );
 
