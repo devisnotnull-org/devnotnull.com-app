@@ -3,9 +3,9 @@ import classnames from "classnames";
 
 import { IMetadataPayload } from "../../../models/metadata";
 
-import * as styles from './about.css'
+import styles from './about.css'
 
-import * as commonStyles from "../../style/common.css";
+import commonStyles from "../../style/common.css";
 
 interface StateProps {
   metadata: IMetadataPayload;

@@ -1,22 +1,17 @@
-const webpack = require("webpack");
-const CircularDependencyPlugin = require("circular-dependency-plugin");
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+import { ProgressPlugin, SourceMapDevToolPlugin } from 'webpack';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
 
-const paths = require("./paths");
+import { resolve as _resolve } from 'path';
+import { root, build, nodeModules, babelConfig } from './paths';
 
-const NODE_ENV = process.env.NODE_ENV || "development";
-const isDevelopment = NODE_ENV === "development";
-const isProduction = NODE_ENV === "production";
-const target = process.env.TARGET || "client";
-const isClient = target === "client";
-const publicPath = "/";
+const publicPath = '/';
 
-const common = {
-  mode: NODE_ENV,
-  context: paths.root,
+const common = (env) => ({
+  mode: env,
+  context: root,
   output: {
     publicPath,
-    path: paths.dist
+    path: build
   },
   resolve: {
     mainFields: ["module", "browser", "main"],
@@ -24,44 +19,36 @@ const common = {
     alias: {
       "react-dom": "@hot-loader/react-dom",
       "@style": "./web/style",
+      "@web/*": "./web",
+      "@client/*": "./client",
+      "@server/*": "./server",
+      "@core/*": "./core",
+      "@config/*": "./config"
     }
   },
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/,
-        exclude: paths.nodeModules,
-        loader: "babel-loader",
-        options: {
-          cacheDirectory: true,
-          compact: isProduction,
-          cacheIdentifier: target,
-          configFile: paths.babelConfig,
-          cacheCompression: isProduction
-        }
-      },
-      {
         loader: "file-loader",
-        exclude: [/\.m?([jt])sx?$/, /\.json$/, /\.s?css$/],
+        exclude: [/\.m?([jt])sx?$/, /\.json$/, /\.css$/],
         options: {
-          emitFile: isClient,
+          emitFile: true,
           name: "assets/[name].[hash:8].[ext]"
         }
       }
     ]
   },
   plugins: [
-    //new ForkTsCheckerWebpackPlugin({ tsconfig: paths.tsConfig, eslint: true }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new CircularDependencyPlugin({
-      exclude: /node_modules/,
-      failOnError: true,
-      cwd: process.cwd()
+    //
+    new ProgressPlugin({
+      activeModules: true
     }),
-    new webpack.ProgressPlugin({
-      activeModules: true,
+    //
+    new SourceMapDevToolPlugin({
+      filename: '__sourcemaps/[name].[chunkhash:8].js.map',
+      include: ['bundle', 'vendor'],
+      noSources: true
     }),
-
   ],
   stats: {
     colors: true,
@@ -71,11 +58,9 @@ const common = {
   performance: {
     hints: 'warning'
   }
-};
+})
 
-module.exports = {
+export {
   common,
-  publicPath,
-  isProduction,
-  isDevelopment
-};
+  publicPath
+}

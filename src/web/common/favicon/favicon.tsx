@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import * as s from "./favicon.css"
+import s from "./favicon.css"
 
 const iconSelector = (name: string) => {
   switch (name) {

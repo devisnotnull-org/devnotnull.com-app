@@ -1,3 +1,10 @@
+console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
+console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
+console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
+console.log(process.env.NODE_ENV)
+
 const enviroment = process.env.NODE_ENV || 'development';
 
-module.exports = require(`./client.${enviroment}`);
+const { config } = require(`./client.${enviroment}`);
+
+export { config }

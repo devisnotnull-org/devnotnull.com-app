@@ -1,28 +1,78 @@
+import TerserPlugin from 'terser-webpack-plugin';
+import merge from 'webpack-merge';
+import { EnvironmentPlugin, DefinePlugin } from 'webpack';
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
+import AssetsPlugin from 'assets-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { config as server } from './serverless.common';
+import { build, src } from '../paths'
+const asset = require('../../build/client-asset-manifest.json');
 
-const TerserPlugin = require('terser-webpack-plugin');
-const merge = require('webpack-merge');
-const { DefinePlugin } = require('webpack');
-
-// REQUIRE CLIENT BUILD BEFORE HAND
-const asset = require('../../dist/asset-manifest.json');
-const ManifestPlugin = require('webpack-manifest-plugin');
-
-const server = require('./serverless.common');
-
-module.exports = merge(server, {
+const config = merge(server('production'), {
   devtool: 'source-map',
   mode: 'production',
-  target: 'node',
-  output: {
-    libraryTarget: 'commonjs2',
-    filename: 'serverless.js'
+  optimization: {
+    minimize: false,
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          parse: {
+            ecma: 8
+          }
+        }
+      }),
+    ]
   },
-  plugins: [
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: {
+                localIdentName: '[hash:base64:5]'
+              }
+            }
+          },
+          {
+            loader: 'postcss-loader',
+          },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              root: src
+            }
+          }
+        ]
+      }
+    ],
+  },
+  plugins: [ 
     new DefinePlugin({
       __ASSETS__: JSON.stringify(asset)
     }),
-    new ManifestPlugin({
-      fileName: 'asset-manifest-server.json'
-    })
+    new AssetsPlugin({
+      path: build,
+      filename: `server-assets.json`,
+      prettyPrint: true,
+      update: true
+    }),
+    new WebpackManifestPlugin({
+      fileName: 'server-manifest-server.json'
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'server.[contenthash].css',
+    }),
+    new EnvironmentPlugin({
+      NODE_ENV: 'production',
+      BROWSER: false
+    }),
   ]
-});
+})
+
+export { config } 

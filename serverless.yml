@@ -52,11 +52,15 @@ provider:
   timeout: 10 
   region: ${opt:region, 'eu-west-2'}
   environment:
-    NODE_ENV: ${self:provider.stage}
+    NODE_ENV: production
+    BUILD_TYPE: production
 
 functions:
   server:
-    handler: dist/serverless.handler
+    handler: build/serverless.handler
+    environment:
+      NODE_ENV: production
+      BUILD_TYPE: production
     events:
       - http:
           method: GET

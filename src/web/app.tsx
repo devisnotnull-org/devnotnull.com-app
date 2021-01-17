@@ -9,7 +9,7 @@ import FolioViewContainer from './containers/folio/folio';
 import BlogViewContainer from './containers/blog/blog';
 import NotFoundComponent from './containers/notFound/notFound';
 
-import * as styles from "./style/common.css";
+import styles from "./style/common.css";
 
 interface StateProps {}
 interface ActionProps {}

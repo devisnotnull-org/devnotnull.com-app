@@ -23,7 +23,7 @@ export const render = (
   ): string => {
   const response = "";
   const BUILD_PROD = process.env.NODE_ENV === "production";
-  const RUNTIME_PROD = process.env.NODE_RUNTIME_ENV === "production";
+  const RUNTIME_PROD =  process.env.NODE_RUNTIME_ENV === "production";
 
   console.log('___________________________________________')
   console.log('___________________________________________')
@@ -33,7 +33,7 @@ export const render = (
   console.log('___________________________________________')
   console.log('___________________________________________')
   console.log('___________________________________________')
-  console.log('BUILD_PROD, ', BUILD_PROD)
+  console.log('BUILD_PROD, ', process.env.NODE_ENV)
 
   const context = {
     splitPoints: [],

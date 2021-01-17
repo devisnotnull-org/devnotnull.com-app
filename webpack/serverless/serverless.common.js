@@ -1,51 +1,42 @@
-const merge = require('webpack-merge');
-const nodeExternals = require('webpack-node-externals');
-const WebpackBar = require('webpackbar');
-const { ProvidePlugin } = require('webpack');
+import merge from 'webpack-merge';
+import WebpackBar from 'webpackbar';
+import AssetsPlugin from 'assets-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 
-const paths = require('../paths');
-const { common } = require('../common');
+import { common } from '../common';
+import { resolve } from 'path';
+import { src, build, webpackCache } from '../paths';
 
-module.exports = merge(common, {
+const config = (env) => merge(common(env), {
   target: 'node',
-  entry: ['whatwg-fetch', './src/server/handler'],
-  devtool: 'source-map',
-  stats: {
-    colors: true,
-    reasons: true
+  entry: [`${src}/server/handler`],
+  output: {
+    libraryTarget: 'commonjs2',
+    filename: 'serverless.js'
   },
-  module: {
-    rules: [
-      {
-        test: /\.s?css$/,
-        use: [
-          { loader: 'isomorphic-style-loader' },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              modules: {
-                mode: 'local',
-                localIdentName: '[local][hash:base64:5]'
-              }
-            }
-          },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              root: paths.src
-            }
-          }
-        ]
-      }
-    ]
+  cache: { 
+    idleTimeout: 10000000,
+    cacheDirectory: resolve(webpackCache, `server-${env}`),
+    type: "filesystem",
   },
+  plugins: [
+    new WebpackBar({ profile: true, name: `Server` }),
+    new AssetsPlugin({
+      path: build,
+      filename: `server-assets.json`,
+      prettyPrint: true,
+      update: true
+    }),
+    new WebpackManifestPlugin({
+      fileName: 'server-manifest-server.json'
+    }),
+
+  ],
   node: {
     __dirname: false,
     __filename: false
   },
-  plugins: [
-    new WebpackBar({ profile: true, name: 'serverless' }),
-    new ProvidePlugin({})
-  ]
 });
+
+export { config }

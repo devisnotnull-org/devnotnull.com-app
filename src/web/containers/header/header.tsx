@@ -5,7 +5,7 @@ import classnames from "classnames";
 import { Link } from "../../common/link/link"
 import { Favicon } from '../../common/favicon/favicon'
 
-import * as styles from "./header.css";
+import styles from "./header.css";
 import { IHeaderProps } from './header.state';
 
 import { mapDispatchToProps, mapStateToProps } from './header.state';

@@ -1,54 +1,39 @@
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { DefinePlugin } = require('webpack');
-const ManifestPlugin = require('webpack-manifest-plugin');
-const { GenerateSW } = require('workbox-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const merge = require('webpack-merge');
-const { join } = require('path')
+import merge from 'webpack-merge';
+import TerserPlugin from 'terser-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { EnvironmentPlugin } from 'webpack';
 
-const client = require('./client.common');
+import { config as client } from './client.common';
+import { build, src } from '../paths'
 
-const paths = require('../paths');
-
-const workerName = 'service-worker';
-const workerManifestName = 'precache-manifes';
-
-const isWorkerRegExp = new RegExp(`${workerName}|${workerManifestName}`);
-
-module.exports = merge(client, {
+const config = merge(client('production'), {
   devtool: 'source-map',
+  target: 'web',
+  entry: {
+    app: [`${src}/client/index`],
+  }, 
   output: {
-    filename: 'static/js/[name].[contenthash].js',
-    chunkFilename: 'static/js/[name].[contenthash].js'
+    filename: 'static/js/[name].[chunkhash].js',
+    path: `${build}`,
   },
   devServer: {
     port: 9000,
-    hot: true,
+    hot: false,
     compress: true,
-    contentBase: paths.dist,
+    contentBase: build,
   },
   optimization: {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        cache: true,
         parallel: true,
-        sourceMap: true,
         terserOptions: {
+          sourceMap: true,
           parse: {
             ecma: 8
-          },
-          output: {
-            ecma: 5,
-            comments: false,
-            ascii_only: true
           }
         }
       }),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorOptions: { map: { inline: false, annotations: true } }
-      })
     ],
     splitChunks: {
       cacheGroups: {
@@ -63,22 +48,17 @@ module.exports = merge(client, {
   module: {
     rules: [
       {
-        test: /\.s?css$/,
+        test: /\.css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              sourceMap: true
-            }
           },
           {
             loader: 'css-loader',
             options: {
               sourceMap: true,
-              importLoaders: 3,
               modules: {
-                mode: 'local',
-                localIdentName: '[local][hash:base64:5]'
+                localIdentName: '[name]__[local]__[hash:base64:5]'
               }
             }
           },
@@ -86,46 +66,36 @@ module.exports = merge(client, {
             loader: 'postcss-loader',
             options: {
               sourceMap: true,
-              ident: 'postcss',
-              plugins: () => [
-                require('postcss-custom-media'),
-                require('postcss-flexbugs-fixes'),
-                require('postcss-preset-env')({
-                  autoprefixer: {
-                    flexbox: 'no-2009'
-                  },
-                  stage: 3
-                })
-              ]
+              postcssOptions: {
+                plugins: () => [
+                  require('postcss-custom-media'),
+                  require('postcss-flexbugs-fixes'),
+                  require('postcss-preset-env')({
+                    autoprefixer: {
+                      flexbox: 'no-2009'
+                    },
+                    stage: 3
+                  })
+                ]
+              }
             }
           },
           {
             loader: 'resolve-url-loader',
             options: {
-              root: paths.src
+              root: src
             }
           }
         ]
       }
-    ]
+    ],
   },
   plugins: [
-    new ManifestPlugin({
-      fileName: 'asset-manifest.json'
+    new EnvironmentPlugin({
+      NODE_ENV: 'production',
+      BROWSER: false,
     }),
-    new MiniCssExtractPlugin({ filename: 'static/css/[contenthash].css' }),
-    new GenerateSW({
-      skipWaiting: false,
-      clientsClaim: false,
-      swDest: `${workerName}.js`,
-      directoryIndex: 'publicPath',
-      precacheManifestFilename: `${workerManifestName}.[manifestHash].js`,
-      runtimeCaching: [
-        {
-          handler: 'NetworkFirst',
-          urlPattern: new RegExp('/')
-        }
-      ]
-    })
-  ]
+  ],
 });
+
+export { config }

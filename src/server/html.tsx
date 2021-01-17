@@ -58,6 +58,12 @@ const Html: FC<StatePropTypes> = ({
 
   if (!buildProd) srcJsFiles = devStatic;
 
+  console.log('--------------------------------------------------------')
+  console.log('--------------------------------------------------------')
+  console.log('--------------------------------------------------------')
+  console.log('--------------------------------------------------------')
+  console.log('BUILDPROD, ', buildProd)
+
   return (
     <>
       <html {...htmlAttrs}>

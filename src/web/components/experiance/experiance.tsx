@@ -2,8 +2,8 @@ import * as React from 'react';
 import classnames from 'classnames';
 import moment from 'moment'
 
-import * as commonStyles from '../../style/common.css'
-import * as styles from './experiance.css'
+import commonStyles from '../../style/common.css'
+import styles from './experiance.css'
 import { IExperiancePayload } from '../../../models/experiance';
 import { ICommonFields } from '../../../models/common';
 

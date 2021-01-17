@@ -1,9 +1,10 @@
-const merge = require('webpack-merge');
-
 const enviroment = process.env.NODE_ENV || 'development';
 
-const clientConfig = require(`../client/client.${enviroment}`);
-const serverConfig = require(`./serverless.${enviroment}`);
+console.log('***************************************************')
+console.log('***************************************************')
+console.log('***************************************************')
+console.log(enviroment)
 
-module.exports = serverConfig
-// module.exports = [serverConfig, clientConfig]
+const { config } = require(`./serverless.${enviroment}`);
+
+export { config }
