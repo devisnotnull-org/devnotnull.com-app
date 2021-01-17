@@ -10,8 +10,6 @@ export type Environment =
   | 'common'
   | 'developmentLocal'
   | 'development'
-  | 'stagingLocal'
-  | 'staging'
   | 'productionLocal'
   | 'production';
 
@@ -30,20 +28,14 @@ const defaultConfig: Config = {
   },
   development: {
     static: {
-      path: 'https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com'
+      path: 'https://fandanzle-assets-development.s3.eu-west-2.amazonaws.com'
     }
   },
   developmentLocal: {},
-  stagingLocal: {},
-  staging: {
-    static: {
-      path: 'https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com'
-    }
-  },
   productionLocal: {},
   production: {
     static: {
-      path: 'https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com'
+      path: 'https://fandanzle-assets-production.s3.eu-west-2.amazonaws.com'
     }
   }
 };

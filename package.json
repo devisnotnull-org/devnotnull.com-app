@@ -24,7 +24,6 @@
     "prod": "yarn cleanup && yarn types && yarn build:prod && NODE_ENV=production NODE_CONFIG_ENV=development-local concurrently -r \"yarn prodserver\" \"sls offline start --noPrependStageInUrl\"",
    
     "deploy:dev": "yarn build:dev && serverless deploy -v --stage development",
-    "deploy:staging": "yarn build:prod && serverless deploy -v --stage staging",
     "deploy:prod": "yarn build:prod && serverless deploy -v --stage production",
 
     "test:types": "tsc --noEmit",

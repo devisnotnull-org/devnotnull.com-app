@@ -34,9 +34,12 @@ custom:
 
   ## S3 bucket for static assets
   s3Sync:
-    - bucketName: fandanzle-assets-${self:provider.stage}
+    - bucketName: fandanzle-assets-${self:custom.environment}
       bucketPrefix: static/
       localDir: build/static
+
+  ##
+  environment: ${opt:stage, 'development'}
 
 ## 
 package:
@@ -51,16 +54,15 @@ provider:
   runtime: nodejs12.x
   timeout: 10 
   region: ${opt:region, 'eu-west-2'}
+  stackName: ${self:service}-${self:custom.environment}
   environment:
-    NODE_ENV: production
-    BUILD_TYPE: production
+    NODE_RUNTIME_ENV: ${self:custom.environment}
 
 functions:
   server:
     handler: build/serverless.handler
     environment:
-      NODE_ENV: production
-      BUILD_TYPE: production
+      NODE_RUNTIME_ENV: ${self:custom.environment}
     events:
       - http:
           method: GET
@@ -71,7 +73,7 @@ resources:
     AssetsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: fandanzle-assets-${self:provider.stage}
+        BucketName: fandanzle-assets-${self:custom.environment}
     BucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
