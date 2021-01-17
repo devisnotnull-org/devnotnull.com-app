@@ -13,7 +13,7 @@ const config = merge(client('production'), {
     app: [`${src}/client/index`],
   }, 
   output: {
-    filename: 'static/js/[name].[chunkhash].js',
+    filename: 'static/[name].[chunkhash].js',
     path: `${build}`,
   },
   devServer: {
@@ -94,6 +94,9 @@ const config = merge(client('production'), {
     new EnvironmentPlugin({
       NODE_ENV: 'production',
       BROWSER: false,
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'static/client.[contenthash].css',
     }),
   ],
 });

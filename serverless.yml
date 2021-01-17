@@ -16,7 +16,7 @@ custom:
   stackName: ${self:service}-${self:provid
 
   ##
-  localDevStaticFolder: dist
+  localDevStaticFolder: build
 
   ##
   siteName: devnotnull.com

@@ -8,7 +8,7 @@ import { config as client } from './client.common';
 const config = merge(client('development'), {
   devtool: 'inline-source-map',
   output: {
-    filename: 'static/js/[name].js',
+    filename: 'static/[name].js',
     path: `${build}`,
   },
   devServer: {

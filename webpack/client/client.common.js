@@ -19,33 +19,18 @@ const config = (env) => merge(common(env), {
     type: "filesystem",
   }, 
   plugins: [
-    // CLI Build status 
     new WebpackBar({ profile: true, name: `Client`, color: 'red' }),
-    // Webpack polyfills
     new ProvidePlugin({
       process: 'process/browser',
       Buffer: ['buffer', 'Buffer'],
     }),
-    // Asset manifest
     new AssetsPlugin({
       path: build,
       filename: `client-assets.json`,
       prettyPrint: true,
     }),
-    // Asset manifests
     new WebpackManifestPlugin({
       fileName: 'client-asset-manifest.json'
-    }),
-    //
-    new MiniCssExtractPlugin({
-      filename: 'client.[contenthash].css',
-    }),
-    //
-    new DuplicatePackageCheckerPlugin(),
-    //
-    new EnvironmentPlugin({
-      NODE_ENV: env,
-      BROWSER: false,
     }),
   ],
   // Webpack 5 polyfills

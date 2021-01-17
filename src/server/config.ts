@@ -32,7 +32,7 @@ const defaultConfig: Config = {
   development: {
     static: {
       path:
-        "https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com/",
+        "https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com",
     },
   },
   developmentLocal: {},
@@ -40,13 +40,13 @@ const defaultConfig: Config = {
   staging: {
     static: {
       path:
-        "https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com/",
+        "https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com",
     },
   },  productionLocal: {},
   production: {
     static: {
       path:
-        "https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com/",
+        "https://fandanzle-assets-dev.s3.eu-west-2.amazonaws.com",
     },
   },};
 
