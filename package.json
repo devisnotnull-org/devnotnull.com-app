@@ -106,7 +106,7 @@
     "jsdom": "^11.11.0",
     "lerna": "^3.4.0",
     "lint-staged": "^8.1.5",
-    "madge": "^3.4.4",
+    "madge": "^4.0.1",
     "prettier": "^1.18.2",
     "react-test-renderer": "^16.4.1",
     "redux-devtools-extension": "^2.13.0",
