@@ -1,16 +1,20 @@
-import { prop, pipe, propOr } from 'ramda';
-
+import { createSelector } from 'reselect';
 import { IContactState } from './reducer';
 import { IState } from '../reducers';
 
-export const getContact = (state: IState): IContactState =>
-  prop('contact', state);
+export const getContact = (state: IState): IContactState => state?.contact;
 
-export const getContactItems = pipe(getContact, prop('items'));
-
-export const getContactItemsLoading = pipe(getContact, prop('loading'));
-
-export const getContactItemsErrors = pipe(
+export const getContactItems = createSelector(
   getContact,
-  propOr(undefined, 'errors')
+  (state) => state?.items
+);
+
+export const getContactItemsLoading = createSelector(
+  getContact,
+  (state) => state?.loading
+);
+
+export const getContactItemsErrors = createSelector(
+  getContact,
+  (state) => state?.errors ?? undefined
 );

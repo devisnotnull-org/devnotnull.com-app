@@ -128,6 +128,17 @@
   cursor: pointer;
 }
 
+.Left {
+  float: left;
+}
+
+.Right {
+  float: right;
+}
+
+.Hide {
+  display: none;
+}
 
 @media screen and (min-width: 700px) { 
   .Menu {
@@ -143,23 +154,12 @@
   .Menu a {
     text-align: left;
   }
-}
 
-.Left {
-  float: left;
-}
+  .MenuToggle {
+  }
 
-.Right {
-  float: right;
-}
-
-.Hide {
-  display: none;
-}
-
-.LinkIcon {
-  width: 2.5rem;
-  height: 2rem;
-  display: inline-block;
-  margin-right: 0.5rem;
+  .Menu--Closed {
+    transform: none;
+    opacity: 0;
+  }
 }

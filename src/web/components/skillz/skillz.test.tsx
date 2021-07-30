@@ -5,10 +5,7 @@ import Skillz from './skillz';
 
 describe('<Skillz />', () => {
   it('render Skillz Component', () => {
-    const wrapper = shallow((
-      <Skillz abilitiesList={[]}>
-      </Skillz>
-    ));
+    const wrapper = shallow(<Skillz abilitiesList={[]}></Skillz>);
     expect(wrapper).toMatchSnapshot();
   });
 });

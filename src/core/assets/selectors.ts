@@ -1,15 +1,19 @@
-import { prop, pipe, propOr, path } from 'ramda';
+import { createSelector } from 'reselect';
 
 import { IAssetState } from './reducer';
 import { IState } from '../reducers';
 
-export const getAsset = (state: IState): IAssetState => prop('assets', state);
+export const getAsset = (state: IState): IAssetState => state?.assets;
 
 export const getAssetItem = (state, assetId) =>
-  pipe(getAsset, prop('items'), prop(assetId))(state);
+  createSelector(getAsset, (state) => state?.items?.[assetId]);
 
-export const getAssetItemsLoading = pipe(getAsset, prop('loading'));
+export const getAssetItemsLoading = createSelector(
+  getAsset,
+  (state) => state?.loading
+);
 
-export const getAssetItemsErrors = pipe(getAsset, propOr(undefined, 'errors'));
-
-export const getPropertyAssetId = path(['sys', 'id']);
+export const getAssetItemsErrors = createSelector(
+  getAsset,
+  (state) => state?.errors ?? undefined
+);

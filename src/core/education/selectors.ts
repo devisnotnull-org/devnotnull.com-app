@@ -1,16 +1,22 @@
-import { prop, pipe, propOr } from 'ramda';
+import { createSelector } from 'reselect';
 
 import { IEducationState } from './reducer';
 import { IState } from '../reducers';
 
 export const getEducation = (state: IState): IEducationState =>
-  prop('education', state);
+  state?.education;
 
-export const getEducationItems = pipe(getEducation, prop('items'));
-
-export const getEducationItemsLoading = pipe(getEducation, prop('loading'));
-
-export const getEducationItemsErrors = pipe(
+export const getEducationItems = createSelector(
   getEducation,
-  propOr(undefined, 'errors')
+  (state) => state?.items
+);
+
+export const getEducationItemsLoading = createSelector(
+  getEducation,
+  (state) => state?.loading
+);
+
+export const getEducationItemsErrors = createSelector(
+  getEducation,
+  (state) => state?.errors ?? undefined
 );

@@ -1,27 +1,27 @@
 /// <reference path="../../typings/index.d.ts" />
 
 import 'regenerator-runtime/runtime';
-require("source-map-support").install();
+require('source-map-support').install();
 
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpack from 'webpack';
-import { resolve } from 'path'; 
+import { resolve } from 'path';
 
-import express, { Express, NextFunction, Request, Response } from "express";
-import { createMemoryHistory } from "history";
-import { config } from './config'
-import { render } from './render'
+import express, { Express, NextFunction, Request, Response } from 'express';
+import { createMemoryHistory } from 'history';
+import { config } from './config';
+import { render } from './render';
 
-import createStore from "../core/store";
+import createStore from '../core/store';
 
 const PROD: boolean = process.env.NODE_ENV === 'production';
 const app: Express = express();
 
-app.use('/static', express.static('static'))
-app.use('/static',express.static(__dirname + '/static'));
+app.use('/static', express.static('static'));
+app.use('/static', express.static(__dirname + '/static'));
 
-app.use(express.static('static'))
+app.use(express.static('static'));
 app.use(express.static(__dirname + '/static'));
 
 /**
@@ -41,9 +41,8 @@ if (!PROD) {
 }
 **/
 
-
 // All other routes will be directed to React
-app.get("*", (req: Request, res: Response) => {
+app.get('*', (req: Request, res: Response) => {
   const history = createMemoryHistory();
   const store = createStore(history);
   return render(req.url, config, res, store);
@@ -51,15 +50,15 @@ app.get("*", (req: Request, res: Response) => {
 
 // Catch 404 and forward to error handler
 app.use((req: Request, res: Response, next: NextFunction) => {
-  const err = new Error("Not Found");
+  const err = new Error('Not Found');
   (err as any).status = 404;
   next(err);
 });
 
 // Error handler
 app.use((err: any, req: Request, res: Response) => {
-  if (PROD) console.error("error : ", err.message);
-  else console.error("error : ", err);
+  if (PROD) console.error('error : ', err.message);
+  else console.error('error : ', err);
   res.status(err.status || 500);
 });
 

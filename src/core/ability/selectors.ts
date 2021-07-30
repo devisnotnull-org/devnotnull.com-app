@@ -1,16 +1,20 @@
-import { prop, pipe, propOr } from 'ramda';
-
+import { createSelector } from 'reselect';
 import { IAbilityState } from './reducer';
 import { IState } from '../reducers';
 
-export const getAbility = (state: IState): IAbilityState =>
-  prop('ability', state);
+export const getAbility = (state: IState): IAbilityState => state?.ability;
 
-export const getAbilityItems = pipe(getAbility, prop('items'));
-
-export const getAbilityItemsLoading = pipe(getAbility, prop('loading'));
-
-export const getAbilityItemsErrors = pipe(
+export const getAbilityItems = createSelector(
   getAbility,
-  propOr(undefined, 'errors')
+  (state) => state?.items
+);
+
+export const getAbilityItemsLoading = createSelector(
+  getAbility,
+  (state) => state?.loading
+);
+
+export const getAbilityItemsErrors = createSelector(
+  getAbility,
+  (state) => state?.errors ?? undefined
 );

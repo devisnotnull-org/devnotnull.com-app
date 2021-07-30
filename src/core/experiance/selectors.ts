@@ -1,16 +1,22 @@
-import { prop, pipe, propOr } from 'ramda';
+import { createSelector } from 'reselect';
 
 import { IExperianceState } from './reducer';
 import { IState } from '../reducers';
 
 export const getExperiance = (state: IState): IExperianceState =>
-  prop('experiance', state);
+  state?.experiance;
 
-export const getExperianceItems = pipe(getExperiance, prop('items'));
-
-export const getExperianceItemsLoading = pipe(getExperiance, prop('loading'));
-
-export const getExperianceItemsErrors = pipe(
+export const getExperianceItems = createSelector(
   getExperiance,
-  propOr(undefined, 'errors')
+  (state) => state?.items
+);
+
+export const getExperianceItemsLoading = createSelector(
+  getExperiance,
+  (state) => state?.loading
+);
+
+export const getExperianceItemsErrors = createSelector(
+  getExperiance,
+  (state) => state?.errors ?? undefined
 );

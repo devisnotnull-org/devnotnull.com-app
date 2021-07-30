@@ -1,10 +1,10 @@
-import { APIGatewayEvent, Context } from "aws-lambda";
-import { createServer, proxy } from "aws-serverless-express";
-import "regenerator-runtime/runtime";
+import { APIGatewayEvent, Context } from 'aws-lambda';
+import { createServer, proxy } from 'aws-serverless-express';
+import 'regenerator-runtime/runtime';
 
-import { app } from "./http";
+import { app } from './http';
 
-require("source-map-support").install();
+require('source-map-support').install();
 
 const server = createServer(app);
 

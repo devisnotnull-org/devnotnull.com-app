@@ -1,4 +1,3 @@
-import { clone } from 'ramda';
 import { Reducer, AnyAction } from 'redux';
 
 import { AssetActionTypes } from './actions';
@@ -33,7 +32,7 @@ export const asset: Reducer<IAssetState> = (
         ...state,
         loading: false,
         errors: undefined,
-        items: clone(state.items)
+        items: { ...state.items }
       };
     }
     case AssetActionTypes.FETCH_ERROR: {

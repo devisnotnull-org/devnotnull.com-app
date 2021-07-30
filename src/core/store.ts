@@ -10,13 +10,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { routerMiddleware } from 'connected-react-router';
 
 import rootReducers from '../core/reducers';
-import { isServerRender } from '../utils';
 
 export default (history: any, reduxState = undefined) => {
-  //
-  console.log('Is this a server side render');
-  console.log(isServerRender);
-
   // Compose our middlewares
   const saga: SagaMiddleware = createSaga();
   const router: Middleware = routerMiddleware(history);

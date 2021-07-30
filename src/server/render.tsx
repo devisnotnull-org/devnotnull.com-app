@@ -1,12 +1,12 @@
-import React from "react";
-import { renderToString } from "react-dom/server";
-import { Provider } from "react-redux";
-import { Response } from "express";
-import { StaticRouter } from "react-router";
-import { Store } from "redux";
-import rootSaga from "../core/sagas";
-import App from "@web/app";
-import Html from "./html";
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { Provider } from 'react-redux';
+import { Response } from 'express';
+import { StaticRouter } from 'react-router';
+import { Store } from 'redux';
+import rootSaga from '../core/sagas';
+import App from '@web/app';
+import Html from './html';
 
 /**
  *
@@ -20,23 +20,13 @@ export const render = (
   config: any,
   res: Response,
   store: Store
-  ): string => {
-  const response = "";
-  const BUILD_PROD = process.env.NODE_ENV === "production";
-  const RUNTIME_PROD = process.env.NODE_RUNTIME_ENV === "production";
-
-  console.log('___________________________________________')
-  console.log('___________________________________________')
-  console.log('___________________________________________')
-  console.log('___________________________________________')
-  console.log('___________________________________________')
-  console.log('___________________________________________')
-  console.log('___________________________________________')
-  console.log('___________________________________________')
-  console.log('BUILD_PROD, ', BUILD_PROD)
+): string => {
+  const response = '';
+  const BUILD_PROD = process.env.NODE_ENV === 'production';
+  const RUNTIME_PROD = process.env.NODE_RUNTIME_ENV === 'production';
 
   const context = {
-    splitPoints: [],
+    splitPoints: []
   };
   const rootComponent = BUILD_PROD ? (
     <Provider store={store}>
@@ -53,7 +43,7 @@ export const render = (
       const state = store.getState();
       const initialState = `window.__INITIAL_STATE__ = ${JSON.stringify({
         ...state,
-        config,
+        config
       })}`;
       const splitPoints = `window.__SPLIT_POINTS__ = ${JSON.stringify(
         context.splitPoints
