@@ -2,8 +2,8 @@ name: "Bump Version"
 
 on:
   push:
-    branches:
-      - "master"
+    branches-ignore:
+      - 'master'
 
 jobs:
   bump-version:
