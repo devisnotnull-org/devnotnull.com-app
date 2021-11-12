@@ -6,6 +6,7 @@ export interface AppConfig {
 
 export type Environment =
   | 'common'
+  | 'local'
   | 'developmentLocal'
   | 'development'
   | 'stagingLocal'
@@ -28,25 +29,45 @@ const defaultConfig: Config = {
   },
   development: {
     static: {
-      path: 'https://ecom-rc-backoffice-ui-development-assets.s3.eu-west-1.amazonaws.com/'
+      path: 'https://fandanzle-assets-development.s3.eu-west-2.amazonaws.com'
+    }
+  },
+  local: {
+    static: {
+      path: 'http://localhost:9000/'
     }
   },
   developmentLocal: {},
   stagingLocal: {},
   staging: {
     static: {
-      path: 'https://ecom-rc-backoffice-ui-development-assets.s3.eu-west-1.amazonaws.com/'
+      path: 'https://fandanzle-assets-staging.s3.eu-west-2.amazonaws.com'
     }
   },
   productionLocal: {},
   production: {
     static: {
-      path: 'https://ecom-rc-backoffice-ui-development-assets.s3.eu-west-1.amazonaws.com/'
+      path: 'https://fandanzle-assets-production.s3.eu-west-2.amazonaws.com'
     }
   }
 };
 
 const envKey = offline ? `${env}Local` : env;
+
+console.log("!!!!!!!!!!!!!!!")
+console.log("!!!!!!!!!!!!!!!")
+console.log("!!!!!!!!!!!!!!!")
+console.log("!!!!!!!!!!!!!!!")
+console.log("!!!!!!!!!!!!!!!")
+console.log("env, ", env) 
+console.log("envKey, ", envKey) 
+console.log("offline, ", offline) 
+
+console.log("!!!!!!!!!!!")
+console.log("!!!!!!!!!!!")
+console.log("!!!!!!!!!!!")
+console.log(process.env)
+
 
 export const config: Partial<AppConfig> = {
   ...defaultConfig.common,

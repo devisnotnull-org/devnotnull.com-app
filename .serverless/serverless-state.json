@@ -8,12 +8,11 @@
       "stage": "production",
       "variableSyntax": "\\${([^{}]+?)}",
       "name": "aws",
-      "runtime": "nodejs12.x",
+      "runtime": "nodejs14.x",
       "timeout": 10,
       "region": "eu-west-2",
       "environment": {
-        "NODE_ENV": "production",
-        "ITEM": "eufhufhrufhrufhiehrgiy"
+        "NODE_ENV": "production"
       },
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
@@ -164,7 +163,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/fandanzle-v2/production/1623614686157-2021-06-13T20:04:46.157Z/fandanzle-v2.zip"
+                "S3Key": "serverless/fandanzle-v2/production/1636408222676-2021-11-08T21:50:22.676Z/fandanzle-v2.zip"
               },
               "FunctionName": "fandanzle-v2-production-server",
               "Handler": "dist/serverless.handler",
@@ -175,12 +174,11 @@
                   "Arn"
                 ]
               },
-              "Runtime": "nodejs12.x",
+              "Runtime": "nodejs14.x",
               "Timeout": 10,
               "Environment": {
                 "Variables": {
-                  "NODE_ENV": "production",
-                  "ITEM": "HEYHEYHEYHEYEHYHEYHEY"
+                  "NODE_ENV": "production"
                 }
               }
             },
@@ -188,14 +186,14 @@
               "ServerLogGroup"
             ]
           },
-          "ServerLambdaVersionnhHe1lmMCLJx9MNhkcFYbXouhChyOrBEFovTldbmY": {
+          "ServerLambdaVersiongHZVnr5O3kWaoqmVH2UdczSrXhGnUEQin7t4icVcKk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ServerLambdaFunction"
               },
-              "CodeSha256": "Ag94ohOfD2TCgL9t7yzbW/Jl8z+sM9EuQ+Z/UVWHnrg="
+              "CodeSha256": "EdzM8gS/BssphMqe8ckNEkJbiCaC0FXCFXIksgVL4mw="
             }
           },
           "ApiGatewayRestApi": {
@@ -268,7 +266,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1623614661191": {
+          "ApiGatewayDeployment1636408193028": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -365,7 +363,7 @@
           "ServerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ServerLambdaVersionnhHe1lmMCLJx9MNhkcFYbXouhChyOrBEFovTldbmY"
+              "Ref": "ServerLambdaVersiongHZVnr5O3kWaoqmVH2UdczSrXhGnUEQin7t4icVcKk"
             }
           },
           "ServiceEndpoint": {
@@ -498,8 +496,7 @@
       "server": {
         "handler": "dist/serverless.handler",
         "environment": {
-          "NODE_ENV": "production",
-          "ITEM": "HEYHEYHEYHEYEHYHEYHEY"
+          "NODE_ENV": "production"
         },
         "events": [
           {
@@ -514,9 +511,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 10,
-        "runtime": "nodejs12.x",
+        "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "ServerLambdaVersionnhHe1lmMCLJx9MNhkcFYbXouhChyOrBEFovTldbmY"
+        "versionLogicalId": "ServerLambdaVersiongHZVnr5O3kWaoqmVH2UdczSrXhGnUEQin7t4icVcKk"
       }
     },
     "resources": {
@@ -582,17 +579,16 @@
           "src/**"
         ],
         "artifact": "/Users/alexbrown/Development/fandanzle-v2/.serverless/fandanzle-v2.zip",
-        "artifactDirectoryName": "serverless/fandanzle-v2/production/1623614686157-2021-06-13T20:04:46.157Z"
+        "artifactDirectoryName": "serverless/fandanzle-v2/production/1636408222676-2021-11-08T21:50:22.676Z"
       },
       "provider": {
         "name": "aws",
-        "runtime": "nodejs12.x",
+        "runtime": "nodejs14.x",
         "timeout": 10,
         "stage": "production",
         "region": "eu-west-2",
         "environment": {
-          "NODE_ENV": "production",
-          "ITEM": "eufhufhrufhrufhiehrgiy"
+          "NODE_ENV": "production"
         }
       },
       "functions": {
@@ -606,7 +602,7 @@
     "artifact": "/Users/alexbrown/Development/fandanzle-v2/.serverless/fandanzle-v2.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/fandanzle-v2/production/1623614686157-2021-06-13T20:04:46.157Z",
+    "artifactDirectoryName": "serverless/fandanzle-v2/production/1636408222676-2021-11-08T21:50:22.676Z",
     "artifact": "fandanzle-v2.zip"
   }
 }

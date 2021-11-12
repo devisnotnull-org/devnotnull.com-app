@@ -3,11 +3,6 @@
 import 'regenerator-runtime/runtime';
 require('source-map-support').install();
 
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpack from 'webpack';
-import { resolve } from 'path';
-
 import express, { Express, NextFunction, Request, Response } from 'express';
 import { createMemoryHistory } from 'history';
 import { config } from './config';
@@ -23,23 +18,6 @@ app.use('/static', express.static(__dirname + '/static'));
 
 app.use(express.static('static'));
 app.use(express.static(__dirname + '/static'));
-
-/**
-if (!PROD) {
-  const getRequire = () => (typeof __webpack_require__ === 'function' ? __non_webpack_require__ : require);
-  const webpackConfig = getRequire()(resolve(process.cwd(), 'webpack.config'));
-  const compiler = webpack(webpackConfig);
-  app.use(
-    webpackDevMiddleware(compiler, {
-      publicPath: webpackConfig.output.publicPath,
-      serverSideRender: true,
-      stats: 'errors-only',
-      logLevel: 'error'
-    })
-  );
-  app.use(webpackHotMiddleware(compiler, { log: console.log }));
-}
-**/
 
 // All other routes will be directed to React
 app.get('*', (req: Request, res: Response) => {

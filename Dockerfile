@@ -1,20 +1,15 @@
 
-FROM node:12
+FROM node:12.22
 
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+# Create app directory
+WORKDIR /usr/src/app
 
-WORKDIR /home/node/app
+# If you are building your code for production
+# RUN npm ci --only=production
 
-COPY package*.json ./
+# Bundle app source
+COPY ./dist .
 
-USER node
+EXPOSE 3000
 
-RUN yarn install
-
-COPY --chown=node:node . .
-
-RUN yarn build:prod
-
-EXPOSE 8080
-
-CMD [ "node", "dist/index.js" ]
+CMD [ "node", "server.js" ]
