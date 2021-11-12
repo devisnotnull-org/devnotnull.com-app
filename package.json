@@ -1,37 +1,30 @@
 {
   "name": "fandanzle-v2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "cleanup": "rimraf dist/",
     "test": "jest",
     "prestart": "rimraf dist",
     "prebuild": "rimraf dist",
-
     "start": "sls offline start",
     "devserver": "NODE_ENV=development TARGET=client webpack serve --mode development --inline --hot",
     "prodserver": "NODE_ENV=production TARGET=client webpack serve  --mode production",
-
     "build:client": "TARGET=client webpack",
     "build:server": "TARGET=serverless webpack",
     "build:server:prod": "NODE_ENV=production TARGET=serverless webpack",
     "build": "yarn build:client && yarn build:server",
-
     "build:dev": "yarn cleanup && NODE_ENV=development yarn build:client && yarn build:server",
     "build:prod": "yarn cleanup && NODE_ENV=production yarn build:client && NODE_ENV=production yarn build:server",
-
     "dev": "yarn cleanup && yarn types && yarn build:dev && NODE_ENV=development NODE_CONFIG_ENV=development-local concurrently -r \"yarn devserver\" \"sls offline start --noPrependStageInUrl\"",
     "prod": "yarn cleanup && yarn types && yarn build:prod && NODE_ENV=production NODE_CONFIG_ENV=development-local concurrently -r \"yarn prodserver\" \"sls offline start --noPrependStageInUrl\"",
-   
     "deploy:dev": "yarn build:dev && serverless deploy -v --stage development",
     "deploy:prod": "yarn build:prod && serverless deploy -v --stage production",
-
     "test:types": "tsc --noEmit",
     "hook:before:offline:start": "yarn build:client:prod",
     "build:style-typings": "node webpack/style-typings.js",
     "lint": "eslint ./src --ext .js --ext .ts --ext .tsx",
     "lint:fix": "eslint ./src --ext .js --ext .ts --ext .tsx --fix",
-
     "types": "tcm src"
   },
   "devDependencies": {
