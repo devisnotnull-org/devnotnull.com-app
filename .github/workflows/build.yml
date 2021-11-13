@@ -4,7 +4,7 @@ on:
   push:
     branches-ignore:
       - 'master'
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,5 +24,4 @@ jobs:
     - name: yarn build:prod
       run: yarn build:prod
       env:
-        CI: true
-
+        CI: truefit
