@@ -2,7 +2,7 @@
 const WebpackBeforeBuildPlugin = require('before-build-webpack')
 const fs = require('fs')
 
-export class WaitPlugin extends WebpackBeforeBuildPlugin {
+class WaitPlugin extends WebpackBeforeBuildPlugin {
   constructor(file, interval = 100, timeout = 10000) {
     super(function(stats, callback) {
       let start = Date.now()
@@ -21,4 +21,6 @@ export class WaitPlugin extends WebpackBeforeBuildPlugin {
   }
 }
 
-export default WaitPlugin
+module.exports = {
+  WaitPlugin
+}

@@ -11,6 +11,9 @@ custom:
   serverless-offline:
     port: 3000 
 
+  ##  
+  environment: ${opt:stage, 'development'}
+
   ##
   localDevStaticFolder: dist
 
@@ -31,10 +34,9 @@ custom:
   ## S3 bucket for static assets
   s3Sync:
     buckets:
-    - bucketName: fandanzle-assets-${self:provider.stage}
-      endpoint: http://localhost:9000
+    - bucketName: wedding-assets-${self:custom.environment}
       bucketPrefix: static/
-      localDir: dist
+      localDir: dist/static
 
 ## 
 package:
