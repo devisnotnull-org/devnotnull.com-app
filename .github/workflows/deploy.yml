@@ -31,13 +31,3 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: alexbrown201/fandanzle-v2
         tags: latest
-    - name: multiple command
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        script: |
-          docker kill fandanzle-v2
-          docker pull alexbrown201/fandanzle-v2:latest
-          docker run -it -p 3000:3000 --name fandanzle-v2 alexbrown201/fandanzle-v2

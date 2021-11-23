@@ -1,0 +1,4 @@
+
+```
+sls dynamodb install
+```
