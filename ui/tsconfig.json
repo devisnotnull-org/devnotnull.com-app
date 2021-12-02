@@ -4,19 +4,21 @@
     "module": "commonjs",
     "target": "es5",
     "lib": ["dom", "es2018"],
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "@client/*": ["client/*"],
-      "@server/*": ["server/*"],
-      "@core/*": ["core/*"],
-      "@web/*": ["web/*"]
+      "@web/*": ["src/web/*"],
+      "@client/*": ["src/client/*"],
+      "@server/*": ["src/server/*"],
+      "@core/*": ["src/core/*"],
+      "@config/*": ["src/config/*"],
+      "@styles/*": ["src/style/*"]
     },
     "skipLibCheck": true,
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": false,
@@ -25,6 +27,7 @@
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
     "typeRoots": [
       "./typings",
       "node_modules/@types"

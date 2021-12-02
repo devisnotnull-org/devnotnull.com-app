@@ -1,54 +1,56 @@
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { DefinePlugin } = require("webpack");
-const ManifestPlugin = require("webpack-manifest-plugin");
-const { GenerateSW } = require("workbox-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const merge = require("webpack-merge");
+import merge from 'webpack-merge';
+import TerserPlugin from 'terser-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { EnvironmentPlugin } from 'webpack';
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 
-const client = require("./client.common");
+import CopyPlugin from 'copy-webpack-plugin'
+import { config as client } from './client.common';
+import { build, src, media, buildMedia } from '../paths'
+import { postcssPlugin } from 'postcss-url'
+import { config as globalConfig } from '../config'
+import AssetsPlugin from 'assets-webpack-plugin';
 
-const paths = require("../paths");
 
-const workerName = "service-worker";
-const workerManifestName = "precache-manifes";
+const options = [
+  // using custom function to build url
+  { filter: 'cdn/**/*', url: (asset) => `https://cdn.url/${asset.url}` }
+];
 
-const isWorkerRegExp = new RegExp(`${workerName}|${workerManifestName}`);
-
-module.exports = merge(client, {
-  devtool: "source-map",
+const config = merge(client('production'), {
+  devtool: 'source-map',
+  target: 'web',
+  entry: {
+    app: [`${src}/client/index`],
+  }, 
   output: {
-    filename: "static/js/[name].[contenthash].js",
-    chunkFilename: "static/js/[name].[contenthash].js"
+    filename: 'static/[name].[chunkhash].js',
+    path: `${build}`,
+  },
+  devServer: {
+    port: 9000,
+    compress: true,
+    contentBase: build,
   },
   optimization: {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        cache: true,
         parallel: true,
-        sourceMap: true,
         terserOptions: {
+          sourceMap: true,
           parse: {
             ecma: 8
-          },
-          output: {
-            ecma: 5,
-            comments: false,
-            ascii_only: true
           }
         }
       }),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorOptions: { map: { inline: false, annotations: true } }
-      })
     ],
     splitChunks: {
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all"
+          name: 'vendors',
+          chunks: 'all'
         }
       }
     }
@@ -56,57 +58,74 @@ module.exports = merge(client, {
   module: {
     rules: [
       {
-        test: /\.s?css$/,
+        test: /\.css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              sourceMap: true
-            }
+              esModule: false,
+            },
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               sourceMap: true,
-              importLoaders: 3,
               modules: {
-                mode: "local",
-                localIdentName: "[local][hash:base64:5]"
+                localIdentName: '[name]__[local]__[hash:base64:5]'
               }
             }
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               sourceMap: true,
-              ident: "postcss",
-              plugins: () => [
-                require('postcss-custom-media'),
-                require("postcss-flexbugs-fixes"),
-                require("postcss-preset-env")({
-                  autoprefixer: {
-                    flexbox: "no-2009"
-                  },
-                  stage: 3
-                })
-              ]
+              postcssOptions: {
+                plugins: () => [
+
+                  require('postcss-custom-media'),
+                  require('postcss-flexbugs-fixes'),
+                  require('postcss-preset-env')({
+                    autoprefixer: {
+                      flexbox: 'no-2009'
+                    },
+                    stage: 3
+                  })
+                ]
+              }
             }
           },
           {
             loader: 'resolve-url-loader',
             options: {
-              root: paths.src
+              root: src
             }
-          },
+          }
         ]
       }
-    ]
+    ],
   },
   plugins: [
-    new ManifestPlugin({
-      fileName: "asset-manifest.json",
-      filter: ({ name }) => !isWorkerRegExp.test(name)
+    new EnvironmentPlugin({
+      NODE_ENV: 'production',
+      BROWSER: false,
     }),
-    new MiniCssExtractPlugin({ filename: "static/css/[contenthash].css" }),
-  ]
+    new MiniCssExtractPlugin({
+      filename: 'static/client.[contenthash].css',
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: media, to: buildMedia },
+      ],
+    }),
+    new AssetsPlugin({
+      path: build,
+      filename: `client-assets.json`,
+      prettyPrint: true,
+    }),
+    new WebpackManifestPlugin({
+      fileName: 'asset-manifest.json'
+    }),
+  ],
 });
+
+export { config }

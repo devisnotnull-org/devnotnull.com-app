@@ -1,21 +1,22 @@
-service: fandanzle-v2
+service: wedding-website-ui
 
 frameworkVersion: ">=2.0.0"
 plugins:
   - serverless-offline
   - serverless-deployment-bucket
   - serverless-prune-plugin
+  - serverless-domain-manager
   - serverless-s3-sync
 
 custom:
   serverless-offline:
     port: 3000 
 
-  ##  
-  environment: ${opt:stage, 'development'}
+  ##
+  stackName: ${self:service}-${self:provider}
 
   ##
-  localDevStaticFolder: dist
+  localDevStaticFolder: build
 
   ##
   siteName: devnotnull.com
@@ -33,10 +34,26 @@ custom:
 
   ## S3 bucket for static assets
   s3Sync:
-    buckets:
-    - bucketName: wedding-assets-${self:custom.environment}
+    - bucketName: devnotnull.com${self:custom.environment}
       bucketPrefix: static/
-      localDir: dist/static
+      localDir: build/static
+    - bucketName: devnotnull.com${self:custom.environment}
+      bucketPrefix: assets/
+      localDir: build/assets
+    - bucketName: devnotnull.com${self:custom.environment}
+      bucketPrefix: media/
+      localDir: media
+  ##
+  environment: ${opt:stage, 'development'}
+
+  ##
+  customDomain:
+    domainName: test.devnotnull.com
+    certificateArn: "arn:aws:acm:us-east-1:298900675756:certificate/fc9c610c-425f-46ee-a9b5-33da273a313a"
+    basePath: ''
+    createRoute53Record: true
+    enabled: true
+    endpointType: 'edge'
 
 ## 
 package:
@@ -48,29 +65,32 @@ package:
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs12.x
   timeout: 10 
-  stage: ${opt:stage}
   region: ${opt:region, 'eu-west-2'}
+  stackName: ${self:service}-${self:custom.environment}
   environment:
-    NODE_ENV: production
+    NODE_RUNTIME_ENV: ${self:custom.environment}
 
 functions:
   server:
-    handler: dist/serverless.handler
+    handler: build/serverless.handler
     environment:
-      NODE_ENV: production
+      NODE_RUNTIME_ENV: ${self:custom.environment}
     events:
       - http:
+          path: / # this matches any path, the token 'any' doesn't mean anything special
           method: GET
-          path: /{any+}
+      - http:
+          path: /{any+} # this matches any path, the token 'any' doesn't mean anything special
+          method: GET
 
 resources:
   Resources:
     AssetsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: fandanzle-assets-${self:provider.stage}
+        BucketName: devnotnull.com${self:custom.environment}
     BucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
@@ -88,5 +108,4 @@ resources:
                   - !Ref AssetsBucket
                   - /*
         Bucket: !Ref AssetsBucket
-
     

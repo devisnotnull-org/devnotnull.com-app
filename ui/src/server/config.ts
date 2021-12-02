@@ -24,7 +24,7 @@ const offline = process.env.IS_OFFLINE || false;
 const defaultConfig: Config = {
   common: {
     static: {
-      path: 'http://localhost:8080/dist/'
+      path: 'http://localhost:9000'
     }
   },
   development: {
@@ -34,7 +34,7 @@ const defaultConfig: Config = {
   },
   local: {
     static: {
-      path: 'http://localhost:8080/dist/'
+      path: 'http://localhost:9000'
     }
   },
   developmentLocal: {},

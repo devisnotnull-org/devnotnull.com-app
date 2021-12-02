@@ -1,21 +1,21 @@
-const { resolve } = require('path');
+import { resolve } from 'path';
 
+const webpackCache = resolve(__dirname, '.cache')
 const root = resolve(__dirname, '..');
 const src = resolve(root, 'src');
-const core = resolve(src, 'core');
-const client = resolve(src, 'client');
-const server = resolve(src, 'server');
+const build = resolve(root, 'build')
+const media = resolve(root, 'media')
+const buildMedia = resolve(root, 'build/static/media')
+const nodeModules = resolve(root, 'node_modules')
+const babelConfig = resolve(root, 'babel.config.js')
 
-module.exports = {
+export  {
   src,
-  core,
   root,
-  client,
-  server,
-  dist: resolve(root, 'dist'),
-  assets: resolve(client, 'assets'),
-  tsLint: resolve(root, 'tslint.json'),
-  tsConfig: resolve(root, 'tsconfig.json'),
-  nodeModules: resolve(root, 'node_modules'),
-  babelConfig: resolve(root, 'babel.config.js')
+  webpackCache,
+  build,
+  nodeModules,
+  babelConfig,
+  media,
+  buildMedia
 };

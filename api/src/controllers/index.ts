@@ -1,8 +1,18 @@
 import * as express from 'express';
-import ContentController from './content';
+import MetaController from './meta';
+import AbillityController from './abilities';
+import BlogController from './blog';
+import EducationController from './education';
+import PortfolioController from './portfolio';
+import ExperianceController from './experiance';
 
 const controllers = [
-    ContentController
+    MetaController,
+    BlogController,
+    AbillityController,
+    EducationController,
+    PortfolioController,
+    ExperianceController
 ];
 
 /**

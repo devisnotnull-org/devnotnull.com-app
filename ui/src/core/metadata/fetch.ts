@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ENDPOINT, TOKEN } from '../constants';
+import { ENDPOINT } from '../constants';
 
-export const fetchMetadata = (id: string) =>
-  axios.get(`${ENDPOINT}${id}`, { headers: { Authorization: TOKEN } });
+export const fetchMetadata = () =>
+  axios.get(`${ENDPOINT}/meta`);

@@ -1,12 +1,8 @@
 import axios from 'axios';
 
-import { ENDPOINT, TOKEN, CONTENT_TYPE } from '../constants';
-
-const select = 'fields';
-const order = '-fields.level';
+import { ENDPOINT } from '../constants';
 
 export const fetchAbilities = () =>
   axios.get(
-    `${ENDPOINT}?content_type=${CONTENT_TYPE.abilitiesItem}&select=${select}&order=${order}`,
-    { headers: { Authorization: TOKEN } }
+    `${ENDPOINT}/abilities`,
   );

@@ -44,6 +44,21 @@
                       "/*"
                     ]
                   ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "ServerlessDeploymentBucket"
+                      }
+                    ]
+                  ]
                 }
               ],
               "Condition": {
@@ -59,7 +74,7 @@
     "ServerLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/fandanzle-v2-production-server"
+        "LogGroupName": "/aws/lambda/wedding-website-ui-production-server"
       }
     },
     "IamRoleLambdaExecution": {
@@ -87,7 +102,7 @@
               "Fn::Join": [
                 "-",
                 [
-                  "fandanzle-v2",
+                  "wedding-website-ui",
                   "production",
                   "lambda"
                 ]
@@ -104,7 +119,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/fandanzle-v2-production*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/wedding-website-ui-production*:*"
                     }
                   ]
                 },
@@ -115,7 +130,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/fandanzle-v2-production*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/wedding-website-ui-production*:*:*"
                     }
                   ]
                 }
@@ -128,7 +143,7 @@
           "Fn::Join": [
             "-",
             [
-              "fandanzle-v2",
+              "wedding-website-ui",
               "production",
               {
                 "Ref": "AWS::Region"
@@ -146,43 +161,43 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/fandanzle-v2/production/1636408222676-2021-11-08T21:50:22.676Z/fandanzle-v2.zip"
+          "S3Key": "serverless/wedding-website-ui/production/1637794152026-2021-11-24T22:49:12.026Z/wedding-website-ui.zip"
         },
-        "FunctionName": "fandanzle-v2-production-server",
-        "Handler": "dist/serverless.handler",
+        "Handler": "build/serverless.handler",
+        "Runtime": "nodejs12.x",
+        "FunctionName": "wedding-website-ui-production-server",
         "MemorySize": 1024,
+        "Timeout": 10,
+        "Environment": {
+          "Variables": {
+            "NODE_RUNTIME_ENV": "production"
+          }
+        },
         "Role": {
           "Fn::GetAtt": [
             "IamRoleLambdaExecution",
             "Arn"
           ]
-        },
-        "Runtime": "nodejs14.x",
-        "Timeout": 10,
-        "Environment": {
-          "Variables": {
-            "NODE_ENV": "production"
-          }
         }
       },
       "DependsOn": [
         "ServerLogGroup"
       ]
     },
-    "ServerLambdaVersiongHZVnr5O3kWaoqmVH2UdczSrXhGnUEQin7t4icVcKk": {
+    "ServerLambdaVersion78TGtRGoPWJlqj4fz693Ww0AJdlvZMstNIFP66AcOWE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ServerLambdaFunction"
         },
-        "CodeSha256": "EdzM8gS/BssphMqe8ckNEkJbiCaC0FXCFXIksgVL4mw="
+        "CodeSha256": "WKdWQp3DSyzedtqDkDwP1K7goDNmLYbUfmcHV33MMyI="
       }
     },
     "ApiGatewayRestApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
-        "Name": "production-fandanzle-v2",
+        "Name": "production-wedding-website-ui",
         "EndpointConfiguration": {
           "Types": [
             "EDGE"
@@ -205,6 +220,55 @@
           "Ref": "ApiGatewayRestApi"
         }
       }
+    },
+    "ApiGatewayMethodGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "ServerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "ServerLambdaPermissionApiGateway"
+      ]
     },
     "ApiGatewayMethodAnyVarGet": {
       "Type": "AWS::ApiGateway::Method",
@@ -247,9 +311,12 @@
           }
         },
         "MethodResponses": []
-      }
+      },
+      "DependsOn": [
+        "ServerLambdaPermissionApiGateway"
+      ]
     },
-    "ApiGatewayDeployment1636408193028": {
+    "ApiGatewayDeployment1637794090232": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -258,6 +325,7 @@
         "StageName": "production"
       },
       "DependsOn": [
+        "ApiGatewayMethodGet",
         "ApiGatewayMethodAnyVarGet"
       ]
     },
@@ -301,7 +369,7 @@
     "AssetsBucket": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
-        "BucketName": "fandanzle-assets-production"
+        "BucketName": "devnotnull.comproduction"
       }
     },
     "BucketPolicy": {
@@ -341,12 +409,18 @@
     "ServerlessDeploymentBucketName": {
       "Value": {
         "Ref": "ServerlessDeploymentBucket"
+      },
+      "Export": {
+        "Name": "sls-wedding-website-ui-production-ServerlessDeploymentBucketName"
       }
     },
     "ServerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ServerLambdaVersiongHZVnr5O3kWaoqmVH2UdczSrXhGnUEQin7t4icVcKk"
+        "Ref": "ServerLambdaVersion78TGtRGoPWJlqj4fz693Ww0AJdlvZMstNIFP66AcOWE"
+      },
+      "Export": {
+        "Name": "sls-wedding-website-ui-production-ServerLambdaFunctionQualifiedArn"
       }
     },
     "ServiceEndpoint": {
@@ -370,6 +444,9 @@
             "/production"
           ]
         ]
+      },
+      "Export": {
+        "Name": "sls-wedding-website-ui-production-ServiceEndpoint"
       }
     }
   }
