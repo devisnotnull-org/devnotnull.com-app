@@ -1,52 +1,40 @@
 import merge from 'webpack-merge';
 import WebpackBar from 'webpackbar';
-import { ProvidePlugin } from 'webpack';
+import AssetsPlugin from 'assets-webpack-plugin';
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 
-import { src } from '../paths';
 import { common } from '../common';
+import { resolve } from 'path';
+import { src, build, webpackCache } from '../paths';
 
-const config = merge(common, {
+const config = (env) => merge(common(env), {
   target: 'node',
-  entry: ['whatwg-fetch', `${src}/server/server.ts`],
-  devtool: 'source-map',
-  stats: {
-    colors: true,
-    reasons: true
+  entry: [`${src}/server/server`],
+  output: {
+    libraryTarget: 'commonjs2',
+    filename: 'server.js'
   },
-  module: {
-    rules: [
-      {
-        test: /\.s?css$/,
-        use: [
-          { loader: 'isomorphic-style-loader' },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              modules: {
-                mode: 'local',
-                localIdentName: '[local][hash:base64:5]'
-              }
-            }
-          },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              root: src
-            }
-          }
-        ]
-      }
-    ]
+  cache: { 
+    idleTimeout: 10000000,
+    cacheDirectory: resolve(webpackCache, `server-${env}`),
+    type: "filesystem",
   },
+  plugins: [
+    new WebpackBar({ profile: true, name: `Server` }),
+    new AssetsPlugin({
+      path: build,
+      filename: `server-assets.json`,
+      prettyPrint: true,
+      update: true
+    }),
+    new WebpackManifestPlugin({
+      fileName: 'server-manifest-server.json'
+    }),
+  ],
   node: {
     __dirname: false,
     __filename: false
   },
-  plugins: [
-    new WebpackBar({ profile: true, name: 'server' }),
-    new ProvidePlugin({})
-  ]
 });
 
 export { config }

@@ -5,13 +5,12 @@ import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import AssetsPlugin from 'assets-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-// REQUIRE CLIENT BUILD BEFORE HAND
-const asset = require('../../build/asset-manifest.json');
-
 import { config as server } from './server.common';
 import { build, src } from '../paths';
 
-const config = merge(server, {
+const asset = require('../../build/asset-manifest.json');
+
+const config = merge(server('production'), {
   devtool: 'source-map',
   mode: 'production',
   optimization: {
@@ -32,7 +31,12 @@ const config = merge(server, {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: false,
+            },
+          },
           {
             loader: 'css-loader',
             options: {
@@ -76,6 +80,6 @@ const config = merge(server, {
       __ASSETS__: JSON.stringify(asset)
     }),
   ]
-});
+})
 
-export { config }
+export { config } 
