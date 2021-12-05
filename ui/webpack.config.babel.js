@@ -19,6 +19,10 @@ const flatten = input => {
 
 const aquireTarget = inTarget => require(resolve(__dirname, 'webpack', inTarget, `index.js`))
 
+console.log("3333333333")
+console.log("target, ", target)
+console.log(JSON.stringify(aquireTarget('server').config, undefined, 2))
+
 const configuration =
   target === 'all'
     ? [
@@ -27,5 +31,6 @@ const configuration =
         aquireTarget('server').config,
       ]
     : [aquireTarget(target).config];
+
 
 export default [...flatten(configuration)];
