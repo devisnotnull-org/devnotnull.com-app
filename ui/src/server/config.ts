@@ -29,7 +29,7 @@ const defaultConfig: Config = {
   },
   development: {
     static: {
-      path: 'https://fandanzle-assets-development.s3.eu-west-2.amazonaws.com'
+      path: 'https://devnotnull.co.uk-development.s3.eu-west-2.amazonaws.com'
     }
   },
   local: {
@@ -41,13 +41,13 @@ const defaultConfig: Config = {
   stagingLocal: {},
   staging: {
     static: {
-      path: 'https://fandanzle-assets-staging.s3.eu-west-2.amazonaws.com'
+      path: 'https://devnotnull.co.uk-staging.s3.eu-west-2.amazonaws.com'
     }
   },
   productionLocal: {},
   production: {
     static: {
-      path: 'https://fandanzle-assets-production.s3.eu-west-2.amazonaws.com'
+      path: 'https://devnotnull.co.uk-production.s3.eu-west-2.amazonaws.com'
     }
   }
 };

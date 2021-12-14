@@ -25,6 +25,8 @@ export class HeaderView extends Component<IHeaderProps, IComponentProps> {
   }
 
   render() {
+
+
     return (
       <div className={classnames(styles['Header'])}>
         <div

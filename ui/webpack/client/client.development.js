@@ -24,6 +24,11 @@ const config = merge(client('development'), {
     hot: true,
     compress: false,
     contentBase: build,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    }
   },
   output: {
     filename: 'static/js/[name].js',

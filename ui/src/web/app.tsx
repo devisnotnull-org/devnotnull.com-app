@@ -30,40 +30,42 @@ export const Routes: Record<string, ContainerProvider> = {
   "/blog/:id": { provider: 'none', container: BlogViewContainer },
 }
 
-export const AppRouter: React.FC<Props> = () => (
-  <>
-    <Helmet>
-      <title>{siteName}</title>
-      <meta
-        name="description"
-        content={meta}
-      />
-      <meta
-        name="og:title"
-        property="og:title"
-        content={meta}
-      />
-      <meta property="og:type" content="website" />
-      <meta name="robots" content="index, follow" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-      />
-    </Helmet>
+export const AppRouter: React.FC<Props> = () => { 
 
-    <HeaderViewContainer />
+  return (
+    <>
+        <Helmet>
+          <title>{siteName}</title>
+          <meta
+            name="description"
+            content={meta}
+          />
+          <meta
+            name="og:title"
+            property="og:title"
+            content={meta}
+          />
+          <meta property="og:type" content="website" />
+          <meta name="robots" content="index, follow" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+        </Helmet>
 
-    <div className={styles['Container']}>
+        <HeaderViewContainer />
 
-      <Switch>
-        <Route exact path="/" component={HomeViewContainer} />
-        <Route exact path="/portfolio" component={FolioViewContainer} />
-        <Route exact path="/blog" component={BlogViewContainer} />
-        <Route exact path="/blog/:id" component={BlogViewContainer} />
-        <Route component={NotFoundComponent} />
-      </Switch>
-    </div>
-  </>
-);
+        <div className={styles['Container']}>
 
+          <Switch>
+            <Route exact path="/" component={HomeViewContainer} />
+            <Route exact path="/portfolio" component={FolioViewContainer} />
+            <Route exact path="/blog" component={BlogViewContainer} />
+            <Route exact path="/blog/:id" component={BlogViewContainer} />
+            <Route component={NotFoundComponent} />
+          </Switch>
+        </div>
+    </>
+  )
+}
 export default AppRouter;
