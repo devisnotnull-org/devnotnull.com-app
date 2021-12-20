@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import classnames from 'classnames';
 
 import * as commonStyles from '../../style/common.css';
@@ -9,7 +9,7 @@ interface SelectorProps {}
 
 type Props = StateProps & ActionProps & SelectorProps;
 
-export const Folio: React.SFC<Props> = () => (
+export const Folio: FC<Props> = () => (
   <div className={classnames(commonStyles['Block'])}>
     <h2>Portfolio</h2>
   </div>

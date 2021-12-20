@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import classnames from 'classnames';
 
 import * as s from './favicon.css';
@@ -86,7 +86,7 @@ export type IProps = {
   alt?: string;
 };
 
-export const Favicon: React.SFC<IProps> = ({ className, name, alt }) => {
+export const Favicon: FC<IProps> = ({ className, name, alt }) => {
   const iconMeta = iconSelector(name);
   return (
     <span className={className}>

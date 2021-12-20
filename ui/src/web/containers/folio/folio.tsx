@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -27,40 +27,36 @@ export const blockType = (content: any, marks?: []) => {
 const findAsset = (assets: IAssetPayload[], id: string) =>
   assets.find((item) => item.sys.id === id);
 
-export class BlogView extends Component<IFolioComponentProps, {}> {
-  componentWillMount() {
-    const { onFetchAction } = this.props;
+export const BlogView: FC<IFolioComponentProps> = ({ onFetchAction, folio, assets }) => {
+  useEffect(() => {
     onFetchAction();
-  }
+  }, []);
 
-  render() {
-    const { folio, assets } = this.props;
-    return (
-      <div className={blogStyles.InnerContainer}>
-        {folio?.map((item) => {
-          return (
-            <div className={blogStyles['Entry--Container']}>
-              <div>{item?.fields?.title}</div>
-              <img
-                className={blogStyles['Entry--Primary-image']}
-                src={
-                  findAsset(assets, item?.fields?.primaryMediaItem?.sys?.id)
-                    ?.fields?.file?.url
-                }
-              />
-              {item?.fields?.secondaryMediaItems &&
-                item?.fields?.secondaryMediaItems?.map((item) => (
-                  <img
-                    className={blogStyles['Entry--Secondary-image']}
-                    src={findAsset(assets, item.sys?.id)?.fields?.file?.url}
-                  />
-                ))}
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
+  return (
+    <div className={blogStyles.InnerContainer}>
+      {folio?.map((item) => {
+        return (
+          <div className={blogStyles['Entry--Container']}>
+            <div>{item?.fields?.title}</div>
+            <img
+              className={blogStyles['Entry--Primary-image']}
+              src={
+                findAsset(assets, item?.fields?.primaryMediaItem?.sys?.id)
+                  ?.fields?.file?.url
+              }
+            />
+            {item?.fields?.secondaryMediaItems &&
+              item?.fields?.secondaryMediaItems?.map((item) => (
+                <img
+                  className={blogStyles['Entry--Secondary-image']}
+                  src={findAsset(assets, item.sys?.id)?.fields?.file?.url}
+                />
+              ))}
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogView);

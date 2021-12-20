@@ -1,4 +1,4 @@
-import { isServerRender } from '../../utils'
+import { isServerRender } from '../utils'
 
 const CssKeyToJsKey = (key: string) =>
     key.replace('--', '').replace(/-./g, (x) => x.toUpperCase()[1]);
@@ -50,4 +50,4 @@ export const getAllCSSVariables = (): Record<string, string> => {
 
     if(isServerRender) return {}
     return getElementCSSVariables(cssVars, document?.documentElement);
-};
+}; 

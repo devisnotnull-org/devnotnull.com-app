@@ -1,11 +1,11 @@
 import React, { useState, FC } from "react";
 
-import { getAllCSSVariables } from '../theme/index'
+import { getAllCSSVariables } from '../theme'
 
 import { isServerRender } from "../../utils";
 
 export const GlobalContext = React.createContext<{currentTheme?: string | null, themeSwitchHandler: (themeType: string) => void }>({
-  currentTheme: "",
+  currentTheme: "blank",
   themeSwitchHandler: (themeType: string) => {},
 });
 
@@ -18,7 +18,11 @@ export const GlobalContextProvider: FC = ({ children }) => {
   );
 
   const themeSwitchHandler = (themeType: string) => {
-    getAllCSSVariables()
+    console.log("_______________________")
+    console.log("_______________________")
+    console.log("_______________________")
+    console.log("_______________________")
+    console.log(getAllCSSVariables())
     setCurrentTheme(themeType);
   };
 

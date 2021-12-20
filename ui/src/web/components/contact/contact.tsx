@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import classnames from 'classnames';
 import { Favicon } from '../../common/favicon/favicon';
 import { Link } from '../../common/link/link';
@@ -15,7 +15,7 @@ interface IStateProps {
 
 type Props = IStateProps;
 
-export const Contact: React.SFC<Props> = ({ contactList }) => (
+export const Contact: FC<Props> = ({ contactList }) => (
   <div className={classnames(commonStyles['Block'])}>
     <h2>Contact</h2>
     {contactList &&

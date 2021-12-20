@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 
 import * as styles from './loadingSpinner.css';
 
-export const Experiance: React.SFC = ({}) => (
+export const Experiance: FC = ({}) => (
   <div className={styles['Spinner']}>
     <div></div>
     <div></div>

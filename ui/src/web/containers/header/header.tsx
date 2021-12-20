@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, FC, useState } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
@@ -8,77 +8,61 @@ import { IHeaderProps } from './header.state';
 
 import { mapDispatchToProps, mapStateToProps } from './header.state';
 
-type IComponentProps = {
-  menuOpen: boolean;
-};
+export const HeaderView: FC<IHeaderProps> = () => {
 
-export class HeaderView extends Component<IHeaderProps, IComponentProps> {
-  constructor(props: IHeaderProps) {
-    super(props);
-    this.state = {
-      menuOpen: false
-    };
-  }
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  toggleMenu(state?: boolean) {
-    this.setState({ menuOpen: state ?? !this.state.menuOpen });
-  }
-
-  render() {
-
-
-    return (
-      <div className={classnames(styles['Header'])}>
-        <div
-          onClick={() => this.toggleMenu()}
-          className={classnames(
-            styles['MenuToggle'],
-            this.state.menuOpen
-              ? styles['MenuToggle--Open']
-              : styles['MenuToggle--Closed']
-          )}
-        >
-          <span className={classnames(styles['MenuToggle--Line'])}></span>
-          <span className={classnames(styles['MenuToggle--Line'])}></span>
-          <span className={classnames(styles['MenuToggle--Line'])}></span>
-        </div>
-
-        <ul
-          className={classnames(
-            styles['Menu'],
-            this.state.menuOpen ? styles['Menu--Open'] : styles['Menu--Closed']
-          )}
-        >
-          <li className={classnames(styles['Link'], styles['Link--left'])}>
-            <Link to={'/'} onClick={() => this.toggleMenu(false)}>
-              Profile
-            </Link>
-          </li>
-          <li className={classnames(styles['Link'], styles['Link--left'])}>
-            <Link to={'/blog'} onClick={() => this.toggleMenu(false)}>
-              Blog
-            </Link>
-          </li>
-          <li className={classnames(styles['Link'], styles['Link--left'])}>
-            <Link
-              to={'https://github.com/devisnotnull/'}
-              onClick={() => this.toggleMenu(false)}
-            >
-              Github
-            </Link>
-          </li>
-          <li className={classnames(styles['Link'], styles['Link--left'])}>
-            <Link
-              to={'https://uk.linkedin.com/in/alexbrown201'}
-              onClick={() => this.toggleMenu(false)}
-            >
-              Linkedin
-            </Link>
-          </li>
-        </ul>
+  return (
+    <div className={classnames(styles['Header'])}>
+      <div
+        onClick={() => setMenuOpen(!menuOpen)}
+        className={classnames(
+          styles['MenuToggle'],
+          menuOpen
+            ? styles['MenuToggle--Open']
+            : styles['MenuToggle--Closed']
+        )}
+      >
+        <span className={classnames(styles['MenuToggle--Line'])}></span>
+        <span className={classnames(styles['MenuToggle--Line'])}></span>
+        <span className={classnames(styles['MenuToggle--Line'])}></span>
       </div>
-    );
-  }
+
+      <ul
+        className={classnames(
+          styles['Menu'],
+          menuOpen ? styles['Menu--Open'] : styles['Menu--Closed']
+        )}
+      >
+        <li className={classnames(styles['Link'], styles['Link--left'])}>
+          <Link to={'/'} onClick={() => setMenuOpen(false)}>
+            Profile
+          </Link>
+        </li>
+        <li className={classnames(styles['Link'], styles['Link--left'])}>
+          <Link to={'/blog'} onClick={() => setMenuOpen(false)}>
+            Blog
+          </Link>
+        </li>
+        <li className={classnames(styles['Link'], styles['Link--left'])}>
+          <Link
+            to={'https://github.com/devisnotnull/'}
+            onClick={() => setMenuOpen(false)}
+          >
+            Github
+          </Link>
+        </li>
+        <li className={classnames(styles['Link'], styles['Link--left'])}>
+          <Link
+            to={'https://uk.linkedin.com/in/alexbrown201'}
+            onClick={() => setMenuOpen(false)}
+          >
+            Linkedin
+          </Link>
+        </li>
+      </ul>
+    </div>
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderView);
