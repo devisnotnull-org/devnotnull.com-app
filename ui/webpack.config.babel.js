@@ -28,4 +28,5 @@ const configuration =
       ]
     : [aquireTarget(target).config];
 
+
 export default [...flatten(configuration)];

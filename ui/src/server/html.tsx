@@ -46,6 +46,7 @@ const Html: FC<StatePropTypes> = ({
     <link
       rel="stylesheet"
       href={`${config.static?.path}${assets[key]}`}
+      crossOrigin="anonymous"
       type="text/css"
     />
   ));

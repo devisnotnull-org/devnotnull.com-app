@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import classnames from 'classnames';
 import moment from 'moment';
 
@@ -13,7 +13,7 @@ interface IStateProps {
 
 type Props = IStateProps;
 
-export const Experiance: React.SFC<Props> = ({ experianceList }) => (
+export const Experiance: FC<Props> = ({ experianceList }) => (
   <div className={classnames(commonStyles['Block'])}>
     <h2>EXPERIENCE</h2>
     {experianceList.map(

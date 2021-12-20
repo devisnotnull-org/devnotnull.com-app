@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, FC } from 'react';
 
 import * as codeBlockStyles from './codeBlock.css';
 
@@ -11,7 +11,7 @@ export type IProps = {
   marks?: IBlockMarks[];
 };
 
-export const CodeBlock: React.FC<IProps> = ({ marks, content }) => {
+export const CodeBlock: FC<IProps> = ({ marks, content }) => {
   const codeMark =
     marks && marks.find((dd: IBlockMarks) => dd?.type === 'code');
   const codeBold =

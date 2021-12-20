@@ -2,9 +2,7 @@ import { resolve  } from 'path';
 import merge from 'webpack-merge';
 import { ProvidePlugin } from 'webpack';
 import WebpackBar from 'webpackbar';
-import AssetsPlugin from 'assets-webpack-plugin';
-import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
-import { build, webpackCache } from '../paths';
+import { webpackCache } from '../paths';
 import { common } from '../common';
 
 const config = (env) => merge(common(env), {

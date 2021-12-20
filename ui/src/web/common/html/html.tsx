@@ -1,4 +1,4 @@
-import React, { SFC, ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 
 interface StatePropTypes {
@@ -11,7 +11,7 @@ interface StatePropTypes {
   PROD: boolean;
 }
 
-const Html: SFC<StatePropTypes> = ({
+const Html: FC<StatePropTypes> = ({
   initialState,
   rootComponent,
   assets,

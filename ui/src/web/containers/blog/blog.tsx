@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, FC } from 'react';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
@@ -44,35 +44,37 @@ const renderCommonContentType = (
   );
 };
 
-export class BlogView extends Component<IBlogComponentProps, {}> {
-  componentWillMount() {
-    const { onFetchAction } = this.props;
+export const BlogView: FC<IBlogComponentProps> = ({ onFetchAction, blogItems, pagination }) => {
+
+  useEffect(() => {
     onFetchAction();
-  }
-  render() {
-    const { blogItems } = this.props;
-    return (
-      <div className={blogStyles.InnerContainer}>
-        <div>
-          {blogItems.map((item) => {
-            return (
-              <div className={blogStyles['Entry--Container']}>
-                <h1 className={blogStyles['Entry--Header']}>
-                  {item?.fields?.title ?? ''}
-                </h1>
-                <div>
-                  {item?.fields?.blogContent?.content &&
-                    renderCommonContentType(item?.fields?.blogContent?.content)}
-                </div>
+  }, []);
+
+  console.log("_____________________")
+  console.log("_____________________")
+  console.log("pagination")
+  console.log(pagination)
+
+  return (
+    <div className={blogStyles.InnerContainer}>
+      <div>
+        {blogItems.map((item) => {
+          return (
+            <div className={blogStyles['Entry--Container']}>
+              <h1 className={blogStyles['Entry--Header']}>
+                {item?.fields?.title ?? ''}
+              </h1>
+              <div>
+                {item?.fields?.blogContent?.content &&
+                  renderCommonContentType(item?.fields?.blogContent?.content)}
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-const payload = connect(mapStateToProps, mapDispatchToProps)(BlogView);
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogView);

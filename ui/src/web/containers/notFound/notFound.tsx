@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React, { FC } from 'react';
 
-export class NotFoundView extends Component<{}, {}> {
-  render() {
-    return (
-      <div>
-        <h2>:( Page not found</h2>
-      </div>
-    );
-  }
+export const NotFoundView: FC<{}> = () => {
+  return (
+    <div>
+      <h2>:( Page not found</h2>
+    </div>
+  );
 }
 
 export default NotFoundView;

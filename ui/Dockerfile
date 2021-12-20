@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 # RUN npm ci --only=production
 
 # Bundle app source
-COPY ./dist .
+COPY ./build .
 
 EXPOSE 3000
 

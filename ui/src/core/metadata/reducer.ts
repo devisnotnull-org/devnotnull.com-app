@@ -31,6 +31,14 @@ export const blog: Reducer<IMetadataState> = (
       return { ...state, loading: true, errors: undefined };
     }
     case MetadataActionTypes.FETCH_SUCCESS: {
+      console.log("___________________")
+      console.log("___________________")
+      console.log("___________________")
+      console.log("___________________")
+      console.log("___________________")
+      console.log("___________________")
+      console.log("___________________")
+      console.log(action)
       return { ...state, loading: false, errors: undefined, ...action.payload };
     }
     case MetadataActionTypes.FETCH_ERROR: {

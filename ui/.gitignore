@@ -11,6 +11,7 @@
 # production
 /build
 /dist
+/webpack/.cache
 
 # misc
 .DS_Store

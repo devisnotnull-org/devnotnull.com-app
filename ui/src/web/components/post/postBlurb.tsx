@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC } from 'react';
 import classnames from 'classnames';
 
 import * as commonStyles from '../../style/common.css';
@@ -12,7 +12,7 @@ interface SelectorProps {}
 
 type Props = StateProps & ActionProps & SelectorProps;
 
-export const BlobBlurb: React.SFC<Props> = ({ metadata }) => (
+export const BlobBlurb: FC<Props> = ({ metadata }) => (
   <div className={classnames(commonStyles['Block'])}>
     <h2>Blog post</h2>
     <p>{metadata.summary}</p>

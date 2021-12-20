@@ -33,6 +33,10 @@
     --max-size: 110rem;
 }
 
+.primary-theme {
+    
+}
+
 body {
     margin: 0 auto;
     padding: 0;
@@ -72,6 +76,7 @@ html {
     composes: Container--Large;
     background: #ffffff;
     margin: 0 auto;
+    padding: 2rem;
 }
 
 .Block {

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {FC} from 'react';
 import classnames from 'classnames';
 
 import { IMetadataPayload } from '../../../models/metadata';
@@ -15,7 +15,7 @@ interface SelectorProps {}
 
 type Props = StateProps & ActionProps & SelectorProps;
 
-export const Profile: React.SFC<Props> = ({ metadata }) => (
+export const Profile: FC<Props> = ({ metadata }) => (
   <>
     <div className={classnames(styles['Header'])}>
       <div className={classnames(styles['Header--Photo'])}>

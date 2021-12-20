@@ -1,5 +1,3 @@
-org: devisnotnull
-app: fandanzle-static-s3
 service: fandanzle-website-ui
 
 frameworkVersion: ">=2.0.0"
@@ -8,11 +6,18 @@ plugins:
   - serverless-offline
   - serverless-deployment-bucket
   - serverless-prune-plugin
+#  - serverless-domain-manager
   - serverless-s3-sync
 
 custom:
+  serverless-offline:
+    port: 3000 
+
   ##
   localDevStaticFolder: build
+  domainName: sls.devnotnull.com
+  ##
+  siteName: devnotnull.com
 
   ## Retention
   prune:
@@ -27,14 +32,26 @@ custom:
 
   ## S3 bucket for static assets
   s3Sync:
-    - bucketName: devnotnull.co.uk-${self:custom.environment}
+    - bucketName: devnotnull.com${self:custom.environment}
       bucketPrefix: static/
       localDir: build/static
-    - bucketName: devnotnull.co.uk-${self:custom.environment}
+    - bucketName: devnotnull.com${self:custom.environment}
+      bucketPrefix: assets/
+      localDir: build/assets
+    - bucketName: devnotnull.com${self:custom.environment}
       bucketPrefix: media/
       localDir: media
   ##
   environment: ${opt:stage, 'development'}
+
+  ##
+  customDomain:
+    domainName: sls.devnotnull.com
+    certificateArn: "arn:aws:acm:us-east-1:298900675756:certificate/fc9c610c-425f-46ee-a9b5-33da273a313a"
+    basePath: ''
+    createRoute53Record: true
+    enabled: true
+    endpointType: 'edge'
 
 ## 
 package:
@@ -71,7 +88,7 @@ resources:
     AssetsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: devnotnull.co.uk-${self:custom.environment}
+        BucketName: devnotnull.com${self:custom.environment}
     BucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:

@@ -9,6 +9,7 @@ declare const styles: {
   readonly "Left": string;
   readonly "Right": string;
   readonly "Hide": string;
+  readonly "primary-theme": string;
   readonly "Container--Large": string;
   readonly "Container--Standard": string;
   readonly "Container--Small": string;
