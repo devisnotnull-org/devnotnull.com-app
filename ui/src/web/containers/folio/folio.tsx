@@ -7,7 +7,7 @@ import {
   mapStateToProps
 } from './folio.state';
 
-import * as blogStyles from './folio.css';
+import blogStyles from './folio.css';
 import { IAssetPayload } from 'models/asset';
 
 export type IProps = {
@@ -25,16 +25,20 @@ export const blockType = (content: any, marks?: []) => {
 };
 
 const findAsset = (assets: IAssetPayload[], id: string) =>
-  assets.find((item) => item.sys.id === id);
+  assets.find(item => item.sys.id === id);
 
-export const BlogView: FC<IFolioComponentProps> = ({ onFetchAction, folio, assets }) => {
+export const BlogView: FC<IFolioComponentProps> = ({
+  onFetchAction,
+  folio,
+  assets
+}) => {
   useEffect(() => {
     onFetchAction();
   }, []);
 
   return (
     <div className={blogStyles.InnerContainer}>
-      {folio?.map((item) => {
+      {folio?.map(item => {
         return (
           <div className={blogStyles['Entry--Container']}>
             <div>{item?.fields?.title}</div>
@@ -46,7 +50,7 @@ export const BlogView: FC<IFolioComponentProps> = ({ onFetchAction, folio, asset
               }
             />
             {item?.fields?.secondaryMediaItems &&
-              item?.fields?.secondaryMediaItems?.map((item) => (
+              item?.fields?.secondaryMediaItems?.map(item => (
                 <img
                   className={blogStyles['Entry--Secondary-image']}
                   src={findAsset(assets, item.sys?.id)?.fields?.file?.url}
@@ -57,6 +61,6 @@ export const BlogView: FC<IFolioComponentProps> = ({ onFetchAction, folio, asset
       })}
     </div>
   );
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogView);

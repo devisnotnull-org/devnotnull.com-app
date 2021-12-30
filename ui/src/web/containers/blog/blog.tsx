@@ -1,14 +1,11 @@
-import React, { useEffect, FC } from 'react';
-import { connect } from 'react-redux';
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 import classnames from 'classnames';
+import { getBlogItems } from '../../../core/blog/selectors';
 
-import {
-  IBlogComponentProps,
-  mapDispatchToProps,
-  mapStateToProps
-} from './blog.state';
+import { IBlogComponentProps } from './blog.state';
 
-import * as blogStyles from './blog.css';
+import blogStyles from './blog.css';
 import { ICommonDataNode } from 'models/common';
 
 export type IProps = {
@@ -17,16 +14,16 @@ export type IProps = {
 
 const getType = (marks: { type: string }[] | undefined): string => {
   if (!marks) return 'text';
-  if (marks.find((item) => item.type === 'bold')) return 'bold';
-  if (marks.find((item) => item.type === 'code')) return 'code';
+  if (marks.find(item => item.type === 'bold')) return 'bold';
+  if (marks.find(item => item.type === 'code')) return 'code';
   return 'text';
 };
 
 const renderCommonContentType = (
   content: ICommonDataNode[]
 ): (JSX.Element[] | undefined)[] => {
-  return content?.map((payload) =>
-    payload.content?.map((inner) => {
+  return content?.map(payload =>
+    payload.content?.map(inner => {
       if (inner.nodeType === 'list-item')
         return <p>{JSON.stringify(inner.content)}</p>;
       if (getType(inner.marks) === 'code')
@@ -44,37 +41,25 @@ const renderCommonContentType = (
   );
 };
 
-export const BlogView: FC<IBlogComponentProps> = ({ onFetchAction, blogItems, pagination }) => {
-
-  useEffect(() => {
-    onFetchAction();
-  }, []);
-
-  console.log("_____________________")
-  console.log("_____________________")
-  console.log("pagination")
-  console.log(pagination)
-
+export const BlogView: FC<IBlogComponentProps> = () => {
+  const blogItems = useSelector(getBlogItems);
   return (
     <div className={blogStyles.InnerContainer}>
-      <div>
-        {blogItems.map((item) => {
-          return (
-            <div className={blogStyles['Entry--Container']}>
-              <h1 className={blogStyles['Entry--Header']}>
-                {item?.fields?.title ?? ''}
-              </h1>
-              <div>
-                {item?.fields?.blogContent?.content &&
-                  renderCommonContentType(item?.fields?.blogContent?.content)}
-              </div>
+      {blogItems.map(item => {
+        return (
+          <div className={blogStyles['Entry--Container']}>
+            <h1 className={blogStyles['Entry--Header']}>
+              {item?.fields?.title ?? ''}
+            </h1>
+            <div>
+              {item?.fields?.blogContent?.content &&
+                renderCommonContentType(item?.fields?.blogContent?.content)}
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
   );
-}
+};
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(BlogView);
+export default BlogView;

@@ -8,15 +8,15 @@ export const getExperiance = (state: IState): IExperianceState =>
 
 export const getExperianceItems = createSelector(
   getExperiance,
-  (state) => state?.items
+  state => state?.items
 );
 
 export const getExperianceItemsLoading = createSelector(
   getExperiance,
-  (state) => state?.loading
+  state => state?.loading
 );
 
 export const getExperianceItemsErrors = createSelector(
   getExperiance,
-  (state) => state?.errors ?? undefined
+  state => state?.errors ?? undefined
 );

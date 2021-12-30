@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import classnames from 'classnames';
 
-import * as commonStyles from '../../style/common.css';
+import commonStyles from '../../style/common.css';
 
 interface StateProps {}
 interface ActionProps {}

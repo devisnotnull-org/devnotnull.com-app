@@ -29,7 +29,7 @@ const defaultConfig: Config = {
   },
   development: {
     static: {
-      path: 'https://devnotnull.co.uk-development.s3.eu-west-2.amazonaws.com'
+      path: 'http://s3.eu-west-2.amazonaws.com/devnotnull.co.uk-development'
     }
   },
   local: {
@@ -41,13 +41,13 @@ const defaultConfig: Config = {
   stagingLocal: {},
   staging: {
     static: {
-      path: 'https://devnotnull.co.uk-staging.s3.eu-west-2.amazonaws.com'
+      path: 'http://s3.eu-west-2.amazonaws.com/devnotnull.co.uk-development'
     }
   },
   productionLocal: {},
   production: {
     static: {
-      path: 'https://devnotnull.co.uk-production.s3.eu-west-2.amazonaws.com'
+      path: 'http://s3.eu-west-2.amazonaws.com/devnotnull.co.uk-production'
     }
   }
 };

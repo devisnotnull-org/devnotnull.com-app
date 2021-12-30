@@ -29,8 +29,6 @@
     "build:prod": "yarn cleanup && NODE_ENV=production yarn build:client && NODE_ENV=production yarn build:server",
     "dev": "yarn cleanup && yarn types && NODE_ENV=development NODE_CONFIG_ENV=development-local concurrently -r \"yarn devclient\" \"yarn devserver\" \"yarn watch\"",
     "prod": "yarn cleanup && yarn types && yarn build:client:prod && NODE_ENV=production NODE_CONFIG_ENV=development-local concurrently -r \"yarn prodclient\" \"http-server ./build -p 9000\" \"yarn prodserver\" \"yarn watch\" \"yarn watch:types\"",
-    "deploy:dev": "yarn build:dev && serverless deploy --verbose --stage development",
-    "deploy:prod": "yarn build:prod && serverless deploy --verbose --stage production",
     "test:types": "tsc --noEmit",
     "hook:before:offline:start": "yarn build:client:prod",
     "build:style-typings": "node webpack/style-typings.js",
@@ -41,8 +39,10 @@
     "prodserver:pure": "cross-env NODE_ENV=production TARGET=client webpack serve --mode production",
     "dev:pure": "yarn cleanup && yarn build:style-typings && NODE_ENV=development IS_LOCAL=TRUE NODE_RUNTIME_ENV=local NODE_ENV=development concurrently -r --kill-others \"yarn devserver:pure\" \"TARGET=server webpack --watch\" \"wait-on ./build/server.js && node build/server.js\"",
     "prod:pure": "yarn cleanup && yarn build:style-typings && yarn build:client:prod && NODE_ENV=production IS_LOCAL=TRUE NODE_RUNTIME_ENV=local NODE_ENV=production concurrently -r --kill-others \"yarn prodserver:pure\" \"TARGET=server webpack --watch\" \"wait-on ./build/server.js && node build/server.js\"",
-    "build:dev:pure": "yarn cleanup && cross-env NODE_ENV=development yarn build:client && TARGET=server webpack",
-    "build:prod:pure": "yarn cleanup && cross-env NODE_ENV=production yarn build:client:prod && TARGET=server webpack --mode production"
+    "build:dev:pure": "yarn cleanup && NODE_ENV=development yarn build:client && NODE_ENV=development TARGET=server webpack",
+    "build:prod:pure": "yarn cleanup && NODE_ENV=production yarn build:client:prod && NODE_ENV=production TARGET=server webpack --mode production",
+    "deploy:dev": "yarn build:dev && serverless deploy --verbose --stage development",
+    "deploy:prod": "yarn build:prod && serverless deploy --verbose --stage production"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",

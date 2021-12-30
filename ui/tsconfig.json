@@ -10,6 +10,7 @@
       "@client/*": ["src/client/*"],
       "@server/*": ["src/server/*"],
       "@core/*": ["src/core/*"],
+      "@components/*": ["src/web/components/*"],
       "@config/*": ["src/config/*"],
       "@styles/*": ["src/style/*"]
     },

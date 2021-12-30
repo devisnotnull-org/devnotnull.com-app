@@ -8,6 +8,7 @@ import folio, { IFolioState } from './portfolio/reducer';
 import metadata, { IMetadataState } from './metadata/reducer';
 import assets, { IAssetState } from './assets/reducer';
 import contact, { IContactState } from './contact/reducer';
+import config, { IConfigState } from './config/reducer';
 import { connectRouter } from 'connected-react-router';
 
 export interface IState {
@@ -19,6 +20,7 @@ export interface IState {
   metadata: IMetadataState;
   assets: IAssetState;
   contact: IContactState;
+  config: IConfigState;
   router: any;
 }
 
@@ -32,6 +34,7 @@ const rootReducers = (history: any) =>
     metadata,
     assets,
     contact,
+    config,
     router: connectRouter(history)
   });
 

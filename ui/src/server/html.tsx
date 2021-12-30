@@ -35,15 +35,16 @@ const Html: FC<StatePropTypes> = ({
 
   const keys = Object.keys(assets);
   const js = keys.filter(
-    (a) => a.includes('.js') && !a.includes('.map') && !a.includes('.json')
+    a => a.includes('.js') && !a.includes('.map') && !a.includes('.json')
   );
-  const css = keys.filter((a) => a.includes('.css') && !a.includes('.map'));
+  const css = keys.filter(a => a.includes('.css') && !a.includes('.map'));
 
-  let srcJsFiles = js.map((key) => (
-    <script src={`${config.static?.path}${assets[key]}`} />
+  let srcJsFiles = js.map(key => (
+    <script key={'js-scripts'} src={`${config.static?.path}${assets[key]}`} />
   ));
-  const srcCssFiles = css.map((key) => (
+  const srcCssFiles = css.map(key => (
     <link
+      key={'styles'}
       rel="stylesheet"
       href={`${config.static?.path}${assets[key]}`}
       crossOrigin="anonymous"
@@ -53,8 +54,14 @@ const Html: FC<StatePropTypes> = ({
 
   // Nasty
   const devStatic = [
-    <script src={`${config.static?.path}static/js/app.js`} />,
-    <script src={`${config.static?.path}static/js/vendor.js`} />
+    <script
+      key={'js-scripts-app'}
+      src={`${config.static?.path}static/js/app.js`}
+    />,
+    <script
+      key={'js-scripts-vendor'}
+      src={`${config.static?.path}static/js/vendor.js`}
+    />
   ];
 
   if (!buildProd) srcJsFiles = devStatic;

@@ -1,11 +1,11 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import classnames from 'classnames';
 
 import { IMetadataPayload } from '../../../models/metadata';
 
-import * as styles from './about.css';
+import styles from './about.css';
 
-import * as commonStyles from '../../style/common.css';
+import commonStyles from '../../style/common.css';
 
 interface StateProps {
   metadata: IMetadataPayload;
@@ -19,7 +19,10 @@ export const Profile: FC<Props> = ({ metadata }) => (
   <>
     <div className={classnames(styles['Header'])}>
       <div className={classnames(styles['Header--Photo'])}>
-        <img src="//media.fandanzle.co.uk/avatar.png" alt="avatar" />
+        <img
+          src="//s3.eu-west-2.amazonaws.com/devnotnull.co.uk-production/media/avatar.png"
+          alt="avatar"
+        />
       </div>
       <div className={classnames(styles['Text--Header'])}>
         <h1>
