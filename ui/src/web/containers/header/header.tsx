@@ -1,12 +1,12 @@
-import React, { Component, FC, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { FC, useState } from 'react';
+import { getMetadata } from '../../../core/metadata/selectors';
+import { useSelector } from 'react-redux';
 import classnames from 'classnames';
 
 import { Link } from '../../common/link/link';
-import * as styles from './header.css';
+import styles from './header.css';
 import { IHeaderProps } from './header.state';
-
-import { mapDispatchToProps, mapStateToProps } from './header.state';
+import { getCdn } from '../../../core/config/selectors'
 
 export const HeaderView: FC<IHeaderProps> = () => {
 
@@ -65,4 +65,4 @@ export const HeaderView: FC<IHeaderProps> = () => {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderView);
+export default HeaderView;

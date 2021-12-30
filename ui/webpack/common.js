@@ -21,6 +21,7 @@ const common = (env) => ({
       "@web/*": "./web",
       "@client/*": "./client",
       "@server/*": "./server",
+      "@components/*": "./web/components",
       "@core/*": "./core",
       "@config/*": "./config"
     }

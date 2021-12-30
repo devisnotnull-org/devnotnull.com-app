@@ -1,14 +1,13 @@
-import React, { useEffect, FC } from 'react';
-import { connect } from 'react-redux';
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 import classnames from 'classnames';
+import { getBlogItems } from '../../../core/blog/selectors';
 
 import {
   IBlogComponentProps,
-  mapDispatchToProps,
-  mapStateToProps
 } from './blog.state';
 
-import * as blogStyles from './blog.css';
+import blogStyles from './blog.css';
 import { ICommonDataNode } from 'models/common';
 
 export type IProps = {
@@ -44,37 +43,26 @@ const renderCommonContentType = (
   );
 };
 
-export const BlogView: FC<IBlogComponentProps> = ({ onFetchAction, blogItems, pagination }) => {
+export const BlogView: FC<IBlogComponentProps> = () => {
 
-  useEffect(() => {
-    onFetchAction();
-  }, []);
-
-  console.log("_____________________")
-  console.log("_____________________")
-  console.log("pagination")
-  console.log(pagination)
-
+  const blogItems = useSelector(getBlogItems)
   return (
     <div className={blogStyles.InnerContainer}>
-      <div>
-        {blogItems.map((item) => {
-          return (
-            <div className={blogStyles['Entry--Container']}>
-              <h1 className={blogStyles['Entry--Header']}>
-                {item?.fields?.title ?? ''}
-              </h1>
-              <div>
-                {item?.fields?.blogContent?.content &&
-                  renderCommonContentType(item?.fields?.blogContent?.content)}
-              </div>
+      {blogItems.map((item) => {
+        return (
+          <div className={blogStyles['Entry--Container']}>
+            <h1 className={blogStyles['Entry--Header']}>
+              {item?.fields?.title ?? ''}
+            </h1>
+            <div>
+              {item?.fields?.blogContent?.content &&
+                renderCommonContentType(item?.fields?.blogContent?.content)}
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(BlogView);
+export default BlogView

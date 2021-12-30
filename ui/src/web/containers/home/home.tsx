@@ -1,24 +1,26 @@
 import React, { FC } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import About from '../../components/about/about';
-import Contact from '../../components/contact/contact';
-import Skillz from '../../components/skillz/skillz';
-import Experiance from '../../components/experiance/experiance';
-import Education from '../../components/education/education';
+import { getAbilityItems } from '@core/ability/selectors';
+import { getExperianceItems } from '@core/experiance/selectors';
+import { getEducationItems } from '@core/education/selectors';
+import { getMetadata } from '@core/metadata/selectors';
+
+import About from '@components/about/about';
+import Skillz from '@components/skillz/skillz';
+import Experiance from '@components/experiance/experiance';
+import Education from '@components/education/education';
 
 import { IHomeComponentProps } from './home.state';
-import { mapDispatchToProps, mapStateToProps } from './home.state';
 
-import * as homeStyles from './home.css';
+import homeStyles from './home.css';
 
-export const HomeView: FC<IHomeComponentProps> = ({
-  abilityItems,
-  educationItems,
-  experianceItems,
-  metadata,
-  contactItems
-}) => {
+export const HomeView: FC<IHomeComponentProps> = () => {
+  const abilityItems = useSelector(getAbilityItems);
+  const educationItems = useSelector(getEducationItems);
+  const experianceItems = useSelector(getExperianceItems);
+  const metadata = useSelector(getMetadata);
+
   return (
     <>
       <About metadata={metadata} />
@@ -29,7 +31,6 @@ export const HomeView: FC<IHomeComponentProps> = ({
         </aside>
         <aside className={homeStyles['Breakdown']}>
           <Skillz abilitiesList={abilityItems} />
-          <Contact contactList={contactItems} />
         </aside>
       </div>
     </>
@@ -37,4 +38,4 @@ export const HomeView: FC<IHomeComponentProps> = ({
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeView);
+export default HomeView

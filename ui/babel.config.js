@@ -55,6 +55,7 @@ module.exports = api => {
     ['@babel/plugin-proposal-throw-expressions'],
     ['@babel/plugin-proposal-nullish-coalescing-operator'],
     ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
+    ["@babel/plugin-proposal-private-property-in-object", { "loose": true }]
   ];
 
   if (isProduction) {

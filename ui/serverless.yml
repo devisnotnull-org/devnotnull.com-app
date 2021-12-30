@@ -53,25 +53,22 @@ provider:
   environment:
     NODE_RUNTIME_ENV: ${self:custom.environment}
 
-functions:
-  server:
-    handler: build/serverless.handler
-    environment:
-      NODE_RUNTIME_ENV: ${self:custom.environment}
-    events:
-      - http:
-          path: / # this matches any path, the token 'any' doesn't mean anything special
-          method: GET
-      - http:
-          path: /{any+} # this matches any path, the token 'any' doesn't mean anything special
-          method: GET
-
 resources:
   Resources:
     AssetsBucket:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: devnotnull.co.uk-${self:custom.environment}
+        CorsConfiguration:
+          CorsRules:
+            -
+              AllowedOrigins:
+                - '*'
+              AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - PUT
+              MaxAge: 3000
     BucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:

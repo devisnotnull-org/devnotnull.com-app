@@ -5,8 +5,8 @@ import moment from 'moment';
 import { IEducationPayload } from '../../../models/education';
 import { ICommonFields } from '../../../models/common';
 
-import * as commonStyles from '../../style/common.css';
-import * as styles from './education.css';
+import commonStyles from '../../style/common.css';
+import styles from './education.css';
 
 interface IStateProps {
   educationList: ICommonFields<IEducationPayload>[];

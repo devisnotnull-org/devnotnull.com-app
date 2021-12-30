@@ -13,7 +13,7 @@ import { GlobalContextProvider } from '../web/context/theme'
 
 import { getMetadataBlurb, getMetadataTitle} from '../core/metadata/selectors'
 
-import * as styles from './style/common.css';
+import styles from './style/common.css';
 import { ConnectedComponent } from 'react-redux';
 
 interface StateProps {};

@@ -3,8 +3,8 @@ import classnames from 'classnames';
 import { Favicon } from '../../common/favicon/favicon';
 import { Link } from '../../common/link/link';
 
-import * as commonStyles from '../../style/common.css';
-import * as styles from './contact.css';
+import commonStyles from '../../style/common.css';
+import styles from './contact.css';
 
 import { IContactPayload } from '../../../models/contact';
 import { ICommonFields } from '../../../models/common';
