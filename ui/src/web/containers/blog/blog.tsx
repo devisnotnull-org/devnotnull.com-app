@@ -3,9 +3,7 @@ import { useSelector } from 'react-redux';
 import classnames from 'classnames';
 import { getBlogItems } from '../../../core/blog/selectors';
 
-import {
-  IBlogComponentProps,
-} from './blog.state';
+import { IBlogComponentProps } from './blog.state';
 
 import blogStyles from './blog.css';
 import { ICommonDataNode } from 'models/common';
@@ -16,16 +14,16 @@ export type IProps = {
 
 const getType = (marks: { type: string }[] | undefined): string => {
   if (!marks) return 'text';
-  if (marks.find((item) => item.type === 'bold')) return 'bold';
-  if (marks.find((item) => item.type === 'code')) return 'code';
+  if (marks.find(item => item.type === 'bold')) return 'bold';
+  if (marks.find(item => item.type === 'code')) return 'code';
   return 'text';
 };
 
 const renderCommonContentType = (
   content: ICommonDataNode[]
 ): (JSX.Element[] | undefined)[] => {
-  return content?.map((payload) =>
-    payload.content?.map((inner) => {
+  return content?.map(payload =>
+    payload.content?.map(inner => {
       if (inner.nodeType === 'list-item')
         return <p>{JSON.stringify(inner.content)}</p>;
       if (getType(inner.marks) === 'code')
@@ -44,11 +42,10 @@ const renderCommonContentType = (
 };
 
 export const BlogView: FC<IBlogComponentProps> = () => {
-
-  const blogItems = useSelector(getBlogItems)
+  const blogItems = useSelector(getBlogItems);
   return (
     <div className={blogStyles.InnerContainer}>
-      {blogItems.map((item) => {
+      {blogItems.map(item => {
         return (
           <div className={blogStyles['Entry--Container']}>
             <h1 className={blogStyles['Entry--Header']}>
@@ -63,6 +60,6 @@ export const BlogView: FC<IBlogComponentProps> = () => {
       })}
     </div>
   );
-}
+};
 
-export default BlogView
+export default BlogView;

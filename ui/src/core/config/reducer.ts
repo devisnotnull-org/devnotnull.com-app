@@ -5,7 +5,7 @@ export interface IConfigState {
 }
 
 export const initialState: IConfigState = {
-  cdn: ""
+  cdn: ''
 };
 
 export const config: Reducer<IConfigState> = (

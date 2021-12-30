@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import classnames from 'classnames';
-import { Favicon } from '../../common/favicon/favicon';
-import { Link } from '../../common/link/link';
+import { Favicon } from '../favicon/favicon';
+import { Link } from '../link/link';
 
 import commonStyles from '../../style/common.css';
 import styles from './contact.css';

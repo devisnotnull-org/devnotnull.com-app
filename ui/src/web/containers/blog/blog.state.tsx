@@ -6,7 +6,7 @@ export type IStateProps = {
   title?: string;
   blogItems: ICommonFields<IBlogPostPayload>[];
   metadata: IMetadataPayload;
-  pagination: { total: number, skip: number, limit: number }
+  pagination: { total: number; skip: number; limit: number };
 };
 
 export type IActionProps = {

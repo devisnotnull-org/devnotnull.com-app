@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
 import HeaderViewContainer from './containers/header/header';
 import HomeViewContainer from './containers/home/home';
@@ -9,46 +9,29 @@ import FolioViewContainer from './containers/folio/folio';
 import BlogViewContainer from './containers/blog/blog';
 import NotFoundComponent from './containers/notFound/notFound';
 
-import { GlobalContextProvider } from '../web/context/theme'
+import { GlobalContextProvider } from '../web/context/theme';
 
-import { getMetadataBlurb, getMetadataTitle} from '../core/metadata/selectors'
+import { getMetadataBlurb, getMetadataTitle } from '../core/metadata/selectors';
 
 import styles from './style/common.css';
-import { ConnectedComponent } from 'react-redux';
 
-interface StateProps {};
-interface ActionProps {};
-interface SelectorProps {};
+interface StateProps {}
+interface ActionProps {}
+interface SelectorProps {}
 
 type Props = StateProps & ActionProps & SelectorProps;
 
-type ContainerProvider = { provider?: 'none' | 'contentful', container?: ConnectedComponent<any, any> };
-
-export const Routes: Record<string, ContainerProvider> = {
-  "/" : { provider: 'none', container: HomeViewContainer },
-  "/portfolio": { provider: 'none', container: FolioViewContainer },
-  "/blog": { provider: 'none', container: BlogViewContainer },
-  "/blog/:id": { provider: 'none', container: BlogViewContainer },
-}
-
-export const AppRouter: React.FC<Props> = () => {   
+export const AppRouter: React.FC<Props> = () => {
   const blurb = useSelector(getMetadataBlurb);
   const title = useSelector(getMetadataTitle);
 
   return (
     <>
-    <GlobalContextProvider>
+      <GlobalContextProvider>
         <Helmet>
           <title>{title}</title>
-          <meta
-            name="description"
-            content={blurb}
-          />
-          <meta
-            name="og:title"
-            property="og:title"
-            content={title}
-          />
+          <meta name="description" content={blurb} />
+          <meta name="og:title" property="og:title" content={title} />
           <meta property="og:type" content="website" />
           <meta name="robots" content="index, follow" />
           <meta
@@ -66,8 +49,8 @@ export const AppRouter: React.FC<Props> = () => {
             <Route component={NotFoundComponent} />
           </Switch>
         </div>
-        </GlobalContextProvider>
+      </GlobalContextProvider>
     </>
-  )
-}
+  );
+};
 export default AppRouter;

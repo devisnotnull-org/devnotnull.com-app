@@ -35,7 +35,6 @@ export const HomeView: FC<IHomeComponentProps> = () => {
       </div>
     </>
   );
-}
+};
 
-
-export default HomeView
+export default HomeView;

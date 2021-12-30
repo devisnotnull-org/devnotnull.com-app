@@ -1,15 +1,11 @@
 import React, { FC, useState } from 'react';
-import { getMetadata } from '../../../core/metadata/selectors';
-import { useSelector } from 'react-redux';
 import classnames from 'classnames';
 
-import { Link } from '../../common/link/link';
+import { Link } from '@components/link/link';
 import styles from './header.css';
 import { IHeaderProps } from './header.state';
-import { getCdn } from '../../../core/config/selectors'
 
 export const HeaderView: FC<IHeaderProps> = () => {
-
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -18,9 +14,7 @@ export const HeaderView: FC<IHeaderProps> = () => {
         onClick={() => setMenuOpen(!menuOpen)}
         className={classnames(
           styles['MenuToggle'],
-          menuOpen
-            ? styles['MenuToggle--Open']
-            : styles['MenuToggle--Closed']
+          menuOpen ? styles['MenuToggle--Open'] : styles['MenuToggle--Closed']
         )}
       >
         <span className={classnames(styles['MenuToggle--Line'])}></span>
@@ -63,6 +57,6 @@ export const HeaderView: FC<IHeaderProps> = () => {
       </ul>
     </div>
   );
-}
+};
 
 export default HeaderView;

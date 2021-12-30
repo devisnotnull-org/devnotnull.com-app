@@ -20,13 +20,13 @@ const Html: FC<StatePropTypes> = ({
 }) => {
   const keys = Object.keys(assets);
   const js = keys.filter(
-    (a) => a.includes('.js') && !a.includes('.map') && !a.includes('.json')
+    a => a.includes('.js') && !a.includes('.map') && !a.includes('.json')
   );
-  const css = keys.filter((a) => a.includes('.css') && !a.includes('.map'));
+  const css = keys.filter(a => a.includes('.css') && !a.includes('.map'));
 
-  const srcJsFiles = js.map((key) => <script src={assets[key]} />);
-  const srcCssFiles = css.map((key) => (
-    <link rel="stylesheet" href={assets[key]} type="text/css" />
+  const srcJsFiles = js.map((key, i) => <script key={i} src={assets[key]} />);
+  const srcCssFiles = css.map((key, i) => (
+    <link key={i} rel="stylesheet" href={assets[key]} type="text/css" />
   ));
 
   return (

@@ -6,15 +6,15 @@ export const getAbility = (state: IState): IAbilityState => state?.ability;
 
 export const getAbilityItems = createSelector(
   getAbility,
-  (state) => state?.items
+  state => state?.items
 );
 
 export const getAbilityItemsLoading = createSelector(
   getAbility,
-  (state) => state?.loading
+  state => state?.loading
 );
 
 export const getAbilityItemsErrors = createSelector(
   getAbility,
-  (state) => state?.errors ?? undefined
+  state => state?.errors ?? undefined
 );

@@ -31,7 +31,7 @@ export const Education: FC<Props> = ({ educationList }) => (
             <p>{item.fields.subject}</p>
           </div>
           <div>
-            {item.fields.qualifications.map((qualification) => {
+            {item.fields.qualifications.map(qualification => {
               <p>{qualification}</p>;
             })}
           </div>

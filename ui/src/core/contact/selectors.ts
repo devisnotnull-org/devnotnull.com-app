@@ -6,15 +6,15 @@ export const getContact = (state: IState): IContactState => state?.contact;
 
 export const getContactItems = createSelector(
   getContact,
-  (state) => state?.items
+  state => state?.items
 );
 
 export const getContactItemsLoading = createSelector(
   getContact,
-  (state) => state?.loading
+  state => state?.loading
 );
 
 export const getContactItemsErrors = createSelector(
   getContact,
-  (state) => state?.errors ?? undefined
+  state => state?.errors ?? undefined
 );

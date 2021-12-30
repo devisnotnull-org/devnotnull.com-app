@@ -1,7 +1,9 @@
 /// <reference path="../../typings/index.d.ts" />
 
 import 'regenerator-runtime/runtime';
-require('source-map-support').install();
+import { install } from 'source-map-support';
+
+install();
 
 import express, { Express, NextFunction, Request, Response } from 'express';
 import { createMemoryHistory } from 'history';

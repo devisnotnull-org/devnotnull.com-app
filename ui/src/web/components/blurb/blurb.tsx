@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import classnames from 'classnames';
 
 import commonStyles from '../../style/common.css';

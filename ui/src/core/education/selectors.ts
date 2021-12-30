@@ -8,15 +8,15 @@ export const getEducation = (state: IState): IEducationState =>
 
 export const getEducationItems = createSelector(
   getEducation,
-  (state) => state?.items
+  state => state?.items
 );
 
 export const getEducationItemsLoading = createSelector(
   getEducation,
-  (state) => state?.loading
+  state => state?.loading
 );
 
 export const getEducationItemsErrors = createSelector(
   getEducation,
-  (state) => state?.errors ?? undefined
+  state => state?.errors ?? undefined
 );

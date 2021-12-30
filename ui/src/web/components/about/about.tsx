@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import classnames from 'classnames';
 
 import { IMetadataPayload } from '../../../models/metadata';
@@ -19,7 +19,10 @@ export const Profile: FC<Props> = ({ metadata }) => (
   <>
     <div className={classnames(styles['Header'])}>
       <div className={classnames(styles['Header--Photo'])}>
-        <img src="//s3.eu-west-2.amazonaws.com/devnotnull.co.uk-production/media/avatar.png" alt="avatar" />
+        <img
+          src="//s3.eu-west-2.amazonaws.com/devnotnull.co.uk-production/media/avatar.png"
+          alt="avatar"
+        />
       </div>
       <div className={classnames(styles['Text--Header'])}>
         <h1>
