@@ -20,7 +20,7 @@ export const Profile: FC<Props> = ({ metadata }) => (
     <div className={classnames(styles['Header'])}>
       <div className={classnames(styles['Header--Photo'])}>
         <img
-          src="//s3.eu-west-2.amazonaws.com/devnotnull.co.uk-production/media/avatar.png"
+          src="//s3.eu-west-2.amazonaws.com/devnotnull-ui-production/media/avatar.png"
           alt="avatar"
         />
       </div>

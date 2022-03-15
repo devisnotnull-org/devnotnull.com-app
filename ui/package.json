@@ -21,8 +21,8 @@
     "build:client:prod": "TARGET=client NODE_ENV=production webpack",
     "build:client:pure": "TARGET=client webpack",
     "build:client:prod:pure": "TARGET=client NODE_ENV=production webpack",
-    "build:server": "TARGET=serverless webpack",
-    "build:server:prod": "NODE_ENV=production TARGET=serverless webpack",
+    "build:server": "TARGET=server webpack",
+    "build:server:prod": "NODE_ENV=production TARGET=server webpack",
     "build": "yarn build:client && yarn build:server",
     "build:dev": "yarn cleanup && NODE_ENV=development yarn build:client && yarn build:server",
     "watch:server": "TARGET=serverless webpack --watch",
@@ -42,7 +42,9 @@
     "build:dev:pure": "yarn cleanup && NODE_ENV=development yarn build:client && NODE_ENV=development TARGET=server webpack",
     "build:prod:pure": "yarn cleanup && NODE_ENV=production yarn build:client:prod && NODE_ENV=production TARGET=server webpack --mode production",
     "deploy:dev": "yarn build:dev && serverless deploy --verbose --stage development",
-    "deploy:prod": "yarn build:prod && serverless deploy --verbose --stage production"
+    "deploy:prod": "yarn build:prod && serverless deploy --verbose --stage production",
+    "deploy:pure:dev": "serverless deploy --verbose --stage development",
+    "deploy:pure:prod": "serverless deploy --verbose --stage production"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",

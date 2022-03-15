@@ -16,7 +16,7 @@ const common = (env) => ({
     mainFields: ["module", "browser", "main"],
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
     alias: {
-      "react-dom": "@hot-loader/react-dom",
+      //"react-dom": "@hot-loader/react-dom",
       "@styles": "./web/style",
       "@web/*": "./web",
       "@client/*": "./client",
