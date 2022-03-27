@@ -17,7 +17,10 @@ export const fetchContent = async (id: string, query?: { key: string, value: str
   const cacheKey = `${ENDPOINT}${id}?${mapQuery}`
   const client = await getClient();
   const cached = await client.get(id)
+  console.log("cached")
+  console.log(cached)
   if(cached) return JSON.parse(cached)
+  console.log(cacheKey)
   const payload = await axios.get(cacheKey, { headers: { Authorization: TOKEN } });
   await client.set(cacheKey, JSON.stringify(payload.data));
   return payload.data;

@@ -9,7 +9,7 @@
     "lint": "eslint '*/**/*.ts' --quiet --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "tsc -w",
-    "start": "yarn build"
+    "start": "yarn build && node ./dist/server.js"
   },
   "keywords": [],
   "author": "",

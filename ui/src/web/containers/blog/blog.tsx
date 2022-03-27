@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import classnames from 'classnames';
-import { getBlogItems } from '../../../core/blog/selectors';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+import { getBlogItems, getLinkedAsset } from '../../../core/blog/selectors';
 
 import { IBlogComponentProps } from './blog.state';
 
@@ -20,29 +22,57 @@ const getType = (marks: { type: string }[] | undefined): string => {
 };
 
 const renderCommonContentType = (
+  assets: any[],
   content: ICommonDataNode[]
 ): (JSX.Element[] | undefined)[] => {
   return content?.map(payload =>
     payload.content?.map(inner => {
+
       if (inner.nodeType === 'list-item')
-        return <p>{JSON.stringify(inner.content)}</p>;
+        return (<ul>{inner.content.map(item => <li>{item.content[0].value}</li>)}</ul>)
+        
       if (getType(inner.marks) === 'code')
         return (
-          <pre className={classnames(blogStyles['Code'])}>{inner.value}</pre>
+          <SyntaxHighlighter language="javascript" >
+            {inner.value}
+          </SyntaxHighlighter>
         );
+
       if (getType(inner.marks) === 'bold')
         return (
           <p>
             <b>{inner.value}</b>
           </p>
         );
+
+      if (inner.nodeType === 'embedded-asset-block') {
+        console.log("££££££££££")
+        console.log("assets")
+        console.log(assets)
+        const asset = assets.find(item => item.sys.id === inner.data.target.sys.id)
+        console.log("!!!!!!!!!!!")
+        console.log("asset")
+        console.log(asset)
+        console.log("inner.data.")
+        console.log(inner.data)
+        return (
+          <img src={asset?.fields?.file?.url} />
+        )
+      }
+
       return <p>{inner.value}</p>;
     })
   );
 };
 
+const renderAsset = (assets: any) => {
+  return (<div>s</div>)
+}
+
 export const BlogView: FC<IBlogComponentProps> = () => {
   const blogItems = useSelector(getBlogItems);
+  const linkedAssetItems = useSelector(getLinkedAsset) ?? [];
+  
   return (
     <div className={blogStyles.InnerContainer}>
       {blogItems.map(item => {
@@ -53,7 +83,7 @@ export const BlogView: FC<IBlogComponentProps> = () => {
             </h1>
             <div>
               {item?.fields?.blogContent?.content &&
-                renderCommonContentType(item?.fields?.blogContent?.content)}
+                renderCommonContentType(linkedAssetItems, item?.fields?.blogContent?.content)}
             </div>
           </div>
         );

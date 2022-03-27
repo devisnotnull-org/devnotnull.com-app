@@ -10,7 +10,11 @@ export default class ContentControllerImpl implements Controller {
 
     async initRoutes() {
         this.app.get('/blog', async (req, res) => {
-            const payload = await fetchContent("", [{ key: "content_type", value: "blogItem"}, { key: "select", value: "fields"}])
+            const queryPrams = Object.keys(req.query)
+            const keyValueQueryParams = queryPrams.map(item => ({ key: item, value: req.query[item] as string}))
+            console.log("keyValueQueryParams")
+            console.log([...keyValueQueryParams, { key: "content_type", value: "blogItem"}, { key: "select", value: "fields"}])
+            const payload = await fetchContent("", [...keyValueQueryParams, { key: "content_type", value: "blogItem"}, { key: "select", value: "fields"}])
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(payload, undefined, 2))
         });        

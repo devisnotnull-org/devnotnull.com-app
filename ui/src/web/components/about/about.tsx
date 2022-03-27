@@ -26,12 +26,10 @@ export const Profile: FC<Props> = ({ metadata }) => (
       </div>
       <div className={classnames(styles['Text--Header'])}>
         <h1>
-          Hi <span className={styles['Header--Wave']}>👋</span>, My name is Alex
-          and im a developer
+          {metadata.title}
         </h1>
         <p>
-          With a passion for web development, security, networking and
-          microservices.
+          {metadata.blurb}
         </p>
       </div>
     </div>
