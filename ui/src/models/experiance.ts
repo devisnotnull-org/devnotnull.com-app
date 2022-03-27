@@ -1,7 +1,7 @@
 export interface IExperiancePayload {
   year: string;
   company: string;
-  title: string;
+  jobTitle: string;
   description: string[];
   startDate: string;
   endDate: string;

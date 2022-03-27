@@ -1,6 +1,4 @@
-org: devisnotnull
-app: fandanzle-static-s3
-service: fandanzle-website-ui
+service: devnotnull-ui
 
 frameworkVersion: ">=2.0.0"
 variablesResolutionMode: 20210326
@@ -27,22 +25,15 @@ custom:
 
   ## S3 bucket for static assets
   s3Sync:
-    - bucketName: devnotnull.co.uk-${self:custom.environment}
+    - bucketName: devnotnull-ui-${self:custom.environment}
       bucketPrefix: static/
       localDir: build/static
-    - bucketName: devnotnull.co.uk-${self:custom.environment}
+    - bucketName: devnotnull-ui-${self:custom.environment}
       bucketPrefix: media/
       localDir: media
+
   ##
   environment: ${opt:stage, 'development'}
-
-## 
-package:
-  exclude:
-    - .cache/**
-    - .github/**
-    - node_modules/**
-    - src/**
 
 provider:
   name: aws
@@ -58,7 +49,7 @@ resources:
     AssetsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: devnotnull.co.uk-${self:custom.environment}
+        BucketName: devnotnull-ui-${self:custom.environment}
         CorsConfiguration:
           CorsRules:
             -
@@ -68,6 +59,8 @@ resources:
                 - '*'
               AllowedMethods:
                 - PUT
+                - GET
+                - POST
               MaxAge: 3000
     BucketPolicy:
       Type: AWS::S3::BucketPolicy

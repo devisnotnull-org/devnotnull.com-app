@@ -1,6 +1,6 @@
 import { createClient } from 'redis';
 
-const client = createClient({ password: "Tgq3w9dbpS", url:  'redis://10.150.10.141:6379' })
+const client = createClient({ url:  'redis://10.150.10.141:6379' })
 
 client.on('connected', function () {
     console.info('Redis connected');

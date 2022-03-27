@@ -2,4 +2,6 @@ import axios from 'axios';
 
 import { ENDPOINT } from '../constants';
 
-export const fetchMetadata = () => axios.get(`${ENDPOINT}/meta`);
+export const fetchMetadata = () => {
+    return axios.get(`${ENDPOINT}/meta`);
+}

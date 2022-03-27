@@ -9,6 +9,6 @@ COPY ./node_modules ./node_modules
 
 COPY ./dist .
 
-EXPOSE 3000
+EXPOSE 3005
 
 CMD [ "node", "server.js" ]

@@ -20,18 +20,16 @@ export const Profile: FC<Props> = ({ metadata }) => (
     <div className={classnames(styles['Header'])}>
       <div className={classnames(styles['Header--Photo'])}>
         <img
-          src="//s3.eu-west-2.amazonaws.com/devnotnull.co.uk-production/media/avatar.png"
+          src="//s3.eu-west-2.amazonaws.com/devnotnull-ui-production/media/avatar.png"
           alt="avatar"
         />
       </div>
       <div className={classnames(styles['Text--Header'])}>
         <h1>
-          Hi <span className={styles['Header--Wave']}>👋</span>, My name is Alex
-          and im a developer
+          {metadata.title}
         </h1>
         <p>
-          With a passion for web development, security, networking and
-          microservices.
+          {metadata.blurb}
         </p>
       </div>
     </div>

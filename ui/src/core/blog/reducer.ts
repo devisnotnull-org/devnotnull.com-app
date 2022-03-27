@@ -8,6 +8,19 @@ export interface IBlogState
   extends ICommonContentListPayload<IBlogPostPayload> {
   readonly loading: boolean;
   readonly errors?: string;
+  readonly includes?: {
+    Asset?: {
+      sys? : {
+        id?: string
+      },
+      fields?: {
+        title?: string
+        file?: {
+          url?: string
+        }
+      }
+    }[]
+  }
 }
 
 const initialState: IBlogState = {
@@ -15,6 +28,7 @@ const initialState: IBlogState = {
   skip: 0,
   limit: 0,
   items: [],
+  includes: {},
   errors: undefined,
   loading: false
 };

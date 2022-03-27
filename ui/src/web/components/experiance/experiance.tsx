@@ -27,6 +27,7 @@ export const Experiance: FC<Props> = ({ experianceList }) => (
           </aside>
           <div className={styles['Experiance--Description']}>
             <h3>{item.fields.company}</h3>
+            <h3><i>{item.fields.jobTitle}</i></h3>
             <p>{item.fields.description}</p>
           </div>
         </section>

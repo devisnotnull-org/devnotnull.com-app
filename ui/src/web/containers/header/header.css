@@ -1,11 +1,10 @@
 @import '../../style/common.css';
 
 :root {
-    --header-inverse-top: -7.5rem;
+  --header-inverse-top: -7.5rem;
 }
 
 .Header {
-
 }
 
 .MenuToggle {
@@ -102,12 +101,14 @@
 .Menu--Open {
   transform: none;
   opacity: 1;
+  display: block;
 }
 
 .Menu--Closed {
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
   opacity: 0;
+  display: none;
 }
 
 .Menu li {

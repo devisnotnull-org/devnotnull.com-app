@@ -31,3 +31,9 @@ export const getBlogItemsErrors = createSelector(
   getBlog,
   state => state?.errors ?? undefined
 );
+
+
+export const getLinkedAsset = createSelector(
+  getBlog,
+  state => state?.includes?.Asset ?? []
+)
