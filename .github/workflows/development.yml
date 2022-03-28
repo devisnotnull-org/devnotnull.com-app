@@ -27,6 +27,6 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: "{{defaultContext}}:api"
+        context: ./api
         push: true
         tags: alexbrown201/fandanzle-v2-api:latest
