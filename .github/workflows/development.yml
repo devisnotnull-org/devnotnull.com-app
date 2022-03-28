@@ -30,20 +30,3 @@ jobs:
       with:
         push: true
         tags: alexbrown201/fandanzle-v2-api:latest
-    - name: 'Deploy'
-      uses: 'deliverybot/helm@v1'
-      with:
-        release: 'nginx'
-        repository: 'https://devnotnull-helm.s3.eu-west-2.amazonaws.com'
-        namespace: 'default'
-        chart: 'nodejs-template'
-        token: '${{ github.token }}'
-        values: |
-          name: foobar
-          image.repository: alexbrown201/fandanzle-v2-api:latest
-          port: 3005
-          service.type: LoadBalancer
-          service.loadBalancerIP: 10.150.10.143
-          image.pullPolicy: Always
-      env:
-        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG_PROD }}'
