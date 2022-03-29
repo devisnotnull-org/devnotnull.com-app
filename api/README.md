@@ -1,4 +1,4 @@
+# Devnotnull API
 
-```
-sls dynamodb install
-```
+You will firstly need to configure a redis cluster
+
