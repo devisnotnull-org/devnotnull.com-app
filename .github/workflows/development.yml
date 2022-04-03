@@ -11,15 +11,23 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: api
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      KUBECONFIG_FILE: '${{ secrets.PROD_KUBECONFIG }}'
 
     steps:
+
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - uses: actions/setup-node@v2
       with:
         node-version: '16'
+
+    - run: 'echo "$VPN_CONFIG" > config.ovpn'
+      env:
+        VPN_CONFIG: ${{secrets.VPN_CONFIG}}
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
@@ -33,25 +41,49 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+    - name: Install OpenVPN
+      run: |
+        sudo apt update
+        sudo apt install -y openvpn openvpn-systemd-resolved
+
+    - name: Connect to VPN
+      uses: kota65535/github-openvpn-connect-action@v1.0.2
+      with:
+        config_file: ./config.ovpn
+        username: ${{ secrets.OVPN_USERNAME }}
+        password: ${{ secrets.OVPN_PASSWORD }}
+
     - run: npm install -g yarn
 
     - run: yarn install 
 
-    - run: yarn build
+    - run: yarn build:prod:pure
 
-    - name: Set up WireGuard
-      uses: egor-tensin/setup-wireguard@v1
-      with:
-        endpoint: 46.46.46.46:51820
-        endpoint_public_key: 9IHlvJqgkVWMq57a0A56XI5IjhnL5gaRhI1Pszk7S24=
-        ips: 192.168.143.254/24,fd8c:bc10:5021::192.168.143.254/48
-        allowed_ips: 192.168.143.0/24,fd8c:bc10:5021::/48
-        private_key: GLEiXhRwFuhw8aPy+HQfSMwwoLU0Sw8jE8MOxZ8GV3w=
-        preshared_key: PWAfvVWCjiNV0Uh2DhmXhdRaT326qosSOcaDB3j9dwI=
-        
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: ./api
+        context: .
+        file: ./Dockerfile
         push: true
-        tags: alexbrown201/fandanzle-v2-api:latest
+        tags: alexbrown201/devnotnull-ui:latest
+        
+    - name: Deploy
+      uses: vimeda/helm@v1.6.8
+      with:
+        release: 'devnotnull-ui'
+        namespace: 'default'
+        repo: 'https://devnotnull-helm.s3.eu-west-2.amazonaws.com'
+        repo-alias: devnotnull
+        chart: 'devnotnull/nodejs-template'
+        token: '${{ github.token }}'
+        values: |
+          image: 
+            repository: "alexbrown201/devnotnull-ui:latest"
+            pullPolicy: Always
+          name: foobar
+          port: 3000
+          service:
+            loadBalancerIP: "10.150.10.134"
+            type: LoadBalancer
+      env:
+        KUBECONFIG_FILE: '${{ secrets.PROD_KUBECONFIG }}'
