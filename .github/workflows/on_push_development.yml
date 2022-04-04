@@ -26,6 +26,9 @@ jobs:
       with:
         node-version: '16'
 
+    - name: Branch name
+      run: echo running on branch ${GITHUB_REF##*/}
+
     - run: 'echo "$VPN_CONFIG" > config.ovpn'
       env:
         VPN_CONFIG: ${{secrets.VPN_CONFIG}}
@@ -59,6 +62,9 @@ jobs:
     - run: yarn install 
 
     - run: yarn build:prod:pure
+
+    - name: Create S3 bucket
+      run: aws s3api create-bucket --bucket ${{ github.head_ref }} --region us-east-1
 
     - name: Build and push
       uses: docker/build-push-action@v2

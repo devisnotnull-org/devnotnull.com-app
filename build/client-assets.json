@@ -1,0 +1,22 @@
+{
+  "app": {
+    "js": "/static/app.55a4f95ba8c156b732ee.js",
+    "css": "/static/client.36ab8eae90371f1be3fa.css"
+  },
+  "vendors": {
+    "js": "/static/vendors.b44eb4e41b263ec99a52.js"
+  },
+  "": {
+    "indd": "/static/media/folio.indd",
+    "png": [
+      "/static/media/avatar.png",
+      "/static/media/diy.png",
+      "/static/media/secdata.png"
+    ],
+    "pdf": [
+      "/static/media/folio_final.pdf",
+      "/static/media/folio.pdf"
+    ],
+    "json": "/asset-manifest.json"
+  }
+}
