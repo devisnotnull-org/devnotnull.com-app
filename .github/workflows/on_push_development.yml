@@ -25,9 +25,13 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '16'
+      
+    - name: Dump GitHub context
+      id: github_context_step
+      run: echo '${{ toJSON(github) }}'
 
     - name: Branch name
-      run: echo running on branch ${GITHUB_REF##*/}
+      run: echo running on branch ${{ github.head_ref }
 
     - run: 'echo "$VPN_CONFIG" > config.ovpn'
       env:
