@@ -75,6 +75,9 @@ jobs:
     - name: Create S3 bucket
       run: aws s3api create-bucket --bucket devnotnull.com-${{ github.ref_name }} --region us-east-1
 
+    - name: Copy S3 bucket assets
+      run: aws s3 cp ./build s3://devnotnull.com-github-actions-setup/ --recursive
+
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
