@@ -1,9 +1,0 @@
-{
-  "main": {
-    "js": "/server.js",
-    "css": "/server.a57f04c0adbeb66daa25.css"
-  },
-  "": {
-    "json": "/server-manifest-server.json"
-  }
-}
