@@ -64,7 +64,7 @@ jobs:
     - run: yarn build:prod:pure
 
     - name: Create S3 bucket
-      run: aws s3api create-bucket --bucket ${{ github.head_ref }} --region us-east-1
+      run: aws s3api create-bucket --bucket devnotnull.com-${{ github.head_ref }} --region us-east-1
 
     - name: Build and push
       uses: docker/build-push-action@v2
@@ -72,12 +72,12 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: alexbrown201/devnotnull-ui:latest
+        tags: alexbrown201/devnotnull-ui:${{ github.head_ref }} 
         
     - name: Deploy
       uses: vimeda/helm@v1.6.8
       with:
-        release: 'devnotnull-ui'
+        release: 'devnotnull-ui-${{ github.head_ref }}'
         namespace: 'default'
         repo: 'https://devnotnull-helm.s3.eu-west-2.amazonaws.com'
         repo-alias: devnotnull
@@ -85,7 +85,7 @@ jobs:
         token: '${{ github.token }}'
         values: |
           image: 
-            repository: "alexbrown201/devnotnull-ui:latest"
+            repository: "alexbrown201/devnotnull-ui:${{ github.head_ref }} "
             pullPolicy: Always
           name: foobar
           port: 3000
