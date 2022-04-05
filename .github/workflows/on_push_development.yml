@@ -65,11 +65,11 @@ jobs:
         config_file: ./config.ovpn
         username: ${{ secrets.OVPN_USERNAME }}
         password: ${{ secrets.OVPN_PASSWORD }}
-
+            
     - name: Deploy
       uses: vimeda/helm@v1.6.8
       with:
-        release: 'devnotnull-ui'
+        release: 'devnotnull-ui-${{ github.ref_name }}'
         namespace: 'default'
         repo: 'https://devnotnull-helm.s3.eu-west-2.amazonaws.com'
         repo-alias: devnotnull
@@ -83,7 +83,9 @@ jobs:
           port: 3000
           service:
             type: LoadBalancer
-            
+      env:
+        KUBECONFIG_FILE: '${{ secrets.PROD_KUBECONFIG }}'
+
     - run: npm install -g yarn
 
     - run: yarn install 
@@ -115,7 +117,7 @@ jobs:
         token: '${{ github.token }}'
         values: |
           image: 
-            repository: "alexbrown201/devnotnull-ui:${{ github.ref_name }} "
+            repository: "alexbrown201/devnotnull-ui:${{ github.ref_name }}"
             pullPolicy: Always
           name: foobar
           port: 3000
