@@ -77,7 +77,7 @@ jobs:
         token: '${{ github.token }}'
         values: |
           image: 
-            repository: "alexbrown201/devnotnull-ui:latest"
+            repository: "alexbrown201/devnotnull-ui:${{ github.ref_name }}"
             pullPolicy: Always
           name: foobar
           port: 3000
