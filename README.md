@@ -3,3 +3,5 @@
 ## Running the application
 
 yarn prod:pure
+
+## Deploy

@@ -1,0 +1,88 @@
+name: On merge to main
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  deploy-api:
+    runs-on: 'ubuntu-latest'
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    defaults:
+      run:
+        shell: bash
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      KUBECONFIG_FILE: '${{ secrets.PROD_KUBECONFIG }}'
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - run: 'echo "$VPN_CONFIG" > config.ovpn'
+      env:
+        VPN_CONFIG: ${{secrets.VPN_CONFIG}}
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Install OpenVPN
+      run: |
+        sudo apt update
+        sudo apt install -y openvpn openvpn-systemd-resolved
+
+    - name: Connect to VPN
+      uses: kota65535/github-openvpn-connect-action@v1.0.2
+      with:
+        config_file: ./config.ovpn
+        username: ${{ secrets.OVPN_USERNAME }}
+        password: ${{ secrets.OVPN_PASSWORD }}
+
+    - run: npm install -g yarn
+
+    - run: yarn install 
+
+    - run: yarn build:prod:pure
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: alexbrown201/devnotnull-ui:latest
+        
+    - name: Deploy
+      uses: vimeda/helm@v1.6.8
+      with:
+        release: 'devnotnull-ui'
+        namespace: 'default'
+        repo: 'https://devnotnull-helm.s3.eu-west-2.amazonaws.com'
+        repo-alias: devnotnull
+        chart: 'devnotnull/nodejs-template'
+        token: '${{ github.token }}'
+        values: |
+          image: 
+            repository: "alexbrown201/devnotnull-ui:latest"
+            pullPolicy: Always
+          name: foobar
+          port: 3000
+          service:
+            loadBalancerIP: "10.150.10.134"
+            type: LoadBalancer
+      env:
+        KUBECONFIG_FILE: '${{ secrets.PROD_KUBECONFIG }}'
