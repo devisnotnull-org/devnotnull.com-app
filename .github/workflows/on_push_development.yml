@@ -72,10 +72,10 @@ jobs:
     - run: yarn build:prod:pure
 
     - name: Create S3 bucket
-      run: aws s3api create-bucket --bucket devnotnull.com-${{ github.ref_name }} --region us-east-1
+      run: aws s3api create-bucket --bucket devnotnull-ui-${{ github.ref_name }} --region us-east-1
 
     - name: Copy S3 bucket assets
-      run: aws s3 cp ./build s3://devnotnull.com-github-actions-setup/ --recursive
+      run: aws s3 cp ./build s3://devnotnull-ui-${{ github.ref_name }} --recursive
 
     - name: Build and push
       uses: docker/build-push-action@v2
@@ -88,12 +88,12 @@ jobs:
     - name: Deploy
       uses: vimeda/helm@v1.6.8
       with:
-        release: 'devnotnull-ui-${{ github.ref_name }}'
+        release: devnotnull-ui-${{ github.ref_name }}
         namespace: 'default'
-        repo: 'https://devnotnull-helm.s3.eu-west-2.amazonaws.com'
+        repo: https://devnotnull-helm.s3.eu-west-2.amazonaws.com
         repo-alias: devnotnull
-        chart: 'devnotnull/nodejs-template'
-        token: '${{ github.token }}'
+        chart: devnotnull/nodejs-template
+        token: ${{ github.token }}
         values: |
           image: 
             repository: "alexbrown201/devnotnull-ui:${{ github.ref_name }}"
