@@ -1,1 +1,1 @@
-export const ENDPOINT = 'http://api.devnotnull.com';
+export const ENDPOINT = 'https://api.devnotnull.com';
