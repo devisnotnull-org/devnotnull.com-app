@@ -27,27 +27,27 @@ const defaultConfig: Config = {
       path: 'http://localhost:9000/'
     }
   },
-  development: {
-    static: {
-      path: 'http://s3.eu-west-2.amazonaws.com/devnotnull-ui-development'
-    }
-  },
   local: {
     static: {
       path: 'http://localhost:9000/'
+    }
+  },
+  development: {
+    static: {
+      path: 'https://s3.eu-west-2.amazonaws.com/devnotnull-ui-development'
     }
   },
   developmentLocal: {},
   stagingLocal: {},
   staging: {
     static: {
-      path: 'http://s3.eu-west-2.amazonaws.com/devnotnull-ui-development'
+      path: 'https://s3.eu-west-2.amazonaws.com/devnotnull-ui-development'
     }
   },
   productionLocal: {},
   production: {
     static: {
-      path: 'http://s3.eu-west-2.amazonaws.com/devnotnull-ui-production'
+      path: 'https://s3.eu-west-2.amazonaws.com/devnotnull-ui-production'
     }
   }
 };
