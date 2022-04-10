@@ -65,6 +65,14 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+    - run: |
+        helm install devnotnull-ui devnotnull/nodejs-template \
+        --set image.repository=alexbrown201/devnotnull-ui:latest \
+        --set port=3000 \
+        --set service.type=LoadBalancer \
+        --set service.loadBalancerIP=10.150.10.134 \
+        --set image.pullPolicy=Always
+        
     - name: Install OpenVPN
       run: |
         sudo apt update
