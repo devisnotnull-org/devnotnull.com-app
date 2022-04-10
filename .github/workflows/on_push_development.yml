@@ -47,7 +47,7 @@ jobs:
       env:
         VPN_CONFIG: ${{secrets.VPN_CONFIG}}
 
-    - run: 'mkdir .kube && echo "$PROD_KUBECONFIG" > config'
+    - run: 'mkdir $HOME/.kube && echo "$PROD_KUBECONFIG" > $HOME/.kube/config'
       env:
         PROD_KUBECONFIG: ${{secrets.PROD_KUBECONFIG}}
 
