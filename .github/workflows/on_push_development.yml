@@ -52,11 +52,11 @@ jobs:
         PROD_KUBECONFIG: ${{secrets.PROD_KUBECONFIG}}
 
     - run: 'cat ~/.kube/config'
-    
+
     - run: 'ls ~/.kube'
 
     - name: 'Deploy'
-      uses: 'deliverybot/helm@v1'
+      uses: 'glopezep/helm@v1.7.1'
       with:
         release: 'review-myapp-${{ github.event.pull_request.number }}'
         version: '${{ github.sha }}'
