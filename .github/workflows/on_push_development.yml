@@ -68,13 +68,13 @@ jobs:
     - name: 'Deploy'
       uses: 'vimeda/helm@v1.6.8'
       with:
-        release: 'nginx'
+        release: 'nginx-test'
         track: canary
         namespace: 'default'
         chart: 'app'
         token: '${{ github.token }}'
-        values: |
-          name: foobar
+      env:
+        KUBECONFIG_FILE: '${{ secrets.PROD_KUBECONFIG }}'
 
     - run: npm install -g yarn
 
