@@ -43,6 +43,7 @@ jobs:
         echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
         sudo apt-get update
         sudo apt-get install helm
+        
     - run: 'echo "$VPN_CONFIG" > config.ovpn'
       env:
         VPN_CONFIG: ${{secrets.VPN_CONFIG}}
@@ -81,34 +82,6 @@ jobs:
 
     - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
 
-    - run: |
-        helm upgrade --install devnotnull-ui devnotnull/nodejs-template \
-        --set image.repository=alexbrown201/devnotnull-ui:latest \
-        --set port=3000 \
-        --set service.type=LoadBalancer \
-        --set service.loadBalancerIP=10.150.10.134 \
-        --set image.pullPolicy=Always
-
-    - name: Deploy
-      uses: 'glopezep/helm@v1.7.1'
-      with:
-        release: 'devnotnull-ui-${{ github.ref_name }}'
-        namespace: 'default'
-        repo: 'https://devnotnull-helm.s3.eu-west-2.amazonaws.com'
-        repo-alias: 'devnotnull'
-        chart: 'devnotnull/nodejs-template'
-        token: '${{ github.token }}'
-        values: |
-          image: 
-            repository: "alexbrown201/devnotnull-ui:${{ github.ref_name }}"
-            pullPolicy: Always
-          name: foobar
-          port: 3000
-          service:
-            type: LoadBalancer
-      env:
-        KUBECONFIG_FILE: '${{ secrets.PROD_KUBECONFIG }}'
-
     - run: npm install -g yarn
 
     - run: yarn install 
@@ -128,4 +101,10 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: alexbrown201/devnotnull-ui:${{ github.ref_name }} 
-        
+  
+    - run: |
+        helm upgrade --install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs-template \
+        --set image.repository=alexbrown201/devnotnull-ui::${{ github.ref_name }} \
+        --set port=3000 \
+        --set service.type=LoadBalancer \
+        --set image.pullPolicy=Always

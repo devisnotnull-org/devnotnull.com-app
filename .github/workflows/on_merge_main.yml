@@ -71,24 +71,10 @@ jobs:
     - name: Copy S3 bucket assets
       run: aws s3 cp ./build s3://devnotnull-ui-production --recursive
 
-
-    - name: Deploy
-      uses: vimeda/helm@v1.6.8
-      with:
-        release: 'devnotnull-ui'
-        namespace: 'default'
-        repo: 'https://devnotnull-helm.s3.eu-west-2.amazonaws.com'
-        repo-alias: devnotnull
-        chart: 'devnotnull/nodejs-template'
-        token: '${{ github.token }}'
-        values: |
-          image: 
-            repository: "alexbrown201/devnotnull-ui:latest"
-            pullPolicy: Always
-          name: foobar
-          port: 3000
-          service:
-            loadBalancerIP: "10.150.10.134"
-            type: LoadBalancer
-      env:
-        KUBECONFIG_FILE: '${{ secrets.PROD_KUBECONFIG }}'
+    - run: |
+        helm upgrade --install devnotnull-ui devnotnull/nodejs-template \
+        --set image.repository=alexbrown201/devnotnull-ui:latest \
+        --set port=3000 \
+        --set service.type=LoadBalancer \
+        --set service.loadBalancerIP=10.150.10.134 \
+        --set image.pullPolicy=Always
