@@ -69,6 +69,16 @@ jobs:
       uses: 'vimeda/helm@v1.6.8'
       with:
         release: 'nginx'
+        namespace: 'default'
+        chart: 'app'
+        token: '${{ github.token }}'
+        values: |
+          name: foobar
+
+    - name: 'Deploy'
+      uses: 'vimeda/helm@v1.6.8'
+      with:
+        release: 'nginx'
         track: canary
         namespace: 'default'
         chart: 'nginx'
