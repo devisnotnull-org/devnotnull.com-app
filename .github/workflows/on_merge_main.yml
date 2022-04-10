@@ -71,6 +71,7 @@ jobs:
     - name: Copy S3 bucket assets
       run: aws s3 cp ./build s3://devnotnull-ui-production --recursive
 
+
     - name: Deploy
       uses: vimeda/helm@v1.6.8
       with:
