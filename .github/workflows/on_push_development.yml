@@ -82,7 +82,7 @@ jobs:
     - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
 
     - run: |
-        helm install --install devnotnull-ui devnotnull/nodejs-template \
+        helm upgrade --install devnotnull-ui devnotnull/nodejs-template \
         --set image.repository=alexbrown201/devnotnull-ui:latest \
         --set port=3000 \
         --set service.type=LoadBalancer \
