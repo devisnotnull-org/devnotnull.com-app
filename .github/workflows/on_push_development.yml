@@ -65,6 +65,17 @@ jobs:
         username: ${{ secrets.OVPN_USERNAME }}
         password: ${{ secrets.OVPN_PASSWORD }}
 
+    - name: 'Deploy'
+      uses: 'deliverybot/helm@v1'
+      with:
+        release: 'nginx'
+        track: canary
+        namespace: 'default'
+        chart: 'app'
+        token: '${{ github.token }}'
+        values: |
+          name: foobar
+          
     - run: npm install -g yarn
 
     - run: yarn install 
@@ -72,7 +83,7 @@ jobs:
     - run: yarn build:prod:pure
 
     - name: Create S3 bucket
-      run: aws s3api create-bucket --bucket devnotnull-ui-${{ github.ref_name }} --region us-east-1
+      run: aws s3api create-bucket --bucket devnotnull-ui-${{ github.ref_name }} --region us-east-1 || true
 
     - name: Copy S3 bucket assets
       run: aws s3 cp ./build s3://devnotnull-ui-${{ github.ref_name }} --recursive
