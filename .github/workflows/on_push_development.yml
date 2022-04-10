@@ -37,9 +37,24 @@ jobs:
     - name: Branch name
       run: echo running on branch ${{ github.ref_name }}
 
+    - run: |
+        curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+        sudo apt-get install apt-transport-https --yes
+        echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+        sudo apt-get update
+        sudo apt-get install helm
+        
     - run: 'echo "$VPN_CONFIG" > config.ovpn'
       env:
         VPN_CONFIG: ${{secrets.VPN_CONFIG}}
+
+    - run: 'mkdir ~/.kube && echo "$PROD_KUBECONFIG" > ~/.kube/config'
+      env:
+        PROD_KUBECONFIG: ${{secrets.PROD_KUBECONFIG}}
+
+    - run: 'cat ~/.kube/config'
+
+    - run: 'ls ~/.kube'
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
@@ -65,6 +80,8 @@ jobs:
         username: ${{ secrets.OVPN_USERNAME }}
         password: ${{ secrets.OVPN_PASSWORD }}
 
+    - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
+
     - run: npm install -g yarn
 
     - run: yarn install 
@@ -72,7 +89,7 @@ jobs:
     - run: yarn build:prod:pure
 
     - name: Create S3 bucket
-      run: aws s3api create-bucket --bucket devnotnull-ui-${{ github.ref_name }} --region us-east-1
+      run: aws s3api create-bucket --bucket devnotnull-ui-${{ github.ref_name }} --region us-east-1 || true
 
     - name: Copy S3 bucket assets
       run: aws s3 cp ./build s3://devnotnull-ui-${{ github.ref_name }} --recursive
@@ -84,23 +101,10 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: alexbrown201/devnotnull-ui:${{ github.ref_name }} 
-        
-    - name: Deploy
-      uses: vimeda/helm@v1.6.8
-      with:
-        release: devnotnull-ui-${{ github.ref_name }}
-        namespace: 'default'
-        repo: https://devnotnull-helm.s3.eu-west-2.amazonaws.com
-        repo-alias: devnotnull
-        chart: devnotnull/nodejs-template
-        token: ${{ github.token }}
-        values: |
-          image: 
-            repository: "alexbrown201/devnotnull-ui:${{ github.ref_name }}"
-            pullPolicy: Always
-          name: foobar
-          port: 3000
-          service:
-            type: LoadBalancer
-      env:
-        KUBECONFIG_FILE: '${{ secrets.PROD_KUBECONFIG }}'
+  
+    - run: |
+        helm upgrade --install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs-template \
+        --set image.repository=alexbrown201/devnotnull-ui::${{ github.ref_name }} \
+        --set port=3000 \
+        --set service.type=LoadBalancer \
+        --set image.pullPolicy=Always
