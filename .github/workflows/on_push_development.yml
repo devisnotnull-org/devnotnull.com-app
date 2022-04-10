@@ -68,10 +68,10 @@ jobs:
     - name: 'Deploy'
       uses: 'vimeda/helm@v1.6.8'
       with:
-        release: 'nginx-test'
+        release: 'nginx'
         track: canary
         namespace: 'default'
-        chart: 'app'
+        chart: 'nginx'
         token: '${{ github.token }}'
       env:
         KUBECONFIG_FILE: '${{ secrets.PROD_KUBECONFIG }}'
