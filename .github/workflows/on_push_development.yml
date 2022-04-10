@@ -47,10 +47,11 @@ jobs:
       env:
         VPN_CONFIG: ${{secrets.VPN_CONFIG}}
 
-    - run: 'mkdir $HOME/.kube && echo "$PROD_KUBECONFIG" > $HOME/.kube/config'
+    - run: 'mkdir .kube && echo "$PROD_KUBECONFIG" > .kube/config'
       env:
         PROD_KUBECONFIG: ${{secrets.PROD_KUBECONFIG}}
 
+    - run: 'cat .kube/config'
     - run: 'ls .kube'
 
     - name: Set up QEMU
