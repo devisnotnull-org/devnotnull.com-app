@@ -70,7 +70,9 @@ jobs:
       with:
         release: 'nginx'
         namespace: 'default'
-        chart: 'app'
+        repo: https://devnotnull-helm.s3.eu-west-2.amazonaws.com
+        repo-alias: devnotnull
+        chart: devnotnull/nodejs-template
         token: '${{ github.token }}'
         values: |
           name: foobar
