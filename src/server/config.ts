@@ -9,8 +9,6 @@ export type Environment =
   | 'local'
   | 'developmentLocal'
   | 'development'
-  | 'stagingLocal'
-  | 'staging'
   | 'productionLocal'
   | 'production';
 
@@ -37,20 +35,14 @@ const defaultConfig: Config = {
   },
   development: {
     static: {
-      path: `https://s3.eu-west-2.amazonaws.com/devnotnull-ui-${bucket}`
+      path: `https://devnotnull-ui-${bucket}.s3.amazonaws.com/`
     }
   },
   developmentLocal: {},
-  stagingLocal: {},
-  staging: {
-    static: {
-      path: `https://s3.eu-west-2.amazonaws.com/devnotnull-ui-${bucket}`
-    }
-  },
   productionLocal: {},
   production: {
     static: {
-      path: 'https://s3.eu-west-2.amazonaws.com/devnotnull-ui-production'
+      path: `https://devnotnull-ui-production.s3.amazonaws.com/`
     }
   }
 };
