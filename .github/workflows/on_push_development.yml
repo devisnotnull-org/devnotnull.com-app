@@ -52,10 +52,6 @@ jobs:
       env:
         PROD_KUBECONFIG: ${{secrets.PROD_KUBECONFIG}}
 
-    - run: 'cat ~/.kube/config'
-
-    - run: 'ls ~/.kube'
-
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
 
@@ -93,6 +89,9 @@ jobs:
 
     - name: Copy S3 bucket assets
       run: aws s3 cp ./build s3://devnotnull-ui-${{ github.ref_name }} --recursive
+      
+    - run: |
+        aws s3api put-bucket-cors --bucket devnotnull-ui-${{ github.ref_name }} --cors-configuration '{"CORSRules" : [{"AllowedHeaders":["*"],"AllowedMethods":["GET","HEAD", "POST"],"AllowedOrigins":["*"],"ExposeHeaders":[]}]}'
 
     - name: Build and push
       uses: docker/build-push-action@v2
@@ -103,8 +102,12 @@ jobs:
         tags: alexbrown201/devnotnull-ui:${{ github.ref_name }} 
   
     - run: |
-        helm upgrade --install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs-template \
-        --set image.repository=alexbrown201/devnotnull-ui::${{ github.ref_name }} \
+       helm upgrade --install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs \
+        -f ./helm/values-development.yaml \
+        --set env.NODE_RUNTIME_ENV=development \
+        --set env.CDN_BUCKET=${{ github.ref_name }} \
+        --version 1 \
+        --set image.repository=alexbrown201/devnotnull-ui:${{ github.ref_name }} \
         --set port=3000 \
         --set service.type=LoadBalancer \
         --set image.pullPolicy=Always
