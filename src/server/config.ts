@@ -25,24 +25,24 @@ const offline = process.env.IS_OFFLINE || false;
 const defaultConfig: Config = {
   common: {
     static: {
-      path: 'http://localhost:9000/'
+      path: 'http://localhost:9000'
     }
   },
   local: {
     static: {
-      path: 'http://localhost:9000/'
+      path: 'http://localhost:9000'
     }
   },
   development: {
     static: {
-      path: `https://devnotnull-ui-${bucket}.s3.amazonaws.com/`
+      path: `https://devnotnull-ui-${bucket}.s3.amazonaws.com`
     }
   },
   developmentLocal: {},
   productionLocal: {},
   production: {
     static: {
-      path: `https://devnotnull-ui-production.s3.amazonaws.com/`
+      path: `https://devnotnull-ui-production.s3.amazonaws.com`
     }
   }
 };
