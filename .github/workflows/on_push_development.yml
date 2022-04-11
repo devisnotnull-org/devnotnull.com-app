@@ -99,7 +99,9 @@ jobs:
         tags: alexbrown201/devnotnull-ui:${{ github.ref_name }} 
   
     - run: |
-        helm upgrade --install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs-template \
+        helm upgrade --install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs \
+        -f ./helm/values-development.yaml \
+        --version 1 \
         --set image.repository=alexbrown201/devnotnull-ui::${{ github.ref_name }} \
         --set port=3000 \
         --set service.type=LoadBalancer \

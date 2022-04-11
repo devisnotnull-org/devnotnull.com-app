@@ -72,7 +72,9 @@ jobs:
       run: aws s3 cp ./build s3://devnotnull-ui-production --recursive
 
     - run: |
-        helm upgrade --install devnotnull-ui devnotnull/nodejs-template \
+        helm upgrade --install devnotnull-ui devnotnull/nodejs \
+        -f ./helm/values-production.yaml \
+        --version 1 \
         --set image.repository=alexbrown201/devnotnull-ui:latest \
         --set port=3000 \
         --set service.type=LoadBalancer \
