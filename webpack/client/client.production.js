@@ -7,15 +7,7 @@ import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import CopyPlugin from 'copy-webpack-plugin'
 import { config as client } from './client.common';
 import { build, src, media, buildMedia } from '../paths'
-import { postcssPlugin } from 'postcss-url'
-import { config as globalConfig } from '../config'
 import AssetsPlugin from 'assets-webpack-plugin';
-
-
-const options = [
-  // using custom function to build url
-  { filter: 'cdn/**/*', url: (asset) => `https://cdn.url/${asset.url}` }
-];
 
 const config = merge(client('production'), {
   devtool: 'source-map',
