@@ -52,10 +52,6 @@ jobs:
       env:
         PROD_KUBECONFIG: ${{secrets.PROD_KUBECONFIG}}
 
-    - run: 'cat ~/.kube/config'
-
-    - run: 'ls ~/.kube'
-
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
 
