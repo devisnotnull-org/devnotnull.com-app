@@ -19,6 +19,7 @@ type Config = {
 };
 
 const env = process.env.NODE_RUNTIME_ENV || 'development';
+const bucket = process.env.CDN_BUCKET || 'development';
 const offline = process.env.IS_OFFLINE || false;
 
 const defaultConfig: Config = {
@@ -34,14 +35,14 @@ const defaultConfig: Config = {
   },
   development: {
     static: {
-      path: 'https://s3.eu-west-2.amazonaws.com/devnotnull-ui-development'
+      path: `https://s3.eu-west-2.amazonaws.com/devnotnull-ui-${bucket}`
     }
   },
   developmentLocal: {},
   stagingLocal: {},
   staging: {
     static: {
-      path: 'https://s3.eu-west-2.amazonaws.com/devnotnull-ui-development'
+      path: `https://s3.eu-west-2.amazonaws.com/devnotnull-ui-${bucket}`
     }
   },
   productionLocal: {},

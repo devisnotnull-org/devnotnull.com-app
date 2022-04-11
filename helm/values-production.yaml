@@ -1,5 +1,1 @@
-env:
-  NODE_RUNTIME_ENV:
-    value: production
-  
 replicaCount: 5
