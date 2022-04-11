@@ -81,7 +81,7 @@ jobs:
     - run: |
        helm upgrade --install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs \
         -f ./helm/values-development.yaml \
-        --set env.NODE_RUNTIME_ENV=development
+        --set env.NODE_RUNTIME_ENV=development \
         --set env.CDN_BUCKET=devnotnull-ui-${{ github.ref_name }} \
         --version 1 \
         --set image.repository=alexbrown201/devnotnull-ui:${{ github.ref_name }} \
@@ -112,7 +112,7 @@ jobs:
     - run: |
        helm upgrade --install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs \
         -f ./helm/values-development.yaml \
-        --set env.NODE_RUNTIME_ENV=development
+        --set env.NODE_RUNTIME_ENV=development \
         --set env.CDN_BUCKET=devnotnull-ui-${{ github.ref_name }} \
         --version 1 \
         --set image.repository=alexbrown201/devnotnull-ui:${{ github.ref_name }} \
