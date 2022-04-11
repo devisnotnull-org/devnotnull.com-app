@@ -1,3 +1,5 @@
 env:
   NODE_RUNTIME_ENV:
     value: development
+
+replicaCount: 1
