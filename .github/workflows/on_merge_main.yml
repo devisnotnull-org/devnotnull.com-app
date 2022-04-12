@@ -114,7 +114,7 @@ jobs:
     - run: |
         helm upgrade --install devnotnull-ui devnotnull/nodejs \
         -f ./helm/values-production.yaml \
-        --version ${{ steps.bump-tag.new_tag }} \
+        --version 1 \
         --set env.NODE_RUNTIME_ENV=production \
         --set env.CDN_BUCKET=production \
         --set image.repository=alexbrown201/devnotnull-ui:latest \
