@@ -20,6 +20,8 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
 
     - uses: actions/setup-node@v2
       with:
@@ -110,3 +112,10 @@ jobs:
         --set service.type=LoadBalancer \
         --set service.loadBalancerIP=10.150.10.134 \
         --set image.pullPolicy=Always
+
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        INITIAL_VERSION: 1.0.0
