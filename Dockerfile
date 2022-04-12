@@ -1,4 +1,3 @@
-
 FROM node:16.14-alpine
 
 # Create app directory
