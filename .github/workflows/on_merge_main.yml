@@ -109,16 +109,20 @@ jobs:
     - run: |
         aws s3api put-bucket-cors --bucket devnotnull-ui-production --cors-configuration '{"CORSRules" : [{"AllowedHeaders":["*"],"AllowedMethods":["GET","HEAD", "POST"],"AllowedOrigins":["*"],"ExposeHeaders":[]}]}'
 
+    - run: |
+        aws s3api put-bucket-policy --bucket devnotnull-ui-production --policy '{"Version": "2008-10-17", "Statement": [{ "Sid": "AllowPublicRead", "Effect": "Allow", "Principal": { "AWS": "*" }, "Action": ["s3:GetObject"], "Resource": ["arn:aws:s3:::devnotnull-ui-production/*" ] }] }'
+
     - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
 
     - run: |
         helm upgrade --install devnotnull-ui devnotnull/nodejs \
-        -f ./helm/values-production.yaml \
-        --version 1 \
+        --version 2 \
         --set env.NODE_RUNTIME_ENV=production \
         --set env.CDN_BUCKET=production \
         --set image.repository=alexbrown201/devnotnull-ui:latest \
         --set port=3000 \
         --set service.type=LoadBalancer \
         --set service.loadBalancerIP=10.150.10.134 \
-        --set image.pullPolicy=Always
+        --set image.pullPolicy=Always 
+        --set replicaCount=10
+
