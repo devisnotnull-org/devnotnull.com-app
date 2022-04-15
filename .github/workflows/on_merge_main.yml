@@ -113,12 +113,13 @@ jobs:
 
     - run: |
         helm upgrade --install devnotnull-ui devnotnull/nodejs \
-        -f ./helm/values-production.yaml \
-        --version 1 \
+        --version 2 \
         --set env.NODE_RUNTIME_ENV=production \
         --set env.CDN_BUCKET=production \
         --set image.repository=alexbrown201/devnotnull-ui:latest \
         --set port=3000 \
         --set service.type=LoadBalancer \
         --set service.loadBalancerIP=10.150.10.134 \
-        --set image.pullPolicy=Always
+        --set image.pullPolicy=Always 
+        --set replicaCount=10
+
