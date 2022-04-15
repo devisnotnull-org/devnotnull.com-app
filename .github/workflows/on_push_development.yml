@@ -101,7 +101,7 @@ jobs:
     - run: |
         aws s3api put-bucket-cors --bucket devnotnull-ui-${{ github.ref_name }} --cors-configuration '{"CORSRules" : [{"AllowedHeaders":["*"],"AllowedMethods":["GET","HEAD", "POST"],"AllowedOrigins":["*"],"ExposeHeaders":[]}]}'
      
-     - run: |
+    - run: |
         aws s3api put-bucket-policy --bucket devnotnull-ui-${{ github.ref_name }} --policy '{"Version": "2008-10-17", "Statement": [{ "Sid": "AllowPublicRead", "Effect": "Allow", "Principal": { "AWS": "*" }, "Action": ["s3:GetObject"], "Resource": ["arn:aws:s3:::devnotnull-ui-${{ github.ref_name }}/*" ] }] }'
 
     - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
