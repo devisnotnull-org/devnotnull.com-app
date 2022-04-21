@@ -92,6 +92,8 @@ jobs:
   
     - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
     
+    - run: helm repo update
+
     - name: Create S3 bucket
       run: aws s3api create-bucket --bucket devnotnull-ui-${{ github.ref_name }} --region us-east-1 || true
 
@@ -103,8 +105,6 @@ jobs:
      
     - run: |
         aws s3api put-bucket-policy --bucket devnotnull-ui-${{ github.ref_name }} --policy '{"Version": "2008-10-17", "Statement": [{ "Sid": "AllowPublicRead", "Effect": "Allow", "Principal": { "AWS": "*" }, "Action": ["s3:GetObject"], "Resource": ["arn:aws:s3:::devnotnull-ui-${{ github.ref_name }}/*" ] }] }'
-
-    - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
 
     - run: |
        helm upgrade --install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs \
