@@ -123,6 +123,6 @@ jobs:
         --set port=3000 \
         --set service.type=LoadBalancer \
         --set service.loadBalancerIP=10.150.10.134 \
-        --set image.pullPolicy=Always 
+        --set image.pullPolicy=Always \
         --set replicaCount=10
 
