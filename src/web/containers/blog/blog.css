@@ -44,3 +44,11 @@
 .Text {
     padding: 0.5rem 0;
 }
+
+.ImageContainer {
+    text-align: center;
+}
+
+.ImageContainer--Image {
+    max-height: 30rem;
+}

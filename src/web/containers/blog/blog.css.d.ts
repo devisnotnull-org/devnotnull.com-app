@@ -7,6 +7,8 @@ declare const styles: {
   readonly "Bold": string;
   readonly "Code": string;
   readonly "Text": string;
+  readonly "ImageContainer": string;
+  readonly "ImageContainer--Image": string;
 };
 export = styles;
 

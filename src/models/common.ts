@@ -24,3 +24,13 @@ export interface ILink {
     id: string;
   };
 }
+
+export interface IAsset {
+  sys: {
+    id: string
+    linkType: string
+    type: string
+  }
+}
+
+
