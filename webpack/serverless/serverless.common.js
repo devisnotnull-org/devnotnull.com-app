@@ -9,7 +9,7 @@ import { src, build, webpackCache } from '../paths';
 
 const config = (env) => merge(common(env), {
   target: 'node',
-  entry: [`${src}/server/handler`],
+  entry: ["regenerator-runtime/runtime", `${src}/server/handler`],
   output: {
     libraryTarget: 'commonjs2',
     filename: 'serverless.js'
