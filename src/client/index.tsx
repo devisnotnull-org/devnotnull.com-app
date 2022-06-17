@@ -34,7 +34,6 @@ renderApp();
 
 // Server side rendering
 if ((module as any).hot) {
-  console.log("HMR");
   //
   (module as any).hot.accept('../web/app', () => {
     // const newApp = require('../web/app').default;

@@ -28,7 +28,7 @@ export const blog: Reducer<IExperianceState> = (
       return { ...state, loading: true, errors: undefined };
     }
     case ExperianceActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, errors: undefined, ...action.payload };
+      return { ...state, loading: false, errors: undefined, ...action.payload.payload };
     }
     case ExperianceActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };

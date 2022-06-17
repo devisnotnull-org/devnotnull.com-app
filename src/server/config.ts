@@ -1,7 +1,10 @@
 export interface AppConfig {
   static: {
     path: string;
-  };
+  }
+  api: {
+    path: string
+  }
 }
 
 export type Environment =
@@ -26,6 +29,9 @@ const defaultConfig: Config = {
   common: {
     static: {
       path: 'http://localhost:9000/'
+    },
+    api: {
+      path: 'https://api.devnotnull.com'
     }
   },
   local: {
@@ -36,7 +42,7 @@ const defaultConfig: Config = {
   development: {
     static: {
       path: `https://devnotnull-ui-${bucket}.s3.amazonaws.com`
-    }
+    },
   },
   developmentLocal: {},
   productionLocal: {},
