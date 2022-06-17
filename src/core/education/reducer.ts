@@ -28,7 +28,7 @@ export const blog: Reducer<IEducationState> = (
       return { ...state, loading: true, errors: undefined };
     }
     case EducationActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, errors: undefined, ...action.payload };
+      return { ...state, loading: false, errors: undefined, ...action.payload.payload };
     }
     case EducationActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };

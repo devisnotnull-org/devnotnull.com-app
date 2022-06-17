@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { ICommonDataNode } from 'models/common';
 import { getBlogItems, getLinkedAsset } from '../../../core/blog/selectors';
-import { IBlogComponentProps } from './blog.state';
-import blogStyles from './blog.css';
+import { IBlogComponentProps } from './blogEntry.state';
+import blogStyles from './blogEntry.css';
 
 export type IProps = {
   to: string;

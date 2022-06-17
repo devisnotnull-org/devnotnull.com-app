@@ -28,7 +28,7 @@ export const blog: Reducer<IContactState> = (
       return { ...state, loading: true, errors: undefined };
     }
     case ContactActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, errors: undefined, ...action.payload };
+      return { ...state, loading: false, errors: undefined, ...action.payload.payload };
     }
     case ContactActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };

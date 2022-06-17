@@ -10,9 +10,10 @@ const config = merge(client('development'), {
   devtool: "inline-source-map",
   entry: {
     app: [
-      'babel-polyfill/dist/polyfill.js',
-      'react-hot-loader/patch',
-      'webpack-hot-middleware/client?noInfo=false'
+      'webpack/hot/dev-server',
+      "core-js/stable",
+      "regenerator-runtime/runtime",
+      `${src}/client/index`,
     ]
   },
   output: {
@@ -51,10 +52,7 @@ const config = merge(client('development'), {
         test: /\.s?css$/,
         use: [
           {
-            loader: 'style-loader',
-            options: {
-              hmr: true
-            }
+            loader: 'style-loader'
           },
           {
             loader: 'css-loader',
