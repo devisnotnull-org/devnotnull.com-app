@@ -45,7 +45,8 @@ export const AppRouter: React.FC<Props> = () => {
             <Route exact path="/" component={HomeViewContainer} />
             <Route exact path="/portfolio" component={FolioViewContainer} />
             <Route exact path="/blog" component={BlogViewContainer} />
-            <Route exact path="/blog/:id" component={BlogViewContainer} />
+            <Route exact path="/blog/:slug" component={BlogViewContainer} />
+            <Route exact path="/blog/page/:page" component={BlogViewContainer} />
             <Route component={NotFoundComponent} />
           </Switch>
         </div>

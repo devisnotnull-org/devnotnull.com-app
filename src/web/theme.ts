@@ -3,7 +3,7 @@ import { isServerRender } from '../utils';
 const CssKeyToJsKey = (key: string) =>
   key.replace('--', '').replace(/-./g, x => x.toUpperCase()[1]);
 
-const getAllCSSVariableNames = (styleSheets?: StyleSheetList) => {
+const getAllCSSVariableNames = (styleSheets?: StyleSheetList): number => {
   const cssVars: string[] = [];
   if (isServerRender) return [];
   styleSheets = document?.styleSheets;
