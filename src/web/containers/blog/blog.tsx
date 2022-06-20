@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import {
+  useParams
+} from "react-router-dom";
 import { ICommonDataNode } from 'models/common';
 import { getBlogItems, getLinkedAsset } from '../../../core/blog/selectors';
 import { IBlogComponentProps } from './blog.state';
@@ -32,7 +35,7 @@ const getType = (marks: { type: string }[] | undefined): string => {
 const renderCommonContentType = (
   assets: any[],
   content: ICommonDataNode[]
-): (JSX.Element[] | undefined)[] => {
+): (JSX.Element | undefined)[] => {
 
   return content?.map((payload, index) => {
 
@@ -45,15 +48,14 @@ const renderCommonContentType = (
       )
     }
 
-
     if (payload.nodeType === 'list-item') {
       console.log(payload)
     }
 
-    return payload.content?.map(inner => { 
+    const items = payload.content?.map(inner => { 
 
       if (inner.nodeType === 'list-item') {
-        return (<ul>{inner.content.map(item => <li>{item?.content?.[0]?.value}</li>)}</ul>)
+        return (<ul>{inner.content.map(item => <li><p>{item?.content?.[0]?.value}</p></li>)}</ul>)
       }
         
       if (getType(inner.marks) === 'code') {
@@ -65,14 +67,14 @@ const renderCommonContentType = (
       }
 
       if (getType(inner.marks) === 'bold') {
-        return (
-          <p>
-            <b>{inner.value}</b>
-          </p>
-        );
-        }
-      return <p>{inner.value}</p>;
+        return (<b>{inner.value}</b>);
+      }
+
+      return <span>{inner.value}</span>;
     })
+
+    return <p>{items}</p>
+
   }
   );
 };
@@ -82,6 +84,12 @@ const renderCommonContentType = (
 export const BlogView: FC<IBlogComponentProps> = () => {
   const blogItems = useSelector(getBlogItems);
   const linkedAssetItems = useSelector(getLinkedAsset) ?? [];
+
+  const params = useParams<{ page?: string }>()
+
+  console.log("___________________")
+  console.log("___________________")
+  console.log("Page ", params)
   
   return (
     <div className={blogStyles.InnerContainer}>
