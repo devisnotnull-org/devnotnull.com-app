@@ -7,10 +7,8 @@ import { fetchBlog } from './fetch';
 export function* blogSaga() {
   try {
     const payload = yield call(fetchBlog);
-    //
     yield put(fetchSuccess(payload.data));
   } catch (ex) {
-    //
     yield put({
       type: BlogActionTypes.FETCH_ERROR,
       ex
@@ -21,10 +19,8 @@ export function* blogSaga() {
 export function* blogEntrySaga() {
   try {
     const payload = yield call(fetchBlog);
-    //
     yield put(fetchSuccess(payload.data));
   } catch (ex) {
-    //
     yield put({
       type: BlogActionTypes.FETCH_ERROR,
       ex
