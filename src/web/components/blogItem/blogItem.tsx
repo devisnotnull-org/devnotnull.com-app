@@ -39,10 +39,6 @@ const BlogItemm: FC<Props> = ({ content, assets}) => (
       )
     }
 
-    if (payload.nodeType === 'list-item') {
-      console.log(payload)
-    }
-
     const items = payload.content?.map(inner => { 
 
       if (inner.nodeType === 'list-item') {
