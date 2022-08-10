@@ -60,7 +60,7 @@ jobs:
 
     - run: 'mkdir ~/.kube && echo "$KUBECONFIG_FILE" > ~/.kube/config'
       env:
-        KUBECONFIG_FILE: ${{secrets.KUBECONFIG_FILE}}
+        KUBECONFIG_FILE: ${{secrets.KUBECONFIG_PROD}}
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
