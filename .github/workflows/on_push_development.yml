@@ -107,9 +107,10 @@ jobs:
         aws s3api put-bucket-policy --bucket devnotnull-ui-${{ github.ref_name }} --policy '{"Version": "2008-10-17", "Statement": [{ "Sid": "AllowPublicRead", "Effect": "Allow", "Principal": { "AWS": "*" }, "Action": ["s3:GetObject"], "Resource": ["arn:aws:s3:::devnotnull-ui-${{ github.ref_name }}/*" ] }] }'
 
     - run: helm uninstall devnotnull-ui-${{ github.ref_name }}
+      continue-on-error: true
 
     - run: |
-       helm upgrade --install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs \
+       helm install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs \
         --version 2 \
         --set env.NODE_RUNTIME_ENV=development \
         --set env.CDN_BUCKET=${{ github.ref_name }} \

@@ -120,7 +120,7 @@ jobs:
       continue-on-error: true
 
     - run: |
-        helm upgrade --install devnotnull-ui devnotnull/nodejs \
+        helm install devnotnull-ui devnotnull/nodejs \
         --version 2 \
         --set env.NODE_RUNTIME_ENV=production \
         --set env.CDN_BUCKET=production \
