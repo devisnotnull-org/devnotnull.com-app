@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
 
-export const Button: FC = () => <button></button>;
+type Props = {
+    link: string;
+}
+
+export const Button: FC<Props> = ({ link, children }) => <button>{children}</button>;
 
 export default Button;

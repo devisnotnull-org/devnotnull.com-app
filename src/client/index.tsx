@@ -1,8 +1,10 @@
+//import 'source-map-support/register'
+
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+import { ReduxRouter } from '@lagunovsky/redux-react-router'
 
 import rootSaga from '../core/sagas';
 import createStore from '../core/store';
@@ -18,25 +20,37 @@ const store = createStore(history, preloadedState);
 (store as any).rootTask = (store as any).runSaga(rootSaga);
 
 const renderApp = () => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>,
-    document.getElementById('root')
-  );
+  const rootElement = document.getElementById('root')
+  if(rootElement){
+    /**
+    hydrateRoot(rootElement,  <Provider store={store}>
+      <ReduxRouter
+        history={history}
+        children={<App/>}
+      />
+    </Provider>)
+    */
+   
+    const root = createRoot(rootElement)
+    root.render(
+      <Provider store={store}>
+        <ReduxRouter
+          history={history}
+          children={<App/>}
+        />
+      </Provider>
+    );
+  
+  }
 };
 
 //
 renderApp();
 
-
 // Server side rendering
 if ((module as any).hot) {
   //
   (module as any).hot.accept('../web/app', () => {
-    // const newApp = require('../web/app').default;
     renderApp();
   });
   //

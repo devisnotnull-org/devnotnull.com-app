@@ -1,4 +1,5 @@
 import { all, takeEvery } from 'redux-saga/effects';
+import { ROUTER_ON_LOCATION_CHANGED } from '@lagunovsky/redux-react-router'
 
 import { abilitiesSagas } from './ability/sagas';
 import { blogSaga } from './blog/sagas';
@@ -7,6 +8,7 @@ import { educationSaga } from './education/sagas';
 import { experianceSaga } from './experiance/sagas';
 import { metadataSagas } from './metadata/sagas';
 import { assetSaga } from './assets/sagas';
+import { routeSagas } from './route/sagas'
 import { contactSaga } from './contact/sagas';
 
 import {
@@ -22,7 +24,6 @@ import {
 export function* fetchAllSaga() {
   yield all([
     abilitiesSagas(),
-    blogSaga(),
     educationSaga(),
     experianceSaga(),
     folioSaga(),
@@ -31,11 +32,12 @@ export function* fetchAllSaga() {
 }
 
 export default function* rootSaga() {
+
   yield all([
-    // Fetch our global parameters
     fetchAllSaga(),
     // Bind our actions
     takeEvery(GlobalActionTypes.FETCH_START, metadataSagas),
+    takeEvery(ROUTER_ON_LOCATION_CHANGED, routeSagas),
     takeEvery(AbilitiesActionTypes.FETCH_START, abilitiesSagas),
     takeEvery(BlogActionTypes.FETCH_START, blogSaga),
     takeEvery(EducationActionTypes.FETCH_START, educationSaga),

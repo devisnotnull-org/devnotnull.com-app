@@ -20,10 +20,8 @@ export const Experiance: FC<Props> = ({ experianceList }) => (
       (item: ICommonFields<IExperiancePayload>, index: number) => (
         <section key={index} className={styles['Experiance']}>
           <aside className={styles['Experiance--Year']}>
-            <div>
-              {moment(item.fields.startDate).format('YYYY')} -{' '}
-              {moment(item.fields.endDate).format('YYYY')}
-            </div>
+            <div>{moment(item.fields.endDate).format('MMM')} {moment(item.fields.endDate).format('YYYY')}</div>
+            <div>{moment(item.fields.startDate).format('MMM')} {moment(item.fields.startDate).format('YYYY')}</div>
           </aside>
           <div className={styles['Experiance--Description']}>
             <h3>{item.fields.company}</h3>

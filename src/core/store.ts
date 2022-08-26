@@ -7,14 +7,15 @@ import {
 } from 'redux';
 import createSaga, { END, SagaMiddleware } from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { routerMiddleware } from 'connected-react-router';
+import { createRouterMiddleware } from '@lagunovsky/redux-react-router'
 
 import rootReducers from '../core/reducers';
 
 export default (history: any, reduxState = undefined) => {
   // Compose our middlewares
+  // Compose our middlewares
   const saga: SagaMiddleware = createSaga();
-  const router: Middleware = routerMiddleware(history);
+  const router: Middleware = createRouterMiddleware(history);
 
   // Compose with dev tools
   const enhancer = composeWithDevTools(applyMiddleware(saga, router));

@@ -9,12 +9,16 @@ export interface ICommonContentListPayload<T> {
   items: Array<ICommonFields<T>>;
 }
 
+export interface ICommonContentayload<T> {
+  item: ICommonFields<T>;
+}
+
 export interface ICommonDataNode {
   nodeType: string;
   data: any;
-  content?: [ICommonDataNode];
-  value?: string;
-  marks?: { type: string }[];
+  content: [ICommonDataNode];
+  value: string;
+  marks: { type: string }[];
 }
 
 export interface ILink {

@@ -66,6 +66,8 @@ const Html: FC<StatePropTypes> = ({
 
   if (!buildProd) srcJsFiles = devStatic;
 
+  console.log(rootComponent)
+  
   return (
     <>
       <html {...htmlAttrs}>
