@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy-api:
+  deploy-app:
     runs-on: 'ubuntu-latest'
     defaults:
       run:
@@ -14,7 +14,7 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      KUBECONFIG_FILE: '${{ secrets.PROD_KUBECONFIG }}'
+      KUBECONFIG_FILE: '${{ secrets.KUBECONFIG_PROD }}'
 
     steps:
 
@@ -48,9 +48,11 @@ jobs:
       env:
         VPN_CONFIG: ${{secrets.VPN_CONFIG}}
 
-    - run: 'mkdir ~/.kube && echo "$PROD_KUBECONFIG" > ~/.kube/config'
+    - run: 'mkdir ~/.kube && echo "$KUBECONFIG_FILE" > ~/.kube/config'
       env:
-        PROD_KUBECONFIG: ${{secrets.PROD_KUBECONFIG}}
+        KUBECONFIG_FILE: ${{secrets.KUBECONFIG_PROD}}
+
+    - run: sudo chown $(id -u):$(id -g) ~/.kube/config
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
@@ -63,18 +65,6 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Install OpenVPN
-      run: |
-        sudo apt update
-        sudo apt install -y openvpn openvpn-systemd-resolved
-
-    - name: Connect to VPN
-      uses: kota65535/github-openvpn-connect-action@v1.0.2
-      with:
-        config_file: ./config.ovpn
-        username: ${{ secrets.OVPN_USERNAME }}
-        password: ${{ secrets.OVPN_PASSWORD }}
 
     - run: npm install -g yarn
 
@@ -90,10 +80,6 @@ jobs:
         push: true
         tags: alexbrown201/devnotnull-ui:${{ github.ref_name }} 
   
-    - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
-    
-    - run: helm repo update
-
     - name: Create S3 bucket
       run: aws s3api create-bucket --bucket devnotnull-ui-${{ github.ref_name }} --region us-east-1 || true
 
@@ -106,10 +92,27 @@ jobs:
     - run: |
         aws s3api put-bucket-policy --bucket devnotnull-ui-${{ github.ref_name }} --policy '{"Version": "2008-10-17", "Statement": [{ "Sid": "AllowPublicRead", "Effect": "Allow", "Principal": { "AWS": "*" }, "Action": ["s3:GetObject"], "Resource": ["arn:aws:s3:::devnotnull-ui-${{ github.ref_name }}/*" ] }] }'
 
+    - name: Install OpenVPN
+      run: |
+        sudo apt update
+        sudo apt install -y openvpn openvpn-systemd-resolved
+
+    - name: Connect to VPN
+      uses: kota65535/github-openvpn-connect-action@v1.0.2
+      with:
+        config_file: ./config.ovpn
+        username: ${{ secrets.OVPN_USERNAME }}
+        password: ${{ secrets.OVPN_PASSWORD }}
+
+    - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
+    
+    - run: helm repo update
+
     - run: helm uninstall devnotnull-ui-${{ github.ref_name }}
+      continue-on-error: true
 
     - run: |
-       helm upgrade --install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs \
+       helm install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs \
         --version 2 \
         --set env.NODE_RUNTIME_ENV=development \
         --set env.CDN_BUCKET=${{ github.ref_name }} \

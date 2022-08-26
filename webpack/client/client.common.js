@@ -33,7 +33,8 @@ const config = (env) => merge(common(env), {
       tls: false,
       zlib: false,
       crypto: false,
-      process: false
+      process: false,
+      path: require.resolve("path-browserify")
     },
     alias: {
       process: "process/browser"

@@ -1,8 +1,8 @@
 import React from 'react';
-import { renderToString } from 'react-dom/server';
+import { renderToPipeableStream } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { Response } from 'express';
-import { StaticRouter } from 'react-router';
+import { StaticRouter } from "react-router-dom/server";
 import { Store } from 'redux';
 import rootSaga from '../core/sagas';
 import App from '@web/app';
@@ -35,6 +35,7 @@ export const render = (
       </StaticRouter>
     </Provider>
   ) : null;
+
   (store as any)
     .runSaga(rootSaga, config)
     .toPromise()
@@ -48,7 +49,9 @@ export const render = (
       const splitPoints = `window.__SPLIT_POINTS__ = ${JSON.stringify(
         context.splitPoints
       )}`;
-      const html = renderToString(
+      
+      let didError = false;
+      const stream = renderToPipeableStream(
         <Html
           config={config}
           buildProd={BUILD_PROD}
@@ -56,9 +59,37 @@ export const render = (
           rootComponent={rootComponent}
           initialState={initialState}
           splitPoints={splitPoints}
-        />
-      );
-      res.send(html);
+        />,
+    {
+      onShellReady() {
+        // The content above all Suspense boundaries is ready.
+        // If something errored before we started streaming, we set the error code appropriately.
+        res.statusCode = didError ? 500 : 200;
+        res.setHeader('Content-type', 'text/html');
+        stream.pipe(res);
+      },
+      onShellError(error) {
+        // Something errored before we could complete the shell so we emit an alternative shell.
+        res.statusCode = 500;
+        res.send(
+          '<!doctype html><p>Loading...</p><script src="clientrender.js"></script>'
+        );
+      },
+      onAllReady() {
+        // If you don't want streaming, use this instead of onShellReady.
+        // This will fire after the entire page content is ready.
+        // You can use this for crawlers or static generation.
+
+        // res.statusCode = didError ? 500 : 200;
+        // res.setHeader('Content-type', 'text/html');
+        // stream.pipe(res);
+      },
+      onError(err) {
+        didError = true;
+        console.error(err);
+      },
+    }
+  );
     });
   // Dispatch a close event so sagas stop listening after they're resolved
   (store as any).closeSagas();

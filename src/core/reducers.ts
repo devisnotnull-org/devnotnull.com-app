@@ -9,7 +9,7 @@ import metadata, { IMetadataState } from './metadata/reducer';
 import assets, { IAssetState } from './assets/reducer';
 import contact, { IContactState } from './contact/reducer';
 import config, { IConfigState } from './config/reducer';
-import { connectRouter } from 'connected-react-router';
+import { createRouterReducer } from '@lagunovsky/redux-react-router'
 
 export interface IState {
   blog: IBlogState;
@@ -35,7 +35,7 @@ const rootReducers = (history: any) =>
     assets,
     contact,
     config,
-    router: connectRouter(history)
+    router: createRouterReducer(history),
   });
 
 export default rootReducers;

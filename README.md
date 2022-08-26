@@ -1,5 +1,7 @@
 # Devnotnull.com React application
 
+Last updated - 26/08/2022
+
 [![On merge to main](https://github.com/devisnotnull/devnotnull.com-app/actions/workflows/on_merge_main.yml/badge.svg)](https://github.com/devisnotnull/devnotnull.com-app/actions/workflows/on_merge_main.yml)
 
 <img width="1258" alt="Screenshot 2022-05-24 at 22 11 38" src="https://user-images.githubusercontent.com/702691/170133701-79db584a-e95a-4ac5-8a38-3163fa18a77c.png">

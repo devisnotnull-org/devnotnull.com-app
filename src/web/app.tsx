@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
 
@@ -7,6 +7,7 @@ import HeaderViewContainer from './containers/header/header';
 import HomeViewContainer from './containers/home/home';
 import FolioViewContainer from './containers/folio/folio';
 import BlogViewContainer from './containers/blog/blog';
+import BlogPageViewContainer from './containers/blogPage/blogPage';
 import NotFoundComponent from './containers/notFound/notFound';
 
 import { GlobalContextProvider } from '../web/context/theme';
@@ -41,14 +42,13 @@ export const AppRouter: React.FC<Props> = () => {
         </Helmet>
         <HeaderViewContainer />
         <div className={styles['Container']}>
-          <Switch>
-            <Route exact path="/" component={HomeViewContainer} />
-            <Route exact path="/portfolio" component={FolioViewContainer} />
-            <Route exact path="/blog" component={BlogViewContainer} />
-            <Route exact path="/blog/:slug" component={BlogViewContainer} />
-            <Route exact path="/blog/page/:page" component={BlogViewContainer} />
-            <Route component={NotFoundComponent} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<HomeViewContainer/>} />
+            <Route path="/portfolio" element={<FolioViewContainer/>} />
+            <Route path="/blog" element={<BlogViewContainer/>} />
+            <Route path="/blog/:slug" element={<BlogPageViewContainer/>} />
+            <Route element={<NotFoundComponent/>} />
+          </Routes>
         </div>
       </GlobalContextProvider>
     </>

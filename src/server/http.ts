@@ -1,10 +1,5 @@
 /// <reference path="../../typings/index.d.ts" />
 
-import 'regenerator-runtime/runtime';
-import { install } from 'source-map-support';
-
-install();
-
 import express, { Express, NextFunction, Request, Response } from 'express';
 import { createMemoryHistory } from 'history';
 import { config } from './config';
@@ -23,7 +18,7 @@ app.use(express.static(__dirname + '/static'));
 
 // All other routes will be directed to React
 app.get('*', (req: Request, res: Response) => {
-  const history = createMemoryHistory();
+  const history = createMemoryHistory({ initialEntries: [req.path]});
   const store = createStore(history);
   return render(req.url, config, res, store);
 });
