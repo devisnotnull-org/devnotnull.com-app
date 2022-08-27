@@ -8,6 +8,7 @@ import folio, { IFolioState } from './portfolio/reducer';
 import metadata, { IMetadataState } from './metadata/reducer';
 import assets, { IAssetState } from './assets/reducer';
 import contact, { IContactState } from './contact/reducer';
+import blogItem, { IBlogItemState } from './blogItem/reducer';
 import config, { IConfigState } from './config/reducer';
 import { createRouterReducer } from '@lagunovsky/redux-react-router'
 
@@ -21,6 +22,7 @@ export interface IState {
   assets: IAssetState;
   contact: IContactState;
   config: IConfigState;
+  blogItem: IBlogItemState;
   router: any;
 }
 
@@ -35,6 +37,7 @@ const rootReducers = (history: any) =>
     assets,
     contact,
     config,
+    blogItem,
     router: createRouterReducer(history),
   });
 

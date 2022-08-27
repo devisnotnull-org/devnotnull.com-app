@@ -36,8 +36,6 @@ type Props = {
  * @returns 
  */
 const BlogItemm: FC<Props> = ({ content, assets}) => {
-
-  console.log(content)
   return (
     <>
     {content.blogContent.content?.map((payload) => {

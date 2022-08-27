@@ -22,7 +22,7 @@ const initialState: MetaDataType = {
   secondaryImage: {}
 };
 
-export const blog: Reducer<IMetadataState> = (
+export const metadata: Reducer<IMetadataState> = (
   state: IMetadataState = initialState,
   action: AnyAction
 ) => {
@@ -31,8 +31,7 @@ export const blog: Reducer<IMetadataState> = (
       return { ...state, loading: true, errors: undefined };
     }
     case MetadataActionTypes.FETCH_SUCCESS: {
-      console.log(action.payload)
-      return { ...state, loading: false, errors: undefined, ...action.payload, ...action.payload };
+      return { ...state, loading: false, errors: undefined, ...action.payload, ...action.payload.payload };
     }
     case MetadataActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };
@@ -43,4 +42,4 @@ export const blog: Reducer<IMetadataState> = (
   }
 };
 
-export default blog;
+export default metadata;

@@ -1,39 +1,13 @@
 import { createSelector } from 'reselect';
-import { IBlogState } from './reducer';
+import { IBlogItemState } from './reducer';
 import { IState } from '../reducers';
 
-export const getBlog = (state: IState): IBlogState => state?.blog;
+export const getBlogItem = (state: IState): IBlogItemState => state?.blogItem;
 
-export const getBlogItems = createSelector(getBlog, state => state?.items);
+export const getBlogContent = createSelector(getBlogItem, state => state.fields.blogContent);
 
-export const getPaginationTotal = createSelector(
-  getBlog,
-  state => state?.total
-);
+export const getBlogSlug = createSelector(getBlogItem, state => state?.fields.slug);
 
-export const getPaginationSkip = createSelector(getBlog, state => state?.skip);
+export const getBlogTitle = createSelector(getBlogItem, state => state?.fields.title);
 
-export const getPaginationLimit = createSelector(getBlog, state => state?.skip);
-
-export const getPagination = createSelector(
-  getPaginationTotal,
-  getPaginationSkip,
-  getPaginationLimit,
-  (total, skip, limit) => ({ total, skip, limit })
-);
-
-export const getBlogItemsLoading = createSelector(
-  getBlog,
-  state => state?.loading
-);
-
-export const getBlogItemsErrors = createSelector(
-  getBlog,
-  state => state?.errors ?? undefined
-);
-
-
-export const getLinkedAsset = createSelector(
-  getBlog,
-  state => state?.includes?.Asset ?? []
-)
+export const getBlogAssets = createSelector(getBlogItem, state => state?.includes);

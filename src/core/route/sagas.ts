@@ -16,7 +16,6 @@ export function* routeSagas() {
   // Path based data loading
   if(currentRoute.location.pathname.includes("/blog/")) {
     const slug = currentRoute.location.pathname?.split("/")?.[2]
-    console.log(slug)
     yield call(blogEntrySaga, slug);
     return
   }

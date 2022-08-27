@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import BlogItem from '@components/blogItem/blogItem'
-import { getBlogItems, getLinkedAsset } from '../../../core/blog/selectors';
+import { getBlogContent, getBlogAssets, getBlogSlug, getBlogTitle } from '../../../core/blogItem/selectors';
 import { IBlogComponentProps } from './blogPage.state';
+
 import blogStyles from './blogPage.css';
 
 export type IProps = {
@@ -22,25 +23,24 @@ export interface IAsset {
 }
 
 export const BlogView: FC<IBlogComponentProps> = () => {
-  const blogItems = useSelector(getBlogItems);
-  const linkedAssetItems = useSelector(getLinkedAsset) ?? [];
+  const blogItem = useSelector(getBlogContent);
+  const getBlogTitle = useSelector(getBlogContent);
+  const linkedAssetItems = useSelector(getBlogAssets) ?? [];
 
   return (
     <div className={blogStyles.InnerContainer}>
-      {blogItems.map(item => {
-        return (
-          <div className={blogStyles['Entry--Container']}>
-            <h1 className={blogStyles['Entry--Header']}>
-              {item?.fields?.title ?? ''}
-            </h1>
-            <div>
-              {item?.fields?.blogContent?.content &&
-                <BlogItem assets={linkedAssetItems} content={item?.fields} />
-              }
-            </div>
+  
+        <div className={blogStyles['Entry--Container']}>
+          <h1 className={blogStyles['Entry--Header']}>
+            {getBlogTitle ?? ''}
+          </h1>
+          <div>
+            {blogItem?.content &&
+              <BlogItem assets={linkedAssetItems ? linkedAssetItems : []} content={blogItem} />
+            }
           </div>
-        );
-      })}
+        </div>
+   
     </div>
   );
 };

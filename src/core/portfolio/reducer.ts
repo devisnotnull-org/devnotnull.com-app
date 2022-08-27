@@ -39,7 +39,7 @@ export const portfolio: Reducer<IFolioState> = (
       };
     }
     case FolioActionTypes.FETCH_ERROR: {
-      return { ...state, loading: false, errors: action.payload };
+      return { ...state, loading: false, errors: action.payload?.payload };
     }
     default: {
       return state;

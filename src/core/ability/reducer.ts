@@ -28,7 +28,7 @@ export const blog: Reducer<IAbilityState> = (
       return { ...state, loading: true, errors: undefined };
     }
     case AbilitiesActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, errors: undefined, ...action.payload };
+      return { ...state, loading: false, errors: undefined, ...action.payload?.payload };
     }
     case AbilitiesActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };

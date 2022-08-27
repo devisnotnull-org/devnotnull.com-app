@@ -7,6 +7,7 @@ import { ExperianceActionTypes } from './experiance/actions';
 import { FolioActionTypes } from './portfolio/actions';
 import { ContactActionTypes } from './contact/actions';
 import { AssetActionTypes } from './assets/actions';
+import { BlogItemActionTypes } from './blogItem/actions';
 
 export {
   AbilitiesActionTypes,
@@ -15,7 +16,8 @@ export {
   ExperianceActionTypes,
   FolioActionTypes,
   AssetActionTypes,
-  ContactActionTypes
+  ContactActionTypes,
+  BlogItemActionTypes
 };
 
 export enum GlobalActionTypes {

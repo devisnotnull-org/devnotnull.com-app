@@ -2,7 +2,6 @@ import { all, takeEvery } from 'redux-saga/effects';
 import { ROUTER_ON_LOCATION_CHANGED } from '@lagunovsky/redux-react-router'
 
 import { abilitiesSagas } from './ability/sagas';
-import { blogSaga } from './blog/sagas';
 import { folioSaga } from './portfolio/sagas';
 import { educationSaga } from './education/sagas';
 import { experianceSaga } from './experiance/sagas';
@@ -13,7 +12,6 @@ import { contactSaga } from './contact/sagas';
 
 import {
   AbilitiesActionTypes,
-  BlogActionTypes,
   EducationActionTypes,
   ExperianceActionTypes,
   FolioActionTypes,
@@ -39,7 +37,6 @@ export default function* rootSaga() {
     takeEvery(GlobalActionTypes.FETCH_START, metadataSagas),
     takeEvery(ROUTER_ON_LOCATION_CHANGED, routeSagas),
     takeEvery(AbilitiesActionTypes.FETCH_START, abilitiesSagas),
-    takeEvery(BlogActionTypes.FETCH_START, blogSaga),
     takeEvery(EducationActionTypes.FETCH_START, educationSaga),
     takeEvery(ExperianceActionTypes.FETCH_START, experianceSaga),
     takeEvery(FolioActionTypes.FETCH_START, folioSaga),
