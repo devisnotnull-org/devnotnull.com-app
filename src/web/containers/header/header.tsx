@@ -54,6 +54,14 @@ export const HeaderView: FC<IHeaderProps> = () => {
             Linkedin
           </Link>
         </li>
+        <li className={classnames(styles['Link'], styles['Link--left'])}>
+          <Link
+            to={'https://medium.devnotnull.com/'}
+            onClick={() => setMenuOpen(false)}
+          >
+            Medium
+          </Link>
+        </li>
       </ul>
     </div>
   );

@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
-import { Button } from '../button/button'
 import { ICommonDataNode } from 'models/common';
 
 import blogItemStyles from './blogItem.css';
-import { useParams } from 'react-router-dom';
 
 /**
  * 
@@ -35,7 +33,7 @@ type Props = {
  * @param param0 
  * @returns 
  */
-const BlogItemm: FC<Props> = ({ content, assets}) => {
+const BlogItemm: FC<Props> = ({ content, assets }) => {
   return (
     <>
     {content.blogContent.content?.map((payload) => {
