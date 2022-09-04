@@ -1,0 +1,55 @@
+.InnerContainer {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+    padding: 0 1rem 1rem 1.5rem;
+}
+
+.Entry--Container {
+    padding-bottom: 5rem;
+    margin-bottom: 5rem;
+    border-bottom: 3px solid #ededed;
+}
+
+.Entry--Header {
+    color: #EC7263;
+    margin-bottom: 4rem;
+}
+
+.Entry--Body {
+
+}
+
+.Block--Code {
+    background: #eeeeee;
+    border: #dddddd 1px solid;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.Bold {
+    font-weight: bold;
+    padding: 0.5rem 0;
+
+}
+
+.Code {
+    background: var(--base-background-colour);
+    padding: 1rem;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:1.5rem
+}
+
+.Text {
+    padding: 0.5rem 0;
+}
+
+.ImageContainer {
+    text-align: center;
+}
+
+.ImageContainer--Image {
+    max-height: 30rem;
+    max-width: 100%;
+}

@@ -7,7 +7,7 @@ export interface IBlogItemState extends IBlogPostPayload {
   readonly loading: boolean;
   readonly errors?: string;
   readonly includes?: {
-    Asset?: {
+    Asset: {
       sys? : {
         id?: string
       },
@@ -22,7 +22,7 @@ export interface IBlogItemState extends IBlogPostPayload {
 }
 
 const initialState: IBlogItemState = {
-  includes: {},
+  includes: { Asset: [] },
   errors: undefined,
   loading: false,
   fields: {

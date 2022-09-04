@@ -33,6 +33,8 @@ export default function* rootSaga() {
 
   yield all([
     fetchAllSaga(),
+    // Initial setup
+    routeSagas(),
     // Bind our actions
     takeEvery(GlobalActionTypes.FETCH_START, metadataSagas),
     takeEvery(ROUTER_ON_LOCATION_CHANGED, routeSagas),

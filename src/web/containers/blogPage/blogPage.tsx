@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import BlogItem from '@components/blogItem/blogItem'
-import { getBlogContent, getBlogAssets, getBlogSlug, getBlogTitle } from '../../../core/blogItem/selectors';
+import Richtext from '@components/richtext/richtext'
+import { getBlogContent, getBlogAssets } from '../../../core/blogItem/selectors';
 import { IBlogComponentProps } from './blogPage.state';
 
 import blogStyles from './blogPage.css';
@@ -36,7 +36,7 @@ export const BlogView: FC<IBlogComponentProps> = () => {
           </h1>
           <div>
             {blogItem?.content &&
-              <BlogItem assets={linkedAssetItems ? linkedAssetItems : []} content={blogItem} />
+              <Richtext assets={linkedAssetItems ? linkedAssetItems : []} payload={blogItem} />
             }
           </div>
         </div>

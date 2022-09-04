@@ -23,6 +23,10 @@
     /** background: linear-gradient(to bottom, #ffffff 0px, var(--base-colour) 0%, var(--base-colour) 0%, #ffffff 100%); **/
 }
 
+.Education--Date {
+    opacity: 0.6;
+}
+
 .Education--Year {
     background: #fff;
     padding: 1rem;
@@ -58,7 +62,7 @@
 
 .Education--Description h3 {
     margin: 0;
-    padding: 0;
+    padding: 0.5rem 0;
     font-weight: 700;
 }
 

@@ -6,7 +6,7 @@
 
 .Experiance {
     position: relative;
-    padding: 1em 0;
+    padding: 0 0 1em 0;
     display: flex;  
     flex-direction: row;
 }
@@ -19,8 +19,6 @@
     left: 2.45rem;
     content: ' ';
     display: block;
-    /** background: var(--base-colour); **/
-    /** background: linear-gradient(to bottom, #ffffff 0px, var(--base-colour) 0%, var(--base-colour) 0%, #ffffff 100%); **/
 }
 
 .Experiance--Year {
@@ -32,7 +30,11 @@
     flex: 1;
 }
 
-.Experiance--Description{
+.Experiance--Date {
+    opacity: 0.6;
+}
+
+.Experiance--Description {
     background: #eee;
     margin-bottom: 1rem;
     position: relative;
@@ -45,7 +47,7 @@
 .Experiance--Description:after {
     content: '';
     position: absolute;
-    top: 1.5rem;
+    top: 3rem;
     right: 0;
     left: -1.5rem;
     height: 0;
@@ -58,12 +60,11 @@
 
 .Experiance--Description h3 {
     margin: 0;
-    padding: 0;
+    padding: 0.5rem 0;
     font-weight: 700;
 }
 
 .Experiance--Description p {
-
     margin-top: 0.5rem;
     padding: 0;
 }
@@ -80,7 +81,5 @@
     
     .Experiance--Description{
         flex: 9;
-    }
-
-    
+    }   
 }
