@@ -10,4 +10,4 @@ export const getBlogSlug = createSelector(getBlogItem, state => state?.fields.sl
 
 export const getBlogTitle = createSelector(getBlogItem, state => state?.fields.title);
 
-export const getBlogAssets = createSelector(getBlogItem, state => state?.includes);
+export const getBlogAssets = createSelector(getBlogItem, state => state?.includes?.Asset);

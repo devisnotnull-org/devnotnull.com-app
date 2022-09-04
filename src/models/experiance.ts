@@ -6,4 +6,5 @@ export interface IExperiancePayload {
   startDate: string;
   endDate: string;
   order: number
+  summary: any
 }
