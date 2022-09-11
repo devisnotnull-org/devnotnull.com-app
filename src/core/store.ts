@@ -6,20 +6,25 @@ import {
   Middleware
 } from 'redux';
 import createSaga, { END, SagaMiddleware } from 'redux-saga';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { createRouterMiddleware } from '@lagunovsky/redux-react-router'
+import { isProduction } from '../utils';
 
 import rootReducers from '../core/reducers';
 
-export default (history: any, reduxState = undefined) => {
-  // Compose our middlewares
+export default async (history: any, reduxState = undefined) => {
   // Compose our middlewares
   const saga: SagaMiddleware = createSaga();
   const router: Middleware = createRouterMiddleware(history);
+  
+  let enhancer;
+  // Only import dev tools if we are in dev mode
+  if(isProduction) { 
+    enhancer = await import('redux-devtools-extension').then(payload => payload.composeWithDevTools(applyMiddleware(saga, router)))
+  } else enhancer = applyMiddleware(saga, router);
 
   // Compose with dev tools
-  const enhancer = composeWithDevTools(applyMiddleware(saga, router));
-
+  enhancer = applyMiddleware(saga, router) 
+  
   // Create our store
   const store: Store = createStore(rootReducers(history), reduxState, enhancer);
 

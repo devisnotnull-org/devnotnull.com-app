@@ -5,6 +5,10 @@
     padding: 0 1rem 1rem 1.5rem;
 }
 
+.Entry {
+    opacity: 0;
+}
+
 .Entry--Container {
     padding-bottom: 5rem;
     margin-bottom: 5rem;
@@ -14,10 +18,6 @@
 .Entry--Header {
     color: #EC7263;
     margin-bottom: 4rem;
-}
-
-.Entry--Body {
-
 }
 
 .Block--Code {
@@ -53,3 +53,12 @@
     max-height: 30rem;
     max-width: 100%;
 }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+  
+.Entry--FadeIn { animation: fadeIn 1s; opacity: 1; }
+
+.Entry--IsViewed { opacity: 1; }

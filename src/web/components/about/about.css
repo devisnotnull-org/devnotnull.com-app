@@ -28,6 +28,47 @@
     border-radius: 50%;
 }
 
+.Text--Header {
+    bottom: -100px;
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+.animatedFadeInUp {
+    opacity: 0
+}
+
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+}
+
 .Text--Header h1 {
     margin: 0;
     padding: 0;
@@ -79,3 +120,12 @@
    50% { transform: rotate(  0.0deg) }    /* Reset for the last half to pause */
   100% { transform: rotate(  0.0deg) }
 }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.Logo--FadeIn { animation: fadeIn 1s; opacity: 1; }
+
+.Logo--IsViewed { opacity: 1; }

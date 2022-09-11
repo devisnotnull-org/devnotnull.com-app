@@ -6,6 +6,9 @@ declare const styles: {
   readonly "Header--Text": string;
   readonly "Header--Wave": string;
   readonly "wave-animation": string;
+  readonly "Logo--FadeIn": string;
+  readonly "fadeIn": string;
+  readonly "Logo--IsViewed": string;
   readonly "primary-theme": string;
   readonly "Container--Large": string;
   readonly "Container--Standard": string;

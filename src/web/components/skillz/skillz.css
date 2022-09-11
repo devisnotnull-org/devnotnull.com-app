@@ -15,6 +15,9 @@
     text-overflow: ellipsis;
     font-size: 1.2em;
     font-weight: 600;
+    animation-name: expand;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
 }
   
 .Skill-Items {
@@ -36,4 +39,18 @@
     font-size: 1.2rem;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
+    box-shadow: 0 30px 40px rgba(0,0,0,.1);
+
 }
+
+@keyframes expand {
+    from {
+        opacity: 0;
+        width: 0;
+    }
+  
+    to {
+        opacity: 1;
+        width: 100%;
+    }
+  }

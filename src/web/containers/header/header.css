@@ -5,6 +5,7 @@
 }
 
 .Header {
+  height: 80px;
 }
 
 .MenuToggle {
@@ -19,26 +20,44 @@
 }
 
 .MenuToggle > span:first-child {
-  transform-origin: 0% 0%;
+  animation-name: rotateReset;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+.MenuToggle > span:nth-child(2) {
+ opacity: 1;
 }
 
 .MenuToggle > span:nth-last-child(2) {
-  transform-origin: 0% 100%;
+  animation-name: rotateReset;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+
 }
 
-.MenuToggle > .MenuToggle--Open ~ span {
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
-  background: #232323;
+.MenuToggle--Open > span:first-child {
+  animation-name: rotateUp;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  top: 10px;
+  width: 40px;
+  margin: 0;
 }
 
-.MenuToggle > .MenuToggle--Open ~ span:nth-last-child(3) {
+.MenuToggle--Open > span:nth-child(2) {
   opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
+  margin: 10px;
 }
 
-.MenuToggle > .MenuToggle--Open ~ span:nth-last-child(2) {
-  transform: rotate(-45deg) translate(0, -1px);
+.MenuToggle--Open > span:last-child {
+  animation-name: rotateDown;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  bottom: 18px;
+  width: 40px;
+  margin: 0;
+
 }
 
 .MenuToggle--Open {
@@ -54,12 +73,33 @@
   background: black;
   border-radius: 0.3rem;
   z-index: 1;
-  transform-origin: 4px 0px;
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              opacity 0.55s ease;
 }
 
+@keyframes rotateReset {
+  to {
+    transform: rotate(0)
+  }
+}
+
+@keyframes rotateUp {
+  from {
+      transform: rotate(0)
+  }
+
+  to {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes rotateDown {
+  from {
+      transform: rotate(0)
+  }
+
+  to {
+    transform: rotate(-45deg);
+  }
+}
 .Menu {
   top: 0;
   margin: 0;
@@ -111,12 +151,19 @@
   display: none;
 }
 
-.Menu li {
-    padding: 1rem;
-    font-size: 2rem;
-    margin-left: 0.6rem;
+.Menu ul {
+  padding: 0;
+  margin: 0;
 }
 
+.Menu li {
+    padding: 0;
+    font-size: 2rem;
+}
+
+.Menu a {
+  padding: 2rem;
+}
 
 .MenuToggle {
   display: block;
