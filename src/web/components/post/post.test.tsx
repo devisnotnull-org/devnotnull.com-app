@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Post from './postBlurb';
+import Post from './post';
 
 describe('<Post />', () => {
   it('render Post Component', () => {

@@ -1,3 +1,7 @@
 {
-  "extends": "stylelint-config-standard"
+  "extends": [
+    "@considonet/stylelint-config-bem",
+    "@considonet/stylelint-config-scss",
+    "@considonet/stylelint-config-order"
+  ]
 }

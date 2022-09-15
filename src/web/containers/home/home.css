@@ -1,31 +1,28 @@
 .Image {
-    width: 33%;
+  width: 33%;
 }
 
 .Content {
-    display: flex;  
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .Description {
-    order: 1;
-    flex: 2;
+  order: 1;
+  flex: 2;
 }
 
 .Breakdown {
-    order: 2;
-    flex: 1;
+  order: 2;
+  flex: 1;
 }
-  
 
 @media (max-width: 850px) {
+  .Content {
+    flex-direction: column;
+  }
 
-    .Content {  
-        flex-direction: column;
-    }
-
-    .Image {
-        width: 100%;
-    }
-
+  .Image {
+    width: 100%;
+  }
 }

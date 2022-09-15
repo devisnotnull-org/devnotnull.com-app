@@ -8,13 +8,9 @@ import styles from './about.css';
 import commonStyles from '../../style/common.css';
 import { useInView } from 'react-intersection-observer';
 
-interface StateProps {
+type Props = {
   metadata: IMetadataPayload;
 }
-interface ActionProps {}
-interface SelectorProps {}
-
-type Props = StateProps & ActionProps & SelectorProps;
 
 export const Profile: FC<Props> = ({ metadata }) => {
 

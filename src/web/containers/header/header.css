@@ -1,4 +1,4 @@
-@import '../../style/common.css';
+@import "../../style/common.css";
 
 :root {
   --header-inverse-top: -7.5rem;
@@ -9,55 +9,53 @@
 }
 
 .MenuToggle {
-  display: block;
   position: relative;
   z-index: 1;
-  -webkit-user-select: none;
-  user-select: none;
-  padding: 3rem;
   z-index: 999;
+  display: block;
+  padding: 3rem;
   cursor: pointer;
+  user-select: none;
+  user-select: none;
 }
 
 .MenuToggle > span:first-child {
   animation-name: rotateReset;
-  animation-duration: 0.5s;
+  animation-duration: .5s;
   animation-fill-mode: both;
 }
 
 .MenuToggle > span:nth-child(2) {
- opacity: 1;
+  opacity: 1;
 }
 
 .MenuToggle > span:nth-last-child(2) {
   animation-name: rotateReset;
-  animation-duration: 0.5s;
+  animation-duration: .5s;
   animation-fill-mode: both;
-
 }
 
 .MenuToggle--Open > span:first-child {
-  animation-name: rotateUp;
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
   top: 10px;
   width: 40px;
   margin: 0;
+  animation-duration: .5s;
+  animation-fill-mode: both;
+  animation-name: rotateUp;
 }
 
 .MenuToggle--Open > span:nth-child(2) {
-  opacity: 0;
   margin: 10px;
+  opacity: 0;
 }
 
 .MenuToggle--Open > span:last-child {
-  animation-name: rotateDown;
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
   bottom: 18px;
   width: 40px;
   margin: 0;
-
+  animation-duration: .5s;
+  animation-fill-mode: both;
+  animation-name: rotateDown;
 }
 
 .MenuToggle--Open {
@@ -65,25 +63,25 @@
 }
 
 .MenuToggle--Line {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 3.3rem;
-  height: 0.4rem;
-  margin-bottom: 0.5rem;
-  position: relative;
+  height: .4rem;
+  margin-bottom: .5rem;
+  border-radius: .3rem;
   background: black;
-  border-radius: 0.3rem;
-  z-index: 1;
 }
 
 @keyframes rotateReset {
   to {
-    transform: rotate(0)
+    transform: rotate(0);
   }
 }
 
 @keyframes rotateUp {
   from {
-      transform: rotate(0)
+    transform: rotate(0);
   }
 
   to {
@@ -93,35 +91,36 @@
 
 @keyframes rotateDown {
   from {
-      transform: rotate(0)
+    transform: rotate(0);
   }
 
   to {
     transform: rotate(-45deg);
   }
 }
+
 .Menu {
-  top: 0;
-  margin: 0;
-  padding: 8rem 0 0 0;
   position: fixed;
-  width: 100%;
+  top: 0;
   z-index: 998;
+  width: 100%;
   height: 100%;
-  opacity: 0;
+  padding: 8rem 0 0;
+  margin: 0;
   background: var(--base-background-colour);
-  list-style-type: none;
   -webkit-font-smoothing: antialiased;
-  transition: 0.5s;
+  opacity: 0;
+  transition: .5s;
+  list-style-type: none;
 }
 
 .Menu a {
-  padding: 1rem;
-  text-decoration: none;
-  transition: color 0.3s ease;
   display: block;
+  padding: 1rem;
   font-weight: 400;
   text-align: center;
+  text-decoration: none;
+  transition: color .3s ease;
 }
 
 .Menu svg > fill {
@@ -139,16 +138,16 @@
 }
 
 .Menu--Open {
+  display: block;
   transform: none;
   opacity: 1;
-  display: block;
 }
 
 .Menu--Closed {
-  transform-origin: 0% 0%;
-  transform: translate(-100%, 0);
-  opacity: 0;
   display: none;
+  transform: translate(-100%, 0);
+  transform-origin: 0% 0%;
+  opacity: 0;
 }
 
 .Menu ul {
@@ -157,8 +156,8 @@
 }
 
 .Menu li {
-    padding: 0;
-    font-size: 2rem;
+  padding: 0;
+  font-size: 2rem;
 }
 
 .Menu a {
@@ -166,14 +165,14 @@
 }
 
 .MenuToggle {
-  display: block;
   position: relative;
   z-index: 1;
-  -webkit-user-select: none;
-  user-select: none;
-  padding: 3rem;
   z-index: 999;
+  display: block;
+  padding: 3rem;
   cursor: pointer;
+  user-select: none;
+  user-select: none;
 }
 
 .Left {
@@ -188,15 +187,15 @@
   display: none;
 }
 
-@media screen and (min-width: 700px) { 
+@media screen and (min-width: 700px) {
   .Menu {
     position: fixed;
-    width: 30rem;
     z-index: 998;
+    width: 30rem;
     height: 100%;
-    list-style-type: none;
     -webkit-font-smoothing: antialiased;
-    transition: 0.5s;
+    transition: .5s;
+    list-style-type: none;
   }
 
   .Menu a {

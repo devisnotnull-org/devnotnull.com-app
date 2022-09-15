@@ -1,98 +1,98 @@
-@import '../../style/common.css';
+@import "../../style/common.css";
 
 :root {
-    --header-top: 8rem;
-    --header-inverse-top: -7.5rem;
+  --header-top: 8rem;
+  --header-inverse-top: -7.5rem;
 }
 
 .Header {
-    text-align: center;
-    margin-right: 1.5rem;
-    margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+  text-align: center;
 }
 
 .Header--Photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    padding: 5px;
-    background: #ededed;
-    display: inline-block;
-    margin-top: -80px;
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  padding: 5px;
+  margin-top: -80px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #ededed;
 }
 
 .Header--Photo img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
 
 .Text--Header {
-    bottom: -100px;
-    opacity: 0;
-    animation-name: fadeInUp;
-    animation-duration: 1s;
-    animation-fill-mode: both;
+  bottom: -100px;
+  opacity: 0;
+  animation-name: fadeInUp;
+  animation-duration: 1s;
+  animation-fill-mode: both;
 }
 
 @keyframes fadeInUp {
-    from {
-        transform: translate3d(0,40px,0)
-    }
+  from {
+    transform: translate3d(0, 40px, 0);
+  }
 
-    to {
-        transform: translate3d(0,0,0);
-        opacity: 1
-    }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
 }
 
 .Text-header h1::first-line {
-    font-size: 1.5em;
-    letter-spacing: -4px;
-    font-weight: 800;
-    line-height: 1.5em;
+  font-size: 1.5em;
+  letter-spacing: -4px;
+  font-weight: 800;
+  line-height: 1.5em;
 }
 
 .Header--Text h1 span {
-    color: #F0563D;
+  color: #f0563d;
 }
 
 .Header--Text h1 sup {
-    opacity: 0.5;
+  opacity: .5;
 }
 
-.Header--Text:after {
-    width: 100%;
-    height: 0.3rem;
-    background: #ddd;
-    opacity: 0.5;
-    margin-top: 1.5rem;
-    content: '';
-    display: block;
+.Header--Text::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: .3rem;
+  margin-top: 1.5rem;
+  background: #ddd;
+  opacity: .5;
 }
 
 .Header--Wave {
-    animation-name: wave-animation;    /* Refers to the name of your @keyframes element below */
-    animation-duration: 1.5s;          /* Change to speed up or slow down */
-    animation-iteration-count: infinite;    /* Never stop waving :) */
-    transform-origin: 70% 70%;         /* Pivot around the bottom-left palm */
-    display: inline-block;
+  display: inline-block;
+  transform-origin: 70% 70%;         /* Pivot around the bottom-left palm */
+  animation-duration: 1.5s;          /* Change to speed up or slow down */
+  animation-iteration-count: infinite;    /* Never stop waving :) */
+  animation-name: wave-animation;    /* Refers to the name of your @keyframes element below */
 }
 
 @keyframes wave-animation {
-    0% { transform: rotate(  0.0deg) }
-   10% { transform: rotate(-10.0deg) }    /* The following four values can be played with to make the waving more or less extreme */
-   20% { transform: rotate( 12.0deg) }
-   30% { transform: rotate(-10.0deg) }
-   40% { transform: rotate(  9.0deg) }
-   50% { transform: rotate(  0.0deg) }    /* Reset for the last half to pause */
-  100% { transform: rotate(  0.0deg) }
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(-10deg); }    /* The following four values can be played with to make the waving more or less extreme */
+  20% { transform: rotate(12deg); }
+  30% { transform: rotate(-10deg); }
+  40% { transform: rotate(9deg); }
+  50% { transform: rotate(0deg); }    /* Reset for the last half to pause */
+  100% { transform: rotate(0deg); }
 }
 
 @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .Logo--FadeIn { animation: fadeIn 1s; opacity: 1; }

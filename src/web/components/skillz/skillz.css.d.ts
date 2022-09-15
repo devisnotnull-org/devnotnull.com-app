@@ -1,6 +1,7 @@
 declare const styles: {
   readonly "Item--Skills": string;
   readonly "Skill": string;
+  readonly "expand": string;
   readonly "Skill-Items": string;
   readonly "Skill--Badge": string;
 };
