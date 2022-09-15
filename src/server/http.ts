@@ -17,9 +17,9 @@ app.use(express.static('static'));
 app.use(express.static(__dirname + '/static'));
 
 // All other routes will be directed to React
-app.get('*', (req: Request, res: Response) => {
+app.get('*', async (req: Request, res: Response) => {
   const history = createMemoryHistory({ initialEntries: [req.path]});
-  const store = createStore(history);
+  const store = await createStore(history);
   return render(req.url, config, res, store);
 });
 

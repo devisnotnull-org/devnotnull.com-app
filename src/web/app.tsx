@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
+import ReactGA from 'react-ga';
 
 import HeaderViewContainer from './containers/header/header';
 import HomeViewContainer from './containers/home/home';
@@ -16,13 +17,10 @@ import { getMetadataBlurb, getMetadataTitle } from '../core/metadata/selectors';
 
 import styles from './style/common.css';
 
-interface StateProps {}
-interface ActionProps {}
-interface SelectorProps {}
+const TRACKING_ID = "UA-136352816-2";
+ReactGA.initialize(TRACKING_ID);
 
-type Props = StateProps & ActionProps & SelectorProps;
-
-export const AppRouter: React.FC<Props> = () => {
+export const AppRouter: React.FC = () => {
   const blurb = useSelector(getMetadataBlurb);
   const title = useSelector(getMetadataTitle);
 

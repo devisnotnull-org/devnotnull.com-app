@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import BlogItem from '@components/blogItem/blogItem'
+
 import { getBlogItems, getLinkedAsset } from '../../../core/blog/selectors';
-import { IBlogComponentProps } from './blog.state';
 import blogStyles from './blog.css';
 
 export type IProps = {
@@ -21,10 +21,10 @@ export interface IAsset {
   }
 }
 
-export const BlogView: FC<IBlogComponentProps> = () => {
+export const BlogView: FC = () => {
   const blogItems = useSelector(getBlogItems);
   const linkedAssetItems = useSelector(getLinkedAsset) ?? [];
-  
+
   return (
     <div className={blogStyles.InnerContainer}>
       {blogItems.map(item => {

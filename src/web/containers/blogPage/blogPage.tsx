@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import Richtext from '@components/richtext/richtext'
 import { getBlogContent, getBlogAssets } from '../../../core/blogItem/selectors';
-import { IBlogComponentProps } from './blogPage.state';
 
 import blogStyles from './blogPage.css';
 
@@ -22,7 +21,7 @@ export interface IAsset {
   }
 }
 
-export const BlogView: FC<IBlogComponentProps> = () => {
+export const BlogView: FC = () => {
   const blogItem = useSelector(getBlogContent);
   const getBlogTitle = useSelector(getBlogContent);
   const linkedAssetItems = useSelector(getBlogAssets) ?? [];

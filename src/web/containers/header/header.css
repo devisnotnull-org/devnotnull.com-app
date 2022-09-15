@@ -1,44 +1,61 @@
-@import '../../style/common.css';
+@import "../../style/common.css";
 
 :root {
   --header-inverse-top: -7.5rem;
 }
 
 .Header {
+  height: 80px;
 }
 
 .MenuToggle {
-  display: block;
   position: relative;
   z-index: 1;
-  -webkit-user-select: none;
-  user-select: none;
-  padding: 3rem;
   z-index: 999;
+  display: block;
+  padding: 3rem;
   cursor: pointer;
+  user-select: none;
+  user-select: none;
 }
 
 .MenuToggle > span:first-child {
-  transform-origin: 0% 0%;
+  animation-name: rotateReset;
+  animation-duration: .5s;
+  animation-fill-mode: both;
+}
+
+.MenuToggle > span:nth-child(2) {
+  opacity: 1;
 }
 
 .MenuToggle > span:nth-last-child(2) {
-  transform-origin: 0% 100%;
+  animation-name: rotateReset;
+  animation-duration: .5s;
+  animation-fill-mode: both;
 }
 
-.MenuToggle > .MenuToggle--Open ~ span {
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
-  background: #232323;
+.MenuToggle--Open > span:first-child {
+  top: 10px;
+  width: 40px;
+  margin: 0;
+  animation-duration: .5s;
+  animation-fill-mode: both;
+  animation-name: rotateUp;
 }
 
-.MenuToggle > .MenuToggle--Open ~ span:nth-last-child(3) {
+.MenuToggle--Open > span:nth-child(2) {
+  margin: 10px;
   opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
 }
 
-.MenuToggle > .MenuToggle--Open ~ span:nth-last-child(2) {
-  transform: rotate(-45deg) translate(0, -1px);
+.MenuToggle--Open > span:last-child {
+  bottom: 18px;
+  width: 40px;
+  margin: 0;
+  animation-duration: .5s;
+  animation-fill-mode: both;
+  animation-name: rotateDown;
 }
 
 .MenuToggle--Open {
@@ -46,42 +63,64 @@
 }
 
 .MenuToggle--Line {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 3.3rem;
-  height: 0.4rem;
-  margin-bottom: 0.5rem;
-  position: relative;
+  height: .4rem;
+  margin-bottom: .5rem;
+  border-radius: .3rem;
   background: black;
-  border-radius: 0.3rem;
-  z-index: 1;
-  transform-origin: 4px 0px;
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-              opacity 0.55s ease;
+}
+
+@keyframes rotateReset {
+  to {
+    transform: rotate(0);
+  }
+}
+
+@keyframes rotateUp {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes rotateDown {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(-45deg);
+  }
 }
 
 .Menu {
-  top: 0;
-  margin: 0;
-  padding: 8rem 0 0 0;
   position: fixed;
-  width: 100%;
+  top: 0;
   z-index: 998;
+  width: 100%;
   height: 100%;
-  opacity: 0;
+  padding: 8rem 0 0;
+  margin: 0;
   background: var(--base-background-colour);
-  list-style-type: none;
   -webkit-font-smoothing: antialiased;
-  transition: 0.5s;
+  opacity: 0;
+  transition: .5s;
+  list-style-type: none;
 }
 
 .Menu a {
-  padding: 1rem;
-  text-decoration: none;
-  transition: color 0.3s ease;
   display: block;
+  padding: 1rem;
   font-weight: 400;
   text-align: center;
+  text-decoration: none;
+  transition: color .3s ease;
 }
 
 .Menu svg > fill {
@@ -99,34 +138,41 @@
 }
 
 .Menu--Open {
+  display: block;
   transform: none;
   opacity: 1;
-  display: block;
 }
 
 .Menu--Closed {
-  transform-origin: 0% 0%;
-  transform: translate(-100%, 0);
-  opacity: 0;
   display: none;
+  transform: translate(-100%, 0);
+  transform-origin: 0% 0%;
+  opacity: 0;
+}
+
+.Menu ul {
+  padding: 0;
+  margin: 0;
 }
 
 .Menu li {
-    padding: 1rem;
-    font-size: 2rem;
-    margin-left: 0.6rem;
+  padding: 0;
+  font-size: 2rem;
 }
 
+.Menu a {
+  padding: 2rem;
+}
 
 .MenuToggle {
-  display: block;
   position: relative;
   z-index: 1;
-  -webkit-user-select: none;
-  user-select: none;
-  padding: 3rem;
   z-index: 999;
+  display: block;
+  padding: 3rem;
   cursor: pointer;
+  user-select: none;
+  user-select: none;
 }
 
 .Left {
@@ -141,15 +187,15 @@
   display: none;
 }
 
-@media screen and (min-width: 700px) { 
+@media screen and (min-width: 700px) {
   .Menu {
     position: fixed;
-    width: 30rem;
     z-index: 998;
+    width: 30rem;
     height: 100%;
-    list-style-type: none;
     -webkit-font-smoothing: antialiased;
-    transition: 0.5s;
+    transition: .5s;
+    list-style-type: none;
   }
 
   .Menu a {

@@ -17,9 +17,9 @@ export const HeaderView: FC<IHeaderProps> = () => {
           menuOpen ? styles['MenuToggle--Open'] : styles['MenuToggle--Closed']
         )}
       >
+        <span className={classnames(styles['MenuToggle--Line'], styles['MenuToggle--Line-top'])}></span>
         <span className={classnames(styles['MenuToggle--Line'])}></span>
-        <span className={classnames(styles['MenuToggle--Line'])}></span>
-        <span className={classnames(styles['MenuToggle--Line'])}></span>
+        <span className={classnames(styles['MenuToggle--Line'], styles['MenuToggle--Line-bottom'])}></span>
       </div>
 
       <ul

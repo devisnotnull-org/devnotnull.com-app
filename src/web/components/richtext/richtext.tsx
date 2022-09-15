@@ -24,11 +24,6 @@ type Props = {
   }
 }
 
-/**
- * 
- * @param param0 
- * @returns 
- */
 const RichText: FC<Props> = ({ payload, assets }) => (
   <>
   {payload.content?.map((payload) => {
@@ -60,10 +55,12 @@ const RichText: FC<Props> = ({ payload, assets }) => (
         return (<b>{inner.value}</b>);
       }
 
-      return <span>{inner.value}</span>;
+      return <p>{inner.value}</p>;
     })
 
-    return <p>{items}</p>
+    return (
+      <p>{items}</p>
+    )
 
   })}
   </>

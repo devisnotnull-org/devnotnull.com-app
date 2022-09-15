@@ -1,35 +1,35 @@
 .InnerContainer {
-    padding: 0 1rem 1rem 1.5rem;
+  padding: 0 1rem 1rem 1.5rem;
 }
 
 .Entry--Container {
-    padding-bottom: 5rem;
-    margin-bottom: 5rem;
-    border-bottom: 3px solid #ededed;
+  padding-bottom: 5rem;
+  margin-bottom: 5rem;
+  border-bottom: 3px solid #ededed;
 }
 
 .Entry--Header {
-    color: #EC7263;
-    margin-bottom: 4rem;
+  margin-bottom: 4rem;
+  color: #ec7263;
 }
 
 .Entry--Primary-image {
-    width: 100%;
+  width: 100%;
 }
 
 .Entry--Secondary-image {
-    width: 50%;
+  width: 50%;
 }
 
 .Block--Code {
-    background: #eeeeee;
-    border: #dddddd 1px solid;
-    border-radius: 5px;
-    padding: 10px;
+  padding: 10px;
+  border: #ddd 1px solid;
+  border-radius: 5px;
+  background: #eee;
 }
 
-@media screen and (min-width: 700px) { 
-    .Entry--Primary-image {
-        width: 50%;
-    }
+@media screen and (min-width: 700px) {
+  .Entry--Primary-image {
+    width: 50%;
+  }
 }

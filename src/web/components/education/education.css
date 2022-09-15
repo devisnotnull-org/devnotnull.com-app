@@ -1,89 +1,88 @@
 @import "../../style/common.css";
 
-:root{
-    --section-top-margin: 2rem;
+:root {
+  --section-top-margin: 2rem;
 }
 
 .Education {
-    position: relative;
-    padding: 1em 0;
-    display: flex;  
-    flex-direction: row;
+  position: relative;
+  padding: 1em 0;
+  display: flex;
+  flex-direction: row;
 }
 
-.Education:before {
-    width: 0.5rem;
-    height: 40%;
-    top: 70px;
-    position: absolute;
-    left: 2.45rem;
-    content: ' ';
-    display: block;
-    /** background: var(--base-colour); **/
-    /** background: linear-gradient(to bottom, #ffffff 0px, var(--base-colour) 0%, var(--base-colour) 0%, #ffffff 100%); **/
+.Education::before {
+  content: " ";
+  position: absolute;
+  top: 70px;
+  left: 2.45rem;
+  display: block;
+  width: .5rem;
+  height: 40%;
+
+  /** background: var(--base-colour); **/
+
+  /** background: linear-gradient(to bottom, #ffffff 0px, var(--base-colour) 0%, var(--base-colour) 0%, #ffffff 100%); **/
 }
 
 .Education--Date {
-    opacity: 0.6;
+  opacity: .6;
 }
 
 .Education--Year {
-    background: #fff;
-    padding: 1rem;
-    font-size: 1.5em;
-    font-weight: 700;
-    order: 1;
-    flex: 1;
+  flex: 1;
+  order: 1;
+  padding: 1rem;
+  background: #fff;
+  font-size: 1.5em;
+  font-weight: 700;
 }
 
-.Education--Description{
-    background: #eee;
-    margin-bottom: 1rem;
-    position: relative;
-    padding: 1rem 1rem 0 1rem;
-    border-bottom: 1px solid #ddd;
-    order: 2;
-    flex: 9;
+.Education--Description {
+  position: relative;
+  flex: 9;
+  order: 2;
+  padding: 1rem 1rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+  background: #eee;
 }
 
-.Education--Description:after {
-    content: '';
-    position: absolute;
-    top: 1.5rem;
-    right: 0;
-    left: -1.5rem;
-    height: 0;
-    width: 0;
-    border: solid transparent;
-    border-right-color: #eee;
-    border-width: 1rem;
-    pointer-events: none;
+.Education--Description::after {
+  content: "";
+  position: absolute;
+  top: 1.5rem;
+  right: 0;
+  left: -1.5rem;
+  height: 0;
+  width: 0;
+  border: solid transparent;
+  border-right-color: #eee;
+  border-width: 1rem;
+  pointer-events: none;
 }
 
 .Education--Description h3 {
-    margin: 0;
-    padding: 0.5rem 0;
-    font-weight: 700;
+  margin: 0;
+  padding: .5rem 0;
+  font-weight: 700;
 }
 
 .Education--Description p {
-    margin-top: 0.5rem;
-    padding: 0;
+  margin-top: .5rem;
+  padding: 0;
 }
 
 @media (max-width: 850px) {
+  .Education {
+    flex-direction: column;
+  }
 
-    .Education {  
-        flex-direction: column;
-    }
+  .Education--Year {
+    flex: 1;
+  }
 
-    .Education--Year {
-        flex: 1;
-    }
-    
-    .Education--Description{
-        flex: 9;
-    }
-
-    
+  .Education--Description {
+    flex: 9;
+  }
 }
