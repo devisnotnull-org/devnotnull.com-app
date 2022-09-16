@@ -3,9 +3,8 @@ import classnames from 'classnames';
 
 import { Link } from '@components/link/link';
 import styles from './header.css';
-import { IHeaderProps } from './header.state';
 
-export const HeaderView: FC<IHeaderProps> = () => {
+export const HeaderView: FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (

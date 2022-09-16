@@ -46,7 +46,7 @@ const defaultConfig: Config = {
   productionLocal: {},
   production: {
     static: {
-      path: `https://devnotnull-ui-production.s3.amazonaws.com`
+      path: `https://cdn.devnotnull.com`
     }
   }
 };
