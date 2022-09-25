@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
-import { ICommonDataNode } from '@models/common';
-
 import blogItemStyles from './richtext.css';
 
 /**
@@ -20,7 +18,7 @@ const getType = (marks: { type: string }[] | undefined): string => {
 type Props = {
   assets: any[]
   payload: {
-    content: ICommonDataNode[]
+    content: any[]
   }
 }
 

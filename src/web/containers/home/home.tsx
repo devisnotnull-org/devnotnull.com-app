@@ -11,11 +11,9 @@ import Skillz from '@components/skillz/skillz';
 import Experiance from '@components/experiance/experiance';
 import Education from '@components/education/education';
 
-import { IHomeComponentProps } from './home.state';
-
 import homeStyles from './home.css';
 
-export const HomeView: FC<IHomeComponentProps> = () => {
+export const HomeView: FC = () => {
   const abilityItems = useSelector(getAbilityItems);
   const educationItems = useSelector(getEducationItems);
   const experianceItems = useSelector(getExperianceItems);

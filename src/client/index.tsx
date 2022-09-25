@@ -52,6 +52,7 @@ const preloadedState = (window as any).__INITIAL_STATE__;
     (module as any).hot.accept('../core/sagas', () => {
       (store as any).closeSagas();
       (store as any).rootTask = (store as any).runSaga(
+        // eslint-disable-next-line
         require('../core/sagas').default
       );
     });

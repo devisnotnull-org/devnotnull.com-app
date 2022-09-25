@@ -33,9 +33,9 @@ export const Education: FC<Props> = ({ educationList }) => (
 
           </div>
           <div>
-            {item.fields.qualifications.map(qualification => {
-              <p>{qualification}</p>;
-            })}
+            {item.fields.qualifications.map(qualification => (
+              <p>{qualification}</p>
+            ))}
           </div>
         </section>
       )
@@ -44,3 +44,7 @@ export const Education: FC<Props> = ({ educationList }) => (
 );
 
 export default Education;
+
+/**
+ * 
+ */

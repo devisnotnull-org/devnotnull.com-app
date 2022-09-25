@@ -1,4 +1,4 @@
-/// <reference path="../../typings/index.d.ts" />
+import "../../typings/index.d.ts" 
 
 import express, { Express, NextFunction, Request, Response } from 'express';
 import { createMemoryHistory } from 'history';

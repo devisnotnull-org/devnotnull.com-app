@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 
 import Folio from './folio';
 
 describe('<Folio />', () => {
   it('render Folio Component', () => {
-    const wrapper = shallow(<Folio></Folio>);
+    const wrapper = render(<Folio></Folio>);
     expect(wrapper).toMatchSnapshot();
   });
 });
