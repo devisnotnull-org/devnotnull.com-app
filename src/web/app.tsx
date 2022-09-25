@@ -11,8 +11,6 @@ import BlogViewContainer from './containers/blog/blog';
 import BlogPageViewContainer from './containers/blogPage/blogPage';
 import NotFoundComponent from './containers/notFound/notFound';
 
-import { GlobalContextProvider } from '../web/context/theme';
-
 import { getMetadataBlurb, getMetadataTitle } from '../core/metadata/selectors';
 
 import styles from './style/common.css';
@@ -26,29 +24,27 @@ export const AppRouter: React.FC = () => {
 
   return (
     <>
-      <GlobalContextProvider>
-        <Helmet>
-          <title>{title}</title>
-          <meta name="description" content={blurb} />
-          <meta name="og:title" property="og:title" content={title} />
-          <meta property="og:type" content="website" />
-          <meta name="robots" content="index, follow" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-        </Helmet>
-        <HeaderViewContainer />
-        <div className={styles['Container']}>
-          <Routes>
-            <Route path="/" element={<HomeViewContainer/>} />
-            <Route path="/portfolio" element={<FolioViewContainer/>} />
-            <Route path="/blog" element={<BlogViewContainer/>} />
-            <Route path="/blog/:slug" element={<BlogPageViewContainer/>} />
-            <Route element={<NotFoundComponent/>} />
-          </Routes>
-        </div>
-      </GlobalContextProvider>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={blurb} />
+        <meta name="og:title" property="og:title" content={title} />
+        <meta property="og:type" content="website" />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        />
+      </Helmet>
+      <HeaderViewContainer />
+      <div className={styles['Container']}>
+        <Routes>
+          <Route path="/" element={<HomeViewContainer/>} />
+          <Route path="/portfolio" element={<FolioViewContainer/>} />
+          <Route path="/blog" element={<BlogViewContainer/>} />
+          <Route path="/blog/:slug" element={<BlogPageViewContainer/>} />
+          <Route element={<NotFoundComponent/>} />
+        </Routes>
+      </div>
     </>
   );
 };
