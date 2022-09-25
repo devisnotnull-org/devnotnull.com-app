@@ -11,6 +11,9 @@ module.exports = {
     },
     "moduleNameMapper": {
         "\\.(css|less|scss|sass)$": "<rootDir>/jest/__mocks__/style.js",
+        "^@components(.*)$": "<rootDir>/src/web/components$1",
+        "^@models(.*)$": "<rootDir>/src/models$1"
       },
-    "setupTestFrameworkScriptFile": "<rootDir>/jest/setup.js" 
+    "setupFilesAfterEnv": [ "<rootDir>/jest/setup.js" ],
+    testEnvironment: 'jsdom',
   }

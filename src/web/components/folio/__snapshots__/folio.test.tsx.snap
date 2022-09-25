@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Skillz /> render Skillz Component 1`] = `
+exports[`<Folio /> render Folio Component 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -9,7 +9,7 @@ exports[`<Skillz /> render Skillz Component 1`] = `
         class=""
       >
         <h2>
-          Skills
+          Portfolio
         </h2>
       </div>
     </div>
@@ -19,7 +19,7 @@ exports[`<Skillz /> render Skillz Component 1`] = `
       class=""
     >
       <h2>
-        Skills
+        Portfolio
       </h2>
     </div>
   </div>,

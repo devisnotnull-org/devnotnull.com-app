@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 
 import Post from './post';
 
 describe('<Post />', () => {
   it('render Post Component', () => {
-    const wrapper = shallow(
+    const wrapper = render(
       <Post
         metadata={{
           title: '',

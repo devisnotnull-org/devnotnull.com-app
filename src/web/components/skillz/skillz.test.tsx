@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 
 import Skillz from './skillz';
 
 describe('<Skillz />', () => {
   it('render Skillz Component', () => {
-    const wrapper = shallow(<Skillz abilitiesList={[]}></Skillz>);
+    const wrapper = render(<Skillz abilitiesList={[]}></Skillz>);
     expect(wrapper).toMatchSnapshot();
   });
 });
