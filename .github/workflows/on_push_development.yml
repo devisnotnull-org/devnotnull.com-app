@@ -37,7 +37,7 @@ jobs:
     - name: Branch name
       run: echo running on branch ${{ github.ref_name }}
 
-    - name: Declare some variables
+    - name: Export formatted git variables
       id: vars
       shell: bash
       run: |
@@ -45,9 +45,8 @@ jobs:
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
         echo "##[set-output name=branch_formatted;]$(echo ${GITHUB_REF#refs/heads/} | tr / -)"
     
-    - name: Another step
+    - name: Print out variables
       run: |
-        echo "Branch: ${{ steps.vars.outputs.branch }}"
         echo "Sha: ${{ steps.vars.outputs.sha_short }}"
         echo "Branch formatted: ${{ steps.vars.outputs.branch_formatted }}"
 
@@ -96,19 +95,19 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: alexbrown201/devnotnull-ui:${{ github.ref_name }} 
+        tags: alexbrown201/devnotnull-ui:${{ steps.vars.outputs.branch_formatted }} 
   
     - name: Create S3 bucket
-      run: aws s3api create-bucket --bucket devnotnull-ui-${{ github.ref_name }} --region us-east-1 || true
+      run: aws s3api create-bucket --bucket devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} --region us-east-1 || true
 
     - name: Copy S3 bucket assets
-      run: aws s3 cp ./build s3://devnotnull-ui-${{ github.ref_name }} --recursive
+      run: aws s3 cp ./build s3://devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} --recursive
       
     - run: |
-        aws s3api put-bucket-cors --bucket devnotnull-ui-${{ github.ref_name }} --cors-configuration '{"CORSRules" : [{"AllowedHeaders":["*"],"AllowedMethods":["GET","HEAD", "POST"],"AllowedOrigins":["*"],"ExposeHeaders":[]}]}'
+        aws s3api put-bucket-cors --bucket devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} --cors-configuration '{"CORSRules" : [{"AllowedHeaders":["*"],"AllowedMethods":["GET","HEAD", "POST"],"AllowedOrigins":["*"],"ExposeHeaders":[]}]}'
      
     - run: |
-        aws s3api put-bucket-policy --bucket devnotnull-ui-${{ github.ref_name }} --policy '{"Version": "2008-10-17", "Statement": [{ "Sid": "AllowPublicRead", "Effect": "Allow", "Principal": { "AWS": "*" }, "Action": ["s3:GetObject"], "Resource": ["arn:aws:s3:::devnotnull-ui-${{ github.ref_name }}/*" ] }] }'
+        aws s3api put-bucket-policy --bucket devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} --policy '{"Version": "2008-10-17", "Statement": [{ "Sid": "AllowPublicRead", "Effect": "Allow", "Principal": { "AWS": "*" }, "Action": ["s3:GetObject"], "Resource": ["arn:aws:s3:::devnotnull-ui-${{ github.ref_name }}/*" ] }] }'
 
     - name: Install OpenVPN
       run: |
@@ -126,15 +125,15 @@ jobs:
     
     - run: helm repo update
 
-    - run: helm uninstall devnotnull-ui-${{ github.ref_name }}
+    - run: helm uninstall devnotnull-ui-${{ steps.vars.outputs.branch_formatted }}
       continue-on-error: true
 
     - run: |
-       helm install devnotnull-ui-${{ github.ref_name }} devnotnull/nodejs \
+       helm install devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} devnotnull/nodejs \
         --version 2 \
         --set env.NODE_RUNTIME_ENV=development \
-        --set env.CDN_BUCKET=${{ github.ref_name }} \
-        --set image.repository=alexbrown201/devnotnull-ui:${{ github.ref_name }} \
+        --set env.CDN_BUCKET=${{ steps.vars.outputs.branch_formatted }} \
+        --set image.repository=alexbrown201/devnotnull-ui:${{ steps.vars.outputs.branch_formatted }} \
         --set port=3000 \
         --set service.type=LoadBalancer \
         --set image.pullPolicy=Always \
