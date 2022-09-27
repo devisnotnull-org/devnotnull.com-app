@@ -43,11 +43,13 @@ jobs:
       run: |
         echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+        echo "::set-output name=branch_formatted::$(${GITHUB_REF#refs/heads//.gif/.$new_extension})"
     
     - name: Another step
       run: |
         echo "Branch: ${{ steps.vars.outputs.branch }}"
         echo "Sha: ${{ steps.vars.outputs.sha_short }}"
+        echo "Branch formatted: ${{ steps.vars.outputs.branch_formatted }}"
 
     - run: |
         curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
