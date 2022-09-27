@@ -172,7 +172,7 @@
     "serverless-s3-sync": "^1.15.0",
     "source-map-explorer": "^2.0.0",
     "style-loader": "^2.0.0",
-    "stylelint": "^14.11.0",
+    "stylelint": "^14.12.1",
     "stylelint-config-prettier": "^5.2.0",
     "stylelint-config-prettier-scss": "^0.0.1",
     "stylelint-config-standard": "^28.0.0",
