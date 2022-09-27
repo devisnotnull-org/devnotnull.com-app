@@ -37,6 +37,18 @@ jobs:
     - name: Branch name
       run: echo running on branch ${{ github.ref_name }}
 
+    - name: Declare some variables
+      id: vars
+      shell: bash
+      run: |
+        echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+    
+    - name: Another step
+      run: |
+        echo "Branch: ${{ steps.vars.outputs.branch }}"
+        echo "Sha: ${{ steps.vars.outputs.sha_short }}"
+
     - run: |
         curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
         sudo apt-get install apt-transport-https --yes
