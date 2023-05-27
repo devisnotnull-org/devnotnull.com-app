@@ -1,6 +1,6 @@
 // WaitPlugin.js
-const WebpackBeforeBuildPlugin = require('before-build-webpack')
-const fs = require('fs')
+import { WebpackBeforeBuildPlugin } from 'before-build-webpack'
+import { fs } from 'fs'
 
 export class WaitPlugin extends WebpackBeforeBuildPlugin {
   constructor(file, interval = 100, timeout = 10000) {

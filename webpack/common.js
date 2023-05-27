@@ -1,7 +1,7 @@
-import { ProgressPlugin, SourceMapDevToolPlugin } from 'webpack';
+import webpack from 'webpack';
 
 import { resolve as _resolve } from 'path';
-import { root, build, nodeModules, babelConfig } from './paths';
+import { root, build, nodeModules, babelConfig } from './paths.js';
 
 const publicPath = '/';
 
@@ -51,11 +51,11 @@ const common = (env) => ({
   },
   plugins: [
     //
-    new ProgressPlugin({
+    new webpack.ProgressPlugin({
       activeModules: true
     }),
     //
-    new SourceMapDevToolPlugin({
+    new webpack.SourceMapDevToolPlugin({
       filename: '__sourcemaps/[name].[chunkhash:8].js.map',
       include: ['bundle', 'vendor'],
       noSources: true

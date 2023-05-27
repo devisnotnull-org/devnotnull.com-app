@@ -6,8 +6,6 @@ import { WaitPlugin } from '../plugins/wait'
 import { src, build } from '../paths'
 import { config as server } from './server.common';
 
-// const asset = require('../../build/asset-manifest.json');
-
 const asset = {
   "app.js": "/static/app.js",
   //"client.css": "/static/client.css",

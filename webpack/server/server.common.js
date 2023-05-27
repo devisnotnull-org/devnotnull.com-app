@@ -3,9 +3,9 @@ import WebpackBar from 'webpackbar';
 import AssetsPlugin from 'assets-webpack-plugin';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 
-import { common } from '../common';
+import { common } from '../common.js';
 import { resolve } from 'path';
-import { src, build, webpackCache } from '../paths';
+import { src, build, webpackCache } from '../paths.js';
 
 const config = (env) => merge(common(env), {
   target: 'node',

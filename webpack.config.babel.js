@@ -1,5 +1,10 @@
 
-import { resolve } from 'path';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = dirname(__filename);
 
 const target = process.env.TARGET || 'all';
 
@@ -17,16 +22,19 @@ const flatten = input => {
   return res.reverse();
 };
 
-const aquireTarget = inTarget => require(resolve(__dirname, 'webpack', inTarget, `index.js`))
+const aquireTarget = async (inTarget) => await import(resolve(__dirname, 'webpack', inTarget, `index.js`));
+
+console.log(`Building target: ${target}`);
+console.log(`Building targets: ${target === 'all' ? 'style, client, server' : target}`);
 
 const configuration =
   target === 'all'
     ? [
-        aquireTarget('style').config,
-        aquireTarget('client').config,
-        aquireTarget('server').config,
+        await aquireTarget('style').config,
+        await aquireTarget('client').config,
+        await aquireTarget('server').config,
       ]
-    : [aquireTarget(target).config];
+    : [await aquireTarget(target).config];
 
 
 export default [...flatten(configuration)];
