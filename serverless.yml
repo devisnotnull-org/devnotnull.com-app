@@ -1,7 +1,6 @@
 service: devnotnull-ui
 
 frameworkVersion: ">=2.0.0"
-variablesResolutionMode: 20210326
 plugins:
   - serverless-offline
   - serverless-deployment-bucket
@@ -9,8 +8,15 @@ plugins:
   - serverless-s3-sync
 
 custom:
+  serverless-offline:
+    port: 3000 
+
+  ##
   ##
   localDevStaticFolder: build
+
+  ##
+  siteName: devnotnull.com
 
   ## Retention
   prune:
@@ -25,15 +31,25 @@ custom:
 
   ## S3 bucket for static assets
   s3Sync:
-    - bucketName: devnotnull-ui-${self:custom.environment}
+    - bucketName: devnotnull-assets-${self:custom.environment}
       bucketPrefix: static/
       localDir: build/static
-    - bucketName: devnotnull-ui-${self:custom.environment}
+    - bucketName: devnotnull-assets-${self:custom.environment}
+      bucketPrefix: assets/
+      localDir: build/assets
+    - bucketName: devnotnull-assets-${self:custom.environment}
       bucketPrefix: media/
       localDir: media
-
   ##
   environment: ${opt:stage, 'development'}
+
+## 
+package:
+  exclude:
+    - .cache/**
+    - .github/**
+    - node_modules/**
+    - src/**
 
 provider:
   name: aws
@@ -44,24 +60,25 @@ provider:
   environment:
     NODE_RUNTIME_ENV: ${self:custom.environment}
 
+functions:
+  server:
+    handler: build/serverless.handler
+    environment:
+      NODE_RUNTIME_ENV: ${self:custom.environment}
+    events:
+      - http:
+          path: / # this matches any path, the token 'any' doesn't mean anything special
+          method: GET
+      - http:
+          path: /{any+} # this matches any path, the token 'any' doesn't mean anything special
+          method: GET
+
 resources:
   Resources:
     AssetsBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: devnotnull-ui-${self:custom.environment}
-        CorsConfiguration:
-          CorsRules:
-            -
-              AllowedOrigins:
-                - '*'
-              AllowedHeaders:
-                - '*'
-              AllowedMethods:
-                - PUT
-                - GET
-                - POST
-              MaxAge: 3000
+        BucketName: devnotnull-assets-${self:custom.environment}
     BucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
