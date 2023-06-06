@@ -33,7 +33,9 @@ export default (api) => {
       {
         "targets": {
           "esmodules": true
-        }
+        },
+        "loose": true,
+        "modules": false
       }
     ],
     '@babel/preset-typescript',

@@ -3,6 +3,8 @@ import webpack from 'webpack';
 import { resolve as _resolve } from 'path';
 import { root, build, nodeModules, babelConfig } from './paths.js';
 
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+
 const publicPath = '/';
 
 const common = (env) => ({
@@ -27,17 +29,31 @@ const common = (env) => ({
   },
   module: {
     rules: [
+  
       {
         test: /\.(ts|js)x?$/,
         exclude: nodeModules,
         loader: "babel-loader",
         options: {
-          cacheDirectory: true,
+          cacheDirectory: false,
           compact: env === 'production',
           configFile: babelConfig,
           cacheCompression: env === 'production'
         }
       },
+     /** 
+           {
+                 // Match js, jsx, ts & tsx files
+                 test: /\.(ts|js)x?$/,
+                 exclude: nodeModules,
+                 loader: 'esbuild-loader',
+                 options: {
+                   // JavaScript version to compile to
+                   target: 'es2015',
+                   tsconfig: './tsconfig.json'
+                 }
+               },
+               **/
       {
         loader: "file-loader",
         exclude: [/\.m?([jt])sx?$/, /\.json$/, /\.css$/],
@@ -59,6 +75,8 @@ const common = (env) => ({
       include: ['bundle', 'vendor'],
       noSources: true
     }),
+    //
+    new TsconfigPathsPlugin({})
   ],
   stats: {
     colors: true,

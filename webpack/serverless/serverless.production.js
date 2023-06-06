@@ -9,6 +9,7 @@ import server from './serverless.common.js';
 import { build, src } from '../paths.js';
 
 import { createRequire } from 'node:module';
+
 const require = createRequire(import.meta.url);
 
 const asset = require('../../build/asset-manifest.json');
