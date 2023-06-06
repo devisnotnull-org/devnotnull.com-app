@@ -1,5 +1,7 @@
+import { aquireTarget } from '../util.js';
+
 const enviroment = process.env.NODE_ENV || 'development';
 
-const { config } = require(`./serverless.${enviroment}`);
+const config  = await aquireTarget(`./serverless/serverless.${enviroment}.js`);
 
-export { config }
+export default config.default;

@@ -1,8 +1,7 @@
-import 'regenerator-runtime/runtime';
-import 'source-map-support/register'
-
 import { APIGatewayEvent, Context } from 'aws-lambda';
-import { createServer, proxy } from 'aws-serverless-express';
+import { createServer, proxy } from '@vendia/serverless-express';
+import 'regenerator-runtime/runtime';
+import 'source-map-support/register';
 
 import { app } from './http';
 

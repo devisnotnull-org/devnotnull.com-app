@@ -1,14 +1,18 @@
 import TerserPlugin from 'terser-webpack-plugin';
-import merge from 'webpack-merge';
-import { EnvironmentPlugin, DefinePlugin } from 'webpack';
-import { WaitPlugin } from '../plugins/wait'
+import { merge } from 'webpack-merge';
+import webpack from 'webpack';
+import { WaitPlugin } from '../plugins/wait.js'
 
-import { src, build } from '../paths'
-import { config as server } from './serverless.common';
+import { src, build } from '../paths.js'
+import server from './serverless.common.js';
 
-const asset = require('../../build/asset-manifest.json');
+const asset = {
+  "app.js": "/static/app.js",
+  "client.css": "/static/client.css",
+  "vendors.js": "/static/vendors.js"
+}
 
-const config = merge(server('development'), {
+export default merge(server('development'), {
   mode: 'development',
   devtool: 'source-map',
   optimization: {
@@ -53,15 +57,13 @@ const config = merge(server('development'), {
     ],
   },
   plugins: [
-    new EnvironmentPlugin({
+    new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
       BROWSER: false
     }),
-    new WaitPlugin(`${build}/client-assets.json`),
-    new DefinePlugin({
+    new webpack.DefinePlugin({
       __ASSETS__: JSON.stringify(asset)
     }),
   ],
 })
 
-export { config }

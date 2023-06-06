@@ -1,12 +1,12 @@
-import merge from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
-import { HotModuleReplacementPlugin } from 'webpack'
+import webpack from 'webpack'
 import AssetsPlugin from 'assets-webpack-plugin';
 
-import { build, src } from '../paths'
-import { config as client } from './client.common';
+import { build, src } from '../paths.js'
+import client from './client.common.js';
 
-const config = merge(client('development'), {
+export default merge(client('development'), {
   devtool: "inline-source-map",
   entry: {
     app: [
@@ -16,15 +16,13 @@ const config = merge(client('development'), {
       `${src}/client/index`,
     ]
   },
-  output: {
-    filename: "[name].js",
-    chunkFilename: "[name].chunk.js"
-  },
   devServer: {
     port: 9000,
     hot: true,
     compress: false,
-    contentBase: build,
+    static: {
+      directory: build
+    },
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
@@ -69,9 +67,9 @@ const config = merge(client('development'), {
               sourceMap: false,
               postcssOptions: {
                 plugins: () => [
-                  require('postcss-custom-media'),
-                  require('postcss-flexbugs-fixes'),
-                  require('postcss-preset-env')({
+                  import('postcss-custom-media'),
+                  import('postcss-flexbugs-fixes'),
+                  import('postcss-preset-env')({
                     autoprefixer: {
                       flexbox: 'no-2009'
                     },
@@ -92,7 +90,7 @@ const config = merge(client('development'), {
     ]
   },
   plugins: [
-    new HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new AssetsPlugin({
       path: build,
       filename: `client-assets.json`,
@@ -103,5 +101,3 @@ const config = merge(client('development'), {
     }),
   ]
 });
-
-export { config }

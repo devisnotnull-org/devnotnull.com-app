@@ -1,13 +1,15 @@
-const { compilerOptions } = require("./tsconfig");
+import config from "./tsconfig.json" assert {
+  type: 'json',
+}
 
-const pathsEntries = Object.entries(compilerOptions.paths);
+const pathsEntries = Object.entries(config.compilerOptions.paths);
 
 const removeGlobPattern = glob => glob.replace("/*", "");
 
 const prepareName = name => removeGlobPattern(name);
 
 const preparePath = ([path]) =>
-  `./${compilerOptions.baseUrl}/${removeGlobPattern(path)}`;
+  `./${config.compilerOptions.baseUrl}/${removeGlobPattern(path)}`;
 
 const alias = pathsEntries.reduce(
   (accum, [name, path]) => ({
@@ -17,30 +19,29 @@ const alias = pathsEntries.reduce(
   {}
 );
 
-module.exports = api => {
+export default (api) => {
   const { NODE_ENV, TARGET } = process.env;
 
   const isProduction = NODE_ENV === 'production';
   const isServer = TARGET === 'server';
 
-  api.cache(() => `${NODE_ENV}${TARGET}`);
-
   // client settings in .browserslistrc
-  const targets = isServer ? { node: 'current' } : undefined;
-
+  
   const presets = [
     [
-      '@babel/env',
+      "@babel/preset-env",
       {
-        useBuiltIns: 'entry',
-        corejs: '3.6',
-      },
+        "targets": {
+          "esmodules": true
+        }
+      }
     ],
     '@babel/preset-typescript',
     '@babel/preset-react',
   ];
 
   const plugins = [
+    ["@babel/plugin-proposal-private-methods", { "loose": true }],
     ["babel-plugin-module-resolver", { alias }],
     ['@babel/plugin-proposal-object-rest-spread'],
     ['@babel/plugin-syntax-dynamic-import'],

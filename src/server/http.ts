@@ -1,20 +1,17 @@
 import "../../typings/index.d.ts" 
 
+import { dirname } from 'path';
 import express, { Express, NextFunction, Request, Response } from 'express';
 import { createMemoryHistory } from 'history';
 import { config } from './config';
 import { render } from './render';
 
+const __dirname = (__filename) => dirname(__filename);
+
 import createStore from '../core/store';
 
 const PROD: boolean = process.env.NODE_ENV === 'production';
 const app: Express = express();
-
-app.use('/static', express.static('static'));
-app.use('/static', express.static(__dirname + '/static'));
-
-app.use(express.static('static'));
-app.use(express.static(__dirname + '/static'));
 
 // All other routes will be directed to React
 app.get('*', async (req: Request, res: Response) => {

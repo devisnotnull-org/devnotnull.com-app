@@ -24,17 +24,13 @@ const flatten = input => {
 
 const aquireTarget = async (inTarget) => await import(resolve(__dirname, 'webpack', inTarget, `index.js`));
 
-console.log(`Building target: ${target}`);
-console.log(`Building targets: ${target === 'all' ? 'style, client, server' : target}`);
-
 const configuration =
   target === 'all'
     ? [
-        await aquireTarget('style').config,
-        await aquireTarget('client').config,
-        await aquireTarget('server').config,
+        (await aquireTarget('client')).default,
+        (await aquireTarget('server')).default,
       ]
-    : [await aquireTarget(target).config];
+    : [(await aquireTarget(target)).default];
 
 
 export default [...flatten(configuration)];

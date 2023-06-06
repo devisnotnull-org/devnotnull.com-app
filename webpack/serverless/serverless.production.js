@@ -1,16 +1,19 @@
 import TerserPlugin from 'terser-webpack-plugin';
-import merge from 'webpack-merge';
-import { EnvironmentPlugin, DefinePlugin } from 'webpack';
+import { merge } from 'webpack-merge';
+import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import AssetsPlugin from 'assets-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-import { config as server } from './serverless.common';
-import { build, src } from '../paths';
+import server from './serverless.common.js';
+import { build, src } from '../paths.js';
+
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
 
 const asset = require('../../build/asset-manifest.json');
 
-const config = merge(server('production'), {
+export default merge(server('production'), {
   devtool: 'source-map',
   mode: 'production',
   optimization: {
@@ -72,14 +75,12 @@ const config = merge(server('production'), {
     new MiniCssExtractPlugin({
       filename: 'server.[contenthash].css',
     }),
-    new EnvironmentPlugin({
+    new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
       BROWSER: false
     }),
-    new DefinePlugin({
+    new webpack.DefinePlugin({
       __ASSETS__: JSON.stringify(asset)
     }),
   ]
 })
-
-export { config } 

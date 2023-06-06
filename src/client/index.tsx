@@ -66,7 +66,7 @@ const preloadedState = (window as any).__INITIAL_STATE__;
       (store as any).closeSagas();
       (store as any).rootTask = (store as any).runSaga(
         // eslint-disable-next-line
-        require('../core/sagas').default
+        //require('../core/sagas').default
       );
     });
   }

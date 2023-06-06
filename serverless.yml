@@ -6,7 +6,6 @@ plugins:
   - serverless-offline
   - serverless-deployment-bucket
   - serverless-prune-plugin
-  - serverless-s3-sync
 
 custom:
   ##
@@ -23,15 +22,6 @@ custom:
     versioning: true
     accelerate: true
 
-  ## S3 bucket for static assets
-  s3Sync:
-    - bucketName: devnotnull-ui-${self:custom.environment}
-      bucketPrefix: static/
-      localDir: build/static
-    - bucketName: devnotnull-ui-${self:custom.environment}
-      bucketPrefix: media/
-      localDir: media
-
   ##
   environment: ${opt:stage, 'development'}
 
@@ -39,44 +29,20 @@ provider:
   name: aws
   runtime: nodejs12.x
   timeout: 10 
-  region: ${opt:region, 'eu-west-2'}
+  region: ${opt:region, 'eu-west-1'}
   stackName: ${self:service}-${self:custom.environment}
   environment:
     NODE_RUNTIME_ENV: ${self:custom.environment}
 
-resources:
-  Resources:
-    AssetsBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: devnotnull-ui-${self:custom.environment}
-        CorsConfiguration:
-          CorsRules:
-            -
-              AllowedOrigins:
-                - '*'
-              AllowedHeaders:
-                - '*'
-              AllowedMethods:
-                - PUT
-                - GET
-                - POST
-              MaxAge: 3000
-    BucketPolicy:
-      Type: AWS::S3::BucketPolicy
-      Properties:
-        PolicyDocument:
-          Id: MyPolicy
-          Version: "2012-10-17"
-          Statement:
-            - Sid: PublicReadForGetBucketObjects
-              Effect: Allow
-              Principal: '*'
-              Action: 's3:GetObject'
-              Resource: !Join 
-                - ''
-                - - 'arn:aws:s3:::'
-                  - !Ref AssetsBucket
-                  - /*
-        Bucket: !Ref AssetsBucket
-    
+functions:
+  server:
+    handler: build/serverless.handler
+    environment:
+      NODE_RUNTIME_ENV: ${self:custom.environment}
+    events:
+      - http:
+          path: / # this matches any path, the token 'any' doesn't mean anything special
+          method: GET
+      - http:
+          path: /{any+} # this matches any path, the token 'any' doesn't mean anything special
+          method: GET

@@ -20,7 +20,6 @@ const common = (env) => ({
       "@styles": "./web/style",
       "@web/*": "./web",
       "@client/*": "./client",
-      "@server/*": "./server",
       "@components/*": "./web/components",
       "@core/*": "./core",
       "@config/*": "./config"

@@ -1,15 +1,15 @@
-import merge from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import TerserPlugin from 'terser-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import { EnvironmentPlugin } from 'webpack';
+import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 
 import CopyPlugin from 'copy-webpack-plugin'
-import { config as client } from './client.common';
-import { build, src, media, buildMedia } from '../paths'
+import client from './client.common.js';
+import { build, src, media, buildMedia } from '../paths.js'
 import AssetsPlugin from 'assets-webpack-plugin';
 
-const config = merge(client('production'), {
+export default merge(client('production'), {
   devtool: 'source-map',
   target: 'web',
   entry: {
@@ -22,7 +22,9 @@ const config = merge(client('production'), {
   devServer: {
     port: 9000,
     compress: true,
-    contentBase: build,
+    static: {
+      directory: build
+    },    
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
@@ -78,10 +80,9 @@ const config = merge(client('production'), {
               sourceMap: true,
               postcssOptions: {
                 plugins: () => [
-
-                  require('postcss-custom-media'),
-                  require('postcss-flexbugs-fixes'),
-                  require('postcss-preset-env')({
+                  import('postcss-custom-media'),
+                  import('postcss-flexbugs-fixes'),
+                  import('postcss-preset-env')({
                     autoprefixer: {
                       flexbox: 'no-2009'
                     },
@@ -102,7 +103,7 @@ const config = merge(client('production'), {
     ],
   },
   plugins: [
-    new EnvironmentPlugin({
+    new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
       BROWSER: false,
     }),
@@ -125,4 +126,3 @@ const config = merge(client('production'), {
   ],
 });
 
-export { config }

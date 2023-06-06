@@ -1,13 +1,13 @@
-import { resolve } from 'path';
+import { aquirePath } from './util.js';
 
-const webpackCache = resolve(__dirname, '.cache')
-const root = resolve(__dirname, '..');
-const src = resolve(root, 'src');
-const build = resolve(root, 'build')
-const media = resolve(root, 'media')
-const buildMedia = resolve(root, 'build/static/media')
-const nodeModules = resolve(root, 'node_modules')
-const babelConfig = resolve(root, 'babel.config.js')
+const webpackCache = aquirePath('.cache')
+const root = aquirePath('..');
+const src = aquirePath('..', 'src');
+const build = aquirePath('..', 'build')
+const media = aquirePath('..', 'media')
+const buildMedia = aquirePath('..', 'build/static/media')
+const nodeModules = aquirePath('..', 'node_modules')
+const babelConfig = aquirePath('..', 'babel.config.js')
 
 export  {
   src,

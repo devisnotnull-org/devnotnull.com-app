@@ -1,4 +1,4 @@
-import merge from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import WebpackBar from 'webpackbar';
 import AssetsPlugin from 'assets-webpack-plugin';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
@@ -7,12 +7,14 @@ import { common } from '../common.js';
 import { resolve } from 'path';
 import { src, build, webpackCache } from '../paths.js';
 
-const config = (env) => merge(common(env), {
-  target: 'node',
-  entry: [`${src}/server/server`],
+export default (env) => merge(common(env), {
+  target: 'node18',
+  entry: ["regenerator-runtime/runtime", `${src}/server/server`],
   output: {
-    libraryTarget: 'commonjs2',
     filename: 'server.js'
+  },
+  experiments: {
+    outputModule: true,
   },
   cache: { 
     idleTimeout: 10000000,
@@ -36,5 +38,3 @@ const config = (env) => merge(common(env), {
     __filename: false
   },
 });
-
-export { config }

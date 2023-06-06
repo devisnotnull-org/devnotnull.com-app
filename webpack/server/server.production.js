@@ -1,16 +1,19 @@
 import TerserPlugin from 'terser-webpack-plugin';
-import merge from 'webpack-merge';
+import { merge } from 'webpack-merge';
 import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import AssetsPlugin from 'assets-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-import { config as server } from './server.common.js';
+import server from './server.common.js';
 import { build, src } from '../paths.js';
 
-const asset = await import('../../build/asset-manifest.json');
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
 
-const config = merge(server('production'), {
+const asset = require('../../build/asset-manifest.json');
+
+export default merge(server('production'), {
   devtool: 'source-map',
   mode: 'production',
   optimization: {
@@ -81,5 +84,3 @@ const config = merge(server('production'), {
     }),
   ]
 })
-
-export { config } 

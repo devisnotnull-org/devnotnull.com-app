@@ -1,11 +1,11 @@
 import { resolve  } from 'path';
-import merge from 'webpack-merge';
-import { ProvidePlugin } from 'webpack';
+import { merge } from 'webpack-merge';
+import webpack from 'webpack';
 import WebpackBar from 'webpackbar';
-import { webpackCache } from '../paths';
-import { common } from '../common';
+import { webpackCache } from '../paths.js';
+import { common } from '../common.js';
 
-const config = (env) => merge(common(env), {
+export default (env) => merge(common(env), {
   target: 'web',
   cache: { 
     idleTimeout: 1000000,
@@ -14,7 +14,7 @@ const config = (env) => merge(common(env), {
   }, 
   plugins: [
     new WebpackBar({ profile: true, name: `Client`, color: 'red' }),
-    new ProvidePlugin({
+    new webpack.ProvidePlugin({
       process: 'process/browser',
       Buffer: ['buffer', 'Buffer'],
     }),
@@ -22,11 +22,11 @@ const config = (env) => merge(common(env), {
   // Webpack 5 polyfills
   resolve: {
     fallback: {
-      https: require.resolve("https-browserify"),
-      http: require.resolve("stream-http"),
+      https: resolve("https-browserify"),
+      http: resolve("stream-http"),
       buffer: false,
-      stream: require.resolve("stream-browserify"),
-      os: require.resolve("os-browserify/browser"),
+      stream: resolve("stream-browserify"),
+      os: resolve("os-browserify/browser"),
       fs: false,
       module: false,
       net: false,
@@ -34,12 +34,10 @@ const config = (env) => merge(common(env), {
       zlib: false,
       crypto: false,
       process: false,
-      path: require.resolve("path-browserify")
+      path: resolve("path-browserify")
     },
     alias: {
       process: "process/browser"
     }
   }  
 });
-
-export { config }
