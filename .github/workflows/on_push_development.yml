@@ -76,7 +76,7 @@ jobs:
       run: echo -e '${{ secrets.OVPN_USERNAME }}\n${{ secrets.OVPN_PASSWORD }}' > my_auth_pass.txt
 
     - name: Connect to VPN
-      run: openvpn --config ./public.ovpn --daemon --auth-user-pass my_auth_pass.txt
+      run: openvpn --config ./config.ovpn --daemon --auth-user-pass my_auth_pass.txt
   
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
