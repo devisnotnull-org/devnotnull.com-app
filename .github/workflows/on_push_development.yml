@@ -73,12 +73,8 @@ jobs:
         sudo apt install -y openvpn openvpn-systemd-resolved
 
     - name: Connect to VPN
-      uses: kota65535/github-openvpn-connect-action@v2
-      with:
-        config_file: ./config.ovpn
-        username: ${{ secrets.OVPN_USERNAME }}
-        password: ${{ secrets.OVPN_PASSWORD }}
-        
+      run: openvpn --config ./public.ovpn --daemon --auth-user-pass <(echo -e "'"${{ secrets.OVPN_USERNAME }}"'\n'"${{ secrets.OVPN_PASSWORD }}"'")
+  
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
 
