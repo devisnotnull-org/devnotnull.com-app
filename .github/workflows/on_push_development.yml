@@ -57,26 +57,11 @@ jobs:
         sudo apt-get update
         sudo apt-get install helm
         
-    - run: 'echo "$VPN_CONFIG" > config.ovpn'
-      env:
-        VPN_CONFIG: ${{secrets.VPN_CONFIG}}
-
     - run: 'mkdir ~/.kube && echo "$KUBECONFIG_FILE" > ~/.kube/config'
       env:
         KUBECONFIG_FILE: ${{secrets.KUBECONFIG_PROD}}
 
     - run: sudo chown $(id -u):$(id -g) ~/.kube/config
-
-    - name: Install OpenVPN
-      run: |
-        sudo apt update
-        sudo apt install -y openvpn openvpn-systemd-resolved
-
-    - name: Username password pipe
-      run: echo -e '${{ secrets.OVPN_USERNAME }}\n${{ secrets.OVPN_PASSWORD }}' > my_auth_pass.txt
-
-    - name: Connect to VPN
-      run: openvpn --config ./config.ovpn --auth-user-pass my_auth_pass.txt
   
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
