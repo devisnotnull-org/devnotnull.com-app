@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy-app:
-    runs-on: 'ubuntu-latest'
+    runs-on: 'self-hosted'
     defaults:
       run:
         shell: bash
