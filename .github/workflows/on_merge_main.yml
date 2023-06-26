@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy-app:
-    runs-on: actions_runner
+    runs-on: self-hosted
     defaults:
       run:
         shell: bash
