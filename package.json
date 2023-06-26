@@ -202,6 +202,7 @@
     "@sentry/node": "^7.54.0",
     "@sentry/react": "^7.54.0",
     "@sentry/tracing": "^7.54.0",
+    "@typeform/embed-react": "^2.24.0",
     "aws-serverless-express": "^3.4.0",
     "classnames": "^2.2.6",
     "core-js": "^3.8.2",

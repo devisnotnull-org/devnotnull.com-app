@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react';
 import classnames from 'classnames';
+import { PopupButton } from '@typeform/embed-react'
+
 
 import { Link } from '@components/link/link';
 import styles from './header.css';
@@ -61,6 +63,13 @@ export const HeaderView: FC = () => {
             Medium
           </Link>
         </li>
+        <li className={classnames(styles['Link'], styles['Link--left'])}>
+
+          <PopupButton id="HTs3mlXH" style={{ fontSize: 20, margin: 0, padding:0, border: 0, width: '100%' }}>
+          <Link to=''>Contact me</Link>
+          </PopupButton>
+
+          </li>
       </ul>
     </div>
   );

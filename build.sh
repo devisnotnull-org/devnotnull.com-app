@@ -25,13 +25,19 @@ helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
 
 helm uninstall devnotnull-ui
 
-helm install devnotnull-ui devnotnull/nodejs \
-        --version 2 \
-        --set env.NODE_RUNTIME_ENV=production \
-        --set env.CDN_BUCKET=production \
-        --set image.repository=alexbrown201/devnotnull-ui:latest \
-        --set port=3000 \
-        --set service.type=LoadBalancer \
-        --set service.loadBalancerIP=10.150.10.134 \
-        --set image.pullPolicy=Always \
-        --set replicaCount=10
+helm install \
+    --version 2 \
+    --set env.NODE_RUNTIME_ENV=production \
+    --set env.CDN_BUCKET=production \
+    --set image.repository=alexbrown201/devnotnull-ui:latest \
+    --set port=3000 \
+    --set service.type=LoadBalancer \
+    --set service.loadBalancerIP=10.150.10.134 \
+    --set ingress.tls.secretName=devnotnull.com-production \
+    --set ingress.annotations."kubernetes\.io/ingress\.class"=traefik \
+    --set image.pullPolicy=Always \
+    --set replicaCount=10 \
+    --set "ingress.hosts[0].host"=devnotnull.com \
+    --set "ingress.hosts[0].paths[0].path"=/ \
+    devnotnull-ui \
+    devnotnull/nodejs

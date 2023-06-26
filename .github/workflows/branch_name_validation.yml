@@ -3,7 +3,7 @@ on: pull_request
 
 jobs:
   branch-naming-rules:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: deepakputhraya/action-branch-name@master
         with:

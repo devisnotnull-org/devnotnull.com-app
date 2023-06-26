@@ -7,10 +7,7 @@ on:
 
 jobs:
   deploy-app:
-    runs-on: 'ubuntu-latest'
-    defaults:
-      run:
-        shell: bash
+    runs-on: self-hosted
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -18,6 +15,15 @@ jobs:
 
     steps:
 
+    - id: install-aws-cli
+      uses: unfor19/install-aws-cli-action@v1
+      with:
+        version: 2     # default
+        verbose: false # default
+        arch: amd64    # allowed values: amd64, arm64
+        rootdir: ""    # defaults to "PWD"
+        workdir: ""    # defaults to "PWD/unfor19-awscli"
+        
     - name: Checkout
       uses: actions/checkout@v2
 
@@ -57,16 +63,12 @@ jobs:
         sudo apt-get update
         sudo apt-get install helm
         
-    - run: 'echo "$VPN_CONFIG" > config.ovpn'
-      env:
-        VPN_CONFIG: ${{secrets.VPN_CONFIG}}
-
     - run: 'mkdir ~/.kube && echo "$KUBECONFIG_FILE" > ~/.kube/config'
       env:
         KUBECONFIG_FILE: ${{secrets.KUBECONFIG_PROD}}
 
     - run: sudo chown $(id -u):$(id -g) ~/.kube/config
-
+  
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
 
@@ -106,20 +108,8 @@ jobs:
     - run: |
         aws s3api put-bucket-cors --bucket devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} --cors-configuration '{"CORSRules" : [{"AllowedHeaders":["*"],"AllowedMethods":["GET","HEAD", "POST"],"AllowedOrigins":["*"],"ExposeHeaders":[]}]}'
      
-    - run: |
-        aws s3api put-bucket-policy --bucket devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} --policy '{"Version": "2008-10-17", "Statement": [{ "Sid": "AllowPublicRead", "Effect": "Allow", "Principal": { "AWS": "*" }, "Action": ["s3:GetObject"], "Resource": ["arn:aws:s3:::devnotnull-ui-${{ steps.vars.outputs.branch_formatted }}/*" ] }] }'
-
-    - name: Install OpenVPN
-      run: |
-        sudo apt update
-        sudo apt install -y openvpn openvpn-systemd-resolved
-
-    - name: Connect to VPN
-      uses: kota65535/github-openvpn-connect-action@v1.0.2
-      with:
-        config_file: ./config.ovpn
-        username: ${{ secrets.OVPN_USERNAME }}
-        password: ${{ secrets.OVPN_PASSWORD }}
+    #- run: |
+    #    aws s3api put-bucket-policy --bucket devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} --policy '{"Version": "2008-10-17", "Statement": [{ "Sid": "AllowPublicRead", "Effect": "Allow", "Principal": { "AWS": "*" }, "Action": ["s3:GetObject"], "Resource": ["arn:aws:s3:::devnotnull-ui-${{ steps.vars.outputs.branch_formatted }}/*" ] }] }'
 
     - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
     
