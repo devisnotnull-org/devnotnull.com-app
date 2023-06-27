@@ -90,6 +90,17 @@ jobs:
 
     - run: yarn build:prod:pure
 
+    - name:  'Automated Version Bump'
+      uses:  'phips28/gh-action-bump-version@master'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        minor-wording:  'add,Adds,new'
+        major-wording:  'MAJOR,cut-major'
+        patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
+                                          # defaulting to a patch bump.
+        rc-wording:     'RELEASE,alpha'
+
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
@@ -107,9 +118,6 @@ jobs:
     - run: |
         aws s3api put-bucket-cors --bucket devnotnull-ui-production --cors-configuration '{"CORSRules" : [{"AllowedHeaders":["*"],"AllowedMethods":["GET","HEAD", "POST"],"AllowedOrigins":["*"],"ExposeHeaders":[]}]}'
 
-    #- run: |
-    #    aws s3api put-bucket-policy --bucket devnotnull-ui-production --policy '{"Version": "2008-10-17", "Statement": [{ "Sid": "AllowPublicRead", "Effect": "Allow", "Principal": { "AWS": "*" }, "Action": ["s3:GetObject"], "Resource": ["arn:aws:s3:::devnotnull-ui-production/*" ] }] }'
-        
     - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
 
     - run: helm repo update
