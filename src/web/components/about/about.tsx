@@ -1,12 +1,11 @@
 import React, { FC, useState } from 'react';
 import classnames from 'classnames';
+import { useInView } from 'react-intersection-observer';
 
 import { IMetadataPayload } from '../../../models/metadata';
 
 import styles from './about.css';
-
 import commonStyles from '../../style/common.css';
-import { useInView } from 'react-intersection-observer';
 
 type Props = {
   metadata: IMetadataPayload;

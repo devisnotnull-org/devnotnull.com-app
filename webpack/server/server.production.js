@@ -8,7 +8,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { config as server } from './server.common';
 import { build, src } from '../paths';
 
-const asset = require('../../build/asset-manifest.json');
+const asset = require('../../build/client-asset-manifest.json');
 
 const config = merge(server('production'), {
   devtool: 'source-map',

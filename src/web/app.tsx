@@ -16,6 +16,7 @@ import { getMetadataBlurb, getMetadataTitle } from '../core/metadata/selectors';
 import styles from './style/common.css';
 
 const TRACKING_ID = "UA-136352816-2";
+
 ReactGA.initialize(TRACKING_ID);
 
 export const AppRouter: React.FC = () => {

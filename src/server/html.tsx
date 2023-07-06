@@ -1,3 +1,4 @@
+import { readFile } from 'fs/promises';
 import React, { FC, ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
@@ -12,6 +13,7 @@ interface StatePropTypes {
   buildProd: boolean;
   config: any;
   runtimeProd: boolean;
+  css?: string[]
 }
 
 /**
@@ -23,11 +25,12 @@ const Html: FC<StatePropTypes> = ({
   rootComponent,
   buildProd,
   config,
-  splitPoints
+  splitPoints,
+  css
 }) => {
   // Asset var is hydrate at runtime
   // Please note is is not set when running dev
-  const assets = __ASSETS__;
+  const assets = __ASSETS__ ?? {};
 
   const helmet = Helmet.renderStatic();
   const htmlAttrs = helmet.htmlAttributes.toComponent();
@@ -37,19 +40,9 @@ const Html: FC<StatePropTypes> = ({
   const js = keys.filter(
     a => a.includes('.js') && !a.includes('.map') && !a.includes('.json')
   );
-  const css = keys.filter(a => a.includes('.css') && !a.includes('.map'));
 
   let srcJsFiles = js.map(key => (
     <script key={'js-scripts'} src={`${config.static?.path}${assets[key]}`} />
-  ));
-  const srcCssFiles = css.map(key => (
-    <link
-      key={'styles'}
-      rel="stylesheet"
-      href={`${config.static?.path}${assets[key]}`}
-      crossOrigin="anonymous"
-      type="text/css"
-    />
   ));
 
   // Nasty
@@ -74,7 +67,9 @@ const Html: FC<StatePropTypes> = ({
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
-          {srcCssFiles}
+          {css && css.map(css => {
+            return <style>{css}</style>
+          })}
         </head>
         <body {...bodyAttrs}>
           <script dangerouslySetInnerHTML={{ __html: initialState }} />

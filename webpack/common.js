@@ -1,7 +1,8 @@
 import { ProgressPlugin, SourceMapDevToolPlugin } from 'webpack';
 
-import { resolve as _resolve } from 'path';
-import { root, build, nodeModules, babelConfig } from './paths';
+import { resolve } from 'path';
+import { root, build, nodeModules, babelConfig, tsconfigConfig } from './paths';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const publicPath = '/';
 
@@ -16,14 +17,13 @@ const common = (env) => ({
     mainFields: ["module", "browser", "main"],
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
     alias: {
-      //"react-dom": "@hot-loader/react-dom",
-      "@styles": "./web/style",
-      "@web/*": "./web",
-      "@client/*": "./client",
-      "@server/*": "./server",
-      "@components/*": "./web/components",
-      "@core/*": "./core",
-      "@config/*": "./config"
+      "@styles": "../src/web/style",
+      "@web/*": "../src/web",
+      "@client/*": "../src/client",
+      "@server/*": "../src/server",
+      "@components/*": "../src/web/components",
+      "@core/*": "../src/core",
+      "@config/*": "../src/config"
     }
   },
   module: {
@@ -54,6 +54,7 @@ const common = (env) => ({
     new ProgressPlugin({
       activeModules: true
     }),
+    new TsconfigPathsPlugin({/* options: see below */}),
     //
     new SourceMapDevToolPlugin({
       filename: '__sourcemaps/[name].[chunkhash:8].js.map',

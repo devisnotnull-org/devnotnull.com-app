@@ -1,7 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800";
 @import "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900";
-
-@charset "utf-8";
 
 @-webkit-viewport { width: device-width; }
 
@@ -14,7 +16,7 @@
 @viewport { width: device-width; }
 
 :root {
-  --base-font-famiy: "Roboto", sans-serif;
+  --base-font-famiy: Roboto, sans-serif;
   --base-font-weight: 400;
   --base-background-colour: #ededed;
   --base-font-size: 10px;

@@ -19,7 +19,8 @@ export const render = (
   url: string,
   config: any,
   res: Response,
-  store: Store
+  store: Store,
+  css?: string[]
 ): string => {
   const response = '';
   const BUILD_PROD = process.env.NODE_ENV === 'production';
@@ -28,6 +29,7 @@ export const render = (
   const context = {
     splitPoints: []
   };
+  
   const rootComponent = BUILD_PROD ? (
     <Provider store={store}>
       <StaticRouter location={url}>
@@ -59,6 +61,7 @@ export const render = (
           rootComponent={rootComponent}
           initialState={initialState}
           splitPoints={splitPoints}
+          css={css}
         />,
     {
       onShellReady() {

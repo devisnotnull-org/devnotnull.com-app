@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import classnames from 'classnames';
 
-import commonStyles from '../../style/common.css';
 import { IMetadataPayload } from '../../../models/metadata';
+
+import commonStyles from '../../style/common.css';
 
 type Props =  {
   metadata: IMetadataPayload;
