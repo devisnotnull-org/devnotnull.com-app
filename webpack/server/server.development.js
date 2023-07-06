@@ -6,14 +6,6 @@ import { WaitPlugin } from '../plugins/wait'
 import { src, build } from '../paths'
 import { config as server } from './server.common';
 
-// const asset = require('../../build/asset-manifest.json');
-
-const asset = {
-  "app.js": "/static/app.js",
-  //"client.css": "/static/client.css",
-  "vendors.js": "/static/vendors.js"
-}
-
 const config = merge(server('development'), {
   mode: 'development',
   devtool: 'source-map',
@@ -65,7 +57,7 @@ const config = merge(server('development'), {
     }),
     new WaitPlugin(`${build}/client-assets.json`),
     new DefinePlugin({
-      __ASSETS__: JSON.stringify(asset)
+      __ASSETS__: JSON.stringify({})
     }),
   ],
 })

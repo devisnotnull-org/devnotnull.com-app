@@ -3,6 +3,7 @@ import TerserPlugin from 'terser-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { EnvironmentPlugin } from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
 import CopyPlugin from 'copy-webpack-plugin'
 import { config as client } from './client.common';
@@ -41,6 +42,7 @@ const config = merge(client('production'), {
           }
         }
       }),
+      //new CssMinimizerPlugin()
     ],
     splitChunks: {
       cacheGroups: {
@@ -76,20 +78,7 @@ const config = merge(client('production'), {
             loader: 'postcss-loader',
             options: {
               sourceMap: true,
-              postcssOptions: {
-                plugins: () => [
-
-                  require('postcss-custom-media'),
-                  require('postcss-flexbugs-fixes'),
-                  require('postcss-preset-env')({
-                    autoprefixer: {
-                      flexbox: 'no-2009'
-                    },
-                    stage: 3
-                  })
-                ]
               }
-            }
           },
           {
             loader: 'resolve-url-loader',
@@ -120,7 +109,7 @@ const config = merge(client('production'), {
       prettyPrint: true,
     }),
     new WebpackManifestPlugin({
-      fileName: 'asset-manifest.json'
+      fileName: 'client-asset-manifest.json'
     }),
   ],
 });

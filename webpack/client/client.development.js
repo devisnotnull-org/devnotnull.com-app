@@ -2,6 +2,9 @@ import merge from 'webpack-merge';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import { HotModuleReplacementPlugin } from 'webpack'
 import AssetsPlugin from 'assets-webpack-plugin';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer'
+
 
 import { build, src } from '../paths'
 import { config as client } from './client.common';
@@ -15,10 +18,6 @@ const config = merge(client('development'), {
       "regenerator-runtime/runtime",
       `${src}/client/index`,
     ]
-  },
-  output: {
-    filename: "[name].js",
-    chunkFilename: "[name].chunk.js"
   },
   devServer: {
     port: 9000,
@@ -65,28 +64,7 @@ const config = merge(client('development'), {
           },
           {
             loader: 'postcss-loader',
-            options: {
-              sourceMap: false,
-              postcssOptions: {
-                plugins: () => [
-                  require('postcss-custom-media'),
-                  require('postcss-flexbugs-fixes'),
-                  require('postcss-preset-env')({
-                    autoprefixer: {
-                      flexbox: 'no-2009'
-                    },
-                    stage: 3
-                  })
-                ]
-              }
-            }
           },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              root: src
-            }
-          }
         ]
       }
     ]

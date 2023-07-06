@@ -8,6 +8,7 @@ import { config } from './config';
 import { render } from './render';
 
 import createStore from '../core/store';
+import { readFile } from "fs/promises";
 
 const PROD: boolean = process.env.NODE_ENV === 'production';
 const app: Express = express();
@@ -44,8 +45,20 @@ app.use(express.static(__dirname + '/static'));
 // All other routes will be directed to React
 app.get('*', async (req: Request, res: Response) => {
   const history = createMemoryHistory({ initialEntries: [req.path]});
+  // Load production css if present
+  // Gross but does the job for now
+  const assets = __ASSETS__ ?? {};
+  const keys = Object.keys(assets)
+  const css = keys.filter(a => a.includes('.css') && !a.includes('.map'));
+  const cssPayload = css.map((key) => assets[key]);
+  const cssHydrate = cssPayload.map(async (pred) => (await readFile(`${__dirname}${pred}`)).toString())
+  const cssHydrated = await Promise.all(cssHydrate);
+
+  // Sagas are now old but I like them
   const store = await createStore(history);
-  return render(req.url, config, res, store);
+
+  // Just inline the CSS for better page perf
+  return render(req.url, config, res, store, cssHydrated);
 });
 
 // Catch 404 and forward to error handler
