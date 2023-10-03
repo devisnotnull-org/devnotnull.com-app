@@ -168,7 +168,7 @@
     "moment": "^2.24.0",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
-    "postcss": "^8.4.24",
+    "postcss": "^8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-ga": "^3.3.1",
