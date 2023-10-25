@@ -8,10 +8,10 @@ export function* routeSagas() {
   const currentRoute = yield select((state) => state.router)
   
   // Path based data loading
-  if(currentRoute.location.pathname === "/blog") {
+  // if(currentRoute.location.pathname === "/blog") {
     yield all([blogSaga()])
     return
-  }
+  //}
 
   // Path based data loading
   if(currentRoute.location.pathname.includes("/blog/")) {

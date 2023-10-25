@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
-import classnames from 'classnames';
 
-import commonStyles from '../../style/common.css';
 import { IMetadataPayload } from '../../../models/metadata';
 
 type Props = {
@@ -9,7 +7,7 @@ type Props = {
 }
 
 export const BlobBlurb: FC<Props> = ({ metadata }) => (
-  <div className={classnames(commonStyles['Block'])}>
+  <div>
     <h2>Blog post</h2>
     <p>{metadata.summary}</p>
   </div>

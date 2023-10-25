@@ -1,12 +1,12 @@
 import React from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import { Provider } from 'react-redux';
+import { Router } from "@remix-run/router";
 import { Response } from 'express';
-import { StaticRouter } from "react-router-dom/server";
+import { StaticRouterProvider } from "react-router-dom/server";
 import { Store } from 'redux';
 import rootSaga from '../core/sagas';
-import App from '@web/app';
-import Html from './html';
+import Html from '../web/components/html/html';
 
 /**
  *
@@ -18,6 +18,8 @@ import Html from './html';
 export const render = (
   url: string,
   config: any,
+  router: Router,
+  context: any,
   res: Response,
   store: Store,
   css?: string[]
@@ -26,15 +28,13 @@ export const render = (
   const BUILD_PROD = process.env.NODE_ENV === 'production';
   const RUNTIME_PROD = process.env.NODE_RUNTIME_ENV === 'production';
 
-  const context = {
-    splitPoints: []
-  };
-  
   const rootComponent = BUILD_PROD ? (
     <Provider store={store}>
-      <StaticRouter location={url}>
-        <App />
-      </StaticRouter>
+      <StaticRouterProvider
+        router={router}
+        context={context}
+        nonce="the-nonce"
+      />
     </Provider>
   ) : null;
 
@@ -48,10 +48,6 @@ export const render = (
         ...state,
         config
       })}`;
-      const splitPoints = `window.__SPLIT_POINTS__ = ${JSON.stringify(
-        context.splitPoints
-      )}`;
-      
       let didError = false;
       const stream = renderToPipeableStream(
         <Html
@@ -60,7 +56,6 @@ export const render = (
           runtimeProd={RUNTIME_PROD}
           rootComponent={rootComponent}
           initialState={initialState}
-          splitPoints={splitPoints}
           css={css}
         />,
     {

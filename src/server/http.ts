@@ -1,7 +1,12 @@
 import "../../typings/index.d.ts" 
-
+import 'regenerator-runtime/runtime';
+import 'source-map-support/register'
 import * as Sentry from "@sentry/node";
-
+import { routes } from '../web/routes'
+import {
+  createStaticHandler,
+  createStaticRouter,
+} from "react-router-dom/server";
 import express, { Express, NextFunction, Request, Response } from 'express';
 import { createMemoryHistory } from 'history';
 import { config } from './config';
@@ -43,8 +48,19 @@ app.use(express.static('static'));
 app.use(express.static(__dirname + '/static'));
 
 // All other routes will be directed to React
-app.get('*', async (req: Request, res: Response) => {
-  const history = createMemoryHistory({ initialEntries: [req.path]});
+app.get('*', async (request: Request, res: Response) => {
+
+  const { query, dataRoutes } = createStaticHandler(routes);
+  const remixRequest = createFetchRequest(request);
+  const context = await query(remixRequest as any) ;
+
+  if (context instanceof globalThis.Response) {
+    throw context;
+  }
+
+  const router = createStaticRouter(dataRoutes, context);
+
+  const history = createMemoryHistory({ initialEntries: [request.path]});
   // Load production css if present
   // Gross but does the job for now
   const assets = __ASSETS__ ?? {};
@@ -58,18 +74,18 @@ app.get('*', async (req: Request, res: Response) => {
   const store = await createStore(history);
 
   // Just inline the CSS for better page perf
-  return render(req.url, config, res, store, cssHydrated);
+  return render(request.url, config, router, context, res, store, cssHydrated);
 });
 
 // Catch 404 and forward to error handler
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((request: Request, res: Response, next: NextFunction) => {
   const err = new Error('Not Found');
   (err as any).status = 404;
   next(err);
 });
 
 // Error handler
-app.use((err: any, req: Request, res: Response) => {
+app.use((err: any, request: Request, res: Response) => {
   if (PROD) console.error('error : ', err.message);
   else console.error('error : ', err);
   res.status(err.status || 500);
@@ -79,5 +95,40 @@ app.use((err: any, req: Request, res: Response) => {
 app.use(Sentry.Handlers.errorHandler());
 
 // Server our app
+
+export const createFetchRequest = (req: Request): globalThis.Request => {
+  const origin = `${req.protocol}://${req.get("host")}`;
+  // Note: This had to take originalUrl into account for presumably vite's proxying
+  const url = new URL(req.originalUrl || req.url, origin);
+
+  const controller = new AbortController();
+  req.on("close", () => controller.abort());
+
+  const headers = new Headers();
+
+  for (const [key, values] of Object.entries(req.headers)) {
+    if (values) {
+      if (Array.isArray(values)) {
+        for (const value of values) {
+          headers.append(key, value);
+        }
+      } else {
+        headers.set(key, values);
+      }
+    }
+  }
+
+  const init: RequestInit = {
+    method: req.method,
+    headers,
+    signal: controller.signal,
+  };
+
+  if (req.method !== "GET" && req.method !== "HEAD") {
+    init.body = req.body;
+  }
+
+  return new globalThis.Request(url.href, init);
+}
 
 export { app };

@@ -1,4 +1,4 @@
-import { all, takeEvery } from 'redux-saga/effects';
+import { all, takeEvery, select } from 'redux-saga/effects';
 import { ROUTER_ON_LOCATION_CHANGED } from '@lagunovsky/redux-react-router'
 
 import { abilitiesSagas } from './ability/sagas';
@@ -31,6 +31,7 @@ export function* fetchAllSaga() {
 
 export default function* rootSaga() {
 
+  
   yield all([
     fetchAllSaga(),
     // Initial setup

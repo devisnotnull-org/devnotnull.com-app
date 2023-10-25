@@ -1,14 +1,9 @@
-import { readFile } from 'fs/promises';
 import React, { FC, ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
 
-/**
- *
- */
 interface StatePropTypes {
   initialState: string;
-  splitPoints: string;
   rootComponent: ReactElement<any> | null;
   buildProd: boolean;
   config: any;
@@ -16,16 +11,11 @@ interface StatePropTypes {
   css?: string[]
 }
 
-/**
- *
- * @param param0
- */
 const Html: FC<StatePropTypes> = ({
   initialState,
   rootComponent,
   buildProd,
   config,
-  splitPoints,
   css
 }) => {
   // Asset var is hydrate at runtime
@@ -70,10 +60,9 @@ const Html: FC<StatePropTypes> = ({
           {css && css.map(css => {
             return <style>{css}</style>
           })}
+          <script dangerouslySetInnerHTML={{ __html: initialState }} async/>
         </head>
-        <body {...bodyAttrs}>
-          <script dangerouslySetInnerHTML={{ __html: initialState }} />
-          <script dangerouslySetInnerHTML={{ __html: splitPoints }} />
+        <body {...bodyAttrs} className='bg-zinc-50'>
           {buildProd && rootComponent ? (
             <div
               id="root"

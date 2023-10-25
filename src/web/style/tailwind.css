@@ -1,0 +1,16 @@
+/* webpackIgnore: true */
+@tailwind base;
+/* webpackIgnore: true */
+@tailwind components;
+/* webpackIgnore: true */
+@tailwind utilities;
+
+@import "https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800";
+@import "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900";
+
+@layer base {
+    html {
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+    }
+}

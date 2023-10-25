@@ -41,8 +41,15 @@ const defaultConfig: Config = {
     static: {
       path: `https://devnotnull-ui-${bucket}.s3.amazonaws.com`
     },
+    api: {
+      path: 'https://api.devnotnull.com'
+    }
   },
-  developmentLocal: {},
+  developmentLocal: {
+    api: {
+      path: 'https://api.devnotnull.com'
+    }
+  },
   productionLocal: {},
   production: {
     static: {

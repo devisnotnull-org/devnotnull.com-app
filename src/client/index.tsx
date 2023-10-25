@@ -15,6 +15,29 @@ import rootSaga from '../core/sagas';
 import createStore from '../core/store';
 import App from '../web/app';
 
+
+import * as ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  matchRoutes,
+  RouterProvider,
+} from "react-router-dom";
+
+import { routes } from "../web/routes";
+
+
+
+async function hydrate() {
+
+
+  ReactDOM.hydrateRoot(
+    document.getElementById("app")!,
+    <React.StrictMode>
+      <RouterProvider router={router} fallbackElement={null} />
+    </React.StrictMode>
+  );
+}
+
 Sentry.init({
   dsn: "https://12046da78cfc4847b6f1ae989a727d1c@o1429445.ingest.sentry.io/4503887995076608",
   integrations: [new BrowserTracing()],
@@ -35,12 +58,32 @@ const preloadedState = (window as any).__INITIAL_STATE__;
 
   (store as any).rootTask = (store as any).runSaga(rootSaga);
 
-  const renderApp = () => {
-    const rootElement = document.getElementById('root')
+  const renderApp = async () => {
+    const rootElement = document.getElementById('root');
+
+    // Determine if any of the initial routes are lazy
+    const lazyMatches = matchRoutes(routes, window.location)?.filter(
+      (m) => m.route.lazy
+    );
+
+    // Load the lazy matches and update the routes before creating your router
+    // so we can hydrate the SSR-rendered content synchronously
+    if (lazyMatches && lazyMatches?.length > 0) {
+      await Promise.all(
+        lazyMatches.map(async (m) => {
+          const routeModule = await m.route.lazy!();
+          Object.assign(m.route, { ...routeModule, lazy: undefined });
+        })
+      );
+    }
+
+    const router = createBrowserRouter(routes);
+    
     if(rootElement){
       const root = createRoot(rootElement)
       root.render(
         <Provider store={store}>
+          <RouterProvider router={router} fallbackElement={null} />
           <ReduxRouter
             history={history}
             children={<App/>}

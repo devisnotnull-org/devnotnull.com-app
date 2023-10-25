@@ -48,19 +48,13 @@ const config = merge(client('development'), {
   module: {
     rules: [
       {
-        test: /\.s?css$/,
+        test: /\.css$/,
         use: [
           {
             loader: 'style-loader'
           },
           {
             loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: {
-                localIdentName: '[local][hash:base64:5]'
-              }
-            }
           },
           {
             loader: 'postcss-loader',

@@ -57,35 +57,15 @@ const config = merge(client('production'), {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\tailwind.css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              esModule: false,
-            },
           },
           {
             loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: {
-                localIdentName: '[name]__[local]__[hash:base64:5]'
-              }
-            }
           },
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true,
-              }
-          },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              root: src
-            }
-          }
+          'postcss-loader'
         ]
       }
     ],

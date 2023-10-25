@@ -1,11 +1,8 @@
 import React, { FC, useState } from 'react';
-import classnames from 'classnames';
 import { useInView } from 'react-intersection-observer';
 
 import Richtext from "@components/richtext/richtext"
 import { ICommonDataNode } from 'models/common';
-
-import style from './blogItem.css'
 
 type Props = {
   assets: any[]
@@ -33,9 +30,11 @@ const BlogItemm: FC<Props> = ({ content, assets }) => {
   if(inView === true && viewed === false) setViewed(true)
 
   return (
-    <div ref={ref} className={classnames(style['Entry--FadeIn'], (viewed) ? style['FadeIn'] : undefined)}>
+    <div ref={ref} className='mb-10'>
       <Richtext payload={content.blogContent} assets={assets} />
-      <a href={`/blog/${content.slug}`}><b>Click to view full article</b></a>
+      <div className='mt-10'>
+        <a href={`/blog/${content.slug}`} className='mt-10 relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100'>Click to view full article</a>
+      </div>
     </div>
   )
 }
