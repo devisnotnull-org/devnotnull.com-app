@@ -7,6 +7,11 @@ import Blog from './containers/blog/blog';
 import BlogPageViewContainer from './containers/blogPage/blogPage';
 import NotFound from './containers/notFound/notFound';
 import { fetchBlogItem } from '@core/blogItem/fetch';
+import DownloadView from './containers/download/download';
+import TagsView from './containers/tags/tags';
+import { fetchTags } from '@core/tags/fetch';
+import { fetchTaggedBlog } from '@core/blog/fetch';
+import TaggedBlogView from './containers/taggedBlog/taggedBlog';
 
 export const routes: RouteObject[] = [
   {
@@ -17,7 +22,6 @@ export const routes: RouteObject[] = [
         index: true,
         element: <Home />,
         loader: () => {
-          console.log("Home loader")
           return { data: "Home loader" };
         }
       },
@@ -29,14 +33,40 @@ export const routes: RouteObject[] = [
         },
       },
       {
+        path: "cv",
+        element: <DownloadView />,
+      },
+      {
         path: "blog/:id",
         element: <BlogPageViewContainer/>,
         loader: async ({
           params,
         }: LoaderFunctionArgs) => {
           const blogItem = await fetchBlogItem(params?.id ?? '');
-          console.log("blogItem", blogItem.data.payload)
           return { data: blogItem?.data?.payload}
+        },
+      },
+      {
+        path: "blog/tags",
+        element: <TagsView/>,
+        loader: async () => {
+          const blogItem = await fetchTags();
+          return { data: blogItem?.data?.payload}
+        },
+      },
+      {
+        path: "blog/tags/:tag",
+        element: <TaggedBlogView/>,
+        loader: async ({
+          params,
+        }: LoaderFunctionArgs) => {
+          console.log("TAGGGED BLOG")
+          console.log("TAGGGED BLOG")
+          console.log("TAGGGED BLOG")
+          console.log("TAGGGED BLOG")
+          const blogItem = await fetchTaggedBlog(params.tag ?? '');
+          console.log(blogItem)
+          return { data: blogItem?.data?.payload, id: params.tag }
         },
       },
       {
@@ -46,63 +76,3 @@ export const routes: RouteObject[] = [
     ],
   },
 ];
-
-/**
-const sleep = (n = 500) => new Promise((r) => setTimeout(r, n));
-const rand = () => Math.round(Math.random() * 100);
-
-async function homeLoader() {
-  await sleep();
-  return { data: `Home loader - random value ${rand()}` };
-}
-
-function Home() {
-  let data = useLoaderData();
-  return (
-    <div>
-      <h2>Home</h2>
-      <p>Loader Data: {data.data}</p>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-}
-
-async function dashboardLoader() {
-  await sleep();
-  return { data: `Dashboard loader - random value ${rand()}` };
-}
-
-function Dashboard() {
-  let data = useLoaderData();
-  return (
-    <div>
-      <h2>Dashboard</h2>
-      <p>Loader Data: {data.data}</p>
-    </div>
-  );
-}
-
-async function redirectLoader() {
-  await sleep();
-  return redirect("/");
-}
-
-function NoMatch() {
-  return (
-    <div>
-      <h2>Nothing to see here!</h2>
-      <p>
-        <Link to="/">Go to the home page</Link>
-      </p>
-    </div>
-  );
-}
-
-**/

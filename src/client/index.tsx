@@ -5,38 +5,21 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { ReduxRouter } from '@lagunovsky/redux-react-router'
-
 import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
-
-import reportWebVitals from '../web/webVitals';
-
-import rootSaga from '../core/sagas';
-import createStore from '../core/store';
-import App from '../web/app';
-
-
-import * as ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
   matchRoutes,
   RouterProvider,
 } from "react-router-dom";
 
+import { BrowserTracing } from "@sentry/tracing";
+
+import reportWebVitals from '../web/webVitals';
+import rootSaga from '../core/sagas';
+import createStore from '../core/store';
+import App from '../web/app';
+
 import { routes } from "../web/routes";
-
-
-
-async function hydrate() {
-
-
-  ReactDOM.hydrateRoot(
-    document.getElementById("app")!,
-    <React.StrictMode>
-      <RouterProvider router={router} fallbackElement={null} />
-    </React.StrictMode>
-  );
-}
 
 Sentry.init({
   dsn: "https://12046da78cfc4847b6f1ae989a727d1c@o1429445.ingest.sentry.io/4503887995076608",

@@ -4,8 +4,7 @@ import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
 import ReactGA from 'react-ga';
 
-import HeaderViewContainer from './containers/header/header';
-
+import { Header } from './components/Header';
 import { getMetadataBlurb, getMetadataTitle } from '../core/metadata/selectors';
 
 import './style/tailwind.css';
@@ -31,26 +30,12 @@ export const AppRouter: React.FC = () => {
           content="width=device-width, initial-scale=1.0"
         />
       </Helmet>
-      <div className={"container xl mx-auto w-full bg-white ring-1 ring-zinc-100"}>
-        <HeaderViewContainer />
-        <div className='mx-10'>
-          <Outlet/>
-        </div>
+      <div className="container mx-auto relative flex w-full flex-col">
+        <Header></Header>
+        <main className="flex-auto z-40"><Outlet/></main>
       </div>
     </>
   );
 };
-
-/**
-  <div className='m-16'>
-    <Routes>
-      <Route path="/" element={<HomeViewContainer/>} />
-      <Route path="/portfolio" element={<FolioViewContainer/>} />
-      <Route path="/blog" element={<BlogViewContainer/>} />
-      <Route path="/blog/:slug" element={<BlogPageViewContainer/>} />
-      <Route element={<NotFoundComponent/>} />
-    </Routes>
-  </div>
- */
 
 export default AppRouter;

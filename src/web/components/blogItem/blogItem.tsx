@@ -3,9 +3,11 @@ import { useInView } from 'react-intersection-observer';
 
 import Richtext from "@components/richtext/richtext"
 import { ICommonDataNode } from 'models/common';
+import { Link } from 'react-router-dom';
 
 type Props = {
   assets: any[]
+  limit: number
   content: {
     slug: string
     title: string
@@ -20,7 +22,7 @@ type Props = {
  * @param param0 
  * @returns 
  */
-const BlogItemm: FC<Props> = ({ content, assets }) => {
+const BlogItemm: FC<Props> = ({ content, assets, limit }) => {
     
   const [viewed, setViewed] = useState(false)
   const { ref, inView } = useInView({
@@ -31,9 +33,9 @@ const BlogItemm: FC<Props> = ({ content, assets }) => {
 
   return (
     <div ref={ref} className='mb-10'>
-      <Richtext payload={content.blogContent} assets={assets} />
+      <Richtext payload={content.blogContent} assets={assets} limit={limit}/>
       <div className='mt-10'>
-        <a href={`/blog/${content.slug}`} className='mt-10 relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100'>Click to view full article</a>
+        <Link to={`/blog/${content.slug}`} className='mt-10 relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100'>Click to view full article</Link>
       </div>
     </div>
   )

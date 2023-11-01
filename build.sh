@@ -1,9 +1,6 @@
 #!/bin/sh
 
-yarn build:prod:pure
-
-serverless deploy --verbose --stage development
-serverless deploy --verbose --stage production
+yarn build:prod
 
 ID=$(docker build -q .)
 

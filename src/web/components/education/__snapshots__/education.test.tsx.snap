@@ -6,21 +6,25 @@ exports[`<Folio /> render Folio Component 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class=""
+        class="mb-2"
       >
-        <h2>
-          EDUCATION
-        </h2>
+        <h1
+          class="text-2xl py-3.5 my-2 text-center"
+        >
+          Education
+        </h1>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class=""
+      class="mb-2"
     >
-      <h2>
-        EDUCATION
-      </h2>
+      <h1
+        class="text-2xl py-3.5 my-2 text-center"
+      >
+        Education
+      </h1>
     </div>
   </div>,
   "debug": [Function],

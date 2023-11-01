@@ -3,7 +3,6 @@ import TerserPlugin from 'terser-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { EnvironmentPlugin } from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
-import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
 import CopyPlugin from 'copy-webpack-plugin'
 import { config as client } from './client.common';
@@ -42,7 +41,6 @@ const config = merge(client('production'), {
           }
         }
       }),
-      //new CssMinimizerPlugin()
     ],
     splitChunks: {
       cacheGroups: {
@@ -57,15 +55,17 @@ const config = merge(client('production'), {
   module: {
     rules: [
       {
-        test: /\tailwind.css$/,
+        test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: 'style-loader'
           },
           {
             loader: 'css-loader',
           },
-          'postcss-loader'
+          {
+            loader: 'postcss-loader',
+          },
         ]
       }
     ],

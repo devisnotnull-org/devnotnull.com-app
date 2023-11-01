@@ -73,7 +73,6 @@ const Html: FC<StatePropTypes> = ({
           ) : (
             <div id="root" />
           )}
-          <div id="modal-root" />
           {srcJsFiles}
         </body>
       </html>

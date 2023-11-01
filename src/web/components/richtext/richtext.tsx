@@ -17,9 +17,7 @@ type Props = {
 }
 
 const RichText: FC<Props> = ({ payload, assets, limit }) => {
-  console.log('limit')
-  console.log(limit)
-  const content = limit ? payload.content?.slice(0, 5) : payload.content;
+  const content = limit ? payload.content?.slice(0, limit) : payload.content;
   return (
     <>
     {content?.map((payload) => {

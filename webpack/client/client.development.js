@@ -2,9 +2,6 @@ import merge from 'webpack-merge';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import { HotModuleReplacementPlugin } from 'webpack'
 import AssetsPlugin from 'assets-webpack-plugin';
-import tailwindcss from 'tailwindcss';
-import autoprefixer from 'autoprefixer'
-
 
 import { build, src } from '../paths'
 import { config as client } from './client.common';
