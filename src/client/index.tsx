@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { ReduxRouter } from '@lagunovsky/redux-react-router'
 import * as Sentry from "@sentry/react";
+import { AnimatePresence } from "framer-motion";
 import {
   createBrowserRouter,
   matchRoutes,
@@ -66,7 +67,10 @@ const preloadedState = (window as any).__INITIAL_STATE__;
       const root = createRoot(rootElement)
       root.render(
         <Provider store={store}>
+          <AnimatePresence mode="wait">
+
           <RouterProvider router={router} fallbackElement={null} />
+          </AnimatePresence>
           <ReduxRouter
             history={history}
             children={<App/>}

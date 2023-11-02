@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
 import ReactGA from 'react-ga';
+import { AnimatePresence } from "framer-motion";
 
 import { Header } from './components/Header';
 import { getMetadataBlurb, getMetadataTitle } from '../core/metadata/selectors';
@@ -32,7 +33,8 @@ export const AppRouter: React.FC = () => {
       </Helmet>
       <div className="container mx-auto relative flex w-full flex-col">
         <Header></Header>
-        <main className="flex-auto z-40"><Outlet/></main>
+        <main className="flex-auto z-40">
+        <AnimatePresence mode="wait"><Outlet/></AnimatePresence></main>
       </div>
     </>
   );

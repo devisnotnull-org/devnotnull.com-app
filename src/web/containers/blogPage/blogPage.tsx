@@ -61,22 +61,24 @@ export const BlogPage: FC = () => {
 
   return (  
     <article className='mt-5 p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base'>
-              <h1 className='text-2xl pb-3.5 font-bold font-harman'>
+      <h1 className='text-2xl pb-3.5 font-bold font-harman'>
       {data?.data?.fields?.title ?? ''}
       </h1>
       <div className='pb-3.5'>
         {data?.data?.fields?.summary}
       </div>
-      <div className='text-sm text-gray-500'>
-        {finalDate} {data?.data?.metadata?.tags.map(tag => <Link to={`/blog/tags/${tag?.sys?.id}`}><span className='mt-10 relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100'>{tag?.sys?.id}</span></Link>)}
+      <div className='pb-3.5'>
+        {data?.data?.metadata?.tags.map(tag => <Link to={`/blog/tags/${tag?.sys?.id}`}><span className='mt-10 relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100'>{tag?.sys?.id}</span></Link>)}
       </div>
-            <div>
-            <img src={asset?.fields?.file?.url}/>
-            </div>
-
+      <div className='text-sm text-gray-500'>
+        {finalDate}
+      </div>
       <div>
-          <Richtext assets={data?.data?.includes?.Asset ? data?.data?.includes?.Asset : []} payload={data?.data?.fields?.blogContent}/>
-          <div ref={commentBox} />
+        <img src={asset?.fields?.file?.url}/>
+      </div>
+      <div>
+        <Richtext assets={data?.data?.includes?.Asset ? data?.data?.includes?.Asset : []} payload={data?.data?.fields?.blogContent}/>
+        <div ref={commentBox} />
       </div>
     </article>
   );

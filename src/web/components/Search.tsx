@@ -63,7 +63,8 @@ function SearchDialog({
   setOpen: (open: boolean) => void
   className?: string
 }) {
-    const [searchResults, setSearchResults] = useState<EmptyObject[]>([])
+  console.log("DIALOWGUW")
+    const [searchResults, setSearchResults] = useState<{ items: [], assets: []}>({ items: [], assets: []})
     const [inputString, setInputString] = useState<string>('')
 
   const formRef = useRef<React.ElementRef<'form'>>(null)
@@ -77,8 +78,10 @@ function SearchDialog({
   useEffect(() => {
       searchBlog(inputString).then((results) => { 
         console.log(results)
-        setSearchResults(results.data?.payload?.items ?? [])
-     })
+        setSearchResults({ items: results.data?.payload ?? [], assets: results.data?.includes?.Asset ?? []})
+     }).catch((error) => {
+          console.log(error)
+      })
   }, [inputString])
 
   useEffect(() => {
@@ -100,6 +103,16 @@ function SearchDialog({
     }
   }, [open, setOpen])
 
+  const findAssets = (assetId: string, assets: []) => {
+    console.log("asset id")
+    console.log(assetId)
+    console.log("assets")
+    console.log(assets)
+    return assets.find(assetItem => assetId === assetItem.sys.id);
+  }
+
+  console.log( "search results")
+  console.log(searchResults)  
   return (
     <Transition.Root
       show={open}
@@ -145,17 +158,19 @@ function SearchDialog({
                     className="border-t border-zinc-200 bg-white empty:hidden"
                   >
                     <ul className="divide-y divide-zinc-200">
-                        {searchResults.length > 0 && searchResults.map((result) => {    
+                        {searchResults?.items.length > 0 && searchResults?.items.map((result) => {    
                             return (
+                              
                                 <li key={result.sys.id} className="px-6 py-3.5 hover:bg-zinc-100">
                                     <a href={`/blog/${result.fields.slug}`} className="block">
                                         <div className="text-zinc-900 font-harman"><h1>{result.fields.title}</h1></div>
                                         <div className="text-zinc-500">{result.fields.summary}</div>
+                                        <div>{findAssets(result?.fields?.image?.[0]?.sys?.id, searchResults.assets)}</div>
                                     </a>
                                 </li>
                             )
                         })}
-                        {searchResults.length === 0 && (
+                        {searchResults?.items.length === 0 && (
                             <li className="px-6 py-3.5 hover:bg-zinc-100">
                                 {inputString.length > 0 && <div className="text-zinc-900 font-harman"><h1>No results found</h1></div>}
                                 <div className="text-zinc-500">Try searching for something else</div>
