@@ -1,7 +1,7 @@
-import { Reducer, AnyAction } from 'redux';
+import { Reducer, AnyAction } from "redux";
 
-import { AssetActionTypes } from './actions';
-import { IAssetPayload } from '../../models/asset';
+import { AssetActionTypes } from "./actions";
+import { IAssetPayload } from "../../models/asset";
 
 export interface IAssetEntry {
   [id: string]: IAssetPayload;
@@ -16,12 +16,12 @@ export interface IAssetState {
 const initialState: IAssetState = {
   errors: undefined,
   loading: false,
-  items: {}
+  items: {},
 };
 
 export const asset: Reducer<IAssetState> = (
   state: IAssetState = initialState,
-  action: AnyAction
+  action: AnyAction,
 ) => {
   switch (action.type) {
     case AssetActionTypes.FETCH_START: {
@@ -32,7 +32,7 @@ export const asset: Reducer<IAssetState> = (
         ...state,
         loading: false,
         errors: undefined,
-        items: { ...state.items }
+        items: { ...state.items },
       };
     }
     case AssetActionTypes.FETCH_ERROR: {

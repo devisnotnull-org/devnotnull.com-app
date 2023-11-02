@@ -1,7 +1,7 @@
-import { call, put } from 'redux-saga/effects';
-import { EducationActionTypes, fetchSuccess } from './actions';
+import { call, put } from "redux-saga/effects";
+import { EducationActionTypes, fetchSuccess } from "./actions";
 
-import { fetchEducation } from './fetch';
+import { fetchEducation } from "./fetch";
 
 export function* educationSaga() {
   try {
@@ -10,7 +10,7 @@ export function* educationSaga() {
   } catch (ex) {
     yield put({
       type: EducationActionTypes.FETCH_ERROR,
-      ex
+      ex,
     });
   }
 }

@@ -1,7 +1,7 @@
-import { call, put } from 'redux-saga/effects';
-import { ExperianceActionTypes, fetchSuccess } from './actions';
+import { call, put } from "redux-saga/effects";
+import { ExperianceActionTypes, fetchSuccess } from "./actions";
 
-import { fetchExperiance } from './fetch';
+import { fetchExperiance } from "./fetch";
 
 export function* experianceSaga() {
   try {
@@ -10,7 +10,7 @@ export function* experianceSaga() {
   } catch (ex) {
     yield put({
       type: ExperianceActionTypes.FETCH_ERROR,
-      ex
+      ex,
     });
   }
 }

@@ -1,21 +1,21 @@
-import "../../typings/index.d.ts" 
-import 'regenerator-runtime/runtime';
-import 'source-map-support/register'
+import "../../typings/index.d.ts";
+import "regenerator-runtime/runtime";
+import "source-map-support/register";
 import * as Sentry from "@sentry/node";
-import { routes } from '../web/routes'
+import { routes } from "../web/routes";
 import {
   createStaticHandler,
   createStaticRouter,
 } from "react-router-dom/server";
-import express, { Express, NextFunction, Request, Response } from 'express';
-import { createMemoryHistory } from 'history';
-import { config } from './config';
-import { render } from './render';
+import express, { Express, NextFunction, Request, Response } from "express";
+import { createMemoryHistory } from "history";
+import { config } from "./config";
+import { render } from "./render";
 
-import createStore from '../core/store';
+import createStore from "../core/store";
 import { readFile } from "fs/promises";
 
-const PROD: boolean = process.env.NODE_ENV === 'production';
+const PROD: boolean = process.env.NODE_ENV === "production";
 const app: Express = express();
 
 Sentry.init({
@@ -41,18 +41,17 @@ app.use(Sentry.Handlers.requestHandler());
 // TracingHandler creates a trace for every incoming request
 app.use(Sentry.Handlers.tracingHandler());
 
-app.use('/static', express.static('static'));
-app.use('/static', express.static(__dirname + '/static'));
+app.use("/static", express.static("static"));
+app.use("/static", express.static(__dirname + "/static"));
 
-app.use(express.static('static'));
-app.use(express.static(__dirname + '/static'));
+app.use(express.static("static"));
+app.use(express.static(__dirname + "/static"));
 
 // All other routes will be directed to React
-app.get('*', async (request: Request, res: Response) => {
-
+app.get("*", async (request: Request, res: Response) => {
   const { query, dataRoutes } = createStaticHandler(routes);
   const remixRequest = createFetchRequest(request);
-  const context = await query(remixRequest as any) ;
+  const context = await query(remixRequest as any);
 
   if (context instanceof globalThis.Response) {
     throw context;
@@ -60,14 +59,16 @@ app.get('*', async (request: Request, res: Response) => {
 
   const router = createStaticRouter(dataRoutes, context);
 
-  const history = createMemoryHistory({ initialEntries: [request.path]});
+  const history = createMemoryHistory({ initialEntries: [request.path] });
   // Load production css if present
   // Gross but does the job for now
   const assets = __ASSETS__ ?? {};
-  const keys = Object.keys(assets)
-  const css = keys.filter(a => a.includes('.css') && !a.includes('.map'));
+  const keys = Object.keys(assets);
+  const css = keys.filter((a) => a.includes(".css") && !a.includes(".map"));
   const cssPayload = css.map((key) => assets[key]);
-  const cssHydrate = cssPayload.map(async (pred) => (await readFile(`${__dirname}${pred}`)).toString())
+  const cssHydrate = cssPayload.map(async (pred) =>
+    (await readFile(`${__dirname}${pred}`)).toString(),
+  );
   const cssHydrated = await Promise.all(cssHydrate);
 
   // Sagas are now old but I like them
@@ -79,15 +80,15 @@ app.get('*', async (request: Request, res: Response) => {
 
 // Catch 404 and forward to error handler
 app.use((request: Request, res: Response, next: NextFunction) => {
-  const err = new Error('Not Found');
+  const err = new Error("Not Found");
   (err as any).status = 404;
   next(err);
 });
 
 // Error handler
 app.use((err: any, request: Request, res: Response) => {
-  if (PROD) console.error('error : ', err.message);
-  else console.error('error : ', err);
+  if (PROD) console.error("error : ", err.message);
+  else console.error("error : ", err);
   res.status(err.status || 500);
 });
 
@@ -129,6 +130,6 @@ export const createFetchRequest = (req: Request): globalThis.Request => {
   }
 
   return new globalThis.Request(url.href, init);
-}
+};
 
 export { app };

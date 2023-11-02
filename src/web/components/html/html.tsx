@@ -1,6 +1,6 @@
-import React, { FC, ReactElement } from 'react';
-import { renderToString } from 'react-dom/server';
-import Helmet from 'react-helmet';
+import React, { FC, ReactElement } from "react";
+import { renderToString } from "react-dom/server";
+import Helmet from "react-helmet";
 
 interface StatePropTypes {
   initialState: string;
@@ -8,7 +8,7 @@ interface StatePropTypes {
   buildProd: boolean;
   config: any;
   runtimeProd: boolean;
-  css?: string[]
+  css?: string[];
 }
 
 const Html: FC<StatePropTypes> = ({
@@ -16,7 +16,7 @@ const Html: FC<StatePropTypes> = ({
   rootComponent,
   buildProd,
   config,
-  css
+  css,
 }) => {
   // Asset var is hydrate at runtime
   // Please note is is not set when running dev
@@ -28,27 +28,27 @@ const Html: FC<StatePropTypes> = ({
 
   const keys = Object.keys(assets);
   const js = keys.filter(
-    a => a.includes('.js') && !a.includes('.map') && !a.includes('.json')
+    (a) => a.includes(".js") && !a.includes(".map") && !a.includes(".json"),
   );
 
-  let srcJsFiles = js.map(key => (
-    <script key={'js-scripts'} src={`${config.static?.path}${assets[key]}`} />
+  let srcJsFiles = js.map((key) => (
+    <script key={"js-scripts"} src={`${config.static?.path}${assets[key]}`} />
   ));
 
   // Nasty
   const devStatic = [
     <script
-      key={'js-scripts-app'}
+      key={"js-scripts-app"}
       src={`${config.static?.path}static/js/app.js`}
     />,
     <script
-      key={'js-scripts-vendor'}
+      key={"js-scripts-vendor"}
       src={`${config.static?.path}static/js/vendor.js`}
-    />
+    />,
   ];
 
   if (!buildProd) srcJsFiles = devStatic;
-  
+
   return (
     <>
       <html {...htmlAttrs}>
@@ -57,17 +57,18 @@ const Html: FC<StatePropTypes> = ({
           {helmet.title.toComponent()}
           {helmet.meta.toComponent()}
           {helmet.link.toComponent()}
-          {css && css.map(css => {
-            return <style>{css}</style>
-          })}
-          <script dangerouslySetInnerHTML={{ __html: initialState }} async/>
+          {css &&
+            css.map((css) => {
+              return <style>{css}</style>;
+            })}
+          <script dangerouslySetInnerHTML={{ __html: initialState }} async />
         </head>
-        <body {...bodyAttrs} className='bg-zinc-50'>
+        <body {...bodyAttrs} className="bg-zinc-50">
           {buildProd && rootComponent ? (
             <div
               id="root"
               dangerouslySetInnerHTML={{
-                __html: renderToString(rootComponent)
+                __html: renderToString(rootComponent),
               }}
             />
           ) : (

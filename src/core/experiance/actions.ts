@@ -1,11 +1,11 @@
-import { action } from 'typesafe-actions';
+import { action } from "typesafe-actions";
 
-import { IExperiancePayload } from '../../models/experiance';
+import { IExperiancePayload } from "../../models/experiance";
 
 export enum ExperianceActionTypes {
-  FETCH_START = '@experiance/FETCH_START',
-  FETCH_SUCCESS = '@experiance/FETCH_SUCCESS',
-  FETCH_ERROR = '@experiance/FETCH_ERROR'
+  FETCH_START = "@experiance/FETCH_START",
+  FETCH_SUCCESS = "@experiance/FETCH_SUCCESS",
+  FETCH_ERROR = "@experiance/FETCH_ERROR",
 }
 
 export const fetchRequest = () => action(ExperianceActionTypes.FETCH_START);

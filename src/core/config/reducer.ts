@@ -1,16 +1,16 @@
-import { Reducer, AnyAction } from 'redux';
+import { Reducer, AnyAction } from "redux";
 
 export interface IConfigState {
   readonly cdn: string;
 }
 
 export const initialState: IConfigState = {
-  cdn: ''
+  cdn: "",
 };
 
 export const config: Reducer<IConfigState> = (
   state: IConfigState = initialState,
-  action: AnyAction
+  action: AnyAction,
 ) => {
   switch (action.type) {
     default: {

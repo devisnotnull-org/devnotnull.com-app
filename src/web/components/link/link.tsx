@@ -1,15 +1,15 @@
-import React, { MouseEvent, FC } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { MouseEvent, FC } from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 const isExternalLink = (path: string) => {
-  return path?.includes('http');
+  return path?.includes("http");
 };
 
 export type IProps = {
   to: string;
   classNames?: string;
   onClick?(event: MouseEvent): void;
-  children?: JSX.Element
+  children?: JSX.Element;
 };
 
 export const Link: FC<IProps> = ({ to, children, classNames, onClick }) =>

@@ -1,9 +1,8 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put } from "redux-saga/effects";
 
-import { BlogItemActionTypes, fetchSuccess } from './actions';
+import { BlogItemActionTypes, fetchSuccess } from "./actions";
 
-import { fetchBlogItem } from './fetch';
-
+import { fetchBlogItem } from "./fetch";
 
 export function* blogEntrySaga(slug: string) {
   try {
@@ -12,7 +11,7 @@ export function* blogEntrySaga(slug: string) {
   } catch (ex) {
     yield put({
       type: BlogItemActionTypes.FETCH_ERROR,
-      ex
+      ex,
     });
   }
 }

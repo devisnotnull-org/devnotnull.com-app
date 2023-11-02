@@ -1,7 +1,7 @@
-import { call, put } from 'redux-saga/effects';
-import { ContactActionTypes, fetchSuccess } from './actions';
+import { call, put } from "redux-saga/effects";
+import { ContactActionTypes, fetchSuccess } from "./actions";
 
-import { fetchContact } from './fetch';
+import { fetchContact } from "./fetch";
 
 export function* contactSaga() {
   try {
@@ -10,7 +10,7 @@ export function* contactSaga() {
   } catch (ex) {
     yield put({
       type: ContactActionTypes.FETCH_ERROR,
-      ex
+      ex,
     });
   }
 }

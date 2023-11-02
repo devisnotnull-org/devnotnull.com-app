@@ -1,8 +1,8 @@
-import { Reducer, AnyAction } from 'redux';
+import { Reducer, AnyAction } from "redux";
 
-import { ICommonContentListPayload } from '../../models/common';
-import { EducationActionTypes } from './actions';
-import { IEducationPayload } from '../../models/education';
+import { ICommonContentListPayload } from "../../models/common";
+import { EducationActionTypes } from "./actions";
+import { IEducationPayload } from "../../models/education";
 
 export interface IEducationState
   extends ICommonContentListPayload<IEducationPayload> {
@@ -16,19 +16,24 @@ const initialState: IEducationState = {
   limit: 0,
   items: [],
   errors: undefined,
-  loading: false
+  loading: false,
 };
 
 export const blog: Reducer<IEducationState> = (
   state: IEducationState = initialState,
-  action: AnyAction
+  action: AnyAction,
 ) => {
   switch (action.type) {
     case EducationActionTypes.FETCH_START: {
       return { ...state, loading: true, errors: undefined };
     }
     case EducationActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, errors: undefined, ...action.payload?.payload };
+      return {
+        ...state,
+        loading: false,
+        errors: undefined,
+        ...action.payload?.payload,
+      };
     }
     case EducationActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };

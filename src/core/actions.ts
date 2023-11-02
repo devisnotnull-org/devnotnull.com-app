@@ -1,13 +1,13 @@
-import { action } from 'typesafe-actions';
+import { action } from "typesafe-actions";
 
-import { AbilitiesActionTypes } from './ability/actions';
-import { BlogActionTypes } from './blog/actions';
-import { EducationActionTypes } from './education/actions';
-import { ExperianceActionTypes } from './experiance/actions';
-import { FolioActionTypes } from './portfolio/actions';
-import { ContactActionTypes } from './contact/actions';
-import { AssetActionTypes } from './assets/actions';
-import { BlogItemActionTypes } from './blogItem/actions';
+import { AbilitiesActionTypes } from "./ability/actions";
+import { BlogActionTypes } from "./blog/actions";
+import { EducationActionTypes } from "./education/actions";
+import { ExperianceActionTypes } from "./experiance/actions";
+import { FolioActionTypes } from "./portfolio/actions";
+import { ContactActionTypes } from "./contact/actions";
+import { AssetActionTypes } from "./assets/actions";
+import { BlogItemActionTypes } from "./blogItem/actions";
 
 export {
   AbilitiesActionTypes,
@@ -17,13 +17,13 @@ export {
   FolioActionTypes,
   AssetActionTypes,
   ContactActionTypes,
-  BlogItemActionTypes
+  BlogItemActionTypes,
 };
 
 export enum GlobalActionTypes {
-  FETCH_START = '@global/FETCH_START',
-  FETCH_SUCCESS = '@global/FETCH_SUCCESS',
-  FETCH_ERROR = '@global/FETCH_ERROR'
+  FETCH_START = "@global/FETCH_START",
+  FETCH_SUCCESS = "@global/FETCH_SUCCESS",
+  FETCH_ERROR = "@global/FETCH_ERROR",
 }
 
 export const fetchRequest = () => action(GlobalActionTypes.FETCH_START);

@@ -1,11 +1,11 @@
-import { action } from 'typesafe-actions';
+import { action } from "typesafe-actions";
 
-import { IAbillityPayload } from '../../models/abillity';
+import { IAbillityPayload } from "../../models/abillity";
 
 export enum AbilitiesActionTypes {
-  FETCH_START = '@abilities/FETCH_START',
-  FETCH_SUCCESS = '@abilities/FETCH_SUCCESS',
-  FETCH_ERROR = '@abilities/FETCH_ERROR'
+  FETCH_START = "@abilities/FETCH_START",
+  FETCH_SUCCESS = "@abilities/FETCH_SUCCESS",
+  FETCH_ERROR = "@abilities/FETCH_ERROR",
 }
 
 export const fetchRequest = () => action(AbilitiesActionTypes.FETCH_START);

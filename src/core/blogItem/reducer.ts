@@ -1,24 +1,24 @@
-import { Reducer, AnyAction } from 'redux';
+import { Reducer, AnyAction } from "redux";
 
-import { BlogItemActionTypes } from './actions';
-import { IBlogPostPayload } from '../../models/blog';
+import { BlogItemActionTypes } from "./actions";
+import { IBlogPostPayload } from "../../models/blog";
 
 export interface IBlogItemState extends IBlogPostPayload {
   readonly loading: boolean;
   readonly errors?: string;
   readonly includes?: {
     Asset: {
-      sys? : {
-        id?: string
-      },
+      sys?: {
+        id?: string;
+      };
       fields?: {
-        title?: string
+        title?: string;
         file?: {
-          url?: string
-        }
-      }
-    }[]
-  }
+          url?: string;
+        };
+      };
+    }[];
+  };
 }
 
 const initialState: IBlogItemState = {
@@ -27,13 +27,13 @@ const initialState: IBlogItemState = {
   loading: false,
   fields: {
     title: "",
-    slug: ""
-  }
+    slug: "",
+  },
 };
 
 export const blog: Reducer<IBlogItemState> = (
   state: IBlogItemState = initialState,
-  action: AnyAction
+  action: AnyAction,
 ) => {
   switch (action.type) {
     case BlogItemActionTypes.FETCH_START: {

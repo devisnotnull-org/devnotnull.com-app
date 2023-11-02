@@ -1,11 +1,11 @@
-import { action } from 'typesafe-actions';
+import { action } from "typesafe-actions";
 
-import { IAssetPayload } from '../../models/asset';
+import { IAssetPayload } from "../../models/asset";
 
 export enum AssetActionTypes {
-  FETCH_START = '@asset/FETCH_START',
-  FETCH_SUCCESS = '@asset/FETCH_SUCCESS',
-  FETCH_ERROR = '@asset/FETCH_ERROR'
+  FETCH_START = "@asset/FETCH_START",
+  FETCH_SUCCESS = "@asset/FETCH_SUCCESS",
+  FETCH_ERROR = "@asset/FETCH_ERROR",
 }
 
 export const fetchRequest = () => action(AssetActionTypes.FETCH_START);

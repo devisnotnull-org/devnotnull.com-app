@@ -1,5 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { ENDPOINT } from '../constants';
+import { ENDPOINT } from "../constants";
 
-export const searchBlog = (tag: string) => axios.get(`${ENDPOINT}/blog/search/${tag}`);
+export const searchBlog = (tag: string) =>
+  axios.get(`${ENDPOINT}/blog/search/${tag}`);

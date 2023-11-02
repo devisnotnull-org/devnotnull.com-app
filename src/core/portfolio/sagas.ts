@@ -1,7 +1,7 @@
-import { call, put } from 'redux-saga/effects';
-import { fetchSuccess, fetchError } from './actions';
+import { call, put } from "redux-saga/effects";
+import { fetchSuccess, fetchError } from "./actions";
 
-import { fetchFolio } from './fetch';
+import { fetchFolio } from "./fetch";
 
 export function* folioSaga() {
   try {

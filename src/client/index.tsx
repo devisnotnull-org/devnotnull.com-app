@@ -1,10 +1,10 @@
 //import 'source-map-support/register'
 
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { createBrowserHistory } from 'history';
-import { ReduxRouter } from '@lagunovsky/redux-react-router'
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { createBrowserHistory } from "history";
+import { ReduxRouter } from "@lagunovsky/redux-react-router";
 import * as Sentry from "@sentry/react";
 import { AnimatePresence } from "framer-motion";
 import {
@@ -15,10 +15,10 @@ import {
 
 import { BrowserTracing } from "@sentry/tracing";
 
-import reportWebVitals from '../web/webVitals';
-import rootSaga from '../core/sagas';
-import createStore from '../core/store';
-import App from '../web/app';
+import reportWebVitals from "../web/webVitals";
+import rootSaga from "../core/sagas";
+import createStore from "../core/store";
+import App from "../web/app";
 
 import { routes } from "../web/routes";
 
@@ -43,11 +43,11 @@ const preloadedState = (window as any).__INITIAL_STATE__;
   (store as any).rootTask = (store as any).runSaga(rootSaga);
 
   const renderApp = async () => {
-    const rootElement = document.getElementById('root');
+    const rootElement = document.getElementById("root");
 
     // Determine if any of the initial routes are lazy
     const lazyMatches = matchRoutes(routes, window.location)?.filter(
-      (m) => m.route.lazy
+      (m) => m.route.lazy,
     );
 
     // Load the lazy matches and update the routes before creating your router
@@ -57,43 +57,38 @@ const preloadedState = (window as any).__INITIAL_STATE__;
         lazyMatches.map(async (m) => {
           const routeModule = await m.route.lazy!();
           Object.assign(m.route, { ...routeModule, lazy: undefined });
-        })
+        }),
       );
     }
 
     const router = createBrowserRouter(routes);
-    
-    if(rootElement){
-      const root = createRoot(rootElement)
+
+    if (rootElement) {
+      const root = createRoot(rootElement);
       root.render(
         <Provider store={store}>
           <AnimatePresence mode="wait">
-
-          <RouterProvider router={router} fallbackElement={null} />
+            <RouterProvider router={router} fallbackElement={null} />
           </AnimatePresence>
-          <ReduxRouter
-            history={history}
-            children={<App/>}
-          />
-        </Provider>
+          <ReduxRouter history={history} children={<App />} />
+        </Provider>,
       );
-    
     }
-  }
+  };
 
   //
   renderApp();
-  
+
   reportWebVitals();
 
   // Server side rendering
   if ((module as any).hot) {
     //
-    (module as any).hot.accept('../web/app', () => {
+    (module as any).hot.accept("../web/app", () => {
       renderApp();
     });
     //
-    (module as any).hot.accept('../core/sagas', () => {
+    (module as any).hot.accept("../core/sagas", () => {
       (store as any).closeSagas();
       (store as any).rootTask = (store as any).runSaga(
         // eslint-disable-next-line
@@ -101,8 +96,4 @@ const preloadedState = (window as any).__INITIAL_STATE__;
       );
     });
   }
-
-  
-})().catch(ex => console.log(ex))
-
-
+})().catch((ex) => console.log(ex));

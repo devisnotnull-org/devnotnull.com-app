@@ -1,19 +1,22 @@
-import React from 'react';
-import { FC, useState } from 'react'
-import { Dialog } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import React from "react";
+import { FC, useState } from "react";
+import { Dialog } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
-  { name: 'About', href: '/' },
-  { name: 'Blog', href: '/blog' },
-]
+  { name: "About", href: "/" },
+  { name: "Blog", href: "/blog" },
+];
 
 export const HeaderView: FC = () => {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header>
-      <nav className="mx-auto flex max-w-7xl items-center justify-between" aria-label="Global">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between"
+        aria-label="Global"
+      >
         <div className="absolute flex top-0">
           <button
             type="button"
@@ -25,11 +28,15 @@ export const HeaderView: FC = () => {
           </button>
         </div>
       </nav>
-      <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen} className='relative'>
-        <div className='fixed inset-y-0 left-0 z-10 w-full'>
+      <Dialog
+        as="div"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+        className="relative"
+      >
+        <div className="fixed inset-y-0 left-0 z-10 w-full">
           <Dialog.Panel className="container xl mx-auto overflow-y-auto bg-gray-900 px-6 py-6 sm:ring-1 sm:ring-white/10">
             <div className="flex items-center justify-between">
-    
               <button
                 type="button"
                 className="-m-2.5 rounded-md p-2.5 text-gray-400"
@@ -58,7 +65,7 @@ export const HeaderView: FC = () => {
         </div>
       </Dialog>
     </header>
-  )
-}
+  );
+};
 
 export default HeaderView;

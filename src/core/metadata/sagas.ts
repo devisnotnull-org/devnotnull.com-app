@@ -1,7 +1,7 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put } from "redux-saga/effects";
 
-import { MetadataActionTypes, fetchSuccess } from './actions';
-import { fetchMetadata } from './fetch';
+import { MetadataActionTypes, fetchSuccess } from "./actions";
+import { fetchMetadata } from "./fetch";
 
 export function* metadataSagas() {
   try {
@@ -10,8 +10,7 @@ export function* metadataSagas() {
   } catch (ex) {
     yield put({
       type: MetadataActionTypes.FETCH_ERROR,
-      ex
+      ex,
     });
   }
 }
-

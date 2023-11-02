@@ -1,8 +1,8 @@
-import { Reducer, AnyAction } from 'redux';
+import { Reducer, AnyAction } from "redux";
 
-import { ICommonContentListPayload } from '../../models/common';
-import { BlogActionTypes } from './actions';
-import { IBlogPostPayload } from '../../models/blog';
+import { ICommonContentListPayload } from "../../models/common";
+import { BlogActionTypes } from "./actions";
+import { IBlogPostPayload } from "../../models/blog";
 
 export interface IBlogState
   extends ICommonContentListPayload<IBlogPostPayload> {
@@ -10,17 +10,17 @@ export interface IBlogState
   readonly errors?: string;
   readonly includes?: {
     Asset?: {
-      sys? : {
-        id?: string
-      },
+      sys?: {
+        id?: string;
+      };
       fields?: {
-        title?: string
+        title?: string;
         file?: {
-          url?: string
-        }
-      }
-    }[]
-  }
+          url?: string;
+        };
+      };
+    }[];
+  };
 }
 
 const initialState: IBlogState = {
@@ -30,19 +30,24 @@ const initialState: IBlogState = {
   items: [],
   includes: {},
   errors: undefined,
-  loading: false
+  loading: false,
 };
 
 export const blog: Reducer<IBlogState> = (
   state: IBlogState = initialState,
-  action: AnyAction
+  action: AnyAction,
 ) => {
   switch (action.type) {
     case BlogActionTypes.FETCH_START: {
       return { ...state, loading: true, errors: undefined };
     }
     case BlogActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, errors: undefined, ...action.payload?.payload };
+      return {
+        ...state,
+        loading: false,
+        errors: undefined,
+        ...action.payload?.payload,
+      };
     }
     case BlogActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };

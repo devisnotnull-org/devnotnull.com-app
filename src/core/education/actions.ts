@@ -1,11 +1,11 @@
-import { action } from 'typesafe-actions';
+import { action } from "typesafe-actions";
 
-import { IEducationPayload } from '../../models/education';
+import { IEducationPayload } from "../../models/education";
 
 export enum EducationActionTypes {
-  FETCH_START = '@education/FETCH_START',
-  FETCH_SUCCESS = '@education/FETCH_SUCCESS',
-  FETCH_ERROR = '@education/FETCH_ERROR'
+  FETCH_START = "@education/FETCH_START",
+  FETCH_SUCCESS = "@education/FETCH_SUCCESS",
+  FETCH_ERROR = "@education/FETCH_ERROR",
 }
 
 export const fetchRequest = () => action(EducationActionTypes.FETCH_START);

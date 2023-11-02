@@ -1,9 +1,9 @@
-import { Reducer, AnyAction } from 'redux';
+import { Reducer, AnyAction } from "redux";
 
-import { FolioActionTypes } from './actions';
-import { ICommonContentListPayload } from '../../models/common';
-import { IFolioPayload } from '../../models/folio';
-import { IAssetPayload } from '../../models/asset';
+import { FolioActionTypes } from "./actions";
+import { ICommonContentListPayload } from "../../models/common";
+import { IFolioPayload } from "../../models/folio";
+import { IAssetPayload } from "../../models/asset";
 
 export interface IFolioState extends ICommonContentListPayload<IFolioPayload> {
   readonly loading: boolean;
@@ -18,12 +18,12 @@ const initialState: IFolioState = {
   items: [],
   assets: [],
   errors: undefined,
-  loading: false
+  loading: false,
 };
 
 export const portfolio: Reducer<IFolioState> = (
   state: IFolioState = initialState,
-  action: AnyAction
+  action: AnyAction,
 ) => {
   switch (action.type) {
     case FolioActionTypes.FETCH_START: {
@@ -35,7 +35,7 @@ export const portfolio: Reducer<IFolioState> = (
         loading: false,
         errors: undefined,
         items: action?.payload?.items ?? [],
-        assets: action?.payload?.includes?.Asset
+        assets: action?.payload?.includes?.Asset,
       };
     }
     case FolioActionTypes.FETCH_ERROR: {

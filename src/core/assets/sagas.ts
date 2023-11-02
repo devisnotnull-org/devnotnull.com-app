@@ -1,7 +1,7 @@
-import { call, put } from 'redux-saga/effects';
-import { AssetActionTypes, fetchSuccess } from './actions';
+import { call, put } from "redux-saga/effects";
+import { AssetActionTypes, fetchSuccess } from "./actions";
 
-import { fetchAbilities } from './fetch';
+import { fetchAbilities } from "./fetch";
 
 export function* assetSaga() {
   try {
@@ -10,7 +10,7 @@ export function* assetSaga() {
   } catch (ex) {
     yield put({
       type: AssetActionTypes.FETCH_ERROR,
-      ex
+      ex,
     });
   }
 }

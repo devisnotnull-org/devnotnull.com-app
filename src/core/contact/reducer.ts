@@ -1,8 +1,8 @@
-import { Reducer, AnyAction } from 'redux';
+import { Reducer, AnyAction } from "redux";
 
-import { ICommonContentListPayload } from '../../models/common';
-import { ContactActionTypes } from './actions';
-import { IContactPayload } from '../../models/contact';
+import { ICommonContentListPayload } from "../../models/common";
+import { ContactActionTypes } from "./actions";
+import { IContactPayload } from "../../models/contact";
 
 export interface IContactState
   extends ICommonContentListPayload<IContactPayload> {
@@ -16,19 +16,24 @@ const initialState: IContactState = {
   limit: 0,
   items: [],
   errors: undefined,
-  loading: false
+  loading: false,
 };
 
 export const blog: Reducer<IContactState> = (
   state: IContactState = initialState,
-  action: AnyAction
+  action: AnyAction,
 ) => {
   switch (action.type) {
     case ContactActionTypes.FETCH_START: {
       return { ...state, loading: true, errors: undefined };
     }
     case ContactActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, errors: undefined, ...action.payload?.payload };
+      return {
+        ...state,
+        loading: false,
+        errors: undefined,
+        ...action.payload?.payload,
+      };
     }
     case ContactActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };

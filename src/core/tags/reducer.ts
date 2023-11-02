@@ -1,5 +1,5 @@
-import { IBlogPostPayload } from '../../models/blog';
+import { IBlogPostPayload } from "../../models/blog";
 
 export interface ITagItemState extends IBlogPostPayload {
-  readonly name?: string
+  readonly name?: string;
 }

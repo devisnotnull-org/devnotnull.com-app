@@ -1,8 +1,8 @@
-import { Reducer, AnyAction } from 'redux';
+import { Reducer, AnyAction } from "redux";
 
-import { MetadataActionTypes } from './actions';
-import { IMetadataPayload } from '../../models/metadata';
-import { INetworkResponse } from '../../models/network';
+import { MetadataActionTypes } from "./actions";
+import { IMetadataPayload } from "../../models/metadata";
+import { INetworkResponse } from "../../models/network";
 
 export interface IMetadataState extends IMetadataPayload {
   readonly loading: boolean;
@@ -14,24 +14,30 @@ type MetaDataType = INetworkResponse & IMetadataState;
 const initialState: MetaDataType = {
   errors: undefined,
   loading: false,
-  title: '',
-  blurb: '',
-  summary: '',
+  title: "",
+  blurb: "",
+  summary: "",
   favicon: {},
   primaryImage: {},
-  secondaryImage: {}
+  secondaryImage: {},
 };
 
 export const metadata: Reducer<IMetadataState> = (
   state: IMetadataState = initialState,
-  action: AnyAction
+  action: AnyAction,
 ) => {
   switch (action.type) {
     case MetadataActionTypes.FETCH_START: {
       return { ...state, loading: true, errors: undefined };
     }
     case MetadataActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, errors: undefined, ...action.payload, ...action.payload.payload };
+      return {
+        ...state,
+        loading: false,
+        errors: undefined,
+        ...action.payload,
+        ...action.payload.payload,
+      };
     }
     case MetadataActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };

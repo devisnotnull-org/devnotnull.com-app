@@ -1,14 +1,14 @@
-import { all, takeEvery, select } from 'redux-saga/effects';
-import { ROUTER_ON_LOCATION_CHANGED } from '@lagunovsky/redux-react-router'
+import { all, takeEvery, select } from "redux-saga/effects";
+import { ROUTER_ON_LOCATION_CHANGED } from "@lagunovsky/redux-react-router";
 
-import { abilitiesSagas } from './ability/sagas';
-import { folioSaga } from './portfolio/sagas';
-import { educationSaga } from './education/sagas';
-import { experianceSaga } from './experiance/sagas';
-import { metadataSagas } from './metadata/sagas';
-import { assetSaga } from './assets/sagas';
-import { routeSagas } from './route/sagas'
-import { contactSaga } from './contact/sagas';
+import { abilitiesSagas } from "./ability/sagas";
+import { folioSaga } from "./portfolio/sagas";
+import { educationSaga } from "./education/sagas";
+import { experianceSaga } from "./experiance/sagas";
+import { metadataSagas } from "./metadata/sagas";
+import { assetSaga } from "./assets/sagas";
+import { routeSagas } from "./route/sagas";
+import { contactSaga } from "./contact/sagas";
 
 import {
   AbilitiesActionTypes,
@@ -16,8 +16,8 @@ import {
   ExperianceActionTypes,
   FolioActionTypes,
   AssetActionTypes,
-  GlobalActionTypes
-} from './actions';
+  GlobalActionTypes,
+} from "./actions";
 
 export function* fetchAllSaga() {
   yield all([
@@ -25,13 +25,11 @@ export function* fetchAllSaga() {
     educationSaga(),
     experianceSaga(),
     folioSaga(),
-    metadataSagas()
+    metadataSagas(),
   ]);
 }
 
 export default function* rootSaga() {
-
-  
   yield all([
     fetchAllSaga(),
     // Initial setup
@@ -44,6 +42,6 @@ export default function* rootSaga() {
     takeEvery(ExperianceActionTypes.FETCH_START, experianceSaga),
     takeEvery(FolioActionTypes.FETCH_START, folioSaga),
     takeEvery(AssetActionTypes.FETCH_START, assetSaga),
-    takeEvery(AssetActionTypes.FETCH_START, contactSaga)
+    takeEvery(AssetActionTypes.FETCH_START, contactSaga),
   ]);
 }
