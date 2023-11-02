@@ -100,13 +100,13 @@ jobs:
         tags: alexbrown201/devnotnull-ui:${{ steps.vars.outputs.branch_formatted }} 
   
     - name: Create S3 bucket
-      run: aws s3api create-bucket --bucket devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} --region us-east-1 || true
+      run: aws s3api create-bucket --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --region us-east-1 || true
 
     - name: Copy S3 bucket assets
-      run: aws s3 cp ./build s3://devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} --recursive
+      run: aws s3 cp ./build s3://devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --recursive
       
     - run: |
-        aws s3api put-bucket-cors --bucket devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} --cors-configuration '{"CORSRules" : [{"AllowedHeaders":["*"],"AllowedMethods":["GET","HEAD", "POST"],"AllowedOrigins":["*"],"ExposeHeaders":[]}]}'
+        aws s3api put-bucket-cors --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --cors-configuration '{"CORSRules" : [{"AllowedHeaders":["*"],"AllowedMethods":["GET","HEAD", "POST"],"AllowedOrigins":["*"],"ExposeHeaders":[]}]}'
      
     #- run: |
     #    aws s3api put-bucket-policy --bucket devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} --policy '{"Version": "2008-10-17", "Statement": [{ "Sid": "AllowPublicRead", "Effect": "Allow", "Principal": { "AWS": "*" }, "Action": ["s3:GetObject"], "Resource": ["arn:aws:s3:::devnotnull-ui-${{ steps.vars.outputs.branch_formatted }}/*" ] }] }'
