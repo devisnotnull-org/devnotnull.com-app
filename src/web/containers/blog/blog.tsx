@@ -46,8 +46,8 @@ export const BlogView: FC = () => {
               <div className='text-sm text-gray-500'>
                 {finalDate}
               </div>
-              <div className='flex justify-center items-center'>
-                <img src={asset?.fields?.file?.url} className='m-10 p-10'/>
+              <div className='flex justify-center items-center m-5'>
+                <img src={asset?.fields?.file?.url}/>
               </div>
               <div>
                 {item?.fields &&

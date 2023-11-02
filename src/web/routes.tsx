@@ -1,5 +1,6 @@
 import React from 'react';
 import type { LoaderFunctionArgs, RouteObject } from "react-router-dom";
+
 import AppRouter from './app'
 
 import Home from './containers/home/home';
@@ -43,7 +44,7 @@ export const routes: RouteObject[] = [
           params,
         }: LoaderFunctionArgs) => {
           const blogItem = await fetchBlogItem(params?.id ?? '');
-          return { data: blogItem?.data?.payload}
+          return { data: blogItem?.data?.payload }
         },
       },
       {
@@ -51,7 +52,7 @@ export const routes: RouteObject[] = [
         element: <TagsView/>,
         loader: async () => {
           const blogItem = await fetchTags();
-          return { data: blogItem?.data?.payload}
+          return { data: blogItem?.data?.payload }
         },
       },
       {
@@ -60,12 +61,7 @@ export const routes: RouteObject[] = [
         loader: async ({
           params,
         }: LoaderFunctionArgs) => {
-          console.log("TAGGGED BLOG")
-          console.log("TAGGGED BLOG")
-          console.log("TAGGGED BLOG")
-          console.log("TAGGGED BLOG")
           const blogItem = await fetchTaggedBlog(params.tag ?? '');
-          console.log(blogItem)
           return { data: blogItem?.data?.payload, id: params.tag }
         },
       },

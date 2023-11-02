@@ -58,7 +58,6 @@ export const BlogPage: FC = () => {
 
   const finalDate = isOriginal ? <span>Created {dateUpdatedCaculatorResult.unit} <b>{dateUpdatedCaculatorResult.unitType} ago</b></span> : <span>Updated <b>{dateUpdatedCaculatorResult.unit} {dateUpdatedCaculatorResult.unitType} ago</b> and published <b>{dateCreatedCaculatorResult.unit} {dateCreatedCaculatorResult.unitType} ago</b></span>
 
-
   return (  
     <article className='mt-5 p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base'>
       <h1 className='text-2xl pb-3.5 font-bold font-harman'>
@@ -70,10 +69,10 @@ export const BlogPage: FC = () => {
       <div className='pb-3.5'>
         {data?.data?.metadata?.tags.map(tag => <Link to={`/blog/tags/${tag?.sys?.id}`}><span className='mt-10 relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100'>{tag?.sys?.id}</span></Link>)}
       </div>
-      <div className='text-sm text-gray-500'>
+      <div className='text-sm text-gray-500 mb-3'>
         {finalDate}
       </div>
-      <div>
+      <div  className='m-5'>
         <img src={asset?.fields?.file?.url}/>
       </div>
       <div>

@@ -26,14 +26,16 @@ function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 function MobileNavItem({
   href,
   children,
+  classNames
 }: {
   href: string
   children: React.ReactNode
+  classNames: string
 }) {
   return (
     <li>
-      <Popover.Button className="block pt-5 pr-5 pb-5 font-harman">
-        <Link to={href}>{children}</Link>
+      <Popover.Button classNames={`block pt-5 pr-5 pb-5 font-harman ${classNames}`} as={Link} to={href}>
+        {children}
       </Popover.Button>
     </li>
   )
@@ -70,31 +72,30 @@ function MobileNavigation(
         </Transition.Child>
         <Transition.Child
           as={Fragment}
-          enter="duration-150 ease-out"
-          enterFrom="opacity-0 scale-95"
-          enterTo="opacity-100 scale-100"
-          leave="duration-150 ease-in"
-          leaveFrom="opacity-100 scale-100"
-          leaveTo="opacity-0 scale-95"
+            enter="transform ease-out duration-300 transition"
+            enterFrom="-translate-y-10 opacity-0"
+            enterTo="translate-y-0 opacity-100"
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
         >
           <Popover.Panel
             focus
             className="fixed z-50 top-0 left-0 w-full	h-full bg-white p-8"
           >
             <div className="flex items-center justify-between">
-              <Popover.Button aria-label="Close menu" className="-m-1 p-1">
-                <CloseIcon className="h-6 w-6 text-zinc-500" />
+              <Popover.Button aria-label="Close menu" className="">
+                <CloseIcon className="h-10 w-10 text-zinc-500" />
               </Popover.Button>
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800">
-                <MobileNavItem href="/">About</MobileNavItem>
-                <MobileNavItem href="/blog">Blog</MobileNavItem>
-                <MobileNavItem href="/blog/tags">Tags</MobileNavItem>
+                <MobileNavItem href="/" classNames='animate-fade-down animate-once animate-delay-50 animate-ease-in-out animate-normal'>About</MobileNavItem>
+                <MobileNavItem href="/blog" classNames='animate-fade-down animate-once animate-delay-100 animate-ease-in-out animate-normal'>Blog</MobileNavItem>
+                <MobileNavItem href="/blog/tags" classNames='animate-fade-down animate-once animate-delay-150 animate-ease-in-out animate-normal'>Tags</MobileNavItem>
                 <div className="flex justify-end flex-1">
             <div className="pointer-events-auto">
               <ul className='flex px-3'>
-                <li><SearchMobile/></li>
                 <li><Link to='https://github.com/devisnotnull'><GitHubIcon className="h-10 pl-2 pt-2 flex-none fill-zinc-500 transition group-hover:fill-orange-500" /></Link></li>
                 <li><Link to='https://github.com/devisnotnull'><LinkedInIcon className="h-10 pl-2 pt-2 flex-none fill-zinc-500 transition group-hover:fill-orange-500" /></Link></li>
                 <li><PopupButton id="HTs3mlXH" style={{ fontSize: 20, margin: 0, padding:0, border: 0, width: '100%' }}><MailIcon className="h-10 pl-2 pt-2 flex-none fill-zinc-500 transition group-hover:fill-orange-500" /></PopupButton></li>
