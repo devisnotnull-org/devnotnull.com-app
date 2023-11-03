@@ -8,11 +8,9 @@ import {
   createStaticRouter,
 } from "react-router-dom/server";
 import express, { Express, NextFunction, Request, Response } from "express";
-import { createMemoryHistory } from "history";
 import { config } from "./config";
 import { render } from "./render";
 
-import createStore from "../core/store";
 import { readFile } from "fs/promises";
 
 const PROD: boolean = process.env.NODE_ENV === "production";
@@ -59,7 +57,6 @@ app.get("*", async (request: Request, res: Response) => {
 
   const router = createStaticRouter(dataRoutes, context);
 
-  const history = createMemoryHistory({ initialEntries: [request.path] });
   // Load production css if present
   // Gross but does the job for now
   const assets = __ASSETS__ ?? {};
@@ -71,11 +68,8 @@ app.get("*", async (request: Request, res: Response) => {
   );
   const cssHydrated = await Promise.all(cssHydrate);
 
-  // Sagas are now old but I like them
-  const store = await createStore(history);
-
   // Just inline the CSS for better page perf
-  return render(request.url, config, router, context, res, store, cssHydrated);
+  return render(request.url, config, router, context, res, cssHydrated);
 });
 
 // Catch 404 and forward to error handler

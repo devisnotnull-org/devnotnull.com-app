@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import moment from "moment";
+import { format } from "date-fns";
 
 import { IEducationPayload } from "../../../models/education";
 import { ICommonFields } from "../../../models/common";
@@ -27,13 +27,13 @@ export const Education: FC<Props> = ({ educationList }) => (
           </h3>
           <h3 className="font-bold mr-1.5 mb-1.5 text-lg font-grey-500">
             <span>
-              {moment(item.fields.startDate).format("MMM")}{" "}
-              {moment(item.fields.startDate).format("YYYY")}
+              {format(new Date(item.fields.startDate), "MM")}
+              {format(new Date(item.fields.startDate), "yyyy")}
             </span>
             <span> - </span>
             <span>
-              {moment(item.fields.endDate).format("MMM")}{" "}
-              {moment(item.fields.endDate).format("YYYY")}
+              {format(new Date(item.fields.endDate), "MM")}
+              {format(new Date(item.fields.endDate), "yyyy")}
             </span>
           </h3>
           <div>

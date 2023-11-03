@@ -1,11 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { useSelector } from "react-redux";
 import ReactGA from "react-ga";
 
-import { Header } from "./components/Header";
-import { getMetadataBlurb, getMetadataTitle } from "../core/metadata/selectors";
+import { Header } from "./components/header/header";
 
 import "./style/tailwind.css";
 
@@ -14,8 +12,8 @@ const TRACKING_ID = "UA-136352816-2";
 ReactGA.initialize(TRACKING_ID);
 
 export const AppRouter: React.FC = () => {
-  const blurb = useSelector(getMetadataBlurb);
-  const title = useSelector(getMetadataTitle);
+  const blurb = "";
+  const title = "";
 
   return (
     <>

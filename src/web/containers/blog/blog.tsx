@@ -1,15 +1,13 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
 import BlogItem from "@components/blogItem/blogItem";
 
-import { getBlogItems, getLinkedAsset } from "../../../core/blog/selectors";
 import Link from "@web/components/link/link";
 import { dateCaculator } from "../../../utils";
+import { useLoaderData } from "react-router-dom";
 
 export const BlogView: FC = () => {
-  const blogItems = useSelector(getBlogItems);
-  const linkedAssetItems = useSelector(getLinkedAsset) ?? [];
-
+  const { items, includes } = useLoaderData();
+  console.log(items);
   return (
     <div className="mt-5 p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
       <h1 className="text-2xl pb-3.5 mb-2 md:7 text-left font-bold text-gray-600 font-harman">
@@ -19,8 +17,8 @@ export const BlogView: FC = () => {
       <div className="py-1 inset-x-1 -bottom-px h-px bg-gradient-to-r from-zinc-100 to-teal-zinc"></div>
 
       <main className="mt-10">
-        {blogItems.map((item) => {
-          const asset = linkedAssetItems.find(
+        {items.map((item) => {
+          const asset = includes?.Asset?.find(
             (assetItem) =>
               assetItem.sys.id === item?.fields?.image?.[0]?.sys?.id,
           );
@@ -28,11 +26,10 @@ export const BlogView: FC = () => {
           const dateUpdatedCaculatorResult = dateCaculator(
             new Date(item?.sys?.updatedAt),
           );
+
           const dateCreatedCaculatorResult = dateCaculator(
             new Date(item?.sys?.createdAt),
           );
-
-          // Difference in days
 
           const isOriginal =
             new Date(item?.sys?.updatedAt) === new Date(item?.sys?.createdAt);
@@ -58,7 +55,10 @@ export const BlogView: FC = () => {
           );
 
           return (
-            <article className="animate-fade-down animate-once animate-delay-100 animate-ease-in-out animate-normal">
+            <article
+              key={item?.sys?.id}
+              className="animate-fade-down animate-once animate-delay-100 animate-ease-in-out animate-normal"
+            >
               <h1 className="text-2xl pb-3.5 font-bold font-harman">
                 <Link to={`/blog/${item.fields.slug}`}>
                   {item?.fields?.title ?? ""}
@@ -81,7 +81,7 @@ export const BlogView: FC = () => {
               <div>
                 {item?.fields && (
                   <BlogItem
-                    assets={linkedAssetItems}
+                    assets={includes?.Asset}
                     content={item.fields}
                     limit={5}
                   />

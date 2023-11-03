@@ -1,23 +1,18 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
-
-import { getExperianceItems } from "@core/experiance/selectors";
-import { getMetadata } from "@core/metadata/selectors";
 
 import About from "@components/about/about";
 import Experiance from "@components/experiance/experiance";
-import { getBlogItems, getLinkedAsset } from "@core/blog/selectors";
 import { findAsset } from "../../../utils";
 import Link from "@web/components/link/link";
+import { useLoaderData } from "react-router-dom";
 
 export const HomeView: FC = () => {
-  const experianceItems = useSelector(getExperianceItems);
-  const blogItems = useSelector(getBlogItems);
-  const linkedAssetItems = useSelector(getLinkedAsset) ?? [];
+  const { items, includes, experiance, metadata } = useLoaderData();
 
-  const metadata = useSelector(getMetadata);
+  const topBlog = items.slice(0, 3);
 
-  const topBlog = blogItems.slice(0, 3);
+  console.log("topBlog", topBlog);
+  console.log("metadata", metadata);
 
   return (
     <div className="mt-5 p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
@@ -37,19 +32,20 @@ export const HomeView: FC = () => {
         <div className="mx-auto">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-10 gap-y-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {topBlog.map((post) => (
-              <article className="flex flex-col items-start">
+              <article
+                key={post?.sys?.id}
+                className="flex flex-col items-start"
+              >
                 <Link
                   to={`/blog/${post.fields.slug}`}
                   className="relative z-10"
                 >
                   <div className="relative w-full">
                     <img
-                      src={
-                        findAsset(
-                          post.fields.image?.[0]?.sys?.id,
-                          linkedAssetItems,
-                        )?.fields?.file?.url
-                      }
+                      src={`${findAsset(
+                        post.fields.image?.[0]?.sys?.id,
+                        includes?.Asset,
+                      )?.fields?.file?.url}?fm=webp`}
                       alt=""
                       className="object-contain h-48 w-96 p-3"
                     />
@@ -82,7 +78,7 @@ export const HomeView: FC = () => {
       <h1 className="text-2xl py-3.5 my-2 md:7 text-left font-bold text-gray-600 font-harman">
         Experience
       </h1>
-      <Experiance experianceList={experianceItems} />
+      <Experiance experianceList={experiance} />
     </div>
   );
 };

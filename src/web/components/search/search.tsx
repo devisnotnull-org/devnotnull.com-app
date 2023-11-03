@@ -14,9 +14,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import clsx from "clsx";
 
 import { searchBlog } from "@core/search/fetch";
-import { SearchIcon } from "./icons/icons";
-
-type EmptyObject = Record<string, never>;
+import { SearchIcon } from "../icons/icons";
 
 const SearchInput = forwardRef<
   React.ElementRef<"input">,
@@ -74,16 +72,18 @@ function SearchDialog({
   }, [setOpen]);
 
   useEffect(() => {
-    searchBlog(inputString)
-      .then((results) => {
-        setSearchResults({
-          items: results.data?.payload ?? [],
-          assets: results.data?.payload?.includes?.Asset ?? [],
+    if (inputString.length > 0) {
+      searchBlog(inputString)
+        .then((results) => {
+          setSearchResults({
+            items: results.data?.payload ?? [],
+            assets: results.data?.payload?.includes?.Asset ?? [],
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    }
   }, [inputString]);
 
   useEffect(() => {

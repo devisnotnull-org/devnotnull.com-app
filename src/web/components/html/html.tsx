@@ -3,7 +3,6 @@ import { renderToString } from "react-dom/server";
 import Helmet from "react-helmet";
 
 interface StatePropTypes {
-  initialState: string;
   rootComponent: ReactElement<any> | null;
   buildProd: boolean;
   config: any;
@@ -12,7 +11,6 @@ interface StatePropTypes {
 }
 
 const Html: FC<StatePropTypes> = ({
-  initialState,
   rootComponent,
   buildProd,
   config,
@@ -61,7 +59,6 @@ const Html: FC<StatePropTypes> = ({
             css.map((css) => {
               return <style>{css}</style>;
             })}
-          <script dangerouslySetInnerHTML={{ __html: initialState }} async />
         </head>
         <body {...bodyAttrs} className="bg-zinc-50">
           {buildProd && rootComponent ? (

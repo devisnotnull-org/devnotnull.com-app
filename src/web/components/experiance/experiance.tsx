@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import moment from "moment";
+import { format } from "date-fns";
 import Richtext from "@components/richtext/richtext";
 
 import { IExperiancePayload } from "../../../models/experiance";
@@ -22,13 +22,17 @@ export const Experiance: FC<Props> = ({ experianceList }) => (
           </h3>
           <h3 className="mr-1.5 mb-1.5 text-lg font-grey-500">
             <span>
-              {moment(item.fields.startDate).format("MMM")}{" "}
-              {moment(item.fields.startDate).format("YYYY")}
+              {format(new Date(item.fields.startDate), "MM")}
+              {format(new Date(item.fields.startDate), "yyyy")}
             </span>
             <span> - </span>
             <span>
-              {moment(item.fields.endDate).format("MMM")}{" "}
-              {moment(item.fields.endDate).format("YYYY")}
+              {item.fields.endDate
+                ? format(new Date(item.fields.endDate), "MM")
+                : ""}
+              {item.fields.endDate
+                ? format(new Date(item.fields.endDate), "yyyy")
+                : "Present"}
             </span>
           </h3>
           {item.fields.summary && (

@@ -11,8 +11,10 @@ import { fetchBlogItem } from "@core/blogItem/fetch";
 import DownloadView from "./containers/download/download";
 import TagsView from "./containers/tags/tags";
 import { fetchTags } from "@core/tags/fetch";
-import { fetchTaggedBlog } from "@core/blog/fetch";
+import { fetchBlog, fetchTaggedBlog } from "@core/blog/fetch";
 import TaggedBlogView from "./containers/taggedBlog/taggedBlog";
+import { fetchExperiance } from "@core/experiance/fetch";
+import { fetchMetadata } from "@core/metadata/fetch";
 
 export const routes: RouteObject[] = [
   {
@@ -22,15 +24,27 @@ export const routes: RouteObject[] = [
       {
         index: true,
         element: <Home />,
-        loader: () => {
-          return { data: "Home loader" };
+        loader: async () => {
+          const experianceItems = await fetchExperiance();
+          const blogItems = await fetchBlog();
+          const metaData = await fetchMetadata();
+          return {
+            items: blogItems?.data?.payload?.items ?? [],
+            includes: blogItems?.data?.payload?.includes,
+            experiance: experianceItems.data?.payload?.items,
+            metadata: metaData?.data?.payload?.items?.[0],
+          };
         },
       },
       {
         path: "blog",
         element: <Blog />,
         loader: async () => {
-          return { data: "Blog loader" };
+          const blogItems = await fetchBlog();
+          return {
+            items: blogItems?.data?.payload?.items ?? [],
+            includes: blogItems?.data?.payload?.includes,
+          };
         },
       },
       {
@@ -42,7 +56,10 @@ export const routes: RouteObject[] = [
         element: <BlogPageViewContainer />,
         loader: async ({ params }: LoaderFunctionArgs) => {
           const blogItem = await fetchBlogItem(params?.id ?? "");
-          return { data: blogItem?.data?.payload };
+          return {
+            item: blogItem?.data?.payload ?? [],
+            includes: blogItem?.data?.payload?.includes,
+          };
         },
       },
       {
@@ -50,7 +67,7 @@ export const routes: RouteObject[] = [
         element: <TagsView />,
         loader: async () => {
           const blogItem = await fetchTags();
-          return { data: blogItem?.data?.payload };
+          return { items: blogItem?.data?.payload?.items ?? [] };
         },
       },
       {
@@ -58,7 +75,11 @@ export const routes: RouteObject[] = [
         element: <TaggedBlogView />,
         loader: async ({ params }: LoaderFunctionArgs) => {
           const blogItem = await fetchTaggedBlog(params.tag ?? "");
-          return { data: blogItem?.data?.payload, id: params.tag };
+          return {
+            items: blogItem?.data?.payload?.items ?? [],
+            includes: blogItem?.data?.payload?.includes,
+            id: params.tag,
+          };
         },
       },
       {

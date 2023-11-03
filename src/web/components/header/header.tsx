@@ -2,9 +2,9 @@ import React from "react";
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 
-import Link from "./link/link";
-import { SearchMobile } from "./Search";
-import { GitHubIcon, LinkedInIcon, MailIcon } from "./icons/icons";
+import Link from "../link/link";
+import { SearchMobile } from "../search/search";
+import { GitHubIcon, LinkedInIcon, MailIcon } from "../icons/icons";
 import { PopupButton } from "@typeform/embed-react";
 import { useLocation } from "react-router-dom";
 

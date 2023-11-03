@@ -9,7 +9,7 @@ export type IProps = {
   to: string;
   classNames?: string;
   onClick?(event: MouseEvent): void;
-  children?: JSX.Element;
+  children?: JSX.Element | JSX.Element[] | string;
 };
 
 export const Link: FC<IProps> = ({ to, children, classNames, onClick }) =>

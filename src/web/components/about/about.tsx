@@ -38,7 +38,7 @@ function SocialLink({
 }
 
 type Props = {
-  metadata: IMetadataPayload;
+  metadata: { fields: IMetadataPayload };
 };
 
 export const Profile: FC<Props> = ({ metadata }) => {
@@ -85,6 +85,7 @@ export const Profile: FC<Props> = ({ metadata }) => {
               </SocialLink>
               <PopupButton
                 id="HTs3mlXH"
+                aria-label="Contact Me"
                 style={{
                   fontSize: 20,
                   margin: 0,
@@ -109,13 +110,13 @@ export const Profile: FC<Props> = ({ metadata }) => {
         <div className="md:pl-3">
           <div className="flex basis-full">
             <h1 className="font-bold text-3xl py-3.5 animate-fade-down animate-once animate-delay-100 animate-ease-in-out animate-normal font-harman">
-              {metadata.title}
+              {metadata?.fields?.title}
             </h1>
           </div>
           <div className="flex basis-full  animate-fade-down animate-once animate-delay-500 animate-ease-in-out animate-normal">
-            <p className="text-base py-3.5">
-              <RichText payload={metadata.summary} assets={[]} />
-            </p>
+            <div className="text-base py-3.5">
+              <RichText payload={metadata?.fields?.summary} assets={[]} />
+            </div>
           </div>
         </div>
       </div>
