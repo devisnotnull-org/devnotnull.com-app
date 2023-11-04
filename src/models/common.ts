@@ -31,10 +31,8 @@ export interface ILink {
 
 export interface IAsset {
   sys: {
-    id: string
-    linkType: string
-    type: string
-  }
+    id: string;
+    linkType: string;
+    type: string;
+  };
 }
-
-

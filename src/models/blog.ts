@@ -1,10 +1,9 @@
-import { ICommonDataNode } from '../models/common';
+import { ICommonDataNode } from "../models/common";
 
 export interface IBlogPostPayload {
   fields: {
     title: string;
-    slug: string
+    slug: string;
     blogContent?: ICommonDataNode;
-  }
+  };
 }
-

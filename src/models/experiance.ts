@@ -5,6 +5,6 @@ export interface IExperiancePayload {
   description: string[];
   startDate: string;
   endDate: string;
-  order: number
-  summary: any
+  order: number;
+  summary: any;
 }

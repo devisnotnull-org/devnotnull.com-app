@@ -5,21 +5,21 @@ exports[`<Skillz /> render Skillz Component 1`] = `
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class=""
-      >
+      <div>
         <h2>
-          Skills
+          <b>
+            Skills
+          </b>
         </h2>
       </div>
     </div>
   </body>,
   "container": <div>
-    <div
-      class=""
-    >
+    <div>
       <h2>
-        Skills
+        <b>
+          Skills
+        </b>
       </h2>
     </div>
   </div>,

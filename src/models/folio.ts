@@ -1,4 +1,4 @@
-import { ILink } from './common';
+import { ILink } from "./common";
 
 export interface IFolioPayload {
   title: string;

@@ -1,0 +1,25 @@
+/* webpackIgnore: true */
+@tailwind base;
+/* webpackIgnore: true */
+@tailwind components;
+/* webpackIgnore: true */
+@tailwind utilities;
+
+@import "https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800";
+@import "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900";
+@import "https://devnotnull-ui-production.s3.eu-west-2.amazonaws.com/media/Harman-Sans.otf";
+
+@font-face {
+  font-family: 'HarmanSans';
+  src: url('https://devnotnull-ui-production.s3.eu-west-2.amazonaws.com/media/Harman-Sans.woff2') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+    html {
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+    }
+}
