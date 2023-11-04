@@ -75,11 +75,6 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Install OpenVPN
-      run: |
-        sudo apt update
-        sudo apt install -y openvpn openvpn-systemd-resolved
-
     - run: npm install -g yarn
 
     - run: yarn install 
@@ -89,17 +84,6 @@ jobs:
     - run: yarn test
 
     - run: yarn build:prod:pure
-
-    - name:  'Automated Version Bump'
-      uses:  'phips28/gh-action-bump-version@master'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        minor-wording:  'add,Adds,new'
-        major-wording:  'MAJOR,cut-major'
-        patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
-                                          # defaulting to a patch bump.
-        rc-wording:     'RELEASE,alpha'
 
     - name: Build and push
       uses: docker/build-push-action@v2
