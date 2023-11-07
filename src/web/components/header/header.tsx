@@ -7,7 +7,7 @@ import { SearchMobile } from "../search/search";
 import { GitHubIcon, LinkedInIcon, MailIcon } from "../icons/icons";
 import { PopupButton } from "@typeform/embed-react";
 import { useLocation } from "react-router-dom";
-import { CloseIcon } from "@heroicons/react/outline";
+import { CloseIcon } from "../icons/icons";
 
 function MobileNavItem({
   href,
