@@ -7,21 +7,7 @@ import { SearchMobile } from "../search/search";
 import { GitHubIcon, LinkedInIcon, MailIcon } from "../icons/icons";
 import { PopupButton } from "@typeform/embed-react";
 import { useLocation } from "react-router-dom";
-
-function CloseIcon(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="m17.25 6.75-10.5 10.5M6.75 6.75l10.5 10.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+import { CloseIcon } from "@heroicons/react/outline";
 
 function MobileNavItem({
   href,
@@ -160,7 +146,7 @@ function NavItem({
   isActive,
 }: {
   href: string;
-  children: React.ReactNode;
+  children?: JSX.Element | JSX.Element[] | string;
   isActive?: boolean;
 }) {
   return (
