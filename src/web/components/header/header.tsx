@@ -7,21 +7,7 @@ import { SearchMobile } from "../search/search";
 import { GitHubIcon, LinkedInIcon, MailIcon } from "../icons/icons";
 import { PopupButton } from "@typeform/embed-react";
 import { useLocation } from "react-router-dom";
-
-function CloseIcon(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="m17.25 6.75-10.5 10.5M6.75 6.75l10.5 10.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+import { CloseIcon } from "@heroicons/react/outline";
 
 function MobileNavItem({
   href,
@@ -61,7 +47,7 @@ function MobileNavigation(
           <img
             src="https://devnotnull-ui-production.s3.eu-west-2.amazonaws.com/media/logo.png"
             alt="avatar"
-            className=""
+            className="h-10"
           />
         </div>
       </Popover.Button>
@@ -160,7 +146,7 @@ function NavItem({
   isActive,
 }: {
   href: string;
-  children: React.ReactNode;
+  children?: JSX.Element | JSX.Element[] | string;
   isActive?: boolean;
 }) {
   return (
@@ -203,39 +189,39 @@ function DesktopNavigation(props: React.ComponentPropsWithoutRef<"nav">) {
 export function Header() {
   return (
     <header className="pointer-events-none relative z-50 flex flex-none flex-col">
-      <div className="top-0 z-10 pt-6">
-        <div className="top-[var(--header-top,theme(spacing.6))] w-full">
-          <div className="relative flex gap-4">
-            <div className="flex flex-1 justify-start">
+      <div className="top-0 z-10 pt-3 pb-3 md:pt-6 md:pb-6">
+        <div>
+          <div className="relative flex">
+            <div className="grow md:flex-1">
               <div className="ml-4">
                 <img
                   src="https://devnotnull-ui-production.s3.eu-west-2.amazonaws.com/media/logo.png"
                   alt="avatar"
-                  className="hidden md:block h-12"
+                  className="hidden md:block h-10"
                 />
                 <MobileNavigation className="pointer-events-auto md:hidden" />
               </div>
             </div>
-            <div className="flex justify-center	flex-1">
+            <div className="md:flex md:flex-1 md:justify-center">
               <DesktopNavigation className="pointer-events-auto hidden md:block flex" />
             </div>
-            <div className="flex justify-end flex-1">
+            <div className="md:flex-1">
               <div className="pointer-events-auto">
                 <ul className="flex px-3">
-                  <li>
+                  <li className="inline-block">
                     <SearchMobile />
                   </li>
-                  <li>
+                  <li className="hidden md:inline-block">
                     <Link to="https://github.com/devisnotnull">
                       <GitHubIcon className="h-10 pl-2 pt-2 flex-none fill-zinc-500 transition group-hover:fill-orange-500" />
                     </Link>
                   </li>
-                  <li>
+                  <li className="hidden md:inline-block">
                     <Link to="https://github.com/devisnotnull">
                       <LinkedInIcon className="h-10 pl-2 pt-2 flex-none fill-zinc-500 transition group-hover:fill-orange-500" />
                     </Link>
                   </li>
-                  <li>
+                  <li className="hidden md:inline-block">
                     <PopupButton
                       id="HTs3mlXH"
                       style={{

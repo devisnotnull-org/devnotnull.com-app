@@ -15,6 +15,7 @@ import clsx from "clsx";
 
 import { searchBlog } from "@core/search/fetch";
 import { SearchIcon } from "../icons/icons";
+import { findAsset } from "../../../utils";
 
 const SearchInput = forwardRef<
   React.ElementRef<"input">,
@@ -41,7 +42,8 @@ const SearchInput = forwardRef<
 
             onClose();
           } else {
-            setValue(event.target.value + event.key);
+            const target = event?.target as any;
+            setValue(target?.value + event.key);
           }
         }}
       />
@@ -58,9 +60,10 @@ function SearchDialog({
   setOpen: (open: boolean) => void;
   className?: string;
 }) {
-  const [searchResults, setSearchResults] = useState<{ items: []; assets: [] }>(
-    { items: [], assets: [] },
-  );
+  const [searchResults, setSearchResults] = useState<{
+    items: any;
+    assets: any[];
+  }>({ items: [], assets: [] });
   const [inputString, setInputString] = useState<string>("");
 
   const formRef = useRef<React.ElementRef<"form">>(null);
@@ -104,10 +107,6 @@ function SearchDialog({
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [open, setOpen]);
-
-  const findAssets = (assetId: string, assets: []) => {
-    return assets.find((assetItem) => assetId === assetItem.sys.id);
-  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -166,7 +165,7 @@ function SearchDialog({
                                     <div>
                                       <img
                                         src={
-                                          findAssets(
+                                          findAsset(
                                             result?.fields?.image?.[0]?.sys?.id,
                                             searchResults.assets,
                                           )?.fields?.file?.url
@@ -272,15 +271,7 @@ export function Search() {
 }
 
 export function SearchMobile() {
-  const [modifierKey, setModifierKey] = useState<string>();
   const { buttonProps, dialogProps } = useSearchProps();
-
-  useEffect(() => {
-    setModifierKey(
-      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? "⌘" : "Ctrl ",
-    );
-  }, []);
-
   return (
     <div className="block max-w-md flex-auto">
       <button

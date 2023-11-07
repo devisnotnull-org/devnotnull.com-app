@@ -1,13 +1,13 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 
 import { Header } from "./components/header/header";
 
 import "./style/tailwind.css";
 
-const TRACKING_ID = "UA-136352816-2";
+const TRACKING_ID = "G-L6Z9V5VJE4";
 
 ReactGA.initialize(TRACKING_ID);
 

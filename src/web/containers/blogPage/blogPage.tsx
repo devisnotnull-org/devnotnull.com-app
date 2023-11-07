@@ -80,7 +80,7 @@ export const BlogPage: FC = () => {
   );
 
   return (
-    <article className="mt-5 p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
+    <article className="p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
       <h1 className="text-2xl pb-3.5 font-bold font-harman">
         {item?.fields?.title ?? ""}
       </h1>

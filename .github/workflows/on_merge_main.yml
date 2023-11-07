@@ -111,6 +111,7 @@ jobs:
 
     - run: |
         helm install \
+        --namespace default \
         --version 2 \
         --set env.NODE_RUNTIME_ENV=production \
         --set env.CDN_BUCKET=production \
