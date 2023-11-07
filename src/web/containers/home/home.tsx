@@ -15,8 +15,8 @@ export const HomeView: FC = () => {
   console.log("metadata", metadata);
 
   return (
-    <div className="mt-5 p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
-      <h1 className="text-2xl pb-3.5 mb-2 md:7 text-left font-bold text-gray-600 font-harman">
+    <div className="p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
+      <h1 className="text-2xl md:pb-3.5 md:mb-2 pb-2.5 text-left font-bold text-gray-600 font-harman">
         About me
       </h1>
 
@@ -25,7 +25,7 @@ export const HomeView: FC = () => {
       <div className="mt-12">
         <div className="py-1 inset-x-1 -bottom-px h-px bg-gradient-to-r from-zinc-100 to-teal-zinc"></div>
       </div>
-      <h1 className="text-2xl py-3.5 my-2 md:7 text-left font-bold text-gray-600 font-harman">
+      <h1 className="text-2xl md:py-3.5 md:my-2 md:7 text-left font-bold text-gray-600 font-harman">
         Newest blog posts
       </h1>
       <div className="bg-white">

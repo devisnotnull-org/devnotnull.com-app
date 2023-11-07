@@ -57,7 +57,7 @@ export const Profile: FC<Props> = ({ metadata }) => {
             <img
               src="//s3.eu-west-2.amazonaws.com/devnotnull-ui-production/media/avatar.png"
               alt="avatar"
-              className="rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur"
+              className="rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur w-96 md:w-full"
             />
           </div>
           <div className="md:pl-5 hidden md:block">

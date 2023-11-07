@@ -120,6 +120,7 @@ jobs:
     - run: |
        helm install devnotnull-ui-${{ steps.vars.outputs.branch_formatted }} devnotnull/nodejs \
         --version 2 \
+        --namespace default \
         --set env.NODE_RUNTIME_ENV=development \
         --set env.CDN_BUCKET=${{ steps.vars.outputs.branch_formatted }} \
         --set image.repository=alexbrown201/devnotnull-ui:${{ steps.vars.outputs.branch_formatted }} \

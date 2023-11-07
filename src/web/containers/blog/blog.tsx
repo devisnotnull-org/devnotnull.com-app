@@ -7,16 +7,15 @@ import { useLoaderData } from "react-router-dom";
 
 export const BlogView: FC = () => {
   const { items, includes } = useLoaderData();
-  console.log(items);
   return (
-    <div className="mt-5 p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
-      <h1 className="text-2xl pb-3.5 mb-2 md:7 text-left font-bold text-gray-600 font-harman">
+    <div className="p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
+      <h1 className="text-2xl md:pb-3.5 md:mb-2 pb-2.5 text-left font-bold text-gray-600 font-harman">
         Newest blog posts
       </h1>
 
-      <div className="py-1 inset-x-1 -bottom-px h-px bg-gradient-to-r from-zinc-100 to-teal-zinc"></div>
+      <div className="py-1 inset-x-1 -bottom-px h-px bg-gradient-to-r from-zinc-100 to-teal-zinc mb-5"></div>
 
-      <main className="mt-10">
+      <main>
         {items.map((item) => {
           const asset = includes?.Asset?.find(
             (assetItem) =>
