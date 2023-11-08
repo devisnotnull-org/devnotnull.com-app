@@ -205,7 +205,7 @@ export function Header() {
             <div className="md:flex md:flex-1 md:justify-center">
               <DesktopNavigation className="pointer-events-auto hidden md:block flex" />
             </div>
-            <div className="md:flex-1">
+            <div className="flex md:flex-1 justify-end">
               <div className="pointer-events-auto">
                 <ul className="flex px-3">
                   <li className="inline-block">
