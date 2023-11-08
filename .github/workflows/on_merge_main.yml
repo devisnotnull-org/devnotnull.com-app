@@ -106,7 +106,7 @@ jobs:
 
     - run: helm repo update
  
-    - run: helm uninstall devnotnull-ui
+    - run: helm uninstall devnotnull-ui --namespace default
       continue-on-error: true
 
     - run: |
