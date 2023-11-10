@@ -1,5 +1,6 @@
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { useTranslation } from "react-i18next";
 
 import Richtext from "@components/richtext/richtext";
 import { ICommonDataNode } from "models/common";
@@ -22,7 +23,7 @@ type Props = {
  * @param param0
  * @returns
  */
-const BlogItemm: FC<Props> = ({ content, assets, limit }) => {
+const BlogItem = ({ content, assets, limit }: Props): JSX.Element => {
   const [viewed, setViewed] = useState(false);
   const { ref, inView } = useInView({
     threshold: 0,
@@ -38,11 +39,11 @@ const BlogItemm: FC<Props> = ({ content, assets, limit }) => {
           to={`/blog/${content.slug}`}
           className="mt-10 relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
         >
-          Click to view full article
+          {useTranslation().t("ViewFullPost")}
         </Link>
       </div>
     </div>
   );
 };
 
-export default BlogItemm;
+export default BlogItem;

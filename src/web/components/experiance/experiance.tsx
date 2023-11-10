@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { format } from "date-fns";
 import Richtext from "@components/richtext/richtext";
 
@@ -9,7 +9,7 @@ type Props = {
   experianceList: ICommonFields<IExperiancePayload>[];
 };
 
-export const Experiance: FC<Props> = ({ experianceList }) => (
+export const Experiance = ({ experianceList }: Props): JSX.Element => (
   <div className="mb-2">
     {experianceList.map(
       (item: ICommonFields<IExperiancePayload>, index: number) => (

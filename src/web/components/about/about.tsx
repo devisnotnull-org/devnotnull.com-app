@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import { useInView } from "react-intersection-observer";
 import clsx from "clsx";
 import { PopupButton } from "@typeform/embed-react";
@@ -6,12 +6,7 @@ import { PopupButton } from "@typeform/embed-react";
 import { IMetadataPayload } from "../../../models/metadata";
 import RichText from "../richtext/richtext";
 import Link from "../link/link";
-import {
-  DownloadIcon,
-  GitHubIcon,
-  LinkedInIcon,
-  MailIcon,
-} from "../icons/icons";
+import { GitHubIcon, LinkedInIcon, MailIcon } from "../icons/icons";
 
 function SocialLink({
   className,
@@ -22,16 +17,16 @@ function SocialLink({
   className?: string;
   href: string;
   icon: React.ComponentType<{ className?: string }>;
-  children: React.ReactNode;
-}) {
+  children?: React.ReactNode;
+}): JSX.Element {
   return (
     <li className={clsx(className, "flex")}>
       <Link
         to={href}
-        classNames="group flex text-sm font-medium text-zinc-800 transition hover:text-orange-500"
+        classNames="group flex text-sm font-medium text-zinc-800 transition hover:text-orange-500 p-2 "
       >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-orange-500" />
-        <span className="ml-4">{children}</span>
+        <Icon className="h-10 w-10 flex-none fill-zinc-500 transition group-hover:fill-orange-500" />
+        <span className="md:ml-4 hidden">{children}</span>
       </Link>
     </li>
   );
@@ -41,7 +36,7 @@ type Props = {
   metadata: { fields: IMetadataPayload };
 };
 
-export const Profile: FC<Props> = ({ metadata }) => {
+export const Profile = ({ metadata }: Props): JSX.Element => {
   const [viewed, setViewed] = useState(false);
   const { ref, inView } = useInView({
     threshold: 0,
@@ -55,34 +50,25 @@ export const Profile: FC<Props> = ({ metadata }) => {
         <div ref={ref}>
           <div className="md:m-5 animate-fade animate-once animate-ease-out">
             <img
-              src="//s3.eu-west-2.amazonaws.com/devnotnull-ui-production/media/avatar.png"
+              src={
+                "//s3.eu-west-2.amazonaws.com/devnotnull-ui-production/media/avatar.png"
+              }
               alt="avatar"
               className="rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur w-96 md:w-full"
             />
           </div>
-          <div className="md:pl-5 hidden md:block">
-            <ul role="list">
+          <div className="md:pl-5 my-3 md:my-0">
+            <ul role="list" className="flex flex-row">
               <SocialLink
-                href="#"
+                href="https://github.com/devisnotnull"
                 icon={GitHubIcon}
-                className="mt-4 animate-fade-down animate-once animate-delay-100 animate-ease-in-out animate-normal"
-              >
-                GitHub @devisnotnull
-              </SocialLink>
+                className="animate-fade-down animate-once animate-delay-100 animate-ease-in-out animate-normal"
+              ></SocialLink>
               <SocialLink
-                href="#"
+                href="https://github.com/devisnotnull"
                 icon={LinkedInIcon}
-                className="mt-4 animate-fade-down animate-once animate-delay-300 animate-ease-in-out animate-normal"
-              >
-                Follow on LinkedIn
-              </SocialLink>
-              <SocialLink
-                href="#"
-                icon={DownloadIcon}
-                className="mt-4 animate-fade-down animate-once animate-delay-500 animate-ease-in-out animate-normal"
-              >
-                Download CV
-              </SocialLink>
+                className="animate-fade-down animate-once animate-delay-200 animate-ease-in-out animate-normal"
+              ></SocialLink>
               <PopupButton
                 id="HTs3mlXH"
                 aria-label="Contact Me"
@@ -97,10 +83,8 @@ export const Profile: FC<Props> = ({ metadata }) => {
                 <SocialLink
                   href="#"
                   icon={MailIcon}
-                  className="mt-4 animate-fade-down animate-once animate-delay-700 animate-ease-in-out animate-normal"
-                >
-                  Contact me
-                </SocialLink>
+                  className="animate-fade-down animate-once animate-delay-500 animate-ease-in-out animate-normal"
+                ></SocialLink>
               </PopupButton>
             </ul>
           </div>
@@ -109,7 +93,7 @@ export const Profile: FC<Props> = ({ metadata }) => {
       <div className="md:basis-8/12">
         <div className="md:pl-3">
           <div className="flex basis-full">
-            <h1 className="font-bold text-3xl py-3.5 animate-fade-down animate-once animate-delay-100 animate-ease-in-out animate-normal font-harman">
+            <h1 className="font-bold text-2xl md:py-3.5 animate-fade-down animate-once animate-delay-100 animate-ease-in-out animate-normal font-harman">
               {metadata?.fields?.title}
             </h1>
           </div>

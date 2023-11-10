@@ -31,6 +31,7 @@ const config = merge(server('production'), {
       {
         test: /\.css$/,
         use: [
+          'style-loader',
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
@@ -39,22 +40,10 @@ const config = merge(server('production'), {
           },
           {
             loader: 'css-loader',
-            options: {
-              sourceMap: true,
-              modules: {
-                localIdentName: '[hash:base64:5]'
-              }
-            }
           },
           {
             loader: 'postcss-loader',
           },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              root: src
-            }
-          }
         ]
       }
     ],

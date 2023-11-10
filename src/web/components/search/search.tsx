@@ -276,10 +276,10 @@ export function SearchMobile() {
     <div className="block max-w-md flex-auto">
       <button
         type="button"
-        className="h-10 text-medium text-zinc-500 ui-not-focus-visible:outline-none flex"
+        className="text-medium text-zinc-500 ui-not-focus-visible:outline-none flex p-2 md:p-1"
         {...buttonProps}
       >
-        <SearchIcon className="h-10 pl-2 pt-2 stroke-current" />
+        <SearchIcon className="h-10 stroke-current" />
       </button>
       <Suspense fallback={null}>
         <SearchDialog className="block" {...dialogProps} />

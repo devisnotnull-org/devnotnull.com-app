@@ -57,15 +57,41 @@ const config = merge(client('production'), {
       {
         test: /\.css$/,
         use: [
+          'style-loader',
           {
-            loader: 'style-loader'
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: false,
+            },
           },
           {
             loader: 'css-loader',
           },
           {
             loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              postcssOptions: {
+                plugins: () => [
+
+                  require('postcss-custom-media'),
+                  require('postcss-flexbugs-fixes'),
+                  require('postcss-preset-env')({
+                    autoprefixer: {
+                      flexbox: 'no-2009'
+                    },
+                    stage: 3
+                  })
+                ]
+              }
+            }
           },
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              root: src
+            }
+          }
         ]
       }
     ],

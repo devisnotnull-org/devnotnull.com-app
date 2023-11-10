@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import ReactGA from "react-ga4";
 
+import Route from "./components/route/route";
 import { Header } from "./components/header/header";
 
 import "./style/tailwind.css";
@@ -11,7 +12,7 @@ const TRACKING_ID = "G-L6Z9V5VJE4";
 
 ReactGA.initialize(TRACKING_ID);
 
-export const AppRouter: React.FC = () => {
+export const AppRouter = (): JSX.Element => {
   const blurb = "";
   const title = "";
 
@@ -27,6 +28,7 @@ export const AppRouter: React.FC = () => {
       </Helmet>
       <div className="container mx-auto relative flex w-full flex-col">
         <Header></Header>
+        <Route />
         <main className="flex-auto z-40">
           <Outlet />
         </main>
