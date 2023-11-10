@@ -1,12 +1,11 @@
-import React, { FC } from "react";
+import React from "react";
 import Link from "../link/link";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { IAsset, ICommonDataNode } from "src/models/common";
 
 type Props = {
-  assets: any[];
-  payload: {
-    content: any[];
-  };
+  assets: IAsset[];
+  payload: ICommonDataNode;
   limit?: number;
 };
 
@@ -39,7 +38,7 @@ const generateContentItems = (contentPayload: any, key: number) => {
   }
 };
 
-const RichText: FC<Props> = ({ payload, assets, limit }) => {
+const RichText = ({ payload, assets, limit }: Props): JSX.Element => {
   const content = limit ? payload.content?.slice(0, limit) : payload.content;
   return (
     <>

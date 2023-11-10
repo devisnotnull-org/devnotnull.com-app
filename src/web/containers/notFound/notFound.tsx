@@ -1,7 +1,7 @@
 import Link from "@web/components/link/link";
-import React, { FC } from "react";
+import React from "react";
 
-export const NotFoundView: FC = () => {
+export const NotFoundView = (): JSX.Element => {
   return (
     <main className="grid min-h-full place-items-center bg-white mt-10 p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
       <div className="text-center">

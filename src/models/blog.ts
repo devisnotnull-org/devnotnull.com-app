@@ -1,9 +1,15 @@
-import { ICommonDataNode } from "../models/common";
+import {
+  BaseContentfulRecord,
+  IAssetReference,
+  ICommonDataNode,
+} from "../models/common";
 
-export interface IBlogPostPayload {
-  fields: {
-    title: string;
-    slug: string;
-    blogContent?: ICommonDataNode;
-  };
-}
+export type BlogFields = {
+  title: string;
+  slug: string;
+  summary: string;
+  image: IAssetReference[];
+  blogContent?: ICommonDataNode;
+};
+
+export type Blog = BaseContentfulRecord<BlogFields>;

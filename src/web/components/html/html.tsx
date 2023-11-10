@@ -1,8 +1,8 @@
-import React, { FC, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { renderToString } from "react-dom/server";
 import Helmet from "react-helmet";
 
-interface StatePropTypes {
+interface StateProps {
   rootComponent: ReactElement<any> | null;
   buildProd: boolean;
   config: any;
@@ -10,12 +10,12 @@ interface StatePropTypes {
   css?: string[];
 }
 
-const Html: FC<StatePropTypes> = ({
+const Html = ({
   rootComponent,
   buildProd,
   config,
   css,
-}) => {
+}: StateProps): JSX.Element => {
   // Asset var is hydrate at runtime
   // Please note is is not set when running dev
   const assets = __ASSETS__ ?? {};

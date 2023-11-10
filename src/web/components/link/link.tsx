@@ -1,4 +1,4 @@
-import React, { MouseEvent, FC } from "react";
+import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 const isExternalLink = (path: string) => {
@@ -8,31 +8,16 @@ const isExternalLink = (path: string) => {
 export type IProps = {
   to: string;
   classNames?: string;
-  onClick?(event: MouseEvent): void;
-  children?: JSX.Element | JSX.Element[] | string;
+  children?: React.ReactNode;
 };
 
-export const Link: FC<IProps> = ({ to, children, classNames, onClick }) =>
+export const Link = ({ to, children, classNames }: IProps): JSX.Element =>
   isExternalLink(to) ? (
-    <a
-      href={to}
-      className={classNames}
-      target="_blank"
-      onClick={(event: MouseEvent) => {
-        if (onClick) onClick(event);
-      }}
-      rel="noreferrer"
-    >
+    <a href={to} className={classNames} target="_blank" rel="noreferrer">
       {children}
     </a>
   ) : (
-    <RouterLink
-      to={to}
-      className={classNames}
-      onClick={(event: MouseEvent) => {
-        if (onClick) onClick(event);
-      }}
-    >
+    <RouterLink to={to} className={classNames}>
       {children}
     </RouterLink>
   );

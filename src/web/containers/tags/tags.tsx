@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import React from "react";
 
 import Link from "@web/components/link/link";
 import { useLoaderData } from "react-router-dom";
 
-export const TagsView: FC = () => {
-  const { items } = useLoaderData();
+export const TagsView = (): JSX.Element => {
+  const { items } = useLoaderData() as any;
   return (
     <div className="p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
       <h1 className="text-2xl md:pb-3.5 md:mb-2 pb-2.5 text-left font-bold text-gray-600 font-harman">

@@ -1,6 +1,8 @@
 import React from "react";
 import type { LoaderFunctionArgs, RouteObject } from "react-router-dom";
 
+import "./i8";
+
 import AppRouter from "./app";
 
 import Home from "./containers/home/home";
@@ -8,7 +10,6 @@ import Blog from "./containers/blog/blog";
 import BlogPageViewContainer from "./containers/blogPage/blogPage";
 import NotFound from "./containers/notFound/notFound";
 import { fetchBlogItem } from "@core/blogItem/fetch";
-import DownloadView from "./containers/download/download";
 import TagsView from "./containers/tags/tags";
 import { fetchTags } from "@core/tags/fetch";
 import { fetchBlog, fetchTaggedBlog } from "@core/blog/fetch";
@@ -41,15 +42,30 @@ export const routes: RouteObject[] = [
         element: <Blog />,
         loader: async () => {
           const blogItems = await fetchBlog();
+          const totalPages = Math.ceil(blogItems.data.payload.total / 10);
           return {
             items: blogItems?.data?.payload?.items ?? [],
-            includes: blogItems?.data?.payload?.includes,
+            assets: blogItems?.data?.payload?.includes.Asset,
+            page: 1,
+            totalPages,
+            total: blogItems.data.payload.total,
           };
         },
       },
       {
-        path: "cv",
-        element: <DownloadView />,
+        path: "blog/page/:page",
+        element: <Blog />,
+        loader: async ({ params }: LoaderFunctionArgs) => {
+          const blogItems = await fetchBlog();
+          const totalPages = Math.ceil(blogItems.data.payload.total / 10);
+          return {
+            items: blogItems?.data?.payload?.items ?? [],
+            assets: blogItems?.data?.payload?.includes.Asset,
+            totalPages,
+            page: params.page,
+            total: blogItems.data.payload.total,
+          };
+        },
       },
       {
         path: "blog/:id",
@@ -58,7 +74,7 @@ export const routes: RouteObject[] = [
           const blogItem = await fetchBlogItem(params?.id ?? "");
           return {
             item: blogItem?.data?.payload ?? [],
-            includes: blogItem?.data?.payload?.includes,
+            assets: blogItem?.data?.payload?.includes.Asset,
           };
         },
       },
@@ -77,7 +93,7 @@ export const routes: RouteObject[] = [
           const blogItem = await fetchTaggedBlog(params.tag ?? "");
           return {
             items: blogItem?.data?.payload?.items ?? [],
-            includes: blogItem?.data?.payload?.includes,
+            assets: blogItem?.data?.payload?.includes.Asset,
             id: params.tag,
           };
         },
