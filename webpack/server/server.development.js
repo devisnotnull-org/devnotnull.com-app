@@ -32,19 +32,10 @@ const config = merge(server('development'), {
             loader: 'css-loader',
             options: {
               sourceMap: true,
-              modules: {
-                localIdentName: '[hash:base64:5]'
-              }
             }
           },
           {
             loader: 'postcss-loader',
-          },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              root: src
-            }
           }
         ]
       }

@@ -85,12 +85,6 @@ const config = merge(client('production'), {
                 ]
               }
             }
-          },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              root: src
-            }
           }
         ]
       }
