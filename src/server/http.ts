@@ -12,6 +12,7 @@ import { config } from "./config";
 import { render } from "./render";
 
 import { readFile } from "fs/promises";
+import compression from "compression";
 
 const PROD: boolean = process.env.NODE_ENV === "production";
 const app: Express = express();
@@ -32,6 +33,9 @@ Sentry.init({
   // We recommend adjusting this value in production
   tracesSampleRate: 1.0,
 });
+
+// GZIP compress
+app.use(compression());
 
 // RequestHandler creates a separate execution context, so that all
 // transactions/spans/breadcrumbs are isolated across requests
