@@ -4,6 +4,7 @@ import { EnvironmentPlugin, DefinePlugin } from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import AssetsPlugin from 'assets-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
 import { config as server } from './server.common';
 import { build, src } from '../paths';
@@ -14,7 +15,7 @@ const config = merge(server('production'), {
   devtool: 'source-map',
   mode: 'production',
   optimization: {
-    minimize: false,
+    minimize: true,
     minimizer: [
       new TerserPlugin({
         parallel: true,
@@ -24,6 +25,7 @@ const config = merge(server('production'), {
           }
         }
       }),
+      new CssMinimizerPlugin(),
     ]
   },
   module: {
@@ -31,7 +33,7 @@ const config = merge(server('production'), {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          'isomorphic-style-loader',
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
@@ -40,10 +42,13 @@ const config = merge(server('production'), {
           },
           {
             loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            }
           },
           {
             loader: 'postcss-loader',
-          },
+          }
         ]
       }
     ],

@@ -29,6 +29,8 @@ const Html = ({
     (a) => a.includes(".js") && !a.includes(".map") && !a.includes(".json"),
   );
 
+  const cssImport = keys.filter((a) => a.includes(".css"))?.[0];
+
   let srcJsFiles = js.map((key) => (
     <script key={"js-scripts"} src={`${config.static?.path}${assets[key]}`} />
   ));
@@ -59,6 +61,12 @@ const Html = ({
             css.map((css) => {
               return <style>{css}</style>;
             })}
+          {cssImport && (
+            <link
+              rel="stylesheet"
+              href={`${config.static?.path}${assets[cssImport]}`}
+            ></link>
+          )}
         </head>
         <body {...bodyAttrs} className="bg-zinc-50">
           {buildProd && rootComponent ? (
