@@ -111,7 +111,7 @@ jobs:
         aws s3api put-bucket-cors --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --cors-configuration '{"CORSRules" : [{"AllowedHeaders":["*"],"AllowedMethods":["GET","HEAD", "POST"],"AllowedOrigins":["*"],"ExposeHeaders":[]}]}'
      
     - run: |
-        aws s3api put-bucket-policy --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --policy '{ "Version": "2012-10-17", "Statement": { "Action": ["s3:GetObject", "s3:PutObject'""], "Effect": "Allow", "Resource": "arn:aws:s3:::devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }}/*", "Principal": "*" }}'
+        aws s3api put-bucket-policy --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --policy '{ "Version": "2012-10-17", "Statement": { "Action": ["s3:GetObject", "s3:PutObject"], "Effect": "Allow", "Resource": "arn:aws:s3:::devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }}/*", "Principal": "*" }}'
 
     - run: helm repo add devnotnull https://devnotnull-helm.s3.eu-west-2.amazonaws.com
     
