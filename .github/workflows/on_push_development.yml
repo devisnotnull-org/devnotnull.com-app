@@ -107,9 +107,6 @@ jobs:
     - run: |
         aws s3api delete-public-access-block --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }}
 
-    - name: Set S3 bucket access
-      run: aws s3api put-public-access-block --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" || true
-
     - run: |
         aws s3api put-bucket-policy --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --policy '{ "Version": "2012-10-17", "Statement": { "Action": ["s3:GetObject", "s3:PutObject"], "Effect": "Allow", "Resource": "arn:aws:s3:::devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }}/*", "Principal": "*" }}'
 
