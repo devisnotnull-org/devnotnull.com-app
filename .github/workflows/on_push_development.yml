@@ -102,11 +102,11 @@ jobs:
       run: aws s3api create-bucket --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --region us-east-1 || true
 
     - name: Set S3 bucket access
-      run: aws s3api put-public-access-block --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region us-east-1 || true
+      run: aws s3api put-public-access-block --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --public-access-block-configuration "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" || true
 
     - name: Copy S3 bucket assets
       run: aws s3 cp ./build s3://devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --recursive
-      
+  
     - run: |
         aws s3api put-bucket-cors --bucket devnotnull-ui-feat-${{ steps.vars.outputs.branch_formatted }} --cors-configuration '{"CORSRules" : [{"AllowedHeaders":["*"],"AllowedMethods":["GET","HEAD", "POST"],"AllowedOrigins":["*"],"ExposeHeaders":[]}]}'
      
