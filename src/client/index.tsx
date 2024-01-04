@@ -1,15 +1,12 @@
-//import 'source-map-support/register'
+import "source-map-support/register";
 
 import React from "react";
 import { createRoot } from "react-dom/client";
-import * as Sentry from "@sentry/react";
 import {
   createBrowserRouter,
   matchRoutes,
   RouterProvider,
 } from "react-router-dom";
-
-import { BrowserTracing } from "@sentry/tracing";
 
 import reportWebVitals from "../web/webVitals";
 

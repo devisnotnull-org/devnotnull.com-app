@@ -73,7 +73,7 @@ app.get("*", async (request: Request, res: Response) => {
   const cssHydrated = await Promise.all(cssHydrate);
 
   // Just inline the CSS for better page perf
-  return render(request.url, config, router, context, res, cssHydrated);
+  return render(config, router, context, res, cssHydrated);
 });
 
 // Catch 404 and forward to error handler

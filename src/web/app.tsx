@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { Helmet } from "react-helmet";
 import ReactGA from "react-ga4";
-
+import { HelmetProvider } from "react-helmet-async";
+import { SEO } from "./components/seo/seo";
 import Route from "./components/route/route";
 import { Header } from "./components/header/header";
 
@@ -13,19 +13,12 @@ const TRACKING_ID = "G-L6Z9V5VJE4";
 ReactGA.initialize(TRACKING_ID);
 
 export const AppRouter = (): JSX.Element => {
-  const blurb = "";
-  const title = "";
+  const blurb = "Alex Brown - Software Engineer";
+  const title = "Alex Brown - Software Engineer";
 
   return (
-    <>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={blurb} />
-        <meta name="og:title" property="og:title" content={title} />
-        <meta property="og:type" content="website" />
-        <meta name="robots" content="index, follow" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Helmet>
+    <HelmetProvider>
+      <SEO title={title} description={blurb} name={title} type="website" />
       <div className="container mx-auto relative flex w-full flex-col">
         <Header></Header>
         <Route />
@@ -33,7 +26,7 @@ export const AppRouter = (): JSX.Element => {
           <Outlet />
         </main>
       </div>
-    </>
+    </HelmetProvider>
   );
 };
 

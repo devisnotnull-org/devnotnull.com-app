@@ -4,16 +4,15 @@ import { Router } from "@remix-run/router";
 import { Response } from "express";
 import { StaticRouterProvider } from "react-router-dom/server";
 import Html from "../web/components/html/html";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 /**
  *
- * @param url
  * @param store
  * @param assets
  * @param res
  */
 export const render = (
-  url: string,
   config: any,
   router: Router,
   context: any,
