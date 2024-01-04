@@ -2,7 +2,6 @@ import React from "react";
 
 import About from "@components/about/about";
 
-import Profile from "@components/profile/profile";
 import Experiance from "@components/experiance/experiance";
 import { findAsset } from "../../../utils";
 import Link from "@web/components/link/link";
@@ -16,8 +15,6 @@ export const HomeView = (): JSX.Element => {
   return (
     <div className="p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
       <About metadata={metadata} />
-
-      <Profile />
 
       <div className="py-1 inset-x-1 -bottom-px h-px bg-gradient-to-r from-zinc-100 to-teal-zinc mt-2.5 md:mt-5"></div>
       <h1 className="text-2xl text-left font-bold text-gray-600 font-harman py-2.5 md:py-5">
