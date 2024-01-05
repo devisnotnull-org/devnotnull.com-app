@@ -1,6 +1,7 @@
 import React from "react";
 
 import About from "@components/about/about";
+
 import Experiance from "@components/experiance/experiance";
 import { findAsset } from "../../../utils";
 import Link from "@web/components/link/link";
