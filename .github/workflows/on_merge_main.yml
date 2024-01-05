@@ -124,7 +124,7 @@ jobs:
         --set image.pullPolicy=Always \
         --set replicaCount=10 \
         --set "ingress.hosts[0].host"=devnotnull.com \
-        --set "ingress.hosts[1].host"=devnotnull.com \
+        --set "ingress.hosts[1].host"=techlex.co.uk \
         --set "ingress.hosts[0].paths[0].path"=/ \
         --set "ingress.hosts[1].paths[0].path"=/ \
         devnotnull-ui \
