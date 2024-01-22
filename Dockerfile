@@ -1,4 +1,4 @@
-FROM node:18.15.0-alpine
+FROM node:node:20.11.0-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
