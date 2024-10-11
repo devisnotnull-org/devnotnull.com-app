@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import Link from "@web/components/link/link";
-import { useLoaderData } from "react-router-dom";
+import Link from '@web/components/link/link';
+import { useLoaderData } from 'react-router-dom';
 
 export const TagsView = (): JSX.Element => {
   const { items } = useLoaderData() as any;

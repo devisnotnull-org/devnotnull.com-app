@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import About from "@components/about/about";
+import About from '@components/about/about';
 
-import Experiance from "@components/experiance/experiance";
-import { findAsset } from "../../../utils";
-import Link from "@web/components/link/link";
-import { useLoaderData } from "react-router-dom";
+import Experiance from '@components/experiance/experiance';
+import { findAsset } from '../../../utils';
+import Link from '@web/components/link/link';
+import { useLoaderData } from 'react-router-dom';
 
 export const HomeView = (): JSX.Element => {
   const { items, includes, experiance, metadata } = useLoaderData();
@@ -34,7 +34,7 @@ export const HomeView = (): JSX.Element => {
                     <img
                       src={`${findAsset(
                         post.fields.image?.[0]?.sys?.id,
-                        includes?.Asset,
+                        includes?.Asset
                       )?.fields?.file?.url}?fm=webp`}
                       alt=""
                       className="object-contain h-32 md:h-52 w-32 md:w-52"

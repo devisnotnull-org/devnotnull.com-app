@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useInView } from "react-intersection-observer";
-import clsx from "clsx";
-import { PopupButton } from "@typeform/embed-react";
+import React, { useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import clsx from 'clsx';
+import { PopupButton } from '@typeform/embed-react';
 
-import { IMetadataPayload } from "../../../models/metadata";
-import RichText from "../richtext/richtext";
-import Link from "../link/link";
-import { GitHubIcon, LinkedInIcon, MailIcon } from "../icons/icons";
+import { IMetadataPayload } from '../../../models/metadata';
+import RichText from '../richtext/richtext';
+import Link from '../link/link';
+import { GitHubIcon, LinkedInIcon, MailIcon } from '../icons/icons';
 
 function SocialLink({
   className,
@@ -20,7 +20,7 @@ function SocialLink({
   children?: React.ReactNode;
 }): JSX.Element {
   return (
-    <li className={clsx(className, "flex")}>
+    <li className={clsx(className, 'flex')}>
       <Link
         to={href}
         classNames="group flex text-sm font-medium text-zinc-800 transition hover:text-orange-500 p-2 "
@@ -51,7 +51,7 @@ export const Profile = ({ metadata }: Props): JSX.Element => {
           <div className="md:m-5 animate-fade animate-once animate-ease-out">
             <img
               src={
-                "//s3.eu-west-2.amazonaws.com/devnotnull-ui-production/media/avatar.png"
+                '//s3.eu-west-2.amazonaws.com/devnotnull-ui-production/media/avatar.png'
               }
               alt="avatar"
               className="rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur w-96 md:w-full"
@@ -77,7 +77,7 @@ export const Profile = ({ metadata }: Props): JSX.Element => {
                   margin: 0,
                   padding: 0,
                   border: 0,
-                  width: "100%",
+                  width: '100%',
                 }}
               >
                 <SocialLink

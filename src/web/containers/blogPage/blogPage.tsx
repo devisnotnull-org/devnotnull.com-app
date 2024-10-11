@@ -1,7 +1,7 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
-import Article from "@web/components/article/article";
-import { SEO } from "@web/components/seo/seo";
+import React from 'react';
+import { useLoaderData } from 'react-router-dom';
+import Article from '@web/components/article/article';
+import { SEO } from '@web/components/seo/seo';
 
 export const BlogPage = (): JSX.Element => {
   const { item, assets } = useLoaderData();

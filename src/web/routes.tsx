@@ -1,25 +1,25 @@
-import React from "react";
-import type { LoaderFunctionArgs, RouteObject } from "react-router-dom";
+import React from 'react';
+import type { LoaderFunctionArgs, RouteObject } from 'react-router-dom';
 
-import "./i8";
+import './i8';
 
-import AppRouter from "./app";
+import AppRouter from './app';
 
-import Home from "./containers/home/home";
-import Blog from "./containers/blog/blog";
-import BlogPageViewContainer from "./containers/blogPage/blogPage";
-import NotFound from "./containers/notFound/notFound";
-import { fetchBlogItem } from "@core/blogItem/fetch";
-import TagsView from "./containers/tags/tags";
-import { fetchTags } from "@core/tags/fetch";
-import { fetchBlog, fetchTaggedBlog } from "@core/blog/fetch";
-import TaggedBlogView from "./containers/taggedBlog/taggedBlog";
-import { fetchExperiance } from "@core/experiance/fetch";
-import { fetchMetadata } from "@core/metadata/fetch";
+import Home from './containers/home/home';
+import Blog from './containers/blog/blog';
+import BlogPageViewContainer from './containers/blogPage/blogPage';
+import NotFound from './containers/notFound/notFound';
+import { fetchBlogItem } from '@core/blogItem/fetch';
+import TagsView from './containers/tags/tags';
+import { fetchTags } from '@core/tags/fetch';
+import { fetchBlog, fetchTaggedBlog } from '@core/blog/fetch';
+import TaggedBlogView from './containers/taggedBlog/taggedBlog';
+import { fetchExperiance } from '@core/experiance/fetch';
+import { fetchMetadata } from '@core/metadata/fetch';
 
 export const routes: RouteObject[] = [
   {
-    path: "/",
+    path: '/',
     element: <AppRouter />,
     children: [
       {
@@ -38,7 +38,7 @@ export const routes: RouteObject[] = [
         },
       },
       {
-        path: "blog",
+        path: 'blog',
         element: <Blog />,
         loader: async () => {
           const blogItems = await fetchBlog();
@@ -53,7 +53,7 @@ export const routes: RouteObject[] = [
         },
       },
       {
-        path: "blog/page/:page",
+        path: 'blog/page/:page',
         element: <Blog />,
         loader: async ({ params }: LoaderFunctionArgs) => {
           const blogItems = await fetchBlog();
@@ -68,10 +68,10 @@ export const routes: RouteObject[] = [
         },
       },
       {
-        path: "blog/:id",
+        path: 'blog/:id',
         element: <BlogPageViewContainer />,
         loader: async ({ params }: LoaderFunctionArgs) => {
-          const blogItem = await fetchBlogItem(params?.id ?? "");
+          const blogItem = await fetchBlogItem(params?.id ?? '');
           return {
             item: blogItem?.data?.payload ?? [],
             assets: blogItem?.data?.payload?.includes.Asset,
@@ -79,7 +79,7 @@ export const routes: RouteObject[] = [
         },
       },
       {
-        path: "blog/tags",
+        path: 'blog/tags',
         element: <TagsView />,
         loader: async () => {
           const blogItem = await fetchTags();
@@ -87,10 +87,10 @@ export const routes: RouteObject[] = [
         },
       },
       {
-        path: "blog/tags/:tag",
+        path: 'blog/tags/:tag',
         element: <TaggedBlogView />,
         loader: async ({ params }: LoaderFunctionArgs) => {
-          const blogItem = await fetchTaggedBlog(params.tag ?? "");
+          const blogItem = await fetchTaggedBlog(params.tag ?? '');
           return {
             items: blogItem?.data?.payload?.items ?? [],
             assets: blogItem?.data?.payload?.includes.Asset,
@@ -99,7 +99,7 @@ export const routes: RouteObject[] = [
         },
       },
       {
-        path: "*",
+        path: '*',
         element: <NotFound />,
       },
     ],

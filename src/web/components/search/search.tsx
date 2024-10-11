@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   forwardRef,
@@ -8,17 +8,17 @@ import {
   useEffect,
   useRef,
   useState,
-} from "react";
+} from 'react';
 
-import { Dialog, Transition } from "@headlessui/react";
-import clsx from "clsx";
+import { Dialog, Transition } from '@headlessui/react';
+import clsx from 'clsx';
 
-import { searchBlog } from "@core/search/fetch";
-import { SearchIcon } from "../icons/icons";
-import { findAsset } from "../../../utils";
+import { searchBlog } from '@core/search/fetch';
+import { SearchIcon } from '../icons/icons';
+import { findAsset } from '../../../utils';
 
 const SearchInput = forwardRef<
-  React.ElementRef<"input">,
+  React.ElementRef<'input'>,
   {
     onClose: () => void;
     setValue: (key: string) => void;
@@ -30,10 +30,10 @@ const SearchInput = forwardRef<
       <input
         ref={inputRef}
         className={clsx(
-          "flex-auto appearance-none bg-transparent pl-10 text-zinc-900 outline-none placeholder:text-zinc-500 focus:w-full focus:flex-none sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden",
+          'flex-auto appearance-none bg-transparent pl-10 text-zinc-900 outline-none placeholder:text-zinc-500 focus:w-full focus:flex-none sm:text-sm [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden [&::-webkit-search-results-button]:hidden [&::-webkit-search-results-decoration]:hidden'
         )}
         onKeyDown={(event) => {
-          if (event.key === "Escape") {
+          if (event.key === 'Escape') {
             // In Safari, closing the dialog with the escape key can sometimes cause the scroll position to jump to the
             // bottom of the page. This is a workaround for that until we can figure out a proper fix in Headless UI.
             if (document.activeElement instanceof HTMLElement) {
@@ -64,10 +64,10 @@ function SearchDialog({
     items: any;
     assets: any[];
   }>({ items: [], assets: [] });
-  const [inputString, setInputString] = useState<string>("");
+  const [inputString, setInputString] = useState<string>('');
 
-  const formRef = useRef<React.ElementRef<"form">>(null);
-  const panelRef = useRef<React.ElementRef<"div">>(null);
+  const formRef = useRef<React.ElementRef<'form'>>(null);
+  const panelRef = useRef<React.ElementRef<'div'>>(null);
   const inputRef = useRef<React.ElementRef<typeof SearchInput>>(null);
 
   useEffect(() => {
@@ -95,16 +95,16 @@ function SearchDialog({
     }
 
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
+      if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         setOpen(true);
       }
     }
 
-    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener('keydown', onKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener('keydown', onKeyDown);
     };
   }, [open, setOpen]);
 
@@ -112,7 +112,7 @@ function SearchDialog({
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         onClose={setOpen}
-        className={clsx("fixed inset-0 z-50", className)}
+        className={clsx('fixed inset-0 z-50', className)}
       >
         <Transition.Child
           as={Fragment}
@@ -167,7 +167,7 @@ function SearchDialog({
                                         src={
                                           findAsset(
                                             result?.fields?.image?.[0]?.sys?.id,
-                                            searchResults.assets,
+                                            searchResults.assets
                                           )?.fields?.file?.url
                                         }
                                       />
@@ -211,7 +211,7 @@ function SearchDialog({
 }
 
 function useSearchProps() {
-  const buttonRef = useRef<React.ElementRef<"button">>(null);
+  const buttonRef = useRef<React.ElementRef<'button'>>(null);
   const [open, setOpen] = useState(false);
 
   return {
@@ -231,7 +231,7 @@ function useSearchProps() {
             setOpen(open);
           }
         },
-        [setOpen],
+        [setOpen]
       ),
     },
   };
@@ -243,7 +243,7 @@ export function Search() {
 
   useEffect(() => {
     setModifierKey(
-      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? "⌘" : "Ctrl ",
+      /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? '⌘' : 'Ctrl '
     );
   }, []);
 

@@ -1,8 +1,8 @@
-import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 const isExternalLink = (path: string) => {
-  return path?.includes("http");
+  return path?.includes('http');
 };
 
 export type IProps = {

@@ -1,7 +1,17 @@
-import { ILink } from "./common";
+import { z } from 'zod';
 
-export interface IFolioPayload {
-  title: string;
-  primaryMediaItem: ILink;
-  secondaryMediaItems: ILink[];
-}
+export const IFolioPayloadSchema = z.object({
+  title: z.string(),
+  primaryMediaItem: z.object({
+    href: z.string().url(),
+    text: z.string().optional(),
+  }),
+  secondaryMediaItems: z.array(
+    z.object({
+      href: z.string().url(),
+      text: z.string().optional(),
+    })
+  ),
+});
+
+export type IFolioPayload = z.infer<typeof IFolioPayloadSchema>;

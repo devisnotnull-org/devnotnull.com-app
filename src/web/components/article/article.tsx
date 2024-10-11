@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
+import React, { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-import Link from "@web/components/link/link";
-import { dateCaculator } from "../../../utils";
-import { IAsset } from "../../../models/common";
-import { Blog } from "../../../models/blog";
-import RichText from "../richtext/richtext";
-import { useTranslation } from "react-i18next";
+import Link from '@web/components/link/link';
+import { dateCaculator } from '../../../utils';
+import { IAsset } from '../../../models/common';
+import { Blog } from '../../../models/blog';
+import RichText from '../richtext/richtext';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   item: Blog;
@@ -26,14 +26,14 @@ export const Article = ({ item, assets, isPreview }: Props): JSX.Element => {
 
   useEffect(() => {
     if (isPreview) return;
-    const commentScript = document.createElement("script");
+    const commentScript = document.createElement('script');
     commentScript.async = true;
-    commentScript.src = "https://utteranc.es/client.js";
-    commentScript.setAttribute("repo", "devisnotnull-org/devnotnull.com-app");
-    commentScript.setAttribute("issue-term", "pathname");
-    commentScript.setAttribute("id", "utterances");
-    commentScript.setAttribute("label", "comment");
-    commentScript.setAttribute("crossorigin", "anonymous");
+    commentScript.src = 'https://utteranc.es/client.js';
+    commentScript.setAttribute('repo', 'devisnotnull-org/devnotnull.com-app');
+    commentScript.setAttribute('issue-term', 'pathname');
+    commentScript.setAttribute('id', 'utterances');
+    commentScript.setAttribute('label', 'comment');
+    commentScript.setAttribute('crossorigin', 'anonymous');
     if (commentBox && commentBox.current) {
       commentBox.current.appendChild(commentScript);
     } else {
@@ -41,7 +41,7 @@ export const Article = ({ item, assets, isPreview }: Props): JSX.Element => {
     }
     const removeScript = () => {
       commentScript.remove();
-      document.querySelectorAll(".utterances").forEach((el) => el.remove());
+      document.querySelectorAll('.utterances').forEach((el) => el.remove());
     };
     return () => {
       removeScript();
@@ -49,15 +49,15 @@ export const Article = ({ item, assets, isPreview }: Props): JSX.Element => {
   }, []);
 
   const asset = assets?.find(
-    (assetItem) => assetItem.sys.id === item?.fields?.image?.[0]?.sys?.id,
+    (assetItem) => assetItem.sys.id === item?.fields?.image?.[0]?.sys?.id
   );
 
   const dateUpdatedCaculatorResult = dateCaculator(
-    new Date(item?.sys?.updatedAt),
+    new Date(item?.sys?.updatedAt)
   );
 
   const dateCreatedCaculatorResult = dateCaculator(
-    new Date(item?.sys?.createdAt),
+    new Date(item?.sys?.createdAt)
   );
 
   const isOriginal =
@@ -65,22 +65,22 @@ export const Article = ({ item, assets, isPreview }: Props): JSX.Element => {
 
   const finalDate = isOriginal ? (
     <span>
-      {useTranslation().t("Published")} {dateUpdatedCaculatorResult.unit}
+      {useTranslation().t('Published')} {dateUpdatedCaculatorResult.unit}
       <b>
-        {dateUpdatedCaculatorResult.unitType} {useTranslation().t("Ago")}
+        {dateUpdatedCaculatorResult.unitType} {useTranslation().t('Ago')}
       </b>
     </span>
   ) : (
     <span>
-      {useTranslation().t("Updated")}{" "}
+      {useTranslation().t('Updated')}{' '}
       <b>
-        {dateUpdatedCaculatorResult.unit} {dateUpdatedCaculatorResult.unitType}{" "}
-        {useTranslation().t("Ago")}
-      </b>{" "}
-      {useTranslation().t("Published")}{" "}
+        {dateUpdatedCaculatorResult.unit} {dateUpdatedCaculatorResult.unitType}{' '}
+        {useTranslation().t('Ago')}
+      </b>{' '}
+      {useTranslation().t('Published')}{' '}
       <b>
-        {dateCreatedCaculatorResult.unit} {dateCreatedCaculatorResult.unitType}{" "}
-        {useTranslation().t("Ago")}
+        {dateCreatedCaculatorResult.unit} {dateCreatedCaculatorResult.unitType}{' '}
+        {useTranslation().t('Ago')}
       </b>
     </span>
   );
@@ -92,7 +92,7 @@ export const Article = ({ item, assets, isPreview }: Props): JSX.Element => {
     >
       <h1 className="text-2xl pb-3.5 font-bold font-harman">
         <Link to={`/blog/${item.fields.slug}`}>
-          {item?.fields?.title ?? ""}
+          {item?.fields?.title ?? ''}
         </Link>
       </h1>
       <div className="pb-3.5">{item?.fields?.summary}</div>
@@ -127,7 +127,7 @@ export const Article = ({ item, assets, isPreview }: Props): JSX.Element => {
               to={`/blog/${item.fields.slug}`}
               classNames="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
             >
-              {useTranslation().t("ViewFullPost")}
+              {useTranslation().t('ViewFullPost')}
             </Link>
           </div>
         )}

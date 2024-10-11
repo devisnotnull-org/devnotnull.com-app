@@ -1,5 +1,5 @@
-import Link from "@web/components/link/link";
-import React from "react";
+import Link from '@web/components/link/link';
+import React from 'react';
 
 export const NotFoundView = (): JSX.Element => {
   return (

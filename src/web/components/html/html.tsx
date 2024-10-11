@@ -1,6 +1,6 @@
-import React, { ReactElement } from "react";
-import { renderToString } from "react-dom/server";
-import Helmet from "react-helmet";
+import React, { ReactElement } from 'react';
+import { renderToString } from 'react-dom/server';
+import Helmet from 'react-helmet';
 
 interface StateProps {
   rootComponent: ReactElement<any> | null;
@@ -26,23 +26,23 @@ const Html = ({
 
   const keys = Object.keys(assets);
   const js = keys.filter(
-    (a) => a.includes(".js") && !a.includes(".map") && !a.includes(".json"),
+    (a) => a.includes('.js') && !a.includes('.map') && !a.includes('.json')
   );
 
-  const cssImport = keys.filter((a) => a.includes(".css"))?.[0];
+  const cssImport = keys.filter((a) => a.includes('.css'))?.[0];
 
   let srcJsFiles = js.map((key) => (
-    <script key={"js-scripts"} src={`${config.static?.path}${assets[key]}`} />
+    <script key={'js-scripts'} src={`${config.static?.path}${assets[key]}`} />
   ));
 
   // Nasty
   const devStatic = [
     <script
-      key={"js-scripts-app"}
+      key={'js-scripts-app'}
       src={`${config.static?.path}static/js/app.js`}
     />,
     <script
-      key={"js-scripts-vendor"}
+      key={'js-scripts-vendor'}
       src={`${config.static?.path}static/js/vendor.js`}
     />,
   ];

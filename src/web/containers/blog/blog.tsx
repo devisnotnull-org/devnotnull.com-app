@@ -1,10 +1,10 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { Link, useLoaderData } from "react-router-dom";
-import { Blog } from "../../../models/blog";
-import { IAsset } from "../../../models/common";
-import Article from "@web/components/article/article";
-import { SEO } from "@web/components/seo/seo";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link, useLoaderData } from 'react-router-dom';
+import { Blog } from '../../../models/blog';
+import { IAsset } from '../../../models/common';
+import Article from '@web/components/article/article';
+import { SEO } from '@web/components/seo/seo';
 
 export const BlogView = (): JSX.Element => {
   const { items, assets, total, page } = useLoaderData() as {
@@ -17,15 +17,15 @@ export const BlogView = (): JSX.Element => {
   return (
     <>
       <SEO
-        title={"Alex Brown - Blog"}
-        description={"Alex Brown - Blog"}
-        name={"Alex Brown - Blog"}
+        title={'Alex Brown - Blog'}
+        description={'Alex Brown - Blog'}
+        name={'Alex Brown - Blog'}
         type="website"
       />
 
       <div className="p-5 md:p-10 bg-white rounded-lg shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur text-base">
         <h1 className="text-2xl md:pb-3.5 md:mb-2 pb-2.5 text-left font-bold text-gray-600 font-harman">
-          {useTranslation().t("LatestBlogPosts")}
+          {useTranslation().t('LatestBlogPosts')}
         </h1>
 
         <div className="py-1 inset-x-1 -bottom-px h-px bg-gradient-to-r from-zinc-100 to-teal-zinc mb-5"></div>
@@ -42,9 +42,9 @@ export const BlogView = (): JSX.Element => {
         >
           <div className="hidden sm:block">
             <p className="text-sm text-gray-700">
-              Showing{" "}
-              <span className="font-medium">{page && page * 10 + 1 - 10}</span>{" "}
-              to <span className="font-medium">{page && page * 10}</span> of{" "}
+              Showing{' '}
+              <span className="font-medium">{page && page * 10 + 1 - 10}</span>{' '}
+              to <span className="font-medium">{page && page * 10}</span> of{' '}
               <span className="font-medium">{total}</span> results
             </p>
           </div>
@@ -54,7 +54,7 @@ export const BlogView = (): JSX.Element => {
                 to={`/blog/page/${page - 1}`}
                 className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
               >
-                {useTranslation().t("Previous")}
+                {useTranslation().t('Previous')}
               </Link>
             )}
             {page * 10 < total && (
@@ -62,7 +62,7 @@ export const BlogView = (): JSX.Element => {
                 to={`/blog/page/${page + 1}`}
                 className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0"
               >
-                {useTranslation().t("Next")}
+                {useTranslation().t('Next')}
               </Link>
             )}
           </div>

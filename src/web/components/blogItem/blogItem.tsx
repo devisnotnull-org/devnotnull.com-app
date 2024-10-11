@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useInView } from "react-intersection-observer";
-import { useTranslation } from "react-i18next";
+import React, { useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 
-import Richtext from "@components/richtext/richtext";
-import { ICommonDataNode } from "models/common";
-import { Link } from "react-router-dom";
+import Richtext from '@components/richtext/richtext';
+import { ICommonDataNode } from 'models/common';
+import { Link } from 'react-router-dom';
 
 type Props = {
   assets: any[];
@@ -39,7 +39,7 @@ const BlogItem = ({ content, assets, limit }: Props): JSX.Element => {
           to={`/blog/${content.slug}`}
           className="mt-10 relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
         >
-          {useTranslation().t("ViewFullPost")}
+          {useTranslation().t('ViewFullPost')}
         </Link>
       </div>
     </div>

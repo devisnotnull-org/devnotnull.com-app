@@ -1,15 +1,20 @@
-import {
-  BaseContentfulRecord,
-  IAssetReference,
-  ICommonDataNode,
-} from "../models/common";
+import { z } from 'zod';
 
-export type BlogFields = {
-  title: string;
-  slug: string;
-  summary: string;
-  image: IAssetReference[];
-  blogContent?: ICommonDataNode;
-};
+import { IAsset, BaseContentfulRecord } from './common';
 
-export type Blog = BaseContentfulRecord<BlogFields>;
+export const BlogFieldsSchema = z.object({
+  title: z.string(),
+  slug: z.string(),
+  summary: z.string(),
+  image: z.array(IAsset),
+  blogContent: z
+    .object({
+      nodeType: z.string(),
+      content: z.array(z.any()),
+    })
+    .optional(),
+});
+
+export const BlogSchema = BaseContentfulRecord(BlogFieldsSchema);
+
+export type BlogSchemaType = z.infer<typeof BlogSchema>;

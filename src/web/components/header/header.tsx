@@ -1,15 +1,15 @@
-import React from "react";
-import { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import { useTranslation } from "react-i18next";
+import React from 'react';
+import { Fragment } from 'react';
+import { Popover, Transition } from '@headlessui/react';
+import { useTranslation } from 'react-i18next';
 
-import Link from "../link/link";
-import { SearchMobile } from "../search/search";
-import { GitHubIcon, LinkedInIcon, MailIcon } from "../icons/icons";
-import { PopupButton } from "@typeform/embed-react";
-import { useLocation } from "react-router-dom";
-import { CloseIcon } from "../icons/icons";
-import { LOGO_URL } from "@web/consts";
+import Link from '../link/link';
+import { SearchMobile } from '../search/search';
+import { GitHubIcon, LinkedInIcon, MailIcon } from '../icons/icons';
+import { PopupButton } from '@typeform/embed-react';
+import { useLocation } from 'react-router-dom';
+import { CloseIcon } from '../icons/icons';
+import { LOGO_URL } from '@web/consts';
 
 function MobileNavItem({
   href,
@@ -35,7 +35,7 @@ function MobileNavItem({
 }
 
 function MobileNavigation(
-  props: React.ComponentPropsWithoutRef<typeof Popover>,
+  props: React.ComponentPropsWithoutRef<typeof Popover>
 ) {
   return (
     <Popover {...props}>
@@ -86,19 +86,19 @@ function MobileNavigation(
                   href="/"
                   classNames="animate-fade-down animate-once animate-ease-in-out animate-normal"
                 >
-                  {useTranslation().t("MenuItemAbout")}
+                  {useTranslation().t('MenuItemAbout')}
                 </MobileNavItem>
                 <MobileNavItem
                   href="/blog"
                   classNames="animate-fade-down animate-once animate-delay-200 animate-ease-in-out animate-normal"
                 >
-                  {useTranslation().t("MenuItemBlog")}
+                  {useTranslation().t('MenuItemBlog')}
                 </MobileNavItem>
                 <MobileNavItem
                   href="/blog/tags"
                   classNames="animate-fade-down animate-once animate-delay-500 animate-ease-in-out animate-normal"
                 >
-                  {useTranslation().t("MenuItemTags")}
+                  {useTranslation().t('MenuItemTags')}
                 </MobileNavItem>
                 <div className="flex justify-end flex-1">
                   <div className="pointer-events-auto">
@@ -125,7 +125,7 @@ function MobileNavigation(
                           style={{
                             margin: 0,
                             border: 0,
-                            width: "100%",
+                            width: '100%',
                           }}
                           className="px-4 py-6 block"
                         >
@@ -158,7 +158,7 @@ function NavItem({
       <Link
         to={href}
         classNames={`relative block p-3 transition hover:text-orange-500 font-harman ${
-          isActive ? "border-b-2 border-orange-500" : ""
+          isActive ? 'border-b-2 border-orange-500' : ''
         }`}
       >
         {children}
@@ -167,29 +167,29 @@ function NavItem({
   );
 }
 
-function DesktopNavigation(props: React.ComponentPropsWithoutRef<"nav">) {
+function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
   const location = useLocation();
 
   return (
     <nav {...props}>
       <ul className="flex px-3 font-medium text-zinc-800">
         <NavItem
-          href={useTranslation().t("LinkAbout")}
-          isActive={location.pathname === "/"}
+          href={useTranslation().t('LinkAbout')}
+          isActive={location.pathname === '/'}
         >
-          {useTranslation().t("MenuItemAbout")}
+          {useTranslation().t('MenuItemAbout')}
         </NavItem>
         <NavItem
-          href={useTranslation().t("LinkBlog")}
-          isActive={location.pathname.includes("/blog")}
+          href={useTranslation().t('LinkBlog')}
+          isActive={location.pathname.includes('/blog')}
         >
-          {useTranslation().t("MenuItemBlog")}
+          {useTranslation().t('MenuItemBlog')}
         </NavItem>
         <NavItem
-          href={useTranslation().t("LinkTags")}
-          isActive={location.pathname.includes(useTranslation().t("LinkTags"))}
+          href={useTranslation().t('LinkTags')}
+          isActive={location.pathname.includes(useTranslation().t('LinkTags'))}
         >
-          {useTranslation().t("MenuItemTags")}
+          {useTranslation().t('MenuItemTags')}
         </NavItem>
       </ul>
     </nav>
@@ -239,7 +239,7 @@ export function Header() {
                         margin: 0,
                         padding: 0,
                         border: 0,
-                        width: "100%",
+                        width: '100%',
                       }}
                     >
                       <MailIcon className="h-10 pl-2 pt-2 flex-none fill-zinc-500 transition group-hover:fill-orange-500" />
