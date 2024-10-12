@@ -15,7 +15,7 @@ const flatten = input => {
   return res.reverse();
 };
 
-const aquireTarget = inTarget => require(resolve(__dirname, 'webpack', inTarget, `index.js`))
+const aquireTarget = inTarget => require(resolve(__dirname, 'webpack', inTarget, `index.mjs`))
 
 const configuration =
   target === 'all'
