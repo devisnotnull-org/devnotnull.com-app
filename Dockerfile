@@ -1,4 +1,4 @@
-FROM node:18.15.0-alpine
+FROM oven/bun:1.1
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -8,4 +8,4 @@ COPY ./build .
 
 EXPOSE 3000
 
-CMD [ "node", "server.js" ]
+CMD [ "bun", "run", "server.js" ]

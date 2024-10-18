@@ -1,6 +1,4 @@
-
 import { resolve } from 'path';
-
 const target = process.env.TARGET || 'all';
 
 const flatten = input => {
