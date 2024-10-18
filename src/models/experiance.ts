@@ -11,4 +11,4 @@ export const ExperiancePayloadSchema = z.object({
   summary: z.any(),
 });
 
-export type IExperiancePayload = z.infer<typeof ExperiancePayloadSchema>;
+export type ExperiancePayloadSchemaType = z.infer<typeof ExperiancePayloadSchema>;

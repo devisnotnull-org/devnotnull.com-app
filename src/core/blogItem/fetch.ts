@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { ENDPOINT } from '../constants';
-import { CommonContentPayload } from '../../models/common';
+import { CommonContentPayload } from '../../models/common/base';
 import { Blog } from '../../models/blog';
 
 export const fetchBlogItem = (slug: string) =>

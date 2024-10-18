@@ -8,9 +8,9 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
-import reportWebVitals from '../web/webVitals';
+import reportWebVitals from '../webVitals';
 
-import { routes } from '../web/routes';
+import { routes } from '../routes';
 
 // Grab the state from a global variable injected into the server-generated HTML
 

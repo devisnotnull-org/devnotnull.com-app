@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-export const ContactPayloadSchema = z.object({
+export const ContactSchema = z.object({
   icon: z.string(),
   text: z.string(),
   link: z.string().optional(),
 });
 
-export type IContactPayload = z.infer<typeof ContactPayloadSchema>;
+export type ContactSchemaType = z.infer<typeof ContactSchema>;

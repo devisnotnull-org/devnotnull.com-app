@@ -1,12 +1,13 @@
 import { z } from 'zod';
 
-import { IAsset, BaseContentfulRecord } from './common';
+import { AssetSchema } from './common/asset';
+import { BaseContentfulRecord } from './common/base';
 
 export const BlogFieldsSchema = z.object({
   title: z.string(),
   slug: z.string(),
   summary: z.string(),
-  image: z.array(IAsset),
+  image: z.array(AssetSchema),
   blogContent: z
     .object({
       nodeType: z.string(),

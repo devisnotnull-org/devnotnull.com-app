@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const AssetDataPayloadSchema = z.object({
+export const AssetFieldsSchema = z.object({
   title: z.string(),
   file: z.object({
     url: z.string(),
@@ -16,9 +16,9 @@ export const AssetDataPayloadSchema = z.object({
   contentType: z.string(),
 });
 
-export type IAssetDataPayload = z.infer<typeof AssetDataPayloadSchema>;
+export type AssetFieldsSchemaType = z.infer<typeof AssetFieldsSchema>;
 
-export const AssetSysPayloadSchema = z.object({
+export const AssetSysSchema = z.object({
   id: z.string(),
   type: z.string(),
   createdAt: z.string(),
@@ -39,11 +39,11 @@ export const AssetSysPayloadSchema = z.object({
   }),
 });
 
-export type IAssetSysPayload = z.infer<typeof AssetSysPayloadSchema>;
+export type AssetSysSchemaType = z.infer<typeof AssetSysSchema>;
 
-export const AssetPayloadSchema = z.object({
-  sys: AssetSysPayloadSchema,
-  fields: AssetDataPayloadSchema,
+export const AssetSchema = z.object({
+  sys: AssetSysSchema,
+  fields: AssetFieldsSchema,
 });
 
-export type IAssetPayload = z.infer<typeof AssetPayloadSchema>;
+export type AssetSchemaType = z.infer<typeof AssetSchema>;

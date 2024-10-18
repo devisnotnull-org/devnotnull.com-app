@@ -2,7 +2,7 @@ import 'regenerator-runtime/runtime';
 import 'source-map-support/register';
 
 import * as Sentry from '@sentry/node';
-import { routes } from '../web/routes';
+import { routes } from '../routes';
 import {
   createStaticHandler,
   createStaticRouter,

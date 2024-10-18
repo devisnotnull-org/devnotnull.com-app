@@ -4,7 +4,7 @@ import { ENDPOINT } from '../constants';
 import {
   CommonContentPayload,
   CommonContentListPayload,
-} from '../../models/common';
+} from '../../models/common/base';
 import { Blog } from '../../models/blog';
 
 export const fetchBlog = () =>

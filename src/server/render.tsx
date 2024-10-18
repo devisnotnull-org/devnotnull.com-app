@@ -2,13 +2,13 @@ import React from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import { Router } from '@remix-run/router';
 import { Response } from 'express';
-import { StaticRouterProvider } from 'react-router-dom/server';
-import Html from '../web/components/html/html';
+import { StaticRouterProvider, StaticHandlerContext } from 'react-router-dom/server';
+import Html from '../components/html/html';
 
 export const render = (
   config: unknown,
   router: Router,
-  context: any,
+  context: StaticHandlerContext,
   res: Response,
   css?: string[]
 ): string => {
@@ -39,6 +39,7 @@ export const render = (
       },
       onShellError(error) {
         // Something errored before we could complete the shell so we emit an alternative shell.
+        console.error(error);
         res.statusCode = 500;
         res.send(
           '<!doctype html><p>Loading...</p><script src="clientrender.js"></script>'
