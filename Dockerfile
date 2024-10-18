@@ -1,4 +1,4 @@
-FROM oven/bun:1
+FROM oven/bun:1.1
 
 # Create app directory
 WORKDIR /usr/src/app
