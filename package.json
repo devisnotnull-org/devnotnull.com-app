@@ -20,7 +20,9 @@
     "types": "tcm src",
     "devserver": "cross-env NODE_ENV=development TARGET=client webpack serve --mode development --inline --hot",
     "prodserver": "cross-env NODE_ENV=production TARGET=client webpack serve --mode production",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "infra": "cdk deploy --require-approval never",
+    "infra:synth": "cdk synth"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.5",
@@ -135,9 +137,12 @@
     "@sentry/tracing": "^7.54.0",
     "@typeform/embed-react": "^2.24.0",
     "@types/compression": "^1.7.5",
+    "aws-cdk": "^2.162.1",
+    "aws-cdk-lib": "^2.162.1",
     "classnames": "^2.2.6",
     "clsx": "^2.0.0",
     "compression": "^1.7.4",
+    "constructs": "^10.4.2",
     "core-js": "^3.8.2",
     "date-fns": "^2.30.0",
     "eslint-plugin-react": "^7.37.1",
