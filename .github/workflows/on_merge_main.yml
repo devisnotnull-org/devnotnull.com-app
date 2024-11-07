@@ -92,7 +92,7 @@ jobs:
         tags: alexbrown201/devnotnull-ui:latest
 
     - name: Create S3 bucket
-      run: aws s3api create-bucket --bucket devnotnull-ui-production --region us-east-1 || true
+      run: aws s3api create-bucket --bucket devnotnull-ui-production  --region us-east-1 || true
 
     - name: Copy S3 bucket assets
       run: aws s3 cp ./build s3://devnotnull-ui-production --recursive
