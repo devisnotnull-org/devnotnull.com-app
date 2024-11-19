@@ -20,7 +20,7 @@ export const AppRouter = (): JSX.Element => {
     <HelmetProvider>
       <SEO title={title} description={blurb} name={title} type="website" />
       <div className="container mx-auto relative flex w-full flex-col">
-        <Header></Header>
+        <Header/>
         <Route />
         <main className="flex-auto z-40">
           <Outlet />
