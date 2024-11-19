@@ -130,7 +130,7 @@
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.25.8",
-    "@headlessui/react": "^1.7.17",
+    "@headlessui/react": "2.2.0",
     "@heroicons/react": "^2.0.18",
     "@sentry/node": "^7.54.0",
     "@sentry/react": "^7.54.0",

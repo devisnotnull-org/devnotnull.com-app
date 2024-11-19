@@ -1,6 +1,6 @@
 import React from 'react';
 import { Fragment } from 'react';
-import { Popover, Transition } from '@headlessui/react';
+import { Popover, PopoverButton, Transition, useClose } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
 
 import Link from '../link/link';
@@ -20,16 +20,17 @@ function MobileNavItem({
   children: React.ReactNode;
   classNames: string;
 }) {
+  const close = useClose();
   return (
-    <li>
-      <Popover.Button>
+    <li onClick={()=> close()}>
+      <PopoverButton aria-label="Close menu">
         <Link
           to={href}
           classNames={`text-2xl block pt-5 pr-5 pb-5 font-harman ${classNames}`}
         >
           {children}
         </Link>
-      </Popover.Button>
+      </PopoverButton>
     </li>
   );
 }
@@ -39,7 +40,7 @@ function MobileNavigation(
 ) {
   return (
     <Popover {...props}>
-      <Popover.Button className="group flex items-center px-4 py-2 text-sm font-medium text-zinc-800">
+      <PopoverButton className="group flex items-center px-4 py-2 text-sm font-medium text-zinc-800">
         <div className="block">
           <div aria-hidden="true" className="h-0.5 w-5 bg-current"></div>
           <div aria-hidden="true" className="h-0.5 w-5 bg-current mt-2"></div>
@@ -49,7 +50,7 @@ function MobileNavigation(
         <div className="ml-4">
           <img src={LOGO_URL} alt="avatar" className="h-10" />
         </div>
-      </Popover.Button>
+      </PopoverButton>
       <Transition.Root>
         <Transition.Child
           as={Fragment}
