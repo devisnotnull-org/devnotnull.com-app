@@ -88,7 +88,6 @@ export const Article = ({ item, assets, isPreview }: Props): JSX.Element => {
   return (
     <article
       key={item?.sys?.id}
-      className="animate-fade-down animate-once animate-delay-100 animate-ease-in-out animate-normal"
     >
       <h1 className="text-2xl pb-3.5 font-bold font-harman">
         <Link to={`/blog/${item.fields.slug}`}>

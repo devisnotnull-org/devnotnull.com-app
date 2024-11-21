@@ -48,7 +48,7 @@ export const Profile = ({ metadata }: Props): JSX.Element => {
     <div className="flex flex-wrap bg-white">
       <div className="md:basis-4/12">
         <div ref={ref}>
-          <div className="md:m-5 animate-fade animate-once animate-ease-out">
+          <div className="md:m-5">
             <img
               src={
                 '//s3.eu-west-2.amazonaws.com/devnotnull-ui-production/media/avatar.png'
@@ -62,12 +62,10 @@ export const Profile = ({ metadata }: Props): JSX.Element => {
               <SocialLink
                 href="https://github.com/devisnotnull"
                 icon={GitHubIcon}
-                className="animate-fade-down animate-once animate-delay-100 animate-ease-in-out animate-normal"
               ></SocialLink>
               <SocialLink
                 href="https://github.com/devisnotnull"
                 icon={LinkedInIcon}
-                className="animate-fade-down animate-once animate-delay-200 animate-ease-in-out animate-normal"
               ></SocialLink>
               <PopupButton
                 id="HTs3mlXH"
@@ -83,7 +81,6 @@ export const Profile = ({ metadata }: Props): JSX.Element => {
                 <SocialLink
                   href="#"
                   icon={MailIcon}
-                  className="animate-fade-down animate-once animate-delay-500 animate-ease-in-out animate-normal"
                 ></SocialLink>
               </PopupButton>
             </ul>
@@ -93,11 +90,11 @@ export const Profile = ({ metadata }: Props): JSX.Element => {
       <div className="md:basis-8/12">
         <div className="md:pl-3">
           <div className="flex basis-full">
-            <h1 className="font-bold text-2xl md:py-3.5 animate-fade-down animate-once animate-delay-100 animate-ease-in-out animate-normal font-harman">
+            <h1 className="font-bold text-2xl md:py-3.5 font-harman">
               {metadata?.fields?.title}
             </h1>
           </div>
-          <div className="flex basis-full  animate-fade-down animate-once animate-delay-500 animate-ease-in-out animate-normal">
+          <div>
             <div className="text-base py-3.5">
               <RichText payload={metadata?.fields?.summary} assets={[]} />
             </div>
